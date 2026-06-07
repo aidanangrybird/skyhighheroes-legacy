@@ -111,7 +111,7 @@ function initModule(system) {
         result = entity.getData("fiskheroes:flight_timer") > 0;
       };
       if (keyBind == "TELEPORT" || keyBind == "INVISIBILITY") {
-        result = true;
+        result = !entity.getData("skyhighheroes:dyn/transer");
       };
       if (keyBind == "BATTLE_CARD_0") {
         result = entity.getData("fiskheroes:gravity_manip") && entity.getData("skyhighheroes:dyn/selected_battle_card") == 0;

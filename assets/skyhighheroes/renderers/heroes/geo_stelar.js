@@ -1,8 +1,16 @@
+extend("skyhighheroes:base_transer");
+
 loadTextures({
-  "null": "skyhighheroes:null",
-  "santa_hat": "skyhighheroes:santa_hat",
   "hair": "skyhighheroes:geo/geo_stelar_hair_wave_change.tx.json",
   "hair_wave_changing_lights": "skyhighheroes:geo/mega_man_hair_wave_changing_lights.tx.json",
+  "screen_border": "skyhighheroes:transer/pegasus_border",
+  "screen_off_white": "skyhighheroes:transer/pegasus_off_white",
+  "screen_color_1": "skyhighheroes:transer/pegasus_color_1",
+  "screen_color_2": "skyhighheroes:transer/pegasus_color_2",
+  "screen_color_3": "skyhighheroes:transer/pegasus_color_3",
+  "screen_color_4": "skyhighheroes:transer/pegasus_color_4",
+  "head_human": "skyhighheroes:transer/geo_stelar_head",
+  "head_transformed": "skyhighheroes:transer/mega_man_head",
   "transer": "skyhighheroes:geo/geo_stelar_transer.tx.json",
   "transer_wave_change": "skyhighheroes:geo/geo_stelar_transer_wave_change.tx.json",
   "visualizer": "skyhighheroes:geo/geo_stelar_visualizer.tx.json",
@@ -91,6 +99,7 @@ var date = new Date();
 var isChristmasSeason = (date.getDate() < 26 && date.getDate() > 0 && date.getMonth() == 11);
 
 function init(renderer) {
+  parent.init(renderer);
   renderer.setTexture((entity, renderLayer) => {
     if (renderLayer == "CHESTPLATE") {
       if (entity.is("DISPLAY")) {
@@ -162,6 +171,7 @@ function init(renderer) {
 };
 
 function initEffects(renderer) {
+  parent.initEffects(renderer);
   var color = getMainColor();
   if (isChristmasSeason) {
     var santa_hat_model = renderer.createResource("MODEL", "skyhighheroes:SantaHat");
@@ -295,6 +305,7 @@ function initAnimations(renderer) {
 };
 
 function render(entity, renderLayer, isFirstPersonArm) {
+  parent.render(entity, renderLayer, isFirstPersonArm);
   if (!isChristmasSeason) {
     if (entity.getData("skyhighheroes:dyn/stelar_clothes") < 3 || (!entity.getData("skyhighheroes:dyn/hood_toggle") && entity.getData("skyhighheroes:dyn/stelar_clothes") == 3)) {
       hair.render();

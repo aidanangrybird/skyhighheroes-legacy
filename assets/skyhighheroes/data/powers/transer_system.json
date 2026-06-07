@@ -11,6 +11,15 @@
         "time": 600
       },
       "isToggle": true
+    },
+    "fiskheroes:transformation|transer": {
+      "key": "TRANSER",
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/transer",
+        "timerData": "skyhighheroes:dyn/transer_timer",
+        "time": 60
+      },
+      "isToggle": true
     }
   }
 }

@@ -1,0 +1,10 @@
+{
+  "texture": "skyhighheroes:transer/<HUMAN>_head",
+  "getters": {
+    "HUMAN": {
+      "key": "entity.getData('skyhighheroes:dyn/scroll_entry_5').split(';:').length > 5 ? (entity.getData('skyhighheroes:dyn/scroll_entry_5').split(';:')[5] == 'Ace Stelar' ? 'ace_stelar' : entity.getData('skyhighheroes:dyn/scroll_entry_5').split(';:')[5] == 'Aidan Stelar' ? 'aidan_stelar' : entity.getData('skyhighheroes:dyn/scroll_entry_5').split(';:')[5] == 'Chase Stelar' ? 'chase_stelar' : entity.getData('skyhighheroes:dyn/scroll_entry_5').split(';:')[5] == 'Cade Stelar' ? 'cade_stelar' : entity.getData('skyhighheroes:dyn/scroll_entry_5').split(';:')[5] == 'Damien Stelar' ? 'damien_stelar' : 'geo_stelar') : 'base'",
+      "values": ["ace_stelar", "aidan_stelar", "chase_stelar", "cade_stelar", "damien_stelar", "geo_stelar", "base"]
+    }
+  },
+  "isDynamic": true
+}

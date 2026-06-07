@@ -1,0 +1,10 @@
+{
+  "texture": "skyhighheroes:transer/<SATELLITE>_color_2",
+  "getters": {
+    "SATELLITE": {
+      "key": "entity.getData('skyhighheroes:dyn/scroll_entry_4').split(';:').length > 1 ? (entity.getData('skyhighheroes:dyn/scroll_entry_4').split(';:')[1].toLowerCase() == 'pegasus' ? 'pegasus' : entity.getData('skyhighheroes:dyn/scroll_entry_4').split(';:')[1].toLowerCase() == 'leo' ? 'leo' : entity.getData('skyhighheroes:dyn/scroll_entry_4').split(';:')[1].toLowerCase() == 'dragon' ? 'dragon' : 'pegasus') : 'pegasus'",
+      "values": ["pegasus", "leo", "dragon"]
+    }
+  },
+  "isDynamic": true
+}

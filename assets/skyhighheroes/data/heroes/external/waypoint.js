@@ -2,6 +2,7 @@ function initModule(system) {
   /**
    * Turns NBT String List into an array for easier use in code
    * @param {JSEntity} entity - Entity to create waypoint array from
+   * @param {JSDataManager} manager - required
    * @returns Array of waypoint names
    **/
   function getWaypointNameArray(entity, manager) {
@@ -21,6 +22,7 @@ function initModule(system) {
   /**
    * Turns NBT String List into an array for easier use in code
    * @param {JSEntity} entity - Entity to create waypoint array from
+   * @param {JSDataManager} manager - required
    * @returns Array of waypoint names, coords and dimension
    **/
   function getWaypointArray(entity, manager) {
@@ -72,6 +74,13 @@ function initModule(system) {
       system.moduleMessage(this, entity, "<s>Waypoint created with name: <sh>" + waypointName + "<s>!");
       manager.appendTag(waypoints, waypoint);
     };
+    var list = waypointsList(entity, manager);
+    manager.setData(entity, "skyhighheroes:dyn/list_total", list.length);
+    if ((list.length-1) < entity.getData("skyhighheroes:dyn/scroll_value")) {
+      manager.setData(entity, "skyhighheroes:dyn/scroll_value", (list.length-1));
+    };
+    manager.setData(entity, "skyhighheroes:dyn/scroll_total", Math.max(list.length-7, 0));
+    system.updateList(entity, manager, 7, list);
   };
   /**
    * Remove waypoint by waypoint name
@@ -89,6 +98,13 @@ function initModule(system) {
       system.moduleMessage(this, entity, "<e>Removed waypoint <eh>" + waypointName + "<e>!");
       manager.removeTag(waypoints, waypointIndex);
     };
+    var list = waypointsList(entity, manager);
+    manager.setData(entity, "skyhighheroes:dyn/list_total", list.length);
+    if ((list.length-1) < entity.getData("skyhighheroes:dyn/scroll_value")) {
+      manager.setData(entity, "skyhighheroes:dyn/scroll_value", (list.length-1));
+    };
+    manager.setData(entity, "skyhighheroes:dyn/scroll_total", Math.max(list.length-7, 0));
+    system.updateList(entity, manager, 7, list);
   };
   /**
    * Teleports to waypoint by waypoint name
@@ -142,11 +158,343 @@ function initModule(system) {
       system.moduleMessage(this, entity, waypointMessage);
     });
   };
+  /**
+   * List of waypoints
+   * @param {JSEntity} entity - Required
+   * @param {JSDataManager} manager - Required
+   * @returns List of waypoint names
+   **/
+  function waypointsList(entity, manager) {
+    var nbt = system.getMainNBT(entity);
+    if (!nbt.hasKey("waypoints")) {
+      var newWaypointsList = manager.newTagList();
+      manager.setTagList(nbt, "waypoints", newWaypointsList);
+    };
+    var waypointNames = getWaypointNameArray(entity, manager);
+    return waypointNames;
+  };
+  /**
+   * Waypoint data
+   * @param {JSEntity} entity - Required
+   * @param {JSDataManager} manager - Required
+   * @param {string} waypoint - name of waypoint
+   * @returns Waypoint data
+   **/
+  function getWaypointInfo(entity, manager, waypoint) {
+    var nbt = system.getMainNBT(entity);
+    if (!nbt.hasKey("waypoints")) {
+      var newWaypointsList = manager.newTagList();
+      manager.setTagList(nbt, "waypoints", newWaypointsList);
+    };
+    var coords = "0,0,0,0";
+    var waypointNames = getWaypointNameArray(entity, manager);
+    var waypointDataArray = getWaypointArray(entity, manager);
+    var waypointIndex = waypointNames.indexOf(waypoint);
+    if (waypointIndex > -1) {
+      waypointData = waypointDataArray[waypointIndex].coords;
+      coords = waypointData[0] + "," + waypointData[1] + "," + waypointData[2] + "," + waypointData[3]
+    };
+    return coords;
+  };
   return {
     name: "waypoints",
     moduleMessageName: "Waypoints",
     type: 1,
     command: "wp",
+    transerMenus: {
+      "waypoints": {
+        parent: "main",
+        prevButton: "main_waypoints",
+        buttons: {
+          "waypoints_edit": {
+            borderingButtons: {
+              bottom: "waypoints_add",
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                manager.setData(entity, "skyhighheroes:dyn/selected_button", "waypoints_select_0");
+                manager.setData(entity, "skyhighheroes:dyn/prev_list_entry", "1,1,1,1");
+              },
+              backAction: (entity, manager) => {
+                if (entity.getData("skyhighheroes:dyn/entering_value")) {
+                  manager.setData(entity, "skyhighheroes:dyn/entering_value", false);
+                } else {
+                  manager.setData(entity, "skyhighheroes:dyn/selected_button", "main_waypoints");
+                  manager.setData(entity, "skyhighheroes:dyn/current_menu", "main");
+                };
+              },
+            }
+          },
+          "waypoints_add": {
+            borderingButtons: {
+              top: "waypoints_edit",
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                manager.setData(entity, "skyhighheroes:dyn/entering_value", true);
+              },
+              backAction: (entity, manager) => {
+                if (entity.getData("skyhighheroes:dyn/entering_value")) {
+                  manager.setData(entity, "skyhighheroes:dyn/entering_value", false);
+                } else {
+                  manager.setData(entity, "skyhighheroes:dyn/selected_button", "main_waypoints");
+                  manager.setData(entity, "skyhighheroes:dyn/current_menu", "main");
+                };
+              },
+              textAction: (entity, manager, entry) => {
+                addWaypoint(entity, manager, entry);
+                manager.setData(entity, "skyhighheroes:dyn/entering_value", false);
+              },
+            }
+          },
+          "waypoints_delete": {
+            borderingButtons: {
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                removeContact(entity, manager, entity.getData("skyhighheroes:dyn/list_entry"));
+                manager.setData(entity, "skyhighheroes:dyn/selected_button", "waypoints_select_0");
+                var data = getWaypointInfo(entity, manager, entity.getData("skyhighheroes:dyn/waypoints_select_0"));
+                manager.setData(entity, "skyhighheroes:dyn/prev_list_entry", data);
+              },
+              backAction: (entity, manager) => {
+                var listValue = entity.getData("skyhighheroes:dyn/list_value").toString();
+                manager.setData(entity, "skyhighheroes:dyn/selected_button", "waypoints_select_" + listValue);
+              },
+            }
+          },
+          "waypoints_select_0": {
+            borderingButtons: {
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                manager.setData(entity, "skyhighheroes:dyn/selected_button", "waypoints_delete");
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 0);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_0"));
+              },
+              backAction: (entity, manager) => {
+                manager.setData(entity, "skyhighheroes:dyn/selected_button", "waypoints_edit");
+                manager.setData(entity, "skyhighheroes:dyn/prev_list_entry", "");
+              },
+              upAction: (entity, manager) => {
+                var list = waypointsList(entity, manager);
+                manager.setData(entity, "skyhighheroes:dyn/list_total", list.length);
+                var value = entity.getData("skyhighheroes:dyn/scroll_value");
+                if (value > 0) {
+                  manager.setData(entity, "skyhighheroes:dyn/scroll_value", entity.getData("skyhighheroes:dyn/scroll_value")-1);
+                };
+                system.updateList(entity, manager, 7, list);
+              },
+              downAction: (entity, manager) => {
+                var list = waypointsList(entity, manager);
+                if ((list.length) > 1) {
+                  manager.setData(entity, "skyhighheroes:dyn/selected_button", "waypoints_select_1");
+                };
+              },
+              selectAction: (entity, manager) => {
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 0);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_0"));
+                var data = getWaypointInfo(entity, manager, entity.getData("skyhighheroes:dyn/list_entry"));
+                manager.setData(entity, "skyhighheroes:dyn/prev_list_entry", data);
+              }
+            }
+          },
+          "waypoints_select_1": {
+            borderingButtons: {
+              top: "waypoints_select_0",
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                manager.setData(entity, "skyhighheroes:dyn/selected_button", "waypoints_delete");
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 1);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_1"));
+              },
+              backAction: (entity, manager) => {
+                manager.setData(entity, "skyhighheroes:dyn/selected_button", "waypoints_edit");
+                manager.setData(entity, "skyhighheroes:dyn/prev_list_entry", "");
+              },
+              downAction: (entity, manager) => {
+                var list = waypointsList(entity, manager);
+                if ((list.length) > 2) {
+                  manager.setData(entity, "skyhighheroes:dyn/selected_button", "waypoints_select_2");
+                };
+              },
+              selectAction: (entity, manager) => {
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 1);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_1"));
+                var data = getWaypointInfo(entity, manager, entity.getData("skyhighheroes:dyn/list_entry"));
+                manager.setData(entity, "skyhighheroes:dyn/prev_list_entry", data);
+              }
+            }
+          },
+          "waypoints_select_2": {
+            borderingButtons: {
+              top: "waypoints_select_1",
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                manager.setData(entity, "skyhighheroes:dyn/selected_button", "waypoints_delete");
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 2);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_2"));
+              },
+              backAction: (entity, manager) => {
+                manager.setData(entity, "skyhighheroes:dyn/selected_button", "waypoints_edit");
+                manager.setData(entity, "skyhighheroes:dyn/prev_list_entry", "");
+              },
+              downAction: (entity, manager) => {
+                var list = waypointsList(entity, manager);
+                if ((list.length) > 3) {
+                  manager.setData(entity, "skyhighheroes:dyn/selected_button", "waypoints_select_3");
+                };
+              },
+              selectAction: (entity, manager) => {
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 2);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_2"));
+                var data = getWaypointInfo(entity, manager, entity.getData("skyhighheroes:dyn/list_entry"));
+                manager.setData(entity, "skyhighheroes:dyn/prev_list_entry", data);
+              }
+            }
+          },
+          "waypoints_select_3": {
+            borderingButtons: {
+              top: "waypoints_select_2",
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                manager.setData(entity, "skyhighheroes:dyn/selected_button", "waypoints_delete");
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 3);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_3"));
+              },
+              backAction: (entity, manager) => {
+                manager.setData(entity, "skyhighheroes:dyn/selected_button", "waypoints_edit");
+                manager.setData(entity, "skyhighheroes:dyn/prev_list_entry", "");
+              },
+              downAction: (entity, manager) => {
+                var list = waypointsList(entity, manager);
+                if ((list.length) > 4) {
+                  manager.setData(entity, "skyhighheroes:dyn/selected_button", "waypoints_select_4");
+                };
+              },
+              selectAction: (entity, manager) => {
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 3);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_3"));
+                var data = getWaypointInfo(entity, manager, entity.getData("skyhighheroes:dyn/list_entry"));
+                manager.setData(entity, "skyhighheroes:dyn/prev_list_entry", data);
+              }
+            }
+          },
+          "waypoints_select_4": {
+            borderingButtons: {
+              top: "waypoints_select_3",
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                manager.setData(entity, "skyhighheroes:dyn/selected_button", "waypoints_delete");
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 4);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_4"));
+              },
+              backAction: (entity, manager) => {
+                manager.setData(entity, "skyhighheroes:dyn/selected_button", "waypoints_edit");
+                manager.setData(entity, "skyhighheroes:dyn/prev_list_entry", "");
+              },
+              downAction: (entity, manager) => {
+                var list = waypointsList(entity, manager);
+                if ((list.length) > 5) {
+                  manager.setData(entity, "skyhighheroes:dyn/selected_button", "waypoints_select_5");
+                };
+              },
+              selectAction: (entity, manager) => {
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 4);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_4"));
+                var data = getWaypointInfo(entity, manager, entity.getData("skyhighheroes:dyn/list_entry"));
+                manager.setData(entity, "skyhighheroes:dyn/prev_list_entry", data);
+              }
+            }
+          },
+          "waypoints_select_5": {
+            borderingButtons: {
+              top: "waypoints_select_4",
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                manager.setData(entity, "skyhighheroes:dyn/selected_button", "waypoints_delete");
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 5);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_5"));
+              },
+              backAction: (entity, manager) => {
+                manager.setData(entity, "skyhighheroes:dyn/selected_button", "waypoints_edit");
+                manager.setData(entity, "skyhighheroes:dyn/prev_list_entry", "");
+              },
+              downAction: (entity, manager) => {
+                var list = waypointsList(entity, manager);
+                if ((list.length) > 6) {
+                  manager.setData(entity, "skyhighheroes:dyn/selected_button", "waypoints_select_6");
+                };
+              },
+              selectAction: (entity, manager) => {
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 5);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_5"));
+                var data = getWaypointInfo(entity, manager, entity.getData("skyhighheroes:dyn/list_entry"));
+                manager.setData(entity, "skyhighheroes:dyn/prev_list_entry", data);
+              }
+            }
+          },
+          "waypoints_select_6": {
+            borderingButtons: {
+              top: "waypoints_select_5",
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                manager.setData(entity, "skyhighheroes:dyn/selected_button", "waypoints_delete");
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 6);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_6"));
+              },
+              backAction: (entity, manager) => {
+                manager.setData(entity, "skyhighheroes:dyn/selected_button", "waypoints_edit");
+                manager.setData(entity, "skyhighheroes:dyn/prev_list_entry", "");
+              },
+              downAction: (entity, manager) => {
+                var list = waypointsList(entity, manager);
+                manager.setData(entity, "skyhighheroes:dyn/list_total", list.length);
+                var value = entity.getData("skyhighheroes:dyn/scroll_value");
+                if ((list.length-7) > value) {
+                  manager.setData(entity, "skyhighheroes:dyn/scroll_value", entity.getData("skyhighheroes:dyn/scroll_value")+1);
+                };
+                system.updateList(entity, manager, 7, list);
+              },
+              selectAction: (entity, manager) => {
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 6);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_6"));
+                var data = getWaypointInfo(entity, manager, entity.getData("skyhighheroes:dyn/list_entry"));
+                manager.setData(entity, "skyhighheroes:dyn/prev_list_entry", data);
+              }
+            }
+          }
+        }
+      }
+    },
+    transerMainButton: {
+      buttonID: "main_waypoints",
+      borderingButtons: {
+        top: "main_Brother",
+        bottom: "main_settings",
+        left: "main_groups",
+      },
+      properties: {
+        confirmAction: (entity, manager) => {
+          manager.setData(entity, "skyhighheroes:dyn/current_menu", "waypoints");
+          manager.setData(entity, "skyhighheroes:dyn/selected_button", "waypoints_edit");
+          var list = waypointsList(entity, manager);
+          manager.setData(entity, "skyhighheroes:dyn/list_total", list.length);
+          manager.setData(entity, "skyhighheroes:dyn/scroll_value", 0);
+          manager.setData(entity, "skyhighheroes:dyn/scroll_total", Math.max(list.length-7, 0));
+          system.updateList(entity, manager, 7, list);
+        },
+        backAction: (entity, manager) => {
+          manager.setData(entity, "skyhighheroes:dyn/transer", false);
+        }
+      }
+    },
     helpMessage: "<n>!wp <nh>-<n> Waypoints",
     disabledMessage: "<e>Module <eh>waypoints<e> is disabled!",
     commandHandler: function (entity, manager, argList) {
