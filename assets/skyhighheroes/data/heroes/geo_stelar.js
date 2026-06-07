@@ -66,13 +66,13 @@ function init(hero) {
       return transer.canUseTranser(entity);
     };
     if (keyBind == "VISUALIZER_TOGGLE") {
-      return !entity.getData("skyhighheroes:dyn/transer") && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getUUID() == transer.getCompatibleUUID(entity) && ((entity.getData("skyhighheroes:dyn/stelar_clothes") == 3) ? !entity.isSneaking() : true);
+      return !entity.getData("skyhighheroes:dyn/transer") && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && ((entity.getData("skyhighheroes:dyn/stelar_clothes") == 3) ? !entity.isSneaking() : true);
     };
     if (keyBind == "CYCLE_CLOTHES") {
-      return !entity.getData("skyhighheroes:dyn/transer") && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getUUID() == transer.getCompatibleUUID(entity);
+      return !entity.getData("skyhighheroes:dyn/transer") && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0;
     };
     if (keyBind == "HOOD_TOGGLE") {
-      return !entity.getData("skyhighheroes:dyn/transer") && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.getUUID() == transer.getCompatibleUUID(entity) && entity.isSneaking() && entity.getData("skyhighheroes:dyn/stelar_clothes") == 3;
+      return !entity.getData("skyhighheroes:dyn/transer") && entity.getData("skyhighheroes:dyn/wave_changing_timer") == 0 && entity.isSneaking() && entity.getData("skyhighheroes:dyn/stelar_clothes") == 3;
     };
     if (keyBind == "SHAPE_SHIFT") {
       return entity.getData("skyhighheroes:dyn/transer") && entity.getData("skyhighheroes:dyn/battle_card") == 0 && transer.canUseTranser(entity) && (!transerOS.isTelekinesisButton(entity) || (transerOS.isTelekinesisButton(entity) && !entity.getData("skyhighheroes:dyn/entering_value")));
