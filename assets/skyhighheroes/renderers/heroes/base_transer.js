@@ -593,12 +593,12 @@ function initEffects(renderer) {
 };
 
 function render(entity, renderLayer, isFirstPersonArm) {
-  if (entity.getData("skyhighocs:dyn/transer")) {
+  if (entity.getData("skyhighheroes:dyn/transer")) {
     //Upper
     upperTranserBorder.render(isFirstPersonArm);
-    if (entity.getData("skyhighocs:dyn/current_menu") == "main") {
-      if (entity.getData("skyhighocs:dyn/compatible_human") != "") {
-        var name = entity.getData("skyhighocs:dyn/compatible_human").split(" ");
+    if (entity.getData("skyhighheroes:dyn/current_menu") == "main") {
+      if (entity.getData("skyhighheroes:dyn/compatible_human") != "") {
+        var name = entity.getData("skyhighheroes:dyn/compatible_human").split(" ");
         black_text.renderLine(isFirstPersonArm, "left", "center", name[0], nameTextBox.leftX+3.0, nameTextBox.centerY, nameTextBox.z, 1.0);
         if (name.length > 1) {
           black_text.renderLine(isFirstPersonArm, "left", "center", name[1], nameTextBox.centerX+3.0, nameTextBox.centerY, nameTextBox.z, 1.0);
@@ -620,224 +620,224 @@ function render(entity, renderLayer, isFirstPersonArm) {
       xpBox.render(isFirstPersonArm);
       xpTextBox.render(isFirstPersonArm);
       headBox.render(isFirstPersonArm);
-      if (entity.getData("skyhighocs:dyn/wave_changing_timer") > 0.5) {
+      if (entity.getData("skyhighheroes:dyn/wave_changing_timer") > 0.5) {
         headEMBeing.render(isFirstPersonArm);
       } else {
         headHuman.render(isFirstPersonArm);
       };
     };
-    if (entity.getData("skyhighocs:dyn/current_menu") == "contacts") {
+    if (entity.getData("skyhighheroes:dyn/current_menu") == "contacts") {
       upperScreenMenu.render(isFirstPersonArm);
       menuUpperBorder.render(isFirstPersonArm);
       menuUpperBorderLeftExt.render(isFirstPersonArm);
       menuUpperBorderRightExt.render(isFirstPersonArm);
       gray_text.renderLine(isFirstPersonArm, "left", "center", "CONTACTS", menuUpperBorderLeftExt.leftX+10.0, menuUpperBorderLeftExt.centerY, menuUpperBorderLeftExt.z, 1.0);
-      if (!entity.getData("skyhighocs:dyn/entering_value")) {
+      if (!entity.getData("skyhighheroes:dyn/entering_value")) {
         contactsBox.render(isFirstPersonArm);
         contactsBoxInner.render(isFirstPersonArm);
         contactsButton0.render(isFirstPersonArm);
-        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighocs:dyn/scroll_entry_0"), contactsButton0.leftX+3.0, contactsButton0.centerY, contactsButton0.z, 1.0);
-        if (entity.getData("skyhighocs:dyn/selected_button") == "contacts_select_0") {
+        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighheroes:dyn/scroll_entry_0"), contactsButton0.leftX+3.0, contactsButton0.centerY, contactsButton0.z, 1.0);
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "contacts_select_0") {
           contactsButton0Selected.render(entity, isFirstPersonArm);
         };
         contactsButton1.render(isFirstPersonArm);
-        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighocs:dyn/scroll_entry_1"), contactsButton1.leftX+3.0, contactsButton1.centerY, contactsButton1.z, 1.0);
-        if (entity.getData("skyhighocs:dyn/selected_button") == "contacts_select_1") {
+        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighheroes:dyn/scroll_entry_1"), contactsButton1.leftX+3.0, contactsButton1.centerY, contactsButton1.z, 1.0);
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "contacts_select_1") {
           contactsButton1Selected.render(entity, isFirstPersonArm);
         };
         contactsButton2.render(isFirstPersonArm);
-        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighocs:dyn/scroll_entry_2"), contactsButton2.leftX+3.0, contactsButton2.centerY, contactsButton2.z, 1.0);
-        if (entity.getData("skyhighocs:dyn/selected_button") == "contacts_select_2") {
+        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighheroes:dyn/scroll_entry_2"), contactsButton2.leftX+3.0, contactsButton2.centerY, contactsButton2.z, 1.0);
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "contacts_select_2") {
           contactsButton2Selected.render(entity, isFirstPersonArm);
         };
         contactsButton3.render(isFirstPersonArm);
-        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighocs:dyn/scroll_entry_3"), contactsButton3.leftX+3.0, contactsButton3.centerY, contactsButton3.z, 1.0);
-        if (entity.getData("skyhighocs:dyn/selected_button") == "contacts_select_3") {
+        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighheroes:dyn/scroll_entry_3"), contactsButton3.leftX+3.0, contactsButton3.centerY, contactsButton3.z, 1.0);
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "contacts_select_3") {
           contactsButton3Selected.render(entity, isFirstPersonArm);
         };
         contactsButton4.render(isFirstPersonArm);
-        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighocs:dyn/scroll_entry_4"), contactsButton4.leftX+4.0, contactsButton4.centerY, contactsButton4.z, 1.0);
-        if (entity.getData("skyhighocs:dyn/selected_button") == "contacts_select_4") {
+        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighheroes:dyn/scroll_entry_4"), contactsButton4.leftX+4.0, contactsButton4.centerY, contactsButton4.z, 1.0);
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "contacts_select_4") {
           contactsButton4Selected.render(entity, isFirstPersonArm);
         };
         contactsButton5.render(isFirstPersonArm);
-        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighocs:dyn/scroll_entry_5"), contactsButton5.leftX+3.0, contactsButton5.centerY, contactsButton5.z, 1.0);
-        if (entity.getData("skyhighocs:dyn/selected_button") == "contacts_select_5") {
+        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighheroes:dyn/scroll_entry_5"), contactsButton5.leftX+3.0, contactsButton5.centerY, contactsButton5.z, 1.0);
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "contacts_select_5") {
           contactsButton5Selected.render(entity, isFirstPersonArm);
         };
         contactsButton6.render(isFirstPersonArm);
-        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighocs:dyn/scroll_entry_6"), contactsButton6.leftX+4.0, contactsButton6.centerY, contactsButton6.z, 1.0);
-        if (entity.getData("skyhighocs:dyn/selected_button") == "contacts_select_6") {
+        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighheroes:dyn/scroll_entry_6"), contactsButton6.leftX+4.0, contactsButton6.centerY, contactsButton6.z, 1.0);
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "contacts_select_6") {
           contactsButton6Selected.render(entity, isFirstPersonArm);
         };
-        contactsScrollBar.render(isFirstPersonArm, entity.getData("skyhighocs:dyn/scroll_value"), entity.getData("skyhighocs:dyn/scroll_total"));
+        contactsScrollBar.render(isFirstPersonArm, entity.getData("skyhighheroes:dyn/scroll_value"), entity.getData("skyhighheroes:dyn/scroll_total"));
         
         contactsNumberBox.render(isFirstPersonArm);
         contactsNumberBoxInner.render(isFirstPersonArm);
-        white_text.renderLine(isFirstPersonArm, "left", "center", "Contacts: " + entity.getData("skyhighocs:dyn/list_total"), contactsNumberBoxInner.leftX+4.0, contactsNumberBoxInner.centerY, contactsNumberBoxInner.z, 1.0);
+        white_text.renderLine(isFirstPersonArm, "left", "center", "Contacts: " + entity.getData("skyhighheroes:dyn/list_total"), contactsNumberBoxInner.leftX+4.0, contactsNumberBoxInner.centerY, contactsNumberBoxInner.z, 1.0);
         contactsBaseBox.render(isFirstPersonArm);
         contactsBaseBoxInner.render(isFirstPersonArm);
         white_text.renderLine(isFirstPersonArm, "left", "center", "Edit", contactsEditSelected.leftX+14.0, contactsEditSelected.centerY, contactsEditSelected.z, 1.0);
-        if (entity.getData("skyhighocs:dyn/selected_button") == "contacts_edit") {
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "contacts_edit") {
           contactsEditSelected.render(entity, isFirstPersonArm, 3.0);
         };
         white_text.renderLine(isFirstPersonArm, "left", "center", "Add", contactsAddSelected.leftX+14.0, contactsAddSelected.centerY, contactsAddSelected.z, 1.0);
-        if (entity.getData("skyhighocs:dyn/selected_button") == "contacts_add") {
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "contacts_add") {
           contactsAddSelected.render(entity, isFirstPersonArm, 3.0);
         };
         contactsEditBox.render(isFirstPersonArm);
         contactsEditBoxInner.render(isFirstPersonArm);
         white_text.renderLine(isFirstPersonArm, "left", "center", "Delete", contactsDeleteSelected.leftX+14.0, contactsDeleteSelected.centerY, contactsDeleteSelected.z, 1.0);
-        if (entity.getData("skyhighocs:dyn/selected_button") == "contacts_delete") {
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "contacts_delete") {
           contactsDeleteSelected.render(entity, isFirstPersonArm, 3.0);
         };
       } else {
         white_text.renderLine(isFirstPersonArm, "center", "center", "Enter username to add as contact", upperScreenMenu.centerX, upperScreenMenu.centerY, upperScreenMenu.z, 1.0);
       };
     };
-    if (entity.getData("skyhighocs:dyn/current_menu") == "groups") {
+    if (entity.getData("skyhighheroes:dyn/current_menu") == "groups") {
       upperScreenMenu.render(isFirstPersonArm);
       menuUpperBorder.render(isFirstPersonArm);
       menuUpperBorderLeftExt.render(isFirstPersonArm);
       menuUpperBorderRightExt.render(isFirstPersonArm);
-      if (!entity.getData("skyhighocs:dyn/entering_value")) {
+      if (!entity.getData("skyhighheroes:dyn/entering_value")) {
         gray_text.renderLine(isFirstPersonArm, "left", "center", "GROUPS", menuUpperBorderLeftExt.leftX+10.0, menuUpperBorderLeftExt.centerY, menuUpperBorderLeftExt.z, 1.0);
         groupsBox.render(isFirstPersonArm);
         groupsBoxInner.render(isFirstPersonArm);
         groupsButton0.render(isFirstPersonArm);
-        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighocs:dyn/scroll_entry_0"), groupsButton0.leftX+3.0, groupsButton0.centerY, groupsButton0.z, 1.0);
-        if (entity.getData("skyhighocs:dyn/selected_button") == "groups_select_0") {
+        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighheroes:dyn/scroll_entry_0"), groupsButton0.leftX+3.0, groupsButton0.centerY, groupsButton0.z, 1.0);
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "groups_select_0") {
           groupsButton0Selected.render(entity, isFirstPersonArm);
         };
         groupsButton1.render(isFirstPersonArm);
-        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighocs:dyn/scroll_entry_1"), groupsButton1.leftX+3.0, groupsButton1.centerY, groupsButton1.z, 1.0);
-        if (entity.getData("skyhighocs:dyn/selected_button") == "groups_select_1") {
+        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighheroes:dyn/scroll_entry_1"), groupsButton1.leftX+3.0, groupsButton1.centerY, groupsButton1.z, 1.0);
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "groups_select_1") {
           groupsButton1Selected.render(entity, isFirstPersonArm);
         };
         groupsButton2.render(isFirstPersonArm);
-        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighocs:dyn/scroll_entry_2"), groupsButton2.leftX+3.0, groupsButton2.centerY, groupsButton2.z, 1.0);
-        if (entity.getData("skyhighocs:dyn/selected_button") == "groups_select_2") {
+        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighheroes:dyn/scroll_entry_2"), groupsButton2.leftX+3.0, groupsButton2.centerY, groupsButton2.z, 1.0);
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "groups_select_2") {
           groupsButton2Selected.render(entity, isFirstPersonArm);
         };
         groupsButton3.render(isFirstPersonArm);
-        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighocs:dyn/scroll_entry_3"), groupsButton3.leftX+3.0, groupsButton3.centerY, groupsButton3.z, 1.0);
-        if (entity.getData("skyhighocs:dyn/selected_button") == "groups_select_3") {
+        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighheroes:dyn/scroll_entry_3"), groupsButton3.leftX+3.0, groupsButton3.centerY, groupsButton3.z, 1.0);
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "groups_select_3") {
           groupsButton3Selected.render(entity, isFirstPersonArm);
         };
         groupsButton4.render(isFirstPersonArm);
-        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighocs:dyn/scroll_entry_4"), groupsButton4.leftX+4.0, groupsButton4.centerY, groupsButton4.z, 1.0);
-        if (entity.getData("skyhighocs:dyn/selected_button") == "groups_select_4") {
+        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighheroes:dyn/scroll_entry_4"), groupsButton4.leftX+4.0, groupsButton4.centerY, groupsButton4.z, 1.0);
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "groups_select_4") {
           groupsButton4Selected.render(entity, isFirstPersonArm);
         };
         groupsButton5.render(isFirstPersonArm);
-        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighocs:dyn/scroll_entry_5"), groupsButton5.leftX+3.0, groupsButton5.centerY, groupsButton5.z, 1.0);
-        if (entity.getData("skyhighocs:dyn/selected_button") == "groups_select_5") {
+        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighheroes:dyn/scroll_entry_5"), groupsButton5.leftX+3.0, groupsButton5.centerY, groupsButton5.z, 1.0);
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "groups_select_5") {
           groupsButton5Selected.render(entity, isFirstPersonArm);
         };
         groupsButton6.render(isFirstPersonArm);
-        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighocs:dyn/scroll_entry_6"), groupsButton6.leftX+4.0, groupsButton6.centerY, groupsButton6.z, 1.0);
-        if (entity.getData("skyhighocs:dyn/selected_button") == "groups_select_6") {
+        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighheroes:dyn/scroll_entry_6"), groupsButton6.leftX+4.0, groupsButton6.centerY, groupsButton6.z, 1.0);
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "groups_select_6") {
           groupsButton6Selected.render(entity, isFirstPersonArm);
         };
-        groupsScrollBar.render(isFirstPersonArm, entity.getData("skyhighocs:dyn/scroll_value"), entity.getData("skyhighocs:dyn/scroll_total"));
+        groupsScrollBar.render(isFirstPersonArm, entity.getData("skyhighheroes:dyn/scroll_value"), entity.getData("skyhighheroes:dyn/scroll_total"));
         groupsNumberBox.render(isFirstPersonArm);
         groupsNumberBoxInner.render(isFirstPersonArm);
-        white_text.renderLine(isFirstPersonArm, "left", "center", "Groups: " + entity.getData("skyhighocs:dyn/list_total"), groupsNumberBoxInner.leftX+4.0, groupsNumberBoxInner.centerY, groupsNumberBoxInner.z, 1.0);
+        white_text.renderLine(isFirstPersonArm, "left", "center", "Groups: " + entity.getData("skyhighheroes:dyn/list_total"), groupsNumberBoxInner.leftX+4.0, groupsNumberBoxInner.centerY, groupsNumberBoxInner.z, 1.0);
         groupsBaseBox.render(isFirstPersonArm);
         groupsBaseBoxInner.render(isFirstPersonArm);
         white_text.renderLine(isFirstPersonArm, "left", "center", "Edit", groupsEditSelected.leftX+14.0, groupsEditSelected.centerY, groupsEditSelected.z, 1.0);
-        if (entity.getData("skyhighocs:dyn/selected_button") == "groups_edit") {
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "groups_edit") {
           groupsEditSelected.render(entity, isFirstPersonArm, 3.0);
         };
         white_text.renderLine(isFirstPersonArm, "left", "center", "Add", groupsAddSelected.leftX+14.0, groupsAddSelected.centerY, groupsAddSelected.z, 1.0);
-        if (entity.getData("skyhighocs:dyn/selected_button") == "groups_add") {
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "groups_add") {
           groupsAddSelected.render(entity, isFirstPersonArm, 3.0);
         };
         groupsEditBox.render(isFirstPersonArm);
         groupsEditBoxInner.render(isFirstPersonArm);
         white_text.renderLine(isFirstPersonArm, "left", "center", "Members", groupsMembersSelected.leftX+14.0, groupsMembersSelected.centerY, groupsMembersSelected.z, 1.0);
-        if (entity.getData("skyhighocs:dyn/selected_button") == "groups_members") {
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "groups_members") {
           groupsMembersSelected.render(entity, isFirstPersonArm, 3.0);
         };
         white_text.renderLine(isFirstPersonArm, "left", "center", "Delete", groupsDeleteSelected.leftX+14.0, groupsDeleteSelected.centerY, groupsDeleteSelected.z, 1.0);
-        if (entity.getData("skyhighocs:dyn/selected_button") == "groups_delete") {
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "groups_delete") {
           groupsDeleteSelected.render(entity, isFirstPersonArm, 3.0);
         };
       } else {
         white_text.renderLine(isFirstPersonArm, "center", "center", "Enter group name", upperScreenMenu.centerX, upperScreenMenu.centerY, upperScreenMenu.z, 1.0);
       };
     };
-    if (entity.getData("skyhighocs:dyn/current_menu") == "group_members") {
+    if (entity.getData("skyhighheroes:dyn/current_menu") == "group_members") {
       upperScreenMenu.render(isFirstPersonArm);
       menuUpperBorder.render(isFirstPersonArm);
       menuUpperBorderLeftExt.render(isFirstPersonArm);
       menuUpperBorderRightExt.render(isFirstPersonArm);
-      if (!entity.getData("skyhighocs:dyn/entering_value")) {
+      if (!entity.getData("skyhighheroes:dyn/entering_value")) {
         gray_text.renderLine(isFirstPersonArm, "left", "center", "GROUPS", menuUpperBorderLeftExt.leftX+10.0, menuUpperBorderLeftExt.centerY, menuUpperBorderLeftExt.z, 1.0);
         groupsBox.render(isFirstPersonArm);
         groupsBoxInner.render(isFirstPersonArm);
         groupsButton0.render(isFirstPersonArm);
-        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighocs:dyn/scroll_entry_0"), groupsButton0.leftX+3.0, groupsButton0.centerY, groupsButton0.z, 1.0);
-        if (entity.getData("skyhighocs:dyn/selected_button") == "groups_members_select_0") {
+        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighheroes:dyn/scroll_entry_0"), groupsButton0.leftX+3.0, groupsButton0.centerY, groupsButton0.z, 1.0);
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "groups_members_select_0") {
           groupsButton0Selected.render(entity, isFirstPersonArm);
         };
         groupsButton1.render(isFirstPersonArm);
-        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighocs:dyn/scroll_entry_1"), groupsButton1.leftX+3.0, groupsButton1.centerY, groupsButton1.z, 1.0);
-        if (entity.getData("skyhighocs:dyn/selected_button") == "groups_members_select_1") {
+        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighheroes:dyn/scroll_entry_1"), groupsButton1.leftX+3.0, groupsButton1.centerY, groupsButton1.z, 1.0);
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "groups_members_select_1") {
           groupsButton1Selected.render(entity, isFirstPersonArm);
         };
         groupsButton2.render(isFirstPersonArm);
-        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighocs:dyn/scroll_entry_2"), groupsButton2.leftX+3.0, groupsButton2.centerY, groupsButton2.z, 1.0);
-        if (entity.getData("skyhighocs:dyn/selected_button") == "groups_members_select_2") {
+        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighheroes:dyn/scroll_entry_2"), groupsButton2.leftX+3.0, groupsButton2.centerY, groupsButton2.z, 1.0);
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "groups_members_select_2") {
           groupsButton2Selected.render(entity, isFirstPersonArm);
         };
         groupsButton3.render(isFirstPersonArm);
-        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighocs:dyn/scroll_entry_3"), groupsButton3.leftX+3.0, groupsButton3.centerY, groupsButton3.z, 1.0);
-        if (entity.getData("skyhighocs:dyn/selected_button") == "groups_members_select_3") {
+        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighheroes:dyn/scroll_entry_3"), groupsButton3.leftX+3.0, groupsButton3.centerY, groupsButton3.z, 1.0);
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "groups_members_select_3") {
           groupsButton3Selected.render(entity, isFirstPersonArm);
         };
         groupsButton4.render(isFirstPersonArm);
-        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighocs:dyn/scroll_entry_4"), groupsButton4.leftX+4.0, groupsButton4.centerY, groupsButton4.z, 1.0);
-        if (entity.getData("skyhighocs:dyn/selected_button") == "groups_members_select_4") {
+        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighheroes:dyn/scroll_entry_4"), groupsButton4.leftX+4.0, groupsButton4.centerY, groupsButton4.z, 1.0);
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "groups_members_select_4") {
           groupsButton4Selected.render(entity, isFirstPersonArm);
         };
         groupsButton5.render(isFirstPersonArm);
-        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighocs:dyn/scroll_entry_5"), groupsButton5.leftX+3.0, groupsButton5.centerY, groupsButton5.z, 1.0);
-        if (entity.getData("skyhighocs:dyn/selected_button") == "groups_members_select_5") {
+        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighheroes:dyn/scroll_entry_5"), groupsButton5.leftX+3.0, groupsButton5.centerY, groupsButton5.z, 1.0);
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "groups_members_select_5") {
           groupsButton5Selected.render(entity, isFirstPersonArm);
         };
         groupsButton6.render(isFirstPersonArm);
-        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighocs:dyn/scroll_entry_6"), groupsButton6.leftX+4.0, groupsButton6.centerY, groupsButton6.z, 1.0);
-        if (entity.getData("skyhighocs:dyn/selected_button") == "groups_members_select_6") {
+        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighheroes:dyn/scroll_entry_6"), groupsButton6.leftX+4.0, groupsButton6.centerY, groupsButton6.z, 1.0);
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "groups_members_select_6") {
           groupsButton6Selected.render(entity, isFirstPersonArm);
         };
-        groupsScrollBar.render(isFirstPersonArm, entity.getData("skyhighocs:dyn/scroll_value"), entity.getData("skyhighocs:dyn/scroll_total"));
+        groupsScrollBar.render(isFirstPersonArm, entity.getData("skyhighheroes:dyn/scroll_value"), entity.getData("skyhighheroes:dyn/scroll_total"));
         groupsMembersNumberBox.render(isFirstPersonArm);
         groupsMembersNumberBoxInner.render(isFirstPersonArm);
-        white_text.renderLine(isFirstPersonArm, "left", "center", "Name: " + entity.getData("skyhighocs:dyn/prev_list_entry"), groupsMembersNumberBoxInner.leftX+4.0, groupsMembersNumberBoxInner.centerY-6.0, groupsMembersNumberBoxInner.z, 1.0);
-        white_text.renderLine(isFirstPersonArm, "left", "center", "Members: " + entity.getData("skyhighocs:dyn/list_total"), groupsMembersNumberBoxInner.leftX+4.0, groupsMembersNumberBoxInner.centerY+6.0, groupsMembersNumberBoxInner.z, 1.0);
+        white_text.renderLine(isFirstPersonArm, "left", "center", "Name: " + entity.getData("skyhighheroes:dyn/prev_list_entry"), groupsMembersNumberBoxInner.leftX+4.0, groupsMembersNumberBoxInner.centerY-6.0, groupsMembersNumberBoxInner.z, 1.0);
+        white_text.renderLine(isFirstPersonArm, "left", "center", "Members: " + entity.getData("skyhighheroes:dyn/list_total"), groupsMembersNumberBoxInner.leftX+4.0, groupsMembersNumberBoxInner.centerY+6.0, groupsMembersNumberBoxInner.z, 1.0);
         groupsMembersBaseBox.render(isFirstPersonArm);
         groupsMembersBaseBoxInner.render(isFirstPersonArm);
         white_text.renderLine(isFirstPersonArm, "left", "center", "Edit", groupsMembersEditSelected.leftX+14.0, groupsMembersEditSelected.centerY, groupsMembersEditSelected.z, 1.0);
-        if (entity.getData("skyhighocs:dyn/selected_button") == "groups_members_edit") {
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "groups_members_edit") {
           groupsMembersEditSelected.render(entity, isFirstPersonArm, 3.0);
         };
         white_text.renderLine(isFirstPersonArm, "left", "center", "Add", groupsMembersAddSelected.leftX+14.0, groupsMembersAddSelected.centerY, groupsMembersAddSelected.z, 1.0);
-        if (entity.getData("skyhighocs:dyn/selected_button") == "groups_members_add") {
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "groups_members_add") {
           groupsMembersAddSelected.render(entity, isFirstPersonArm, 3.0);
         };
         groupsMembersEditBox.render(isFirstPersonArm);
         groupsMembersEditBoxInner.render(isFirstPersonArm);
         white_text.renderLine(isFirstPersonArm, "left", "center", "Delete", groupsMembersDeleteSelected.leftX+14.0, groupsMembersDeleteSelected.centerY, groupsMembersDeleteSelected.z, 1.0);
-        if (entity.getData("skyhighocs:dyn/selected_button") == "groups_members_delete") {
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "groups_members_delete") {
           groupsMembersDeleteSelected.render(entity, isFirstPersonArm, 3.0);
         };
       } else {
         white_text.renderLine(isFirstPersonArm, "center", "center", "Enter username to add to group", upperScreenMenu.centerX, upperScreenMenu.centerY, upperScreenMenu.z, 1.0);
       };
     };
-    if (entity.getData("skyhighocs:dyn/current_menu") == "Brother") {
-      if (!entity.getData("skyhighocs:dyn/entering_value")) {
+    if (entity.getData("skyhighheroes:dyn/current_menu") == "Brother") {
+      if (!entity.getData("skyhighheroes:dyn/entering_value")) {
         profileLowerBorder.render(isFirstPersonArm);
         upperScreenProfile.render(isFirstPersonArm);
         brotherUpperBorder.render(isFirstPersonArm);
@@ -847,73 +847,73 @@ function render(entity, renderLayer, isFirstPersonArm) {
         brotherSelfSatellite.render(isFirstPersonArm);
         brotherSelfSatelliteBorder.render(isFirstPersonArm);
         brotherSelfProfile.render(isFirstPersonArm);
-        if (entity.getData("skyhighocs:dyn/selected_button") == "Brother_self") {
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "Brother_self") {
           brotherSelfSelected.render(entity, isFirstPersonArm);
         };
         //Top left
         brotherLeftTopBase.render(isFirstPersonArm);
-        if (entity.getData("skyhighocs:dyn/scroll_entry_1") != "") {
+        if (entity.getData("skyhighheroes:dyn/scroll_entry_1") != "") {
           brotherLeftTopSatellite.render(isFirstPersonArm);
           brotherLeftTopSatelliteBorder.render(isFirstPersonArm);
           brotherLeftTopProfile.render(isFirstPersonArm);
           brotherLeftTopConnector.render(isFirstPersonArm);
         };
-        if (entity.getData("skyhighocs:dyn/selected_button") == "Brother_left_top") {
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "Brother_left_top") {
           brotherLeftTopSelected.render(entity, isFirstPersonArm);
         };
         //Center left
         brotherLeftCenterBase.render(isFirstPersonArm);
-        if (entity.getData("skyhighocs:dyn/scroll_entry_3") != "") {
+        if (entity.getData("skyhighheroes:dyn/scroll_entry_3") != "") {
           brotherLeftCenterSatellite.render(isFirstPersonArm);
           brotherLeftCenterSatelliteBorder.render(isFirstPersonArm);
           brotherLeftCenterProfile.render(isFirstPersonArm);
           brotherLeftCenterConnector.render(isFirstPersonArm);
         };
-        if (entity.getData("skyhighocs:dyn/selected_button") == "Brother_left_center") {
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "Brother_left_center") {
           brotherLeftCenterSelected.render(entity, isFirstPersonArm);
         };
         //Bottom left
         brotherLeftBottomBase.render(isFirstPersonArm);
-        if (entity.getData("skyhighocs:dyn/scroll_entry_5") != "") {
+        if (entity.getData("skyhighheroes:dyn/scroll_entry_5") != "") {
           brotherLeftBottomSatellite.render(isFirstPersonArm);
           brotherLeftBottomSatelliteBorder.render(isFirstPersonArm);
           brotherLeftBottomProfile.render(isFirstPersonArm);
           brotherLeftBottomConnector.render(isFirstPersonArm);
         };
-        if (entity.getData("skyhighocs:dyn/selected_button") == "Brother_left_bottom") {
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "Brother_left_bottom") {
           brotherLeftBottomSelected.render(entity, isFirstPersonArm);
         };
         //Top right
         brotherRightTopBase.render(isFirstPersonArm);
-        if (entity.getData("skyhighocs:dyn/scroll_entry_2") != "") {
+        if (entity.getData("skyhighheroes:dyn/scroll_entry_2") != "") {
           brotherRightTopSatellite.render(isFirstPersonArm);
           brotherRightTopSatelliteBorder.render(isFirstPersonArm);
           brotherRightTopProfile.render(isFirstPersonArm);
           brotherRightTopConnector.render(isFirstPersonArm);
         };
-        if (entity.getData("skyhighocs:dyn/selected_button") == "Brother_right_top") {
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "Brother_right_top") {
           brotherRightTopSelected.render(entity, isFirstPersonArm);
         };
         //Center right
         brotherRightCenterBase.render(isFirstPersonArm);
-        if (entity.getData("skyhighocs:dyn/scroll_entry_4") != "") {
+        if (entity.getData("skyhighheroes:dyn/scroll_entry_4") != "") {
           brotherRightCenterSatellite.render(isFirstPersonArm);
           brotherRightCenterSatelliteBorder.render(isFirstPersonArm);
           brotherRightCenterProfile.render(isFirstPersonArm);
           brotherRightCenterConnector.render(isFirstPersonArm);
         };
-        if (entity.getData("skyhighocs:dyn/selected_button") == "Brother_right_center") {
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "Brother_right_center") {
           brotherRightCenterSelected.render(entity, isFirstPersonArm);
         };
         //Bottom right
         brotherRightBottomBase.render(isFirstPersonArm);
-        if (entity.getData("skyhighocs:dyn/scroll_entry_6") != "") {
+        if (entity.getData("skyhighheroes:dyn/scroll_entry_6") != "") {
           brotherRightBottomSatellite.render(isFirstPersonArm);
           brotherRightBottomSatelliteBorder.render(isFirstPersonArm);
           brotherRightBottomProfile.render(isFirstPersonArm);
           brotherRightBottomConnector.render(isFirstPersonArm);
         };
-        if (entity.getData("skyhighocs:dyn/selected_button") == "Brother_right_bottom") {
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "Brother_right_bottom") {
           brotherRightBottomSelected.render(entity, isFirstPersonArm);
         };
       } else {
@@ -921,9 +921,9 @@ function render(entity, renderLayer, isFirstPersonArm) {
         white_text.renderLine(isFirstPersonArm, "center", "center", "Use BrotherBand button\n to become Brothers", upperScreenMenu.centerX, upperScreenMenu.centerY, upperScreenMenu.z, 1.0);
       };
     };
-    if (entity.getData("skyhighocs:dyn/current_menu") == "Brother_profile") {
-      if (!entity.getData("skyhighocs:dyn/entering_value")) {
-        var entryList = entity.getData("skyhighocs:dyn/list_entry").split(";:");
+    if (entity.getData("skyhighheroes:dyn/current_menu") == "Brother_profile") {
+      if (!entity.getData("skyhighheroes:dyn/entering_value")) {
+        var entryList = entity.getData("skyhighheroes:dyn/list_entry").split(";:");
         if (entryList.length > 4) {
           var name = entryList[5]
           black_text.renderLine(isFirstPersonArm, "left", "center", name.split(" ")[0], profileBrotherNameTextBox.leftX+3.0, profileBrotherNameTextBox.centerY, profileBrotherNameTextBox.z, 1.0);
@@ -946,16 +946,16 @@ function render(entity, renderLayer, isFirstPersonArm) {
         white_text.renderLine(isFirstPersonArm, "left", "center", "Secret Message", profileBrotherSecretMessageSelected.leftX+14.0, profileBrotherSecretMessageSelected.centerY, profileBrotherSecretMessageSelected.z, 1.0);
         white_text.renderLine(isFirstPersonArm, "left", "center", "Reestablish", profileBrotherReestablishSelected.leftX+14.0, profileBrotherReestablishSelected.centerY, profileBrotherReestablishSelected.z, 1.0);
         white_text.renderLine(isFirstPersonArm, "left", "center", "Delete", profileBrotherDeleteSelected.leftX+14.0, profileBrotherDeleteSelected.centerY, profileBrotherDeleteSelected.z, 1.0);
-        if (entity.getData("skyhighocs:dyn/selected_button") == "Brother_profile_personal_message") {
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "Brother_profile_personal_message") {
           profileBrotherPersonalMessageSelected.render(entity, isFirstPersonArm, 3.0);
         };
-        if (entity.getData("skyhighocs:dyn/selected_button") == "Brother_profile_secret_message") {
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "Brother_profile_secret_message") {
           profileBrotherSecretMessageSelected.render(entity, isFirstPersonArm, 3.0);
         };
-        if (entity.getData("skyhighocs:dyn/selected_button") == "Brother_profile_reestablish") {
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "Brother_profile_reestablish") {
           profileBrotherReestablishSelected.render(entity, isFirstPersonArm, 3.0);
         };
-        if (entity.getData("skyhighocs:dyn/selected_button") == "Brother_profile_delete") {
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "Brother_profile_delete") {
           profileBrotherDeleteSelected.render(entity, isFirstPersonArm, 3.0);
         };
       } else {
@@ -963,9 +963,9 @@ function render(entity, renderLayer, isFirstPersonArm) {
         white_text.renderLine(isFirstPersonArm, "center", "center", "Use BrotherBand button \nto reestablish connection", upperScreenMenu.centerX, upperScreenMenu.centerY, upperScreenMenu.z, 1.0);
       };
     };
-    if (entity.getData("skyhighocs:dyn/current_menu") == "Brother_self_profile") {
-      if (!entity.getData("skyhighocs:dyn/entering_value")) {
-        var entryList = entity.getData("skyhighocs:dyn/list_entry").split(";:");
+    if (entity.getData("skyhighheroes:dyn/current_menu") == "Brother_self_profile") {
+      if (!entity.getData("skyhighheroes:dyn/entering_value")) {
+        var entryList = entity.getData("skyhighheroes:dyn/list_entry").split(";:");
         if (entryList.length > 4) {
           var name = entryList[5]
           black_text.renderLine(isFirstPersonArm, "left", "center", name.split(" ")[0], profileBrotherNameTextBox.leftX+3.0, profileBrotherNameTextBox.centerY, profileBrotherNameTextBox.z, 1.0);
@@ -984,90 +984,90 @@ function render(entity, renderLayer, isFirstPersonArm) {
         profileBrotherHead.render(isFirstPersonArm);
         profileBrotherSelfBox.render(isFirstPersonArm);
         profileBrotherSelfBoxInner.render(isFirstPersonArm);
-        if (entity.getData("skyhighocs:dyn/current_submenu") == "") {
+        if (entity.getData("skyhighheroes:dyn/current_submenu") == "") {
           white_text.renderLine(isFirstPersonArm, "left", "center", "Personal Message", profileBrotherSelfPersonalMessageSelected.leftX+14.0, profileBrotherSelfPersonalMessageSelected.centerY, profileBrotherSelfPersonalMessageSelected.z, 1.0);
           white_text.renderLine(isFirstPersonArm, "left", "center", "Secret Message", profileBrotherSelfSecretMessageSelected.leftX+14.0, profileBrotherSelfSecretMessageSelected.centerY, profileBrotherSelfSecretMessageSelected.z, 1.0);
-          if (entity.getData("skyhighocs:dyn/selected_button") == "Brother_self_profile_personal_message") {
+          if (entity.getData("skyhighheroes:dyn/selected_button") == "Brother_self_profile_personal_message") {
             profileBrotherSelfPersonalMessageSelected.render(entity, isFirstPersonArm, 3.0);
           };
-          if (entity.getData("skyhighocs:dyn/selected_button") == "Brother_self_profile_secret_message") {
+          if (entity.getData("skyhighheroes:dyn/selected_button") == "Brother_self_profile_secret_message") {
             profileBrotherSelfSecretMessageSelected.render(entity, isFirstPersonArm, 3.0);
           };
         };
-        if ((entity.getData("skyhighocs:dyn/current_submenu") == "personal") || (entity.getData("skyhighocs:dyn/current_submenu") == "secret")) {
+        if ((entity.getData("skyhighheroes:dyn/current_submenu") == "personal") || (entity.getData("skyhighheroes:dyn/current_submenu") == "secret")) {
           white_text.renderLine(isFirstPersonArm, "left", "center", "View Message", profileBrotherSelfViewMessageSelected.leftX+14.0, profileBrotherSelfViewMessageSelected.centerY, profileBrotherSelfViewMessageSelected.z, 1.0);
           white_text.renderLine(isFirstPersonArm, "left", "center", "Edit Message", profileBrotherSelfEditMessageSelected.leftX+14.0, profileBrotherSelfEditMessageSelected.centerY, profileBrotherSelfEditMessageSelected.z, 1.0);
-          if (entity.getData("skyhighocs:dyn/selected_button") == "Brother_self_profile_view_message") {
+          if (entity.getData("skyhighheroes:dyn/selected_button") == "Brother_self_profile_view_message") {
             profileBrotherSelfViewMessageSelected.render(entity, isFirstPersonArm, 3.0);
           };
-          if (entity.getData("skyhighocs:dyn/selected_button") == "Brother_self_profile_edit_message") {
+          if (entity.getData("skyhighheroes:dyn/selected_button") == "Brother_self_profile_edit_message") {
             profileBrotherSelfEditMessageSelected.render(entity, isFirstPersonArm, 3.0);
           };
         };
       } else {
         upperScreenMenu.render(isFirstPersonArm);
-        if ((entity.getData("skyhighocs:dyn/current_submenu") == "personal")) {
+        if ((entity.getData("skyhighheroes:dyn/current_submenu") == "personal")) {
           white_text.renderLine(isFirstPersonArm, "center", "center", "Enter a personal message", upperScreenMenu.centerX, upperScreenMenu.centerY, upperScreenMenu.z, 1.0);
         };
-        if ((entity.getData("skyhighocs:dyn/current_submenu") == "secret")) {
+        if ((entity.getData("skyhighheroes:dyn/current_submenu") == "secret")) {
           white_text.renderLine(isFirstPersonArm, "center", "center", "Enter a secret message", upperScreenMenu.centerX, upperScreenMenu.centerY, upperScreenMenu.z, 1.0);
         };
       };
     };
 
-    if (entity.getData("skyhighocs:dyn/current_menu") == "waypoints") {
+    if (entity.getData("skyhighheroes:dyn/current_menu") == "waypoints") {
       upperScreenMenu.render(isFirstPersonArm);
       menuUpperBorder.render(isFirstPersonArm);
       menuUpperBorderLeftExt.render(isFirstPersonArm);
       menuUpperBorderRightExt.render(isFirstPersonArm);
       gray_text.renderLine(isFirstPersonArm, "left", "center", "WAYPOINTS", menuUpperBorderLeftExt.leftX+10.0, menuUpperBorderLeftExt.centerY, menuUpperBorderLeftExt.z, 1.0);
-      if (!entity.getData("skyhighocs:dyn/entering_value")) {
+      if (!entity.getData("skyhighheroes:dyn/entering_value")) {
         waypointsBox.render(isFirstPersonArm);
         waypointsBoxInner.render(isFirstPersonArm);
         waypointsButton0.render(isFirstPersonArm);
-        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighocs:dyn/scroll_entry_0"), waypointsButton0.leftX+3.0, waypointsButton0.centerY, waypointsButton0.z, 1.0);
-        if (entity.getData("skyhighocs:dyn/selected_button") == "waypoints_select_0") {
+        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighheroes:dyn/scroll_entry_0"), waypointsButton0.leftX+3.0, waypointsButton0.centerY, waypointsButton0.z, 1.0);
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "waypoints_select_0") {
           waypointsButton0Selected.render(entity, isFirstPersonArm);
         };
         waypointsButton1.render(isFirstPersonArm);
-        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighocs:dyn/scroll_entry_1"), waypointsButton1.leftX+3.0, waypointsButton1.centerY, waypointsButton1.z, 1.0);
-        if (entity.getData("skyhighocs:dyn/selected_button") == "waypoints_select_1") {
+        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighheroes:dyn/scroll_entry_1"), waypointsButton1.leftX+3.0, waypointsButton1.centerY, waypointsButton1.z, 1.0);
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "waypoints_select_1") {
           waypointsButton1Selected.render(entity, isFirstPersonArm);
         };
         waypointsButton2.render(isFirstPersonArm);
-        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighocs:dyn/scroll_entry_2"), waypointsButton2.leftX+3.0, waypointsButton2.centerY, waypointsButton2.z, 1.0);
-        if (entity.getData("skyhighocs:dyn/selected_button") == "waypoints_select_2") {
+        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighheroes:dyn/scroll_entry_2"), waypointsButton2.leftX+3.0, waypointsButton2.centerY, waypointsButton2.z, 1.0);
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "waypoints_select_2") {
           waypointsButton2Selected.render(entity, isFirstPersonArm);
         };
         waypointsButton3.render(isFirstPersonArm);
-        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighocs:dyn/scroll_entry_3"), waypointsButton3.leftX+3.0, waypointsButton3.centerY, waypointsButton3.z, 1.0);
-        if (entity.getData("skyhighocs:dyn/selected_button") == "waypoints_select_3") {
+        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighheroes:dyn/scroll_entry_3"), waypointsButton3.leftX+3.0, waypointsButton3.centerY, waypointsButton3.z, 1.0);
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "waypoints_select_3") {
           waypointsButton3Selected.render(entity, isFirstPersonArm);
         };
         waypointsButton4.render(isFirstPersonArm);
-        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighocs:dyn/scroll_entry_4"), waypointsButton4.leftX+4.0, waypointsButton4.centerY, waypointsButton4.z, 1.0);
-        if (entity.getData("skyhighocs:dyn/selected_button") == "waypoints_select_4") {
+        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighheroes:dyn/scroll_entry_4"), waypointsButton4.leftX+4.0, waypointsButton4.centerY, waypointsButton4.z, 1.0);
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "waypoints_select_4") {
           waypointsButton4Selected.render(entity, isFirstPersonArm);
         };
         waypointsButton5.render(isFirstPersonArm);
-        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighocs:dyn/scroll_entry_5"), waypointsButton5.leftX+3.0, waypointsButton5.centerY, waypointsButton5.z, 1.0);
-        if (entity.getData("skyhighocs:dyn/selected_button") == "waypoints_select_5") {
+        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighheroes:dyn/scroll_entry_5"), waypointsButton5.leftX+3.0, waypointsButton5.centerY, waypointsButton5.z, 1.0);
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "waypoints_select_5") {
           waypointsButton5Selected.render(entity, isFirstPersonArm);
         };
         waypointsButton6.render(isFirstPersonArm);
-        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighocs:dyn/scroll_entry_6"), waypointsButton6.leftX+4.0, waypointsButton6.centerY, waypointsButton6.z, 1.0);
-        if (entity.getData("skyhighocs:dyn/selected_button") == "waypoints_select_6") {
+        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighheroes:dyn/scroll_entry_6"), waypointsButton6.leftX+4.0, waypointsButton6.centerY, waypointsButton6.z, 1.0);
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "waypoints_select_6") {
           waypointsButton6Selected.render(entity, isFirstPersonArm);
         };
-        waypointsScrollBar.render(isFirstPersonArm, entity.getData("skyhighocs:dyn/scroll_value"), entity.getData("skyhighocs:dyn/scroll_total"));
-        if (entity.getData("skyhighocs:dyn/prev_list_entry") == "") {
+        waypointsScrollBar.render(isFirstPersonArm, entity.getData("skyhighheroes:dyn/scroll_value"), entity.getData("skyhighheroes:dyn/scroll_total"));
+        if (entity.getData("skyhighheroes:dyn/prev_list_entry") == "") {
           waypointsNumberBox.render(isFirstPersonArm);
           waypointsNumberBoxInner.render(isFirstPersonArm);
-          white_text.renderLine(isFirstPersonArm, "left", "center", "Waypoints: " + entity.getData("skyhighocs:dyn/list_total"), waypointsNumberBoxInner.leftX+4.0, waypointsNumberBoxInner.centerY, waypointsNumberBoxInner.z, 1.0);
+          white_text.renderLine(isFirstPersonArm, "left", "center", "Waypoints: " + entity.getData("skyhighheroes:dyn/list_total"), waypointsNumberBoxInner.leftX+4.0, waypointsNumberBoxInner.centerY, waypointsNumberBoxInner.z, 1.0);
         } else {
           waypointsInfoBox.render(isFirstPersonArm);
           waypointsInfoBoxInner.render(isFirstPersonArm);
-          var waypointData = entity.getData("skyhighocs:dyn/prev_list_entry").split(";:");
+          var waypointData = entity.getData("skyhighheroes:dyn/prev_list_entry").split(";:");
           white_text.renderLine(isFirstPersonArm, "left", "center", "X: " + waypointData[0], waypointsInfoBoxInner.leftX+4.0, waypointsInfoBoxInner.centerY-18.0, waypointsInfoBoxInner.z, 1.0);
           white_text.renderLine(isFirstPersonArm, "left", "center", "Y: " + waypointData[1], waypointsInfoBoxInner.leftX+4.0, waypointsInfoBoxInner.centerY-6.0, waypointsInfoBoxInner.z, 1.0);
           white_text.renderLine(isFirstPersonArm, "left", "center", "Z: " + waypointData[2], waypointsInfoBoxInner.leftX+4.0, waypointsInfoBoxInner.centerY+6.0, waypointsInfoBoxInner.z, 1.0);
@@ -1076,32 +1076,83 @@ function render(entity, renderLayer, isFirstPersonArm) {
         waypointsBaseBox.render(isFirstPersonArm);
         waypointsBaseBoxInner.render(isFirstPersonArm);
         white_text.renderLine(isFirstPersonArm, "left", "center", "Edit", waypointsEditSelected.leftX+14.0, waypointsEditSelected.centerY, waypointsEditSelected.z, 1.0);
-        if (entity.getData("skyhighocs:dyn/selected_button") == "waypoints_edit") {
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "waypoints_edit") {
           waypointsEditSelected.render(entity, isFirstPersonArm, 3.0);
         };
         white_text.renderLine(isFirstPersonArm, "left", "center", "Add", waypointsAddSelected.leftX+14.0, waypointsAddSelected.centerY, waypointsAddSelected.z, 1.0);
-        if (entity.getData("skyhighocs:dyn/selected_button") == "waypoints_add") {
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "waypoints_add") {
           waypointsAddSelected.render(entity, isFirstPersonArm, 3.0);
         };
         waypointsEditBox.render(isFirstPersonArm);
         waypointsEditBoxInner.render(isFirstPersonArm);
         white_text.renderLine(isFirstPersonArm, "left", "center", "Delete", waypointsDeleteSelected.leftX+14.0, waypointsDeleteSelected.centerY, waypointsDeleteSelected.z, 1.0);
-        if (entity.getData("skyhighocs:dyn/selected_button") == "waypoints_delete") {
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "waypoints_delete") {
           waypointsDeleteSelected.render(entity, isFirstPersonArm, 3.0);
         };
       } else {
         white_text.renderLine(isFirstPersonArm, "center", "center", "Enter name for waypoint at current location", upperScreenMenu.centerX, upperScreenMenu.centerY, upperScreenMenu.z, 1.0);
       };
     };
-    if (entity.getData("skyhighocs:dyn/current_menu") == "settings") {
+    if (entity.getData("skyhighheroes:dyn/current_menu") == "settings") {
       upperScreenMenu.render(isFirstPersonArm);
-      menuUpperBorder.render(isFirstPersonArm);
-      menuUpperBorderLeftExt.render(isFirstPersonArm);
-      menuUpperBorderRightExt.render(isFirstPersonArm);
-      gray_text.renderLine(isFirstPersonArm, "left", "center", "SETTINGS", menuUpperBorderLeftExt.leftX+10.0, menuUpperBorderLeftExt.centerY, menuUpperBorderLeftExt.z, 1.0);
-      upperScreenMenu.render(isFirstPersonArm);
-      settingsBox.render(isFirstPersonArm);
-      settingsScrollBar.render(isFirstPersonArm, 1, 5);
+      if (!entity.getData("skyhighheroes:dyn/entering_value")) {
+        menuUpperBorder.render(isFirstPersonArm);
+        menuUpperBorderLeftExt.render(isFirstPersonArm);
+        menuUpperBorderRightExt.render(isFirstPersonArm);
+        gray_text.renderLine(isFirstPersonArm, "left", "center", "SETTINGS", menuUpperBorderLeftExt.leftX+10.0, menuUpperBorderLeftExt.centerY, menuUpperBorderLeftExt.z, 1.0);
+        settingsBox.render(isFirstPersonArm);
+        settingsBoxInner.render(isFirstPersonArm);
+        settingsButton0.render(isFirstPersonArm);
+        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighheroes:dyn/scroll_entry_0").split(";:")[0], settingsButton0.leftX+3.0, settingsButton0.centerY, settingsButton0.z, 1.0);
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "settings_select_0") {
+          settingsButton0Selected.render(entity, isFirstPersonArm);
+        };
+        settingsButton1.render(isFirstPersonArm);
+        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighheroes:dyn/scroll_entry_1").split(";:")[0], settingsButton1.leftX+3.0, settingsButton1.centerY, settingsButton1.z, 1.0);
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "settings_select_1") {
+          settingsButton1Selected.render(entity, isFirstPersonArm);
+        };
+        settingsButton2.render(isFirstPersonArm);
+        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighheroes:dyn/scroll_entry_2").split(";:")[0], settingsButton2.leftX+3.0, settingsButton2.centerY, settingsButton2.z, 1.0);
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "settings_select_2") {
+          settingsButton2Selected.render(entity, isFirstPersonArm);
+        };
+        settingsButton3.render(isFirstPersonArm);
+        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighheroes:dyn/scroll_entry_3").split(";:")[0], settingsButton3.leftX+3.0, settingsButton3.centerY, settingsButton3.z, 1.0);
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "settings_select_3") {
+          settingsButton3Selected.render(entity, isFirstPersonArm);
+        };
+        settingsButton4.render(isFirstPersonArm);
+        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighheroes:dyn/scroll_entry_4").split(";:")[0], settingsButton4.leftX+4.0, settingsButton4.centerY, settingsButton4.z, 1.0);
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "settings_select_4") {
+          settingsButton4Selected.render(entity, isFirstPersonArm);
+        };
+        settingsButton5.render(isFirstPersonArm);
+        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighheroes:dyn/scroll_entry_5").split(";:")[0], settingsButton5.leftX+3.0, settingsButton5.centerY, settingsButton5.z, 1.0);
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "settings_select_5") {
+          settingsButton5Selected.render(entity, isFirstPersonArm);
+        };
+        settingsButton6.render(isFirstPersonArm);
+        white_text.renderLine(isFirstPersonArm, "left", "center", entity.getData("skyhighheroes:dyn/scroll_entry_6").split(";:")[0], settingsButton6.leftX+4.0, settingsButton6.centerY, settingsButton6.z, 1.0);
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "settings_select_6") {
+          settingsButton6Selected.render(entity, isFirstPersonArm);
+        };
+        settingsScrollBar.render(isFirstPersonArm, entity.getData("skyhighheroes:dyn/scroll_value"), entity.getData("skyhighheroes:dyn/scroll_total"));
+        
+        settingsBaseBox.render(isFirstPersonArm);
+        settingsBaseBoxInner.render(isFirstPersonArm);
+        white_text.renderLine(isFirstPersonArm, "left", "center", "Edit", settingsEditSelected.leftX+14.0, settingsEditSelected.centerY, settingsEditSelected.z, 1.0);
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "settings_edit") {
+          settingsEditSelected.render(entity, isFirstPersonArm, 3.0);
+        };
+        white_text.renderLine(isFirstPersonArm, "left", "center", "View", settingsViewSelected.leftX+14.0, settingsViewSelected.centerY, settingsViewSelected.z, 1.0);
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "settings_view") {
+          settingsViewSelected.render(entity, isFirstPersonArm, 3.0);
+        };
+      } else {
+        var nbtKey = entity.getData("skyhighheroes:dyn/list_entry").split(";:")[0];
+        white_text.renderLine(isFirstPersonArm, "center", "center", "Enter value to set " + nbtKey, upperScreenMenu.centerX, upperScreenMenu.centerY, upperScreenMenu.z, 1.0);
+      };
     };
 
     //Lower
@@ -1112,31 +1163,31 @@ function render(entity, renderLayer, isFirstPersonArm) {
     white_text.renderLine(isFirstPersonArm, "right", "top", currentDate.getHours() + ":" + ((currentDate.getMinutes() > 9) ? currentDate.getMinutes() : "0" + currentDate.getMinutes()) + ":" + ((currentDate.getSeconds() > 9) ? currentDate.getSeconds() : "0" + currentDate.getSeconds()), lowerScreen.rightX-3.0, lowerScreen.topY, lowerScreen.z, 1.0);
     
     buttonPersonal.render(isFirstPersonArm);
-    if (entity.getData("skyhighocs:dyn/selected_button") == "main_personal" && entity.getData("skyhighocs:dyn/current_menu") == "main") {
+    if (entity.getData("skyhighheroes:dyn/selected_button") == "main_personal" && entity.getData("skyhighheroes:dyn/current_menu") == "main") {
       buttonPersonalSelected.render(entity, isFirstPersonArm);
     };
     buttonBrother.render(isFirstPersonArm);
-    if (entity.getData("skyhighocs:dyn/selected_button") == "main_Brother" && entity.getData("skyhighocs:dyn/current_menu") == "main") {
+    if (entity.getData("skyhighheroes:dyn/selected_button") == "main_Brother" && entity.getData("skyhighheroes:dyn/current_menu") == "main") {
       buttonBrotherSelected.render(entity, isFirstPersonArm);
     };
     buttonContacts.render(isFirstPersonArm);
-    if (entity.getData("skyhighocs:dyn/selected_button") == "main_contacts" && entity.getData("skyhighocs:dyn/current_menu") == "main") {
+    if (entity.getData("skyhighheroes:dyn/selected_button") == "main_contacts" && entity.getData("skyhighheroes:dyn/current_menu") == "main") {
       buttonContactsSelected.render(entity, isFirstPersonArm);
     };
     buttonGroups.render(isFirstPersonArm);
-    if (entity.getData("skyhighocs:dyn/selected_button") == "main_groups" && entity.getData("skyhighocs:dyn/current_menu") == "main") {
+    if (entity.getData("skyhighheroes:dyn/selected_button") == "main_groups" && entity.getData("skyhighheroes:dyn/current_menu") == "main") {
       buttonGroupsSelected.render(entity, isFirstPersonArm);
     };
     buttonWaypoints.render(isFirstPersonArm);
-    if (entity.getData("skyhighocs:dyn/selected_button") == "main_waypoints" && entity.getData("skyhighocs:dyn/current_menu") == "main") {
+    if (entity.getData("skyhighheroes:dyn/selected_button") == "main_waypoints" && entity.getData("skyhighheroes:dyn/current_menu") == "main") {
       buttonWaypointsSelected.render(entity, isFirstPersonArm);
     };
     buttonChat.render(isFirstPersonArm);
-    if (entity.getData("skyhighocs:dyn/selected_button") == "main_chat" && entity.getData("skyhighocs:dyn/current_menu") == "main") {
+    if (entity.getData("skyhighheroes:dyn/selected_button") == "main_chat" && entity.getData("skyhighheroes:dyn/current_menu") == "main") {
       buttonChatSelected.render(entity, isFirstPersonArm);
     };
     buttonSettings.render(isFirstPersonArm);
-    if (entity.getData("skyhighocs:dyn/selected_button") == "main_settings" && entity.getData("skyhighocs:dyn/current_menu") == "main") {
+    if (entity.getData("skyhighheroes:dyn/selected_button") == "main_settings" && entity.getData("skyhighheroes:dyn/current_menu") == "main") {
       buttonSettingsSelected.render(entity, isFirstPersonArm);
     };
     white_text.renderLine(isFirstPersonArm, "center", "center", "PERSONAL", buttonPersonal.centerX, buttonPersonal.centerY, buttonPersonal.z, 1.0);

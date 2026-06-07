@@ -475,7 +475,7 @@ function text(renderer, name) {
   };
   for (var char in chars) {
     var character_texture = texture_name + "_" + index.toString();
-    var character_model = renderer.createResource("MODEL", "skyhighocs:Character");
+    var character_model = renderer.createResource("MODEL", "skyhighheroes:Character");
     character_model.texture.set(null, character_texture);
     var character = renderer.createEffect("fiskheroes:model").setModel(character_model);
     character.anchor.set("head");
