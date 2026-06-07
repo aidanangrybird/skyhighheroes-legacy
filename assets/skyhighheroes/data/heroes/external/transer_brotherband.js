@@ -857,7 +857,6 @@ function initModule(system) {
             },
             properties: {
               confirmAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/scroll_entry_5", "aidanangrybird;:pegasus;:left_bottom;:297;:a3d071d4-c912-41e1-a6b2-c0de99ea4a84;:Aidan Stelar")
                 if (entity.getData("skyhighheroes:dyn/scroll_entry_5") != "") {
                   manager.setData(entity, "skyhighheroes:dyn/current_menu", "Brother_profile");
                   manager.setData(entity, "skyhighheroes:dyn/selected_button", "Brother_profile_personal_message");
