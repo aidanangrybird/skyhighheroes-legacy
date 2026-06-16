@@ -8,6 +8,103 @@ function initModule(system) {
     moduleMessageName: "Wings",
     type: 12,
     command: "wing",
+    cyberOverviewButtons: {
+      "wing_left_deploy": {
+        borderingButtons: {
+          top: "intake_body_left_start_up",
+          right: "external_arm_left_deploy",
+          left: "system_core_open",
+        },
+        properties: {
+          confirmAction: (entity, manager) => {
+            manager.setData(entity, "skyhighheroes:dyn/wing_left_deployed", !entity.getData("skyhighheroes:dyn/wing_left_deployed"));
+            if (entity.getData("skyhighheroes:dyn/wing_left_deployed")) {
+              system.moduleMessage(this, entity, "<s>Deployed <sh>left<s> wing!");
+            } else {
+              system.moduleMessage(this, entity, "<s>Retracted <sh>left<s> wing!");
+            };
+          },
+          backAction: (entity, manager) => {
+            system.setButton(entity, manager, "main_overview");
+            system.setMenu(entity, manager, "main");
+          },
+        }
+      },
+      "wing_right_deploy": {
+        borderingButtons: {
+          top: "intake_body_right_start_up",
+          left: "external_arm_right_deploy",
+          right: "system_core_open",
+        },
+        properties: {
+          confirmAction: (entity, manager) => {
+            manager.setData(entity, "skyhighheroes:dyn/wing_right_deployed", !entity.getData("skyhighheroes:dyn/wing_right_deployed"));
+            if (entity.getData("skyhighheroes:dyn/wing_right_deployed")) {
+              system.moduleMessage(this, entity, "<s>Deployed <sh>right<s> wing!");
+            } else {
+              system.moduleMessage(this, entity, "<s>Retracted <sh>right<s> wing!");
+            };
+          },
+          backAction: (entity, manager) => {
+            system.setButton(entity, manager, "main_overview");
+            system.setMenu(entity, manager, "main");
+          },
+        }
+      },
+    },
+    cyberMenus: {
+      "rockets_wings": {
+        parent: "main",
+        prevButton: "main_rockets_wings",
+        buttons: {
+          "wings_armed": {
+            borderingButtons: {
+              top: "rockets_wings_armed",
+              bottom: "rockets_on_fall",
+              left: "rockets_body_armed",
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                var nbt = system.mainNBT(entity);
+                if (!entity.getData("skyhighheroes:dyn/wings_armed")) {
+                  if (entity.getData("skyhighheroes:dyn/rockets_arms_armed") || entity.getData("skyhighheroes:dyn/rockets_body_armed") || entity.getData("skyhighheroes:dyn/rockets_legs_armed") || entity.getData("skyhighheroes:dyn/rockets_wings_armed")) {
+                    system.moduleMessage(this, entity, "<e>A rocket set is already armed! Disarm rockets before arming wings!");
+                  } else {
+                    manager.setData(entity, "skyhighheroes:dyn/wings_armed", true);
+                    manager.setBoolean(nbt, "wings", true);
+                    system.moduleMessage(this, entity, "<s>Armed <sh>wings<s>!");
+                  };
+                } else {
+                  manager.setData(entity, "skyhighheroes:dyn/wings_armed", false);
+                  manager.setBoolean(nbt, "wings", false);
+                  system.moduleMessage(this, entity, "<s>Disarmed <sh>wings<s>!");
+                };
+              },
+              backAction: (entity, manager) => {
+                system.setButton(entity, manager, "main_rockets_wings");
+                system.setMenu(entity, manager, "main");
+              },
+            }
+          },
+        }
+      }
+    },
+    cyberMainButton: {
+      buttonID: "main_rockets_wings",
+      borderingButtons: {
+        top: "main_external_arms",
+        bottom: "main_cannons"
+      },
+      properties: {
+        confirmAction: (entity, manager) => {
+          system.setMenu(entity, manager, "rockets_wings");
+          system.setButton(entity, manager, "rockets_arms_armed");
+        },
+        backAction: (entity, manager) => {
+          manager.setData(entity, "skyhighheroes:dyn/interface", false);
+        }
+      }
+    },
     helpMessage: "<n>!wing <nh>-<n> Wings",
     disabledMessage: "<e>Module <eh>wings<e> is disabled!",
     commandHandler: function (entity, manager, argList) {

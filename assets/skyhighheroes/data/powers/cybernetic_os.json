@@ -10,16 +10,16 @@
       },
       "isToggle": true
     },
-    "fiskheroes:shape_shifting": {
+    "fiskheroes:transformation|interface": {
+      "key": "INTERFACE",
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/interface",
+        "timerData": "skyhighheroes:dyn/interface_timer",
+        "time": 60
+      },
+      "isToggle": true
     },
-    "fiskheroes:gravity_manipulation": {
-      "range": 0.0,
-      "radius": 0.0,
-      "minGravity": 1.0,
-      "maxGravity": 1.0,
-      "affectsUser": false,
-      "soundEvents": {
-      }
+    "fiskheroes:shape_shifting": {
     }
   }
 }

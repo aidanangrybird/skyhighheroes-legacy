@@ -124,14 +124,14 @@ function initModule(system) {
             },
             properties: {
               confirmAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "contacts_select_0");
+                system.setButton(entity, manager, "contacts_select_0");
               },
               backAction: (entity, manager) => {
                 if (entity.getData("skyhighheroes:dyn/entering_value")) {
                   manager.setData(entity, "skyhighheroes:dyn/entering_value", false);
                 } else {
-                  manager.setData(entity, "skyhighheroes:dyn/selected_button", "main_contacts");
-                  manager.setData(entity, "skyhighheroes:dyn/current_menu", "main");
+                  system.setButton(entity, manager, "main_contacts");
+                  system.setMenu(entity, manager, "main");
                 };
               },
             }
@@ -148,8 +148,8 @@ function initModule(system) {
                 if (entity.getData("skyhighheroes:dyn/entering_value")) {
                   manager.setData(entity, "skyhighheroes:dyn/entering_value", false);
                 } else {
-                  manager.setData(entity, "skyhighheroes:dyn/selected_button", "main_contacts");
-                  manager.setData(entity, "skyhighheroes:dyn/current_menu", "main");
+                  system.setButton(entity, manager, "main_contacts");
+                  system.setMenu(entity, manager, "main");
                 };
               },
               textAction: (entity, manager, entry) => {
@@ -164,11 +164,11 @@ function initModule(system) {
             properties: {
               confirmAction: (entity, manager) => {
                 removeContact(entity, manager, entity.getData("skyhighheroes:dyn/list_entry"));
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "contacts_select_0");
+                system.setButton(entity, manager, "contacts_select_0");
               },
               backAction: (entity, manager) => {
                 var listValue = entity.getData("skyhighheroes:dyn/list_value").toString();
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "contacts_select_" + listValue);
+                system.setButton(entity, manager, "contacts_select_" + listValue);
               },
             }
           },
@@ -177,12 +177,12 @@ function initModule(system) {
             },
             properties: {
               confirmAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "contacts_delete");
+                system.setButton(entity, manager, "contacts_delete");
                 manager.setData(entity, "skyhighheroes:dyn/list_value", 0);
                 manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_0"));
               },
               backAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "contacts_edit");
+                system.setButton(entity, manager, "contacts_edit");
               },
               upAction: (entity, manager) => {
                 var list = contactsList(entity, manager);
@@ -195,8 +195,8 @@ function initModule(system) {
               },
               downAction: (entity, manager) => {
                 var list = contactsList(entity, manager);
-                if ((list.length) > 1) {
-                  manager.setData(entity, "skyhighheroes:dyn/selected_button", "contacts_select_1");
+                if (entity.getData("skyhighheroes:dyn/scroll_entry_1") != "") {
+                  system.setButton(entity, manager, "contacts_select_1");
                 };
               },
               selectAction: (entity, manager) => {
@@ -211,17 +211,17 @@ function initModule(system) {
             },
             properties: {
               confirmAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "contacts_delete");
+                system.setButton(entity, manager, "contacts_delete");
                 manager.setData(entity, "skyhighheroes:dyn/list_value", 1);
                 manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_1"));
               },
               backAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "contacts_edit");
+                system.setButton(entity, manager, "contacts_edit");
               },
               downAction: (entity, manager) => {
                 var list = contactsList(entity, manager);
-                if ((list.length) > 2) {
-                  manager.setData(entity, "skyhighheroes:dyn/selected_button", "contacts_select_2");
+                if (entity.getData("skyhighheroes:dyn/scroll_entry_2") != "") {
+                  system.setButton(entity, manager, "contacts_select_2");
                 };
               },
               selectAction: (entity, manager) => {
@@ -236,17 +236,17 @@ function initModule(system) {
             },
             properties: {
               confirmAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "contacts_delete");
+                system.setButton(entity, manager, "contacts_delete");
                 manager.setData(entity, "skyhighheroes:dyn/list_value", 2);
                 manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_2"));
               },
               backAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "contacts_edit");
+                system.setButton(entity, manager, "contacts_edit");
               },
               downAction: (entity, manager) => {
                 var list = contactsList(entity, manager);
-                if ((list.length) > 3) {
-                  manager.setData(entity, "skyhighheroes:dyn/selected_button", "contacts_select_3");
+                if (entity.getData("skyhighheroes:dyn/scroll_entry_3") != "") {
+                  system.setButton(entity, manager, "contacts_select_3");
                 };
               },
               selectAction: (entity, manager) => {
@@ -261,17 +261,17 @@ function initModule(system) {
             },
             properties: {
               confirmAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "contacts_delete");
+                system.setButton(entity, manager, "contacts_delete");
                 manager.setData(entity, "skyhighheroes:dyn/list_value", 3);
                 manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_3"));
               },
               backAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "contacts_edit");
+                system.setButton(entity, manager, "contacts_edit");
               },
               downAction: (entity, manager) => {
                 var list = contactsList(entity, manager);
-                if ((list.length) > 4) {
-                  manager.setData(entity, "skyhighheroes:dyn/selected_button", "contacts_select_4");
+                if (entity.getData("skyhighheroes:dyn/scroll_entry_4") != "") {
+                  system.setButton(entity, manager, "contacts_select_4");
                 };
               },
               selectAction: (entity, manager) => {
@@ -286,17 +286,17 @@ function initModule(system) {
             },
             properties: {
               confirmAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "contacts_delete");
+                system.setButton(entity, manager, "contacts_delete");
                 manager.setData(entity, "skyhighheroes:dyn/list_value", 4);
                 manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_4"));
               },
               backAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "contacts_edit");
+                system.setButton(entity, manager, "contacts_edit");
               },
               downAction: (entity, manager) => {
                 var list = contactsList(entity, manager);
-                if ((list.length) > 5) {
-                  manager.setData(entity, "skyhighheroes:dyn/selected_button", "contacts_select_5");
+                if (entity.getData("skyhighheroes:dyn/scroll_entry_5") != "") {
+                  system.setButton(entity, manager, "contacts_select_5");
                 };
               },
               selectAction: (entity, manager) => {
@@ -311,17 +311,17 @@ function initModule(system) {
             },
             properties: {
               confirmAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "contacts_delete");
+                system.setButton(entity, manager, "contacts_delete");
                 manager.setData(entity, "skyhighheroes:dyn/list_value", 5);
                 manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_5"));
               },
               backAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "contacts_edit");
+                system.setButton(entity, manager, "contacts_edit");
               },
               downAction: (entity, manager) => {
                 var list = contactsList(entity, manager);
-                if ((list.length) > 6) {
-                  manager.setData(entity, "skyhighheroes:dyn/selected_button", "contacts_select_6");
+                if (entity.getData("skyhighheroes:dyn/scroll_entry_6") != "") {
+                  system.setButton(entity, manager, "contacts_select_6");
                 };
               },
               selectAction: (entity, manager) => {
@@ -336,12 +336,12 @@ function initModule(system) {
             },
             properties: {
               confirmAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "contacts_delete");
+                system.setButton(entity, manager, "contacts_delete");
                 manager.setData(entity, "skyhighheroes:dyn/list_value", 6);
                 manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_6"));
               },
               backAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "contacts_edit");
+                system.setButton(entity, manager, "contacts_edit");
               },
               downAction: (entity, manager) => {
                 var list = contactsList(entity, manager);
@@ -370,8 +370,8 @@ function initModule(system) {
       },
       properties: {
         confirmAction: (entity, manager) => {
-          manager.setData(entity, "skyhighheroes:dyn/current_menu", "contacts");
-          manager.setData(entity, "skyhighheroes:dyn/selected_button", "contacts_edit");
+          system.setMenu(entity, manager, "contacts");
+          system.setButton(entity, manager, "contacts_edit");
           var list = contactsList(entity, manager);
           manager.setData(entity, "skyhighheroes:dyn/list_total", list.length);
           manager.setData(entity, "skyhighheroes:dyn/scroll_value", 0);
@@ -380,6 +380,371 @@ function initModule(system) {
         },
         backAction: (entity, manager) => {
           manager.setData(entity, "skyhighheroes:dyn/transer", false);
+        }
+      }
+    },
+    cyberMainButton: {
+      buttonID: "main_contacts_groups",
+      borderingButtons: {
+        top: "main_settings",
+        bottom: "main_waypoints"
+      },
+      properties: {
+        confirmAction: (entity, manager) => {
+          system.setMenu(entity, manager, "contacts_groups");
+          system.setButton(entity, manager, "contacts_groups_contacts");
+        },
+        backAction: (entity, manager) => {
+          manager.setData(entity, "skyhighheroes:dyn/interface", false);
+        }
+      }
+    },
+    cyberMenus: {
+      "contacts_groups": {
+        parent: "main",
+        prevButton: "main_contacts_groups",
+        buttons: {
+          "contacts_groups_contacts": {
+            borderingButtons: {
+              bottom: "contacts_groups_groups",
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                system.setMenu(entity, manager, "contacts");
+                system.setButton(entity, manager, "contacts_edit");
+                var list = contactsList(entity, manager);
+                manager.setData(entity, "skyhighheroes:dyn/list_total", list.length);
+                manager.setData(entity, "skyhighheroes:dyn/scroll_value", 0);
+                manager.setData(entity, "skyhighheroes:dyn/scroll_total", Math.max(list.length - 10, 0));
+                system.updateList(entity, manager, 10, list);
+              },
+              backAction: (entity, manager) => {
+                system.setButton(entity, manager, "main_contacts_groups");
+                system.setMenu(entity, manager, "main");
+              },
+            }
+          },
+        }
+      },
+      "contacts": {
+        parent: "contacts_groups",
+        prevButton: "contacts_groups_contacts",
+        buttons: {
+          "contacts_edit": {
+            borderingButtons: {
+              bottom: "contacts_add",
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                system.setButton(entity, manager, "contacts_select_0");
+              },
+              backAction: (entity, manager) => {
+                if (entity.getData("skyhighheroes:dyn/entering_value")) {
+                  manager.setData(entity, "skyhighheroes:dyn/entering_value", false);
+                } else {
+                  system.setButton(entity, manager, "contacts_groups_contacts");
+                  system.setMenu(entity, manager, "contacts_groups");
+                };
+              },
+            }
+          },
+          "contacts_add": {
+            borderingButtons: {
+              top: "contacts_edit",
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                manager.setData(entity, "skyhighheroes:dyn/entering_value", true);
+              },
+              backAction: (entity, manager) => {
+                if (entity.getData("skyhighheroes:dyn/entering_value")) {
+                  manager.setData(entity, "skyhighheroes:dyn/entering_value", false);
+                } else {
+                  system.setButton(entity, manager, "contacts_groups_contacts");
+                  system.setMenu(entity, manager, "contacts_groups");
+                };
+              },
+              textAction: (entity, manager, entry) => {
+                addContact(entity, manager, entry);
+                manager.setData(entity, "skyhighheroes:dyn/entering_value", false);
+              },
+            }
+          },
+          "contacts_delete": {
+            borderingButtons: {
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                removeContact(entity, manager, entity.getData("skyhighheroes:dyn/list_entry"));
+                system.setButton(entity, manager, "contacts_select_0");
+              },
+              backAction: (entity, manager) => {
+                var listValue = entity.getData("skyhighheroes:dyn/list_value").toString();
+                system.setButton(entity, manager, "contacts_select_" + listValue);
+              },
+            }
+          },
+          "contacts_select_0": {
+            borderingButtons: {
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                system.setButton(entity, manager, "contacts_delete");
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 0);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_0"));
+              },
+              backAction: (entity, manager) => {
+                system.setButton(entity, manager, "contacts_edit");
+              },
+              upAction: (entity, manager) => {
+                var list = contactsList(entity, manager);
+                manager.setData(entity, "skyhighheroes:dyn/list_total", list.length);
+                var value = entity.getData("skyhighheroes:dyn/scroll_value");
+                if (value > 0) {
+                  manager.setData(entity, "skyhighheroes:dyn/scroll_value", entity.getData("skyhighheroes:dyn/scroll_value") - 1);
+                };
+                system.updateList(entity, manager, 10, list);
+              },
+              downAction: (entity, manager) => {
+                var list = contactsList(entity, manager);
+                if (entity.getData("skyhighheroes:dyn/scroll_entry_1") != "") {
+                  system.setButton(entity, manager, "contacts_select_1");
+                };
+              },
+              selectAction: (entity, manager) => {
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 0);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_0"));
+              }
+            }
+          },
+          "contacts_select_1": {
+            borderingButtons: {
+              top: "contacts_select_0",
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                system.setButton(entity, manager, "contacts_delete");
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 1);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_1"));
+              },
+              backAction: (entity, manager) => {
+                system.setButton(entity, manager, "contacts_edit");
+              },
+              downAction: (entity, manager) => {
+                var list = contactsList(entity, manager);
+                if (entity.getData("skyhighheroes:dyn/scroll_entry_2") != "") {
+                  system.setButton(entity, manager, "contacts_select_2");
+                };
+              },
+              selectAction: (entity, manager) => {
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 1);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_1"));
+              }
+            }
+          },
+          "contacts_select_2": {
+            borderingButtons: {
+              top: "contacts_select_1",
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                system.setButton(entity, manager, "contacts_delete");
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 2);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_2"));
+              },
+              backAction: (entity, manager) => {
+                system.setButton(entity, manager, "contacts_edit");
+              },
+              downAction: (entity, manager) => {
+                var list = contactsList(entity, manager);
+                if (entity.getData("skyhighheroes:dyn/scroll_entry_3") != "") {
+                  system.setButton(entity, manager, "contacts_select_3");
+                };
+              },
+              selectAction: (entity, manager) => {
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 2);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_2"));
+              }
+            }
+          },
+          "contacts_select_3": {
+            borderingButtons: {
+              top: "contacts_select_2",
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                system.setButton(entity, manager, "contacts_delete");
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 3);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_3"));
+              },
+              backAction: (entity, manager) => {
+                system.setButton(entity, manager, "contacts_edit");
+              },
+              downAction: (entity, manager) => {
+                var list = contactsList(entity, manager);
+                if (entity.getData("skyhighheroes:dyn/scroll_entry_4") != "") {
+                  system.setButton(entity, manager, "contacts_select_4");
+                };
+              },
+              selectAction: (entity, manager) => {
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 3);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_3"));
+              }
+            }
+          },
+          "contacts_select_4": {
+            borderingButtons: {
+              top: "contacts_select_3",
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                system.setButton(entity, manager, "contacts_delete");
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 4);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_4"));
+              },
+              backAction: (entity, manager) => {
+                system.setButton(entity, manager, "contacts_edit");
+              },
+              downAction: (entity, manager) => {
+                var list = contactsList(entity, manager);
+                if (entity.getData("skyhighheroes:dyn/scroll_entry_5") != "") {
+                  system.setButton(entity, manager, "contacts_select_5");
+                };
+              },
+              selectAction: (entity, manager) => {
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 4);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_4"));
+              }
+            }
+          },
+          "contacts_select_5": {
+            borderingButtons: {
+              top: "contacts_select_4",
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                system.setButton(entity, manager, "contacts_delete");
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 5);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_5"));
+              },
+              backAction: (entity, manager) => {
+                system.setButton(entity, manager, "contacts_edit");
+              },
+              downAction: (entity, manager) => {
+                var list = contactsList(entity, manager);
+                if (entity.getData("skyhighheroes:dyn/scroll_entry_6") != "") {
+                  system.setButton(entity, manager, "contacts_select_6");
+                };
+              },
+              selectAction: (entity, manager) => {
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 5);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_5"));
+              }
+            }
+          },
+          "contacts_select_6": {
+            borderingButtons: {
+              top: "contacts_select_5",
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                system.setButton(entity, manager, "contacts_delete");
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 6);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_6"));
+              },
+              backAction: (entity, manager) => {
+                system.setButton(entity, manager, "contacts_edit");
+              },
+              downAction: (entity, manager) => {
+                var list = contactsList(entity, manager);
+                if (entity.getData("skyhighheroes:dyn/scroll_entry_7") != "") {
+                  system.setButton(entity, manager, "contacts_select_7");
+                };
+              },
+              selectAction: (entity, manager) => {
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 6);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_6"));
+              }
+            }
+          },
+          "contacts_select_7": {
+            borderingButtons: {
+              top: "contacts_select_6",
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                system.setButton(entity, manager, "contacts_delete");
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 7);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_7"));
+              },
+              backAction: (entity, manager) => {
+                system.setButton(entity, manager, "contacts_edit");
+              },
+              downAction: (entity, manager) => {
+                var list = contactsList(entity, manager);
+                if (entity.getData("skyhighheroes:dyn/scroll_entry_8") != "") {
+                  system.setButton(entity, manager, "contacts_select_8");
+                };
+              },
+              selectAction: (entity, manager) => {
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 7);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_7"));
+              }
+            }
+          },
+          "contacts_select_8": {
+            borderingButtons: {
+              top: "contacts_select_7",
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                system.setButton(entity, manager, "contacts_delete");
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 8);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_8"));
+              },
+              backAction: (entity, manager) => {
+                system.setButton(entity, manager, "contacts_edit");
+              },
+              downAction: (entity, manager) => {
+                var list = contactsList(entity, manager);
+                if (entity.getData("skyhighheroes:dyn/scroll_entry_9") != "") {
+                  system.setButton(entity, manager, "contacts_select_9");
+                };
+              },
+              selectAction: (entity, manager) => {
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 8);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_8"));
+              }
+            }
+          },
+          "contacts_select_9": {
+            borderingButtons: {
+              top: "contacts_select_8",
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                system.setButton(entity, manager, "contacts_delete");
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 9);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_9"));
+              },
+              backAction: (entity, manager) => {
+                system.setButton(entity, manager, "contacts_edit");
+              },
+              downAction: (entity, manager) => {
+                var list = contactsList(entity, manager);
+                manager.setData(entity, "skyhighheroes:dyn/list_total", list.length);
+                var value = entity.getData("skyhighheroes:dyn/scroll_value");
+                if ((list.length - 10) > value) {
+                  manager.setData(entity, "skyhighheroes:dyn/scroll_value", entity.getData("skyhighheroes:dyn/scroll_value") + 1);
+                };
+                system.updateList(entity, manager, 10, list);
+              },
+              selectAction: (entity, manager) => {
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 9);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_9"));
+              }
+            }
+          }
         }
       }
     },

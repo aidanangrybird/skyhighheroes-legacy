@@ -51,7 +51,7 @@ var transformedVars = [
   "ironmaniac:dyn/mk5_timer",
   "secretheroes:dyn/moonknight_timer",
   "secretheroes:dyn/mrknight_timer",
-  "skyhighocs:dyn/wave_changing_timer",
+  "skyhighheroes:dyn/wave_changing_timer",
   "skyhighheroes:dyn/wave_changing_timer",
 ];
 

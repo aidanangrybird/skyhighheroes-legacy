@@ -63,7 +63,7 @@
 {left_leg_front_inner_rocket_cover_posX} += 0.03{part0_inner_rocket}
 {left_leg_front_inner_rocket_cover_posZ} -= 0.99{part1_inner_rocket} + 0.01{part0_inner_rocket}
 {left_leg_inner_rocket_base_posX} -= 2.9{part2_inner_rocket}
-{left_leg_inner_rocket_rotX} -= 90'{part3_inner_rocket} - 45'{part3_inner_rocket}{adx} - 45'{part3_inner_rocket}{motion}
+{left_leg_inner_rocket_rotX} += 90'{part3_inner_rocket} - 45'{part3_inner_rocket}{adx} - 45'{part3_inner_rocket}{motion}
 {left_leg_inner_rocket_rotY} -= 45'{part3_inner_rocket}{forward}
 ;front
 {part0_front_rocket} = if({front_rocket} != 1, animate2({front_rocket}, 1.0, 0.0, 0.15, 0.0), 1)

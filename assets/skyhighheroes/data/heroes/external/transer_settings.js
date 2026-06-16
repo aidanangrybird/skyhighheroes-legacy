@@ -254,7 +254,7 @@ function initModule(system) {
                 viewValue(entity, entry);
               },
               backAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", entity.getData("skyhighheroes:dyn/prev_selected_button"));
+                system.setButton(entity, manager, entity.getData("skyhighheroes:dyn/prev_selected_button"));
               },
             }
           },
@@ -269,9 +269,9 @@ function initModule(system) {
               backAction: (entity, manager) => {
                 if (entity.getData("skyhighheroes:dyn/entering_value")) {
                   manager.setData(entity, "skyhighheroes:dyn/entering_value", false);
-                  manager.setData(entity, "skyhighheroes:dyn/selected_button", entity.getData("skyhighheroes:dyn/prev_selected_button"));
+                  system.setButton(entity, manager, entity.getData("skyhighheroes:dyn/prev_selected_button"));
                 } else {
-                  manager.setData(entity, "skyhighheroes:dyn/selected_button", entity.getData("skyhighheroes:dyn/prev_selected_button"));
+                  system.setButton(entity, manager, entity.getData("skyhighheroes:dyn/prev_selected_button"));
                 };
               },
               textAction: (entity, manager, entry) => {
@@ -287,14 +287,14 @@ function initModule(system) {
             },
             properties: {
               confirmAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "settings_edit");
+                system.setButton(entity, manager, "settings_edit");
                 manager.setData(entity, "skyhighheroes:dyn/prev_selected_button", "settings_select_0");
                 manager.setData(entity, "skyhighheroes:dyn/list_value", 0);
                 manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_0"));
               },
               backAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "main_settings");
-                manager.setData(entity, "skyhighheroes:dyn/current_menu", "main");
+                system.setButton(entity, manager, "main_settings");
+                system.setMenu(entity, manager, "main");
               },
               upAction: (entity, manager) => {
                 var list = settingsList(entity, manager);
@@ -307,8 +307,8 @@ function initModule(system) {
               },
               downAction: (entity, manager) => {
                 var list = settingsList(entity, manager);
-                if ((list.length) > 1) {
-                  manager.setData(entity, "skyhighheroes:dyn/selected_button", "settings_select_1");
+                if (entity.getData("skyhighheroes:dyn/scroll_entry_1") != "") {
+                  system.setButton(entity, manager, "settings_select_1");
                 };
               },
               selectAction: (entity, manager) => {
@@ -323,19 +323,19 @@ function initModule(system) {
             },
             properties: {
               confirmAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "settings_edit");
+                system.setButton(entity, manager, "settings_edit");
                 manager.setData(entity, "skyhighheroes:dyn/prev_selected_button", "settings_select_1");
                 manager.setData(entity, "skyhighheroes:dyn/list_value", 1);
                 manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_1"));
               },
               backAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "main_settings");
-                manager.setData(entity, "skyhighheroes:dyn/current_menu", "main");
+                system.setButton(entity, manager, "main_settings");
+                system.setMenu(entity, manager, "main");
               },
               downAction: (entity, manager) => {
                 var list = settingsList(entity, manager);
-                if ((list.length) > 2) {
-                  manager.setData(entity, "skyhighheroes:dyn/selected_button", "settings_select_2");
+                if (entity.getData("skyhighheroes:dyn/scroll_entry_2") != "") {
+                  system.setButton(entity, manager, "settings_select_2");
                 };
               },
               selectAction: (entity, manager) => {
@@ -350,19 +350,19 @@ function initModule(system) {
             },
             properties: {
               confirmAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "settings_edit");
+                system.setButton(entity, manager, "settings_edit");
                 manager.setData(entity, "skyhighheroes:dyn/prev_selected_button", "settings_select_2");
                 manager.setData(entity, "skyhighheroes:dyn/list_value", 2);
                 manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_2"));
               },
               backAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "main_settings");
-                manager.setData(entity, "skyhighheroes:dyn/current_menu", "main");
+                system.setButton(entity, manager, "main_settings");
+                system.setMenu(entity, manager, "main");
               },
               downAction: (entity, manager) => {
                 var list = settingsList(entity, manager);
-                if ((list.length) > 3) {
-                  manager.setData(entity, "skyhighheroes:dyn/selected_button", "settings_select_3");
+                if (entity.getData("skyhighheroes:dyn/scroll_entry_3") != "") {
+                  system.setButton(entity, manager, "settings_select_3");
                 };
               },
               selectAction: (entity, manager) => {
@@ -377,19 +377,19 @@ function initModule(system) {
             },
             properties: {
               confirmAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "settings_edit");
+                system.setButton(entity, manager, "settings_edit");
                 manager.setData(entity, "skyhighheroes:dyn/prev_selected_button", "settings_select_3");
                 manager.setData(entity, "skyhighheroes:dyn/list_value", 3);
                 manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_3"));
               },
               backAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "main_settings");
-                manager.setData(entity, "skyhighheroes:dyn/current_menu", "main");
+                system.setButton(entity, manager, "main_settings");
+                system.setMenu(entity, manager, "main");
               },
               downAction: (entity, manager) => {
                 var list = settingsList(entity, manager);
-                if ((list.length) > 4) {
-                  manager.setData(entity, "skyhighheroes:dyn/selected_button", "settings_select_4");
+                if (entity.getData("skyhighheroes:dyn/scroll_entry_4") != "") {
+                  system.setButton(entity, manager, "settings_select_4");
                 };
               },
               selectAction: (entity, manager) => {
@@ -404,19 +404,19 @@ function initModule(system) {
             },
             properties: {
               confirmAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "settings_edit");
+                system.setButton(entity, manager, "settings_edit");
                 manager.setData(entity, "skyhighheroes:dyn/prev_selected_button", "settings_select_4");
                 manager.setData(entity, "skyhighheroes:dyn/list_value", 4);
                 manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_4"));
               },
               backAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "main_settings");
-                manager.setData(entity, "skyhighheroes:dyn/current_menu", "main");
+                system.setButton(entity, manager, "main_settings");
+                system.setMenu(entity, manager, "main");
               },
               downAction: (entity, manager) => {
                 var list = settingsList(entity, manager);
-                if ((list.length) > 5) {
-                  manager.setData(entity, "skyhighheroes:dyn/selected_button", "settings_select_5");
+                if (entity.getData("skyhighheroes:dyn/scroll_entry_5") != "") {
+                  system.setButton(entity, manager, "settings_select_5");
                 };
               },
               selectAction: (entity, manager) => {
@@ -431,19 +431,19 @@ function initModule(system) {
             },
             properties: {
               confirmAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "settings_edit");
+                system.setButton(entity, manager, "settings_edit");
                 manager.setData(entity, "skyhighheroes:dyn/prev_selected_button", "settings_select_5");
                 manager.setData(entity, "skyhighheroes:dyn/list_value", 5);
                 manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_5"));
               },
               backAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "main_settings");
-                manager.setData(entity, "skyhighheroes:dyn/current_menu", "main");
+                system.setButton(entity, manager, "main_settings");
+                system.setMenu(entity, manager, "main");
               },
               downAction: (entity, manager) => {
                 var list = settingsList(entity, manager);
-                if ((list.length) > 6) {
-                  manager.setData(entity, "skyhighheroes:dyn/selected_button", "settings_select_6");
+                if (entity.getData("skyhighheroes:dyn/scroll_entry_6") != "") {
+                  system.setButton(entity, manager, "settings_select_6");
                 };
               },
               selectAction: (entity, manager) => {
@@ -458,14 +458,14 @@ function initModule(system) {
             },
             properties: {
               confirmAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "settings_edit");
+                system.setButton(entity, manager, "settings_edit");
                 manager.setData(entity, "skyhighheroes:dyn/prev_selected_button", "settings_select_6");
                 manager.setData(entity, "skyhighheroes:dyn/list_value", 6);
                 manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_6"));
               },
               backAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "main_settings");
-                manager.setData(entity, "skyhighheroes:dyn/current_menu", "main");
+                system.setButton(entity, manager, "main_settings");
+                system.setMenu(entity, manager, "main");
               },
               downAction: (entity, manager) => {
                 var list = settingsList(entity, manager);
@@ -494,8 +494,8 @@ function initModule(system) {
       },
       properties: {
         confirmAction: (entity, manager) => {
-          manager.setData(entity, "skyhighheroes:dyn/current_menu", "settings");
-          manager.setData(entity, "skyhighheroes:dyn/selected_button", "settings_select_0");
+          system.setMenu(entity, manager, "settings");
+          system.setButton(entity, manager, "settings_select_0");
           var list = settingsList(entity);
           system.updateList(entity, manager, 7, list);
         },

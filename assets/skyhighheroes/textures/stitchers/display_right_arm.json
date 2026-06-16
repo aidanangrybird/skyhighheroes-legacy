@@ -1,0 +1,9 @@
+{
+  "dimensions": [ 40, 20 ],
+  "stitch": [
+    { "size": [ 4, 4 ], "from": [ 44, 16 ], "to": [ 8, 0 ], "transforms": [ "ROTATE_LEFT" ] },
+    { "size": [ 10, 12 ], "from": [ 40, 20 ], "to": [ 8, 4 ] },
+    { "size": [ 6, 12 ], "from": [ 50, 20 ], "to": [ 2, 4 ] },
+    { "size": [ 4, 4 ], "from": [ 48, 16 ], "to": [ 8, 16 ], "transforms": [ "ROTATE_RIGHT" ] }
+  ]
+}

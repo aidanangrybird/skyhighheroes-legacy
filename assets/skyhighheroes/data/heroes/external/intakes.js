@@ -9,6 +9,352 @@ function initModule(system) {
     moduleMessageName: "Intakes",
     type: 12,
     command: "intake",
+    cyberOverviewButtons: {
+      "intake_head_left_open": {
+        borderingButtons: {
+          top: "optics_enabled",
+          left: "intake_head_right_open",
+          right: "intake_head_left_start_up",
+          bottom: "intake_body_left_open",
+        },
+        properties: {
+          confirmAction: (entity, manager) => {
+            manager.setData(entity, "skyhighheroes:dyn/intake_head_left_open", !entity.getData("skyhighheroes:dyn/intake_head_left_open"));
+            if (entity.getData("skyhighheroes:dyn/intake_head_left_open")) {
+              system.moduleMessage(this, entity, "<s>Opened <sh>left head<s> intake!");
+            } else {
+              system.moduleMessage(this, entity, "<s>Closed <sh>left head<s> intake!");
+            };
+          },
+          backAction: (entity, manager) => {
+            system.setButton(entity, manager, "main_overview");
+            system.setMenu(entity, manager, "main");
+          },
+        }
+      },
+      "intake_head_right_open": {
+        borderingButtons: {
+          top: "optics_enabled",
+          right: "intake_head_left_open",
+          left: "intake_head_right_start_up",
+          bottom: "intake_body_right_open",
+        },
+        properties: {
+          confirmAction: (entity, manager) => {
+            manager.setData(entity, "skyhighheroes:dyn/intake_head_right_open", !entity.getData("skyhighheroes:dyn/intake_head_right_open"));
+            if (entity.getData("skyhighheroes:dyn/intake_head_right_open")) {
+              system.moduleMessage(this, entity, "<s>Opened <sh>right head<s> intake!");
+            } else {
+              system.moduleMessage(this, entity, "<s>Closed <sh>right head<s> intake!");
+            };
+          },
+          backAction: (entity, manager) => {
+            system.setButton(entity, manager, "main_overview");
+            system.setMenu(entity, manager, "main");
+          },
+        }
+      },
+      "intake_body_left_open": {
+        borderingButtons: {
+          top: "intake_head_left_open",
+          left: "intake_body_right_open",
+          right: "intake_body_left_start_up",
+          bottom: "cannon_body_left_deploy",
+        },
+        properties: {
+          confirmAction: (entity, manager) => {
+            manager.setData(entity, "skyhighheroes:dyn/intake_body_left_open", !entity.getData("skyhighheroes:dyn/intake_body_left_open"));
+            if (entity.getData("skyhighheroes:dyn/intake_body_left_open")) {
+              system.moduleMessage(this, entity, "<s>Opened <sh>left body<s> intake!");
+            } else {
+              system.moduleMessage(this, entity, "<s>Closed <sh>left body<s> intake!");
+            };
+          },
+          backAction: (entity, manager) => {
+            system.setButton(entity, manager, "main_overview");
+            system.setMenu(entity, manager, "main");
+          },
+        }
+      },
+      "intake_body_right_open": {
+        borderingButtons: {
+          top: "intake_head_right_open",
+          right: "intake_body_left_open",
+          left: "intake_body_right_start_up",
+          bottom: "cannon_body_right_deploy",
+        },
+        properties: {
+          confirmAction: (entity, manager) => {
+            manager.setData(entity, "skyhighheroes:dyn/intake_body_right_open", !entity.getData("skyhighheroes:dyn/intake_body_right_open"));
+            if (entity.getData("skyhighheroes:dyn/intake_body_right_open")) {
+              system.moduleMessage(this, entity, "<s>Opened <sh>right body<s> intake!");
+            } else {
+              system.moduleMessage(this, entity, "<s>Closed <sh>right body<s> intake!");
+            };
+          },
+          backAction: (entity, manager) => {
+            system.setButton(entity, manager, "main_overview");
+            system.setMenu(entity, manager, "main");
+          },
+        }
+      },
+      "intake_left_arm_open": {
+        borderingButtons: {
+          bottom: "rocket_left_arm_outer_deploy",
+          left: "intake_left_arm_start_up",
+        },
+        properties: {
+          confirmAction: (entity, manager) => {
+            manager.setData(entity, "skyhighheroes:dyn/intake_left_arm_open", !entity.getData("skyhighheroes:dyn/intake_left_arm_open"));
+            if (entity.getData("skyhighheroes:dyn/intake_left_arm_open")) {
+              system.moduleMessage(this, entity, "<s>Opened <sh>left arm<s> intake!");
+            } else {
+              system.moduleMessage(this, entity, "<s>Closed <sh>left arm<s> intake!");
+            };
+          },
+          backAction: (entity, manager) => {
+            system.setButton(entity, manager, "main_overview");
+            system.setMenu(entity, manager, "main");
+          },
+        }
+      },
+      "intake_right_arm_open": {
+        borderingButtons: {
+          bottom: "rocket_right_arm_outer_deploy",
+          right: "intake_right_arm_start_up",
+        },
+        properties: {
+          confirmAction: (entity, manager) => {
+            manager.setData(entity, "skyhighheroes:dyn/intake_right_arm_open", !entity.getData("skyhighheroes:dyn/intake_right_arm_open"));
+            if (entity.getData("skyhighheroes:dyn/intake_right_arm_open")) {
+              system.moduleMessage(this, entity, "<s>Opened <sh>right arm<s> intake!");
+            } else {
+              system.moduleMessage(this, entity, "<s>Closed <sh>right arm<s> intake!");
+            };
+          },
+          backAction: (entity, manager) => {
+            system.setButton(entity, manager, "main_overview");
+            system.setMenu(entity, manager, "main");
+          },
+        }
+      },
+      "intake_left_leg_open": {
+        borderingButtons: {
+          top: "cannon_left_arm_bottom_deploy",
+          bottom: "rocket_left_leg_front_deploy",
+          left: "intake_left_leg_start_up",
+        },
+        properties: {
+          confirmAction: (entity, manager) => {
+            manager.setData(entity, "skyhighheroes:dyn/intake_left_leg_open", !entity.getData("skyhighheroes:dyn/intake_left_leg_open"));
+            if (entity.getData("skyhighheroes:dyn/intake_left_leg_open")) {
+              system.moduleMessage(this, entity, "<s>Opened <sh>left leg<s> intake!");
+            } else {
+              system.moduleMessage(this, entity, "<s>Closed <sh>left leg<s> intake!");
+            };
+          },
+          backAction: (entity, manager) => {
+            system.setButton(entity, manager, "main_overview");
+            system.setMenu(entity, manager, "main");
+          },
+        }
+      },
+      "intake_right_leg_open": {
+        borderingButtons: {
+          top: "cannon_right_arm_bottom_deploy",
+          bottom: "rocket_right_leg_front_deploy",
+          right: "intake_right_leg_start_up",
+        },
+        properties: {
+          confirmAction: (entity, manager) => {
+            manager.setData(entity, "skyhighheroes:dyn/intake_right_leg_open", !entity.getData("skyhighheroes:dyn/intake_right_leg_open"));
+            if (entity.getData("skyhighheroes:dyn/intake_right_leg_open")) {
+              system.moduleMessage(this, entity, "<s>Opened <sh>right leg<s> intake!");
+            } else {
+              system.moduleMessage(this, entity, "<s>Closed <sh>right leg<s> intake!");
+            };
+          },
+          backAction: (entity, manager) => {
+            system.setButton(entity, manager, "main_overview");
+            system.setMenu(entity, manager, "main");
+          },
+        }
+      },
+      "intake_head_left_start_up": {
+        borderingButtons: {
+          top: "cannon_head_left_deploy",
+          bottom: "intake_body_left_start_up",
+          right: "cannon_left_arm_bottom_deploy",
+          left: "intake_head_left_open",
+        },
+        properties: {
+          confirmAction: (entity, manager) => {
+            manager.setData(entity, "skyhighheroes:dyn/intake_head_left_starting_up", !entity.getData("skyhighheroes:dyn/intake_head_left_starting_up"));
+            if (entity.getData("skyhighheroes:dyn/intake_head_left_starting_up")) {
+              system.moduleMessage(this, entity, "<s>Starting up <sh>left head<s> intake!");
+            } else {
+              system.moduleMessage(this, entity, "<s>Shutting down <sh>left head<s> intake!");
+            };
+          },
+          backAction: (entity, manager) => {
+            system.setButton(entity, manager, "main_overview");
+            system.setMenu(entity, manager, "main");
+          },
+        }
+      },
+      "intake_head_right_start_up": {
+        borderingButtons: {
+          top: "cannon_head_right_deploy",
+          bottom: "intake_body_right_start_up",
+          left: "cannon_right_arm_bottom_deploy",
+          right: "intake_head_right_open",
+        },
+        properties: {
+          confirmAction: (entity, manager) => {
+            manager.setData(entity, "skyhighheroes:dyn/intake_head_right_starting_up", !entity.getData("skyhighheroes:dyn/intake_head_right_starting_up"));
+            if (entity.getData("skyhighheroes:dyn/intake_head_right_starting_up")) {
+              system.moduleMessage(this, entity, "<s>Starting up <sh>right head<s> intake!");
+            } else {
+              system.moduleMessage(this, entity, "<s>Shutting down <sh>right head<s> intake!");
+            };
+          },
+          backAction: (entity, manager) => {
+            system.setButton(entity, manager, "main_overview");
+            system.setMenu(entity, manager, "main");
+          },
+        }
+      },
+      "intake_body_left_start_up": {
+        borderingButtons: {
+          top: "intake_head_left_start_up",
+          right: "intake_left_leg_start_up",
+          left: "intake_body_left_open",
+          bottom: "wing_left_deploy",
+        },
+        properties: {
+          confirmAction: (entity, manager) => {
+            manager.setData(entity, "skyhighheroes:dyn/intake_body_left_starting_up", !entity.getData("skyhighheroes:dyn/intake_body_left_starting_up"));
+            if (entity.getData("skyhighheroes:dyn/intake_body_left_starting_up")) {
+              system.moduleMessage(this, entity, "<s>Starting up <sh>left body<s> intake!");
+            } else {
+              system.moduleMessage(this, entity, "<s>Shutting down <sh>left body<s> intake!");
+            };
+          },
+          backAction: (entity, manager) => {
+            system.setButton(entity, manager, "main_overview");
+            system.setMenu(entity, manager, "main");
+          },
+        }
+      },
+      "intake_body_right_start_up": {
+        borderingButtons: {
+          top: "intake_head_right_start_up",
+          right: "intake_body_right_open",
+          left: "intake_right_leg_start_up",
+          bottom: "wing_right_deploy",
+        },
+        properties: {
+          confirmAction: (entity, manager) => {
+            manager.setData(entity, "skyhighheroes:dyn/intake_body_right_starting_up", !entity.getData("skyhighheroes:dyn/intake_body_right_starting_up"));
+            if (entity.getData("skyhighheroes:dyn/intake_body_right_starting_up")) {
+              system.moduleMessage(this, entity, "<s>Starting up <sh>right body<s> intake!");
+            } else {
+              system.moduleMessage(this, entity, "<s>Shutting down <sh>right body<s> intake!");
+            };
+          },
+          backAction: (entity, manager) => {
+            system.setButton(entity, manager, "main_overview");
+            system.setMenu(entity, manager, "main");
+          },
+        }
+      },
+      "intake_left_arm_start_up": {
+        borderingButtons: {
+          bottom: "rocket_left_arm_front_deploy",
+          left: "cannon_head_left_deploy",
+          right: "intake_left_arm_open",
+        },
+        properties: {
+          confirmAction: (entity, manager) => {
+            manager.setData(entity, "skyhighheroes:dyn/intake_left_arm_starting_up", !entity.getData("skyhighheroes:dyn/intake_left_arm_starting_up"));
+            if (entity.getData("skyhighheroes:dyn/intake_left_arm_starting_up")) {
+              system.moduleMessage(this, entity, "<s>Starting up <sh>left arm<s> intakes!");
+            } else {
+              system.moduleMessage(this, entity, "<s>Shutting down <sh>left arm<s> intake!");
+            };
+          },
+          backAction: (entity, manager) => {
+            system.setButton(entity, manager, "main_overview");
+            system.setMenu(entity, manager, "main");
+          },
+        }
+      },
+      "intake_right_arm_start_up": {
+        borderingButtons: {
+          bottom: "rocket_right_arm_front_deploy",
+          right: "cannon_head_right_deploy",
+          left: "intake_right_arm_open",
+        },
+        properties: {
+          confirmAction: (entity, manager) => {
+            manager.setData(entity, "skyhighheroes:dyn/intake_right_arm_starting_up", !entity.getData("skyhighheroes:dyn/intake_right_arm_starting_up"));
+            if (entity.getData("skyhighheroes:dyn/intake_right_arm_starting_up")) {
+              system.moduleMessage(this, entity, "<s>Starting up <sh>right arm<s> intakes!");
+            } else {
+              system.moduleMessage(this, entity, "<s>Shutting down <sh>right arm<s> intake!");
+            };
+          },
+          backAction: (entity, manager) => {
+            system.setButton(entity, manager, "main_overview");
+            system.setMenu(entity, manager, "main");
+          },
+        }
+      },
+      "intake_left_leg_start_up": {
+        borderingButtons: {
+          top: "cannon_left_arm_bottom_deploy",
+          bottom: "rocket_left_leg_inner_deploy",
+          right: "intake_left_leg_open",
+          left: "intake_body_left_start_up",
+        },
+        properties: {
+          confirmAction: (entity, manager) => {
+            manager.setData(entity, "skyhighheroes:dyn/intake_left_leg_starting_up", !entity.getData("skyhighheroes:dyn/intake_left_leg_starting_up"));
+            if (entity.getData("skyhighheroes:dyn/intake_left_leg_starting_up")) {
+              system.moduleMessage(this, entity, "<s>Starting up <sh>left leg<s> intakes!");
+            } else {
+              system.moduleMessage(this, entity, "<s>Shutting down <sh>left leg<s> intake!");
+            };
+          },
+          backAction: (entity, manager) => {
+            system.setButton(entity, manager, "main_overview");
+            system.setMenu(entity, manager, "main");
+          },
+        }
+      },
+      "intake_right_leg_start_up": {
+        borderingButtons: {
+          top: "cannon_right_arm_bottom_deploy",
+          bottom: "rocket_right_leg_inner_deploy",
+          left: "intake_right_leg_open",
+          right: "intake_body_right_start_up",
+        },
+        properties: {
+          confirmAction: (entity, manager) => {
+            manager.setData(entity, "skyhighheroes:dyn/intake_right_leg_starting_up", !entity.getData("skyhighheroes:dyn/intake_right_leg_starting_up"));
+            if (entity.getData("skyhighheroes:dyn/intake_right_leg_starting_up")) {
+              system.moduleMessage(this, entity, "<s>Starting up <sh>right leg<s> intakes!");
+            } else {
+              system.moduleMessage(this, entity, "<s>Shutting down <sh>right leg<s> intake!");
+            };
+          },
+          backAction: (entity, manager) => {
+            system.setButton(entity, manager, "main_overview");
+            system.setMenu(entity, manager, "main");
+          },
+        }
+      },
+    },
     helpMessage: "<n>!intake <nh>-<n> intakes",
     disabledMessage: "<e>Module <eh>intakes<e> is disabled!",
     commandHandler: function (entity, manager, argList) {
@@ -50,11 +396,11 @@ function initModule(system) {
                 break;
               case "leftArm":
                 manager.setData(entity, "skyhighheroes:dyn/intake_left_arm_open", true);
-                system.moduleMessage(this, entity, "<s>Opened <sh>left arm<s> intakes!");
+                system.moduleMessage(this, entity, "<s>Opened <sh>left arm<s> intake!");
                 break;
               case "rightArm":
                 manager.setData(entity, "skyhighheroes:dyn/intake_right_arm_open", true);
-                system.moduleMessage(this, entity, "<s>Opened <sh>right arm<s> intakes!");
+                system.moduleMessage(this, entity, "<s>Opened <sh>right arm<s> intake!");
                 break;
               case "legs":
                 manager.setData(entity, "skyhighheroes:dyn/intake_left_leg_open", true);
@@ -63,11 +409,11 @@ function initModule(system) {
                 break;
               case "leftLeg":
                 manager.setData(entity, "skyhighheroes:dyn/intake_left_leg_open", true);
-                system.moduleMessage(this, entity, "<s>Opened <sh>left leg<s> intakes!");
+                system.moduleMessage(this, entity, "<s>Opened <sh>left leg<s> intake!");
                 break;
               case "rightLeg":
                 manager.setData(entity, "skyhighheroes:dyn/intake_right_leg_open", true);
-                system.moduleMessage(this, entity, "<s>Opened <sh>right leg<s> intakes!");
+                system.moduleMessage(this, entity, "<s>Opened <sh>right leg<s> intake!");
                 break;
               default:
                 system.moduleMessage(this, entity, "<e>Unknown <eh>intake<e>!");
@@ -342,45 +688,66 @@ function initModule(system) {
     },
     tickHandler: function (entity, manager) {
       var nbt = system.mainNBT(entity);
-      //manager.setData(entity, "skyhighheroes:dyn/intake_head_left_starting_up", entity.getData("skyhighheroes:dyn/intake_head_left_open_timer") == 1);
-      manager.incrementData(entity, "skyhighheroes:dyn/intake_head_left_start_up_timer", 200, 50, entity.getData("skyhighheroes:dyn/intake_head_left_starting_up"));
-      //manager.setData(entity, "skyhighheroes:dyn/intake_head_right_starting_up", entity.getData("skyhighheroes:dyn/intake_head_right_open_timer") == 1);
-      manager.incrementData(entity, "skyhighheroes:dyn/intake_head_right_start_up_timer", 200, 50, entity.getData("skyhighheroes:dyn/intake_head_right_starting_up"));
-      //manager.setData(entity, "skyhighheroes:dyn/intake_body_left_starting_up", entity.getData("skyhighheroes:dyn/intake_body_left_open_timer") == 1);
-      manager.incrementData(entity, "skyhighheroes:dyn/intake_body_left_start_up_timer", 200, 50, entity.getData("skyhighheroes:dyn/intake_body_left_starting_up"));
-      //manager.setData(entity, "skyhighheroes:dyn/intake_body_right_starting_up", entity.getData("skyhighheroes:dyn/intake_body_right_open_timer") == 1);
-      manager.incrementData(entity, "skyhighheroes:dyn/intake_body_right_start_up_timer", 200, 50, entity.getData("skyhighheroes:dyn/intake_body_right_starting_up"));
-      //manager.setData(entity, "skyhighheroes:dyn/intake_left_arm_starting_up", entity.getData("skyhighheroes:dyn/intake_left_arm_open_timer") == 1);
-      manager.incrementData(entity, "skyhighheroes:dyn/intake_left_arm_start_up_timer", 200, 50, entity.getData("skyhighheroes:dyn/intake_left_arm_starting_up"));
-      //manager.setData(entity, "skyhighheroes:dyn/intake_right_arm_starting_up", entity.getData("skyhighheroes:dyn/intake_right_arm_open_timer") == 1);
-      manager.incrementData(entity, "skyhighheroes:dyn/intake_right_arm_start_up_timer", 200, 50, entity.getData("skyhighheroes:dyn/intake_right_arm_starting_up"));
-      //manager.setData(entity, "skyhighheroes:dyn/intake_left_leg_starting_up", entity.getData("skyhighheroes:dyn/intake_left_leg_open_timer") == 1);
-      manager.incrementData(entity, "skyhighheroes:dyn/intake_left_leg_start_up_timer", 200, 50, entity.getData("skyhighheroes:dyn/intake_left_leg_starting_up"));
-      //manager.setData(entity, "skyhighheroes:dyn/intake_right_leg_starting_up", entity.getData("skyhighheroes:dyn/intake_right_leg_open_timer") == 1);
-      manager.incrementData(entity, "skyhighheroes:dyn/intake_right_leg_start_up_timer", 200, 50, entity.getData("skyhighheroes:dyn/intake_right_leg_starting_up"));
-      /* 
-      var rocketsArms = entity.getData("skyhighheroes:dyn/rockets_arms_timer") == 1;
-      var rocketsBody = entity.getData("skyhighheroes:dyn/rockets_body_timer") == 1;
-      var rocketsLegs = entity.getData("skyhighheroes:dyn/rockets_legs_timer") == 1;
-      var cannonsHead = entity.getData("skyhighheroes:dyn/cannons_head_timer") == 1;
-      var cannonsArms = entity.getData("skyhighheroes:dyn/cannons_arms_timer") == 1;
-      var cannonsBody = entity.getData("skyhighheroes:dyn/cannons_body_timer") == 1;
-      if (cannonsHead) {
-        manager.setData(entity, "skyhighheroes:dyn/intake_body_left_open", true);
-        manager.setData(entity, "skyhighheroes:dyn/intake_body_right_open", true);
+      if (!system.hasEnoughEnergy(entity, manager, "intakeFan")) {
+        manager.setData(entity, "skyhighheroes:dyn/intake_head_left_starting_up", false);
+        manager.setData(entity, "skyhighheroes:dyn/intake_head_right_starting_up", false);
+        manager.setData(entity, "skyhighheroes:dyn/intake_body_left_starting_up", false);
+        manager.setData(entity, "skyhighheroes:dyn/intake_body_right_starting_up", false);
+        manager.setData(entity, "skyhighheroes:dyn/intake_left_arm_starting_up", false);
+        manager.setData(entity, "skyhighheroes:dyn/intake_right_arm_starting_up", false);
+        manager.setData(entity, "skyhighheroes:dyn/intake_left_leg_starting_up", false);
+        manager.setData(entity, "skyhighheroes:dyn/intake_right_leg_starting_up", false);
       };
-      if (rocketsBody || cannonsBody) {
-        manager.setData(entity, "skyhighheroes:dyn/intake_body_left_open", true);
-        manager.setData(entity, "skyhighheroes:dyn/intake_body_right_open", true);
+      var headLeft = entity.getData("skyhighheroes:dyn/intake_head_left_starting_up");
+      var headRight = entity.getData("skyhighheroes:dyn/intake_head_right_starting_up");
+      var bodyLeft = entity.getData("skyhighheroes:dyn/intake_body_left_starting_up");
+      var bodyRight = entity.getData("skyhighheroes:dyn/intake_body_right_starting_up");
+      var leftArm = entity.getData("skyhighheroes:dyn/intake_left_arm_starting_up");
+      var rightArm = entity.getData("skyhighheroes:dyn/intake_right_arm_starting_up");
+      var leftLeg = entity.getData("skyhighheroes:dyn/intake_left_leg_starting_up");
+      var rightLeg = entity.getData("skyhighheroes:dyn/intake_right_leg_starting_up");
+      manager.incrementData(entity, "skyhighheroes:dyn/intake_head_left_start_up_timer", 200, 50, headLeft);
+      if (headLeft) {
+        system.useEnergy(entity, manager, "intakeFan");
       };
-      if (rocketsArms || cannonsArms) {
-        manager.setData(entity, "skyhighheroes:dyn/intake_left_arm_open", true);
-        manager.setData(entity, "skyhighheroes:dyn/intake_right_arm_open", true);
+      manager.incrementData(entity, "skyhighheroes:dyn/intake_head_right_start_up_timer", 200, 50, headRight);
+      if (headRight) {
+        system.useEnergy(entity, manager, "intakeFan");
       };
-      if (rocketsLegs) {
-        manager.setData(entity, "skyhighheroes:dyn/intake_left_leg_open", true);
-        manager.setData(entity, "skyhighheroes:dyn/intake_right_leg_open", true);
-      }; */
+      manager.incrementData(entity, "skyhighheroes:dyn/intake_body_left_start_up_timer", 200, 50, bodyLeft);
+      if (bodyLeft) {
+        system.useEnergy(entity, manager, "intakeFan");
+      };
+      manager.incrementData(entity, "skyhighheroes:dyn/intake_body_right_start_up_timer", 200, 50, bodyRight);
+      if (bodyRight) {
+        system.useEnergy(entity, manager, "intakeFan");
+      };
+      manager.incrementData(entity, "skyhighheroes:dyn/intake_left_arm_start_up_timer", 200, 50, leftArm);
+      if (leftArm) {
+        system.useEnergy(entity, manager, "intakeFan");
+      };
+      manager.incrementData(entity, "skyhighheroes:dyn/intake_right_arm_start_up_timer", 200, 50, rightArm);
+      if (rightArm) {
+        system.useEnergy(entity, manager, "intakeFan");
+      };
+      manager.incrementData(entity, "skyhighheroes:dyn/intake_left_leg_start_up_timer", 200, 50, leftLeg);
+      if (leftLeg) {
+        system.useEnergy(entity, manager, "intakeFan");
+      };
+      manager.incrementData(entity, "skyhighheroes:dyn/intake_right_leg_start_up_timer", 200, 50, rightLeg);
+      if (rightLeg) {
+        system.useEnergy(entity, manager, "intakeFan");
+      };
+    },
+    onChargingStart: function (entity, manager) {
+      manager.setData(entity, "skyhighheroes:dyn/intake_head_left_starting_up", false);
+      manager.setData(entity, "skyhighheroes:dyn/intake_head_right_starting_up", false);
+      manager.setData(entity, "skyhighheroes:dyn/intake_body_left_starting_up", false);
+      manager.setData(entity, "skyhighheroes:dyn/intake_body_right_starting_up", false);
+      manager.setData(entity, "skyhighheroes:dyn/intake_left_arm_starting_up", false);
+      manager.setData(entity, "skyhighheroes:dyn/intake_right_arm_starting_up", false);
+      manager.setData(entity, "skyhighheroes:dyn/intake_left_leg_starting_up", false);
+      manager.setData(entity, "skyhighheroes:dyn/intake_right_leg_starting_up", false);
     }
   };
 };

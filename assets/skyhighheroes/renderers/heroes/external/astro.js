@@ -169,7 +169,7 @@ function initAstroAnimations(renderer) {
     data.load(1, 0.0 + getHoloBoolean(entity, "holoBoostFlight"));
     data.load(2, entity.loop(20 * Math.PI) + 0.4);
     data.load(3, 0.0 + getHoloBooleans(entity, "holoFlight", "holoFlightMotion"));
-  }).priority = -9;
+  }).setCondition(entity => entity.is("DISPLAY")).priority = -9;
 };
 
 function initNV(renderer, uuid) {

@@ -67,9 +67,8 @@ function initModule(system) {
                   manager.appendTag(brotherBand, brotherBandSelf);
                 };
                 system.moduleMessage(this, entity, "<s>Successfully formed BrotherBand connection to <sh>" + otherEntity.getName() + "<s>!");
-                updateList(entity, manager);
                 system.moduleMessage(this, otherEntity, "<s>Successfully formed BrotherBand connection to <sh>" + entity.getName() + "<s>!");
-                updateList(otherEntity, manager);
+                updateList(entity, manager);
                 success = true;
               } else {
                 if (brotherFormed || brotherFormedOther) {
@@ -166,9 +165,7 @@ function initModule(system) {
                     var selfBrotherOther = nbt.getTagList("Brothers").getCompoundTag(otherIndex);
                     manager.setInteger(selfBrotherOther, "entityID", parseInt(otherEntityID));
                     system.moduleMessage(this, entity, "Reestablished connection with " + human + "!");
-                    updateList(entity, manager);
                     system.moduleMessage(this, otherEntity, "Reestablished connection with " + ((nbt.hasKey("compatibleHuman")) ? nbt.getString("compatibleHuman") : entity.getName()) + "!");
-                    updateList(otherEntity, manager);
                   };
                 } else {
                   success = true;
@@ -181,9 +178,7 @@ function initModule(system) {
                   var selfBrotherOther = nbt.getTagList("Brothers").getCompoundTag(otherIndex);
                   manager.setInteger(selfBrotherOther, "entityID", parseInt(otherEntityID));
                   system.moduleMessage(this, entity, "Reestablished connection with " + human + "!");
-                  updateList(entity, manager);
                   system.moduleMessage(this, otherEntity, "Reestablished connection with " + ((nbt.hasKey("compatibleHuman")) ? nbt.getString("compatibleHuman") : entity.getName()) + "!");
-                  updateList(otherEntity, manager);
                 };
               };
             } else {
@@ -492,12 +487,12 @@ function initModule(system) {
                 var entryList = entry.split(";:");
                 deleteBrotherBand(entity, manager, entryList[0]);
                 updateList(entity, manager);
-                manager.setData(entity, "skyhighheroes:dyn/current_menu", "Brother");
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", entity.getData("skyhighheroes:dyn/prev_selected_button"));
+                system.setMenu(entity, manager, "Brother");
+                system.setButton(entity, manager, entity.getData("skyhighheroes:dyn/prev_selected_button"));
               },
               backAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/current_menu", "Brother");
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", entity.getData("skyhighheroes:dyn/prev_selected_button"));
+                system.setMenu(entity, manager, "Brother");
+                system.setButton(entity, manager, entity.getData("skyhighheroes:dyn/prev_selected_button"));
                 updateList(entity, manager);
               },
             }
@@ -514,10 +509,10 @@ function initModule(system) {
               backAction: (entity, manager) => {
                 if (entity.getData("skyhighheroes:dyn/entering_value")) {
                   manager.setData(entity, "skyhighheroes:dyn/entering_value", false);
-                  manager.setData(entity, "skyhighheroes:dyn/selected_button", "Brother_profile_reestablish");
+                  system.setButton(entity, manager, "Brother_profile_reestablish");
                 } else {
-                  manager.setData(entity, "skyhighheroes:dyn/current_menu", "Brother");
-                  manager.setData(entity, "skyhighheroes:dyn/selected_button", entity.getData("skyhighheroes:dyn/prev_selected_button"));
+                  system.setMenu(entity, manager, "Brother");
+                  system.setButton(entity, manager, entity.getData("skyhighheroes:dyn/prev_selected_button"));
                 };
                 updateList(entity, manager);
               },
@@ -578,8 +573,8 @@ function initModule(system) {
                 };
               },
               backAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/current_menu", "Brother");
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", entity.getData("skyhighheroes:dyn/prev_selected_button"));
+                system.setMenu(entity, manager, "Brother");
+                system.setButton(entity, manager, entity.getData("skyhighheroes:dyn/prev_selected_button"));
                 updateList(entity, manager);
               },
             }
@@ -626,8 +621,8 @@ function initModule(system) {
                 };
               },
               backAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/current_menu", "Brother");
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", entity.getData("skyhighheroes:dyn/prev_selected_button"));
+                system.setMenu(entity, manager, "Brother");
+                system.setButton(entity, manager, entity.getData("skyhighheroes:dyn/prev_selected_button"));
                 updateList(entity, manager);
               },
             }
@@ -657,8 +652,8 @@ function initModule(system) {
                 };
               },
               backAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", entity.getData("skyhighheroes:dyn/prev_selected_button"));
-                manager.setData(entity, "skyhighheroes:dyn/current_submenu", "");
+                system.setButton(entity, manager, entity.getData("skyhighheroes:dyn/prev_selected_button"));
+                system.setSubmenu(entity, manager, "");
                 updateList(entity, manager);
               },
             }
@@ -675,8 +670,8 @@ function initModule(system) {
                 if (entity.getData("skyhighheroes:dyn/entering_value")) {
                   manager.setData(entity, "skyhighheroes:dyn/entering_value", false);
                 } else {
-                  manager.setData(entity, "skyhighheroes:dyn/selected_button", entity.getData("skyhighheroes:dyn/prev_selected_button"));
-                  manager.setData(entity, "skyhighheroes:dyn/current_submenu", "");
+                  system.setButton(entity, manager, entity.getData("skyhighheroes:dyn/prev_selected_button"));
+                  system.setSubmenu(entity, manager, "");
                 };
                 updateList(entity, manager);
               },
@@ -710,14 +705,14 @@ function initModule(system) {
             },
             properties: {
               confirmAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/current_submenu", "secret");
+                system.setSubmenu(entity, manager, "secret");
                 manager.setData(entity, "skyhighheroes:dyn/prev_selected_button", "Brother_self_profile_secret_message");
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "Brother_self_profile_view_message");
+                system.setButton(entity, manager, "Brother_self_profile_view_message");
                 updateList(entity, manager);
               },
               backAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/current_menu", "Brother");
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "Brother_self");
+                system.setMenu(entity, manager, "Brother");
+                system.setButton(entity, manager, "Brother_self");
                 updateList(entity, manager);
               },
             }
@@ -728,14 +723,14 @@ function initModule(system) {
             },
             properties: {
               confirmAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/current_submenu", "personal");
+                system.setSubmenu(entity, manager, "personal");
                 manager.setData(entity, "skyhighheroes:dyn/prev_selected_button", "Brother_self_profile_personal_message");
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "Brother_self_profile_view_message");
+                system.setButton(entity, manager, "Brother_self_profile_view_message");
                 updateList(entity, manager);
               },
               backAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/current_menu", "Brother");
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "Brother_self");
+                system.setMenu(entity, manager, "Brother");
+                system.setButton(entity, manager, "Brother_self");
                 updateList(entity, manager);
               },
             }
@@ -753,16 +748,16 @@ function initModule(system) {
             },
             properties: {
               confirmAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/current_menu", "Brother_self_profile");
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "Brother_self_profile_personal_message");
+                system.setMenu(entity, manager, "Brother_self_profile");
+                system.setButton(entity, manager, "Brother_self_profile_personal_message");
                 manager.setData(entity, "skyhighheroes:dyn/list_value", 0);
                 manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_0"));
                 manager.setData(entity, "skyhighheroes:dyn/prev_selected_button", "Brother_self");
                 updateList(entity, manager);
               },
               backAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/current_menu", "main");
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "main_Brother");
+                system.setMenu(entity, manager, "main");
+                system.setButton(entity, manager, "main_Brother");
                 updateList(entity, manager);
               },
             }
@@ -775,8 +770,8 @@ function initModule(system) {
             properties: {
               confirmAction: (entity, manager) => {
                 if (entity.getData("skyhighheroes:dyn/scroll_entry_1") != "") {
-                  manager.setData(entity, "skyhighheroes:dyn/current_menu", "Brother_profile");
-                  manager.setData(entity, "skyhighheroes:dyn/selected_button", "Brother_profile_personal_message");
+                  system.setMenu(entity, manager, "Brother_profile");
+                  system.setButton(entity, manager, "Brother_profile_personal_message");
                   manager.setData(entity, "skyhighheroes:dyn/list_value", 1);
                   manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_1"));
                   manager.setData(entity, "skyhighheroes:dyn/prev_selected_button", "Brother_left_top");
@@ -789,8 +784,8 @@ function initModule(system) {
                 if (entity.getData("skyhighheroes:dyn/entering_value")) {
                   manager.setData(entity, "skyhighheroes:dyn/entering_value", false);
                 } else {
-                  manager.setData(entity, "skyhighheroes:dyn/current_menu", "main");
-                  manager.setData(entity, "skyhighheroes:dyn/selected_button", "main_Brother");
+                  system.setMenu(entity, manager, "main");
+                  system.setButton(entity, manager, "main_Brother");
                 };
                 updateList(entity, manager);
               },
@@ -798,8 +793,8 @@ function initModule(system) {
                 var wasSuccess = addBrotherBand(entity, manager, entry, "left_top");
                 manager.setData(entity, "skyhighheroes:dyn/entering_value", false);
                 if (wasSuccess) {
-                  manager.setData(entity, "skyhighheroes:dyn/current_menu", "Brother_profile");
-                  manager.setData(entity, "skyhighheroes:dyn/selected_button", "Brother_profile_personal_message");
+                  system.setMenu(entity, manager, "Brother_profile");
+                  system.setButton(entity, manager, "Brother_profile_personal_message");
                   manager.setData(entity, "skyhighheroes:dyn/list_value", 1);
                   manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_1"));
                   manager.setData(entity, "skyhighheroes:dyn/prev_selected_button", "Brother_left_top");
@@ -817,8 +812,8 @@ function initModule(system) {
             properties: {
               confirmAction: (entity, manager) => {
                 if (entity.getData("skyhighheroes:dyn/scroll_entry_3") != "") {
-                  manager.setData(entity, "skyhighheroes:dyn/current_menu", "Brother_profile");
-                  manager.setData(entity, "skyhighheroes:dyn/selected_button", "Brother_profile_personal_message");
+                  system.setMenu(entity, manager, "Brother_profile");
+                  system.setButton(entity, manager, "Brother_profile_personal_message");
                   manager.setData(entity, "skyhighheroes:dyn/list_value", 3);
                   manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_3"));
                   manager.setData(entity, "skyhighheroes:dyn/prev_selected_button", "Brother_left_center");
@@ -831,8 +826,8 @@ function initModule(system) {
                 if (entity.getData("skyhighheroes:dyn/entering_value")) {
                   manager.setData(entity, "skyhighheroes:dyn/entering_value", false);
                 } else {
-                  manager.setData(entity, "skyhighheroes:dyn/current_menu", "main");
-                  manager.setData(entity, "skyhighheroes:dyn/selected_button", "main_Brother");
+                  system.setMenu(entity, manager, "main");
+                  system.setButton(entity, manager, "main_Brother");
                 };
                 updateList(entity, manager);
               },
@@ -840,8 +835,8 @@ function initModule(system) {
                 var wasSuccess = addBrotherBand(entity, manager, entry, "left_center");
                 manager.setData(entity, "skyhighheroes:dyn/entering_value", false);
                 if (wasSuccess) {
-                  manager.setData(entity, "skyhighheroes:dyn/current_menu", "Brother_profile");
-                  manager.setData(entity, "skyhighheroes:dyn/selected_button", "Brother_profile_personal_message");
+                  system.setMenu(entity, manager, "Brother_profile");
+                  system.setButton(entity, manager, "Brother_profile_personal_message");
                   manager.setData(entity, "skyhighheroes:dyn/list_value", 3);
                   manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_3"));
                   manager.setData(entity, "skyhighheroes:dyn/prev_selected_button", "Brother_left_center");
@@ -858,8 +853,8 @@ function initModule(system) {
             properties: {
               confirmAction: (entity, manager) => {
                 if (entity.getData("skyhighheroes:dyn/scroll_entry_5") != "") {
-                  manager.setData(entity, "skyhighheroes:dyn/current_menu", "Brother_profile");
-                  manager.setData(entity, "skyhighheroes:dyn/selected_button", "Brother_profile_personal_message");
+                  system.setMenu(entity, manager, "Brother_profile");
+                  system.setButton(entity, manager, "Brother_profile_personal_message");
                   manager.setData(entity, "skyhighheroes:dyn/list_value", 5);
                   manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_5"));
                   manager.setData(entity, "skyhighheroes:dyn/prev_selected_button", "Brother_left_bottom");
@@ -872,8 +867,8 @@ function initModule(system) {
                 if (entity.getData("skyhighheroes:dyn/entering_value")) {
                   manager.setData(entity, "skyhighheroes:dyn/entering_value", false);
                 } else {
-                  manager.setData(entity, "skyhighheroes:dyn/current_menu", "main");
-                  manager.setData(entity, "skyhighheroes:dyn/selected_button", "main_Brother");
+                  system.setMenu(entity, manager, "main");
+                  system.setButton(entity, manager, "main_Brother");
                 };
                 updateList(entity, manager);
               },
@@ -881,8 +876,8 @@ function initModule(system) {
                 var wasSuccess = addBrotherBand(entity, manager, entry, "left_bottom");
                 manager.setData(entity, "skyhighheroes:dyn/entering_value", false);
                 if (wasSuccess) {
-                  manager.setData(entity, "skyhighheroes:dyn/current_menu", "Brother_profile");
-                  manager.setData(entity, "skyhighheroes:dyn/selected_button", "Brother_profile_personal_message");
+                  system.setMenu(entity, manager, "Brother_profile");
+                  system.setButton(entity, manager, "Brother_profile_personal_message");
                   manager.setData(entity, "skyhighheroes:dyn/list_value", 5);
                   manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_5"));
                   manager.setData(entity, "skyhighheroes:dyn/prev_selected_button", "Brother_left_bottom");
@@ -899,8 +894,8 @@ function initModule(system) {
             properties: {
               confirmAction: (entity, manager) => {
                 if (entity.getData("skyhighheroes:dyn/scroll_entry_2") != "") {
-                  manager.setData(entity, "skyhighheroes:dyn/current_menu", "Brother_profile");
-                  manager.setData(entity, "skyhighheroes:dyn/selected_button", "Brother_profile_personal_message");
+                  system.setMenu(entity, manager, "Brother_profile");
+                  system.setButton(entity, manager, "Brother_profile_personal_message");
                   manager.setData(entity, "skyhighheroes:dyn/list_value", 2);
                   manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_2"));
                   manager.setData(entity, "skyhighheroes:dyn/prev_selected_button", "Brother_right_top");
@@ -913,8 +908,8 @@ function initModule(system) {
                 if (entity.getData("skyhighheroes:dyn/entering_value")) {
                   manager.setData(entity, "skyhighheroes:dyn/entering_value", false);
                 } else {
-                  manager.setData(entity, "skyhighheroes:dyn/current_menu", "main");
-                  manager.setData(entity, "skyhighheroes:dyn/selected_button", "main_Brother");
+                  system.setMenu(entity, manager, "main");
+                  system.setButton(entity, manager, "main_Brother");
                 };
                 updateList(entity, manager);
               },
@@ -922,8 +917,8 @@ function initModule(system) {
                 var wasSuccess = addBrotherBand(entity, manager, entry, "right_top");
                 manager.setData(entity, "skyhighheroes:dyn/entering_value", false);
                 if (wasSuccess) {
-                  manager.setData(entity, "skyhighheroes:dyn/current_menu", "Brother_profile");
-                  manager.setData(entity, "skyhighheroes:dyn/selected_button", "Brother_profile_personal_message");
+                  system.setMenu(entity, manager, "Brother_profile");
+                  system.setButton(entity, manager, "Brother_profile_personal_message");
                   manager.setData(entity, "skyhighheroes:dyn/list_value", 2);
                   manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_2"));
                   manager.setData(entity, "skyhighheroes:dyn/prev_selected_button", "Brother_right_top");
@@ -941,8 +936,8 @@ function initModule(system) {
             properties: {
               confirmAction: (entity, manager) => {
                 if (entity.getData("skyhighheroes:dyn/scroll_entry_4") != "") {
-                  manager.setData(entity, "skyhighheroes:dyn/current_menu", "Brother_profile");
-                  manager.setData(entity, "skyhighheroes:dyn/selected_button", "Brother_profile_personal_message");
+                  system.setMenu(entity, manager, "Brother_profile");
+                  system.setButton(entity, manager, "Brother_profile_personal_message");
                   manager.setData(entity, "skyhighheroes:dyn/list_value", 4);
                   manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_4"));
                   manager.setData(entity, "skyhighheroes:dyn/prev_selected_button", "Brother_right_center");
@@ -955,8 +950,8 @@ function initModule(system) {
                 if (entity.getData("skyhighheroes:dyn/entering_value")) {
                   manager.setData(entity, "skyhighheroes:dyn/entering_value", false);
                 } else {
-                  manager.setData(entity, "skyhighheroes:dyn/current_menu", "main");
-                  manager.setData(entity, "skyhighheroes:dyn/selected_button", "main_Brother");
+                  system.setMenu(entity, manager, "main");
+                  system.setButton(entity, manager, "main_Brother");
                 };
                 updateList(entity, manager);
               },
@@ -964,8 +959,8 @@ function initModule(system) {
                 var wasSuccess = addBrotherBand(entity, manager, entry, "right_center");
                 manager.setData(entity, "skyhighheroes:dyn/entering_value", false);
                 if (wasSuccess) {
-                  manager.setData(entity, "skyhighheroes:dyn/current_menu", "Brother_profile");
-                  manager.setData(entity, "skyhighheroes:dyn/selected_button", "Brother_profile_personal_message");
+                  system.setMenu(entity, manager, "Brother_profile");
+                  system.setButton(entity, manager, "Brother_profile_personal_message");
                   manager.setData(entity, "skyhighheroes:dyn/list_value", 4);
                   manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_4"));
                   manager.setData(entity, "skyhighheroes:dyn/prev_selected_button", "Brother_right_center");
@@ -982,8 +977,8 @@ function initModule(system) {
             properties: {
               confirmAction: (entity, manager) => {
                 if (entity.getData("skyhighheroes:dyn/scroll_entry_6") != "") {
-                  manager.setData(entity, "skyhighheroes:dyn/current_menu", "Brother_profile");
-                  manager.setData(entity, "skyhighheroes:dyn/selected_button", "Brother_profile_personal_message");
+                  system.setMenu(entity, manager, "Brother_profile");
+                  system.setButton(entity, manager, "Brother_profile_personal_message");
                   manager.setData(entity, "skyhighheroes:dyn/list_value", 6);
                   manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_6"));
                   manager.setData(entity, "skyhighheroes:dyn/prev_selected_button", "Brother_right_bottom");
@@ -996,8 +991,8 @@ function initModule(system) {
                 if (entity.getData("skyhighheroes:dyn/entering_value")) {
                   manager.setData(entity, "skyhighheroes:dyn/entering_value", false);
                 } else {
-                  manager.setData(entity, "skyhighheroes:dyn/current_menu", "main");
-                  manager.setData(entity, "skyhighheroes:dyn/selected_button", "main_Brother");
+                  system.setMenu(entity, manager, "main");
+                  system.setButton(entity, manager, "main_Brother");
                 };
                 updateList(entity, manager);
               },
@@ -1005,8 +1000,8 @@ function initModule(system) {
                 var wasSuccess = addBrotherBand(entity, manager, entry, "right_bottom");
                 manager.setData(entity, "skyhighheroes:dyn/entering_value", false);
                 if (wasSuccess) {
-                  manager.setData(entity, "skyhighheroes:dyn/current_menu", "Brother_profile");
-                  manager.setData(entity, "skyhighheroes:dyn/selected_button", "Brother_profile_personal_message");
+                  system.setMenu(entity, manager, "Brother_profile");
+                  system.setButton(entity, manager, "Brother_profile_personal_message");
                   manager.setData(entity, "skyhighheroes:dyn/list_value", 6);
                   manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_6"));
                   manager.setData(entity, "skyhighheroes:dyn/prev_selected_button", "Brother_right_bottom");
@@ -1027,8 +1022,8 @@ function initModule(system) {
       },
       properties: {
         confirmAction: (entity, manager) => {
-          manager.setData(entity, "skyhighheroes:dyn/current_menu", "Brother");
-          manager.setData(entity, "skyhighheroes:dyn/selected_button", "Brother_self");
+          system.setMenu(entity, manager, "Brother");
+          system.setButton(entity, manager, "Brother_self");
           updateList(entity, manager);
         },
         backAction: (entity, manager) => {

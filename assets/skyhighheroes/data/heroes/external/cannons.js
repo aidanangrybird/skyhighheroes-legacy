@@ -1,6 +1,6 @@
 /**
- * You put all of the required functions in here
- * @param system - Required
+*You put all of the required functions in here
+*@param system - Required
  **/
 function initModule(system) {
   //All of the required functions and stuff go here
@@ -10,6 +10,394 @@ function initModule(system) {
     moduleMessageName: "Cannons",
     type: 13,
     command: "cannon",
+    cyberMenus: {
+      "cannons": {
+        parent: "main",
+        prevButton: "main_cannons",
+        buttons: {
+          "cannons_head_armed": {
+            borderingButtons: {
+              bottom: "cannons_body_armed",
+              right: "cannons_head_flush",
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                var nbt = system.mainNBT(entity);
+                if (!entity.getData("skyhighheroes:dyn/cannons_head_armed")) {
+                  manager.setData(entity, "skyhighheroes:dyn/cannons_head_armed", true);
+                  manager.setBoolean(nbt, "cannonsHead", true);
+                  system.moduleMessage(this, entity, "<s>Armed <sh>head<s> cannons!");
+                } else {
+                  manager.setData(entity, "skyhighheroes:dyn/cannons_head_armed", false);
+                  manager.setBoolean(nbt, "cannonsHead", false);
+                  system.moduleMessage(this, entity, "<s>Disarmed <sh>head<s> cannons!");
+                };
+              },
+              backAction: (entity, manager) => {
+                system.setButton(entity, manager, "main_cannons");
+                system.setMenu(entity, manager, "main");
+              },
+            }
+          },
+          "cannons_body_armed": {
+            borderingButtons: {
+              top: "cannons_head_armed",
+              bottom: "cannons_arms_armed",
+              right: "cannons_body_flush",
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                var nbt = system.mainNBT(entity);
+                if (!entity.getData("skyhighheroes:dyn/cannons_body_armed")) {
+                  manager.setData(entity, "skyhighheroes:dyn/cannons_body_armed", true);
+                  manager.setBoolean(nbt, "cannonsBody", true);
+                  system.moduleMessage(this, entity, "<s>Armed <sh>body<s> cannons!");
+                } else {
+                  manager.setData(entity, "skyhighheroes:dyn/cannons_body_armed", false);
+                  manager.setBoolean(nbt, "cannonsBody", false);
+                  system.moduleMessage(this, entity, "<s>Disarmed <sh>body<s> cannons!");
+                };
+              },
+              backAction: (entity, manager) => {
+                system.setButton(entity, manager, "main_cannons");
+                system.setMenu(entity, manager, "main");
+              },
+            }
+          },
+          "cannons_arms_armed": {
+            borderingButtons: {
+              top: "cannons_body_armed",
+              left: "cannons_left_arm_flush",
+              right: "cannons_right_arm_flush",
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                var nbt = system.mainNBT(entity);
+                if (!entity.getData("skyhighheroes:dyn/cannons_arms_armed")) {
+                  manager.setData(entity, "skyhighheroes:dyn/cannons_arms_armed", true);
+                  manager.setBoolean(nbt, "cannonsArms", true);
+                  system.moduleMessage(this, entity, "<s>Armed <sh>arm<s> cannons!");
+                } else {
+                  manager.setData(entity, "skyhighheroes:dyn/cannons_arms_armed", false);
+                  manager.setBoolean(nbt, "cannonsArms", false);
+                  system.moduleMessage(this, entity, "<s>Disarmed <sh>arm<s> cannons!");
+                };
+              },
+              backAction: (entity, manager) => {
+                system.setButton(entity, manager, "main_cannons");
+                system.setMenu(entity, manager, "main");
+              },
+            }
+          },
+          "cannons_head_flush": {
+            borderingButtons: {
+              bottom: "cannons_body_flush",
+              left: "cannons_head_armed",
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                var nbt = system.mainNBT(entity);
+                manager.setBoolean(nbt, "flushHeadCannons", !nbt.getBoolean("flushHeadCannons"));
+                manager.setData(entity, "skyhighheroes:dyn/cannon_head_flush_enabled", nbt.getBoolean("flushHeadCannons"));
+                system.moduleMessage(this, entity, "<n>Flush Head Cannons set to <nh>" + entity.getData("skyhighheroes:dyn/cannon_head_flush_enabled") + "<n>!");
+              },
+              backAction: (entity, manager) => {
+                system.setButton(entity, manager, "main_cannons");
+                system.setMenu(entity, manager, "main");
+              },
+            }
+          },
+          "cannons_body_flush": {
+            borderingButtons: {
+              top: "cannons_head_flush",
+              bottom: "cannons_right_arm_flush",
+              left: "cannons_body_armed",
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                var nbt = system.mainNBT(entity);
+                manager.setBoolean(nbt, "flushBodyCannons", !nbt.getBoolean("flushBodyCannons"));
+                manager.setData(entity, "skyhighheroes:dyn/cannon_body_flush_enabled", nbt.getBoolean("flushBodyCannons"));
+                system.moduleMessage(this, entity, "<n>Flush Body Cannons set to <nh>" + entity.getData("skyhighheroes:dyn/cannon_body_flush_enabled") + "<n>!");
+              },
+              backAction: (entity, manager) => {
+                system.setButton(entity, manager, "main_cannons");
+                system.setMenu(entity, manager, "main");
+              },
+            }
+          },
+          "cannons_left_arm_flush": {
+            borderingButtons: {
+              top: "cannons_body_armed",
+              right: "cannons_arms_armed",
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                var nbt = system.mainNBT(entity);
+                manager.setBoolean(nbt, "flushLeftArmCannons", !nbt.getBoolean("flushLeftArmCannons"));
+                manager.setData(entity, "skyhighheroes:dyn/cannon_left_arm_flush_enabled", nbt.getBoolean("flushLeftArmCannons"));
+                system.moduleMessage(this, entity, "<n>Flush Left Arm Cannon set to <nh>" + entity.getData("skyhighheroes:dyn/cannon_left_arm_flush_enabled") + "<n>!");
+              },
+              backAction: (entity, manager) => {
+                system.setButton(entity, manager, "main_cannons");
+                system.setMenu(entity, manager, "main");
+              },
+            }
+          },
+          "cannons_right_arm_flush": {
+            borderingButtons: {
+              top: "cannons_body_flush",
+              left: "cannons_arms_armed",
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                var nbt = system.mainNBT(entity);
+                manager.setBoolean(nbt, "flushRightArmCannons", !nbt.getBoolean("flushRightArmCannons"));
+                manager.setData(entity, "skyhighheroes:dyn/cannon_right_arm_flush_enabled", nbt.getBoolean("flushRightArmCannons"));
+                system.moduleMessage(this, entity, "<n>Flush Right Arm Cannon set to <nh>" + entity.getData("skyhighheroes:dyn/cannon_right_arm_flush_enabled") + "<n>!");
+              },
+              backAction: (entity, manager) => {
+                system.setButton(entity, manager, "main_cannons");
+                system.setMenu(entity, manager, "main");
+              },
+            }
+          },
+        }
+      }
+    },
+    cyberOverviewButtons: {
+      "cannon_head_left_deploy": {
+        borderingButtons: {
+          top: "antenna_deploy",
+          bottom: "intake_head_left_start_up",
+          right: "rocket_left_arm_front_deploy",
+          left: "optics_enabled",
+        },
+        properties: {
+          confirmAction: (entity, manager) => {
+            manager.setData(entity, "skyhighheroes:dyn/cannon_head_left_deployed", !entity.getData("skyhighheroes:dyn/cannon_head_left_deployed"));
+            if (entity.getData("skyhighheroes:dyn/cannon_head_left_deployed")) {
+              system.moduleMessage(this, entity, "<s>Deployed <sh>left head<s> cannon!");
+            } else {
+              system.moduleMessage(this, entity, "<s>Stowed <sh>left head<s> cannon!");
+            };
+          },
+          backAction: (entity, manager) => {
+            system.setButton(entity, manager, "main_overview");
+            system.setMenu(entity, manager, "main");
+          },
+        }
+      },
+      "cannon_head_right_deploy": {
+        borderingButtons: {
+          top: "antenna_deploy",
+          bottom: "intake_head_right_start_up",
+          left: "rocket_right_arm_front_deploy",
+          right: "optics_enabled",
+        },
+        properties: {
+          confirmAction: (entity, manager) => {
+            manager.setData(entity, "skyhighheroes:dyn/cannon_head_right_deployed", !entity.getData("skyhighheroes:dyn/cannon_head_right_deployed"));
+            if (entity.getData("skyhighheroes:dyn/cannon_head_right_deployed")) {
+              system.moduleMessage(this, entity, "<s>Deployed <sh>right head<s> cannon!");
+            } else {
+              system.moduleMessage(this, entity, "<s>Stowed <sh>right head<s> cannon!");
+            };
+          },
+          backAction: (entity, manager) => {
+            system.setButton(entity, manager, "main_overview");
+            system.setMenu(entity, manager, "main");
+          },
+        }
+      },
+      "cannon_body_left_deploy": {
+        borderingButtons: {
+          top: "intake_body_left_open",
+          right: "rocket_body_left_deploy",
+          left: "cannon_body_right_deploy",
+          bottom: "system_core_open",
+        },
+        properties: {
+          confirmAction: (entity, manager) => {
+            manager.setData(entity, "skyhighheroes:dyn/cannon_body_left_deployed", !entity.getData("skyhighheroes:dyn/cannon_body_left_deployed"));
+            if (entity.getData("skyhighheroes:dyn/cannon_body_left_deployed")) {
+              system.moduleMessage(this, entity, "<s>Deployed <sh>left body<s> cannon!");
+            } else {
+              system.moduleMessage(this, entity, "<s>Stowed <sh>left body<s> cannon!");
+            };
+          },
+          backAction: (entity, manager) => {
+            system.setButton(entity, manager, "main_overview");
+            system.setMenu(entity, manager, "main");
+          },
+        }
+      },
+      "cannon_body_right_deploy": {
+        borderingButtons: {
+          top: "intake_body_right_open",
+          left: "rocket_body_right_deploy",
+          right: "cannon_body_left_deploy",
+          bottom: "system_core_open",
+        },
+        properties: {
+          confirmAction: (entity, manager) => {
+            manager.setData(entity, "skyhighheroes:dyn/cannon_body_right_deployed", !entity.getData("skyhighheroes:dyn/cannon_body_right_deployed"));
+            if (entity.getData("skyhighheroes:dyn/cannon_body_right_deployed")) {
+              system.moduleMessage(this, entity, "<s>Deployed <sh>right body<s> cannon!");
+            } else {
+              system.moduleMessage(this, entity, "<s>Stowed <sh>right body<s> cannon!");
+            };
+          },
+          backAction: (entity, manager) => {
+            system.setButton(entity, manager, "main_overview");
+            system.setMenu(entity, manager, "main");
+          },
+        }
+      },
+      "cannon_left_arm_bottom_deploy": {
+        borderingButtons: {
+          top: "shield_left_deploy",
+          bottom: "intake_left_leg_open",
+          left: "intake_head_left_start_up",
+        },
+        properties: {
+          confirmAction: (entity, manager) => {
+            manager.setData(entity, "skyhighheroes:dyn/cannon_left_arm_bottom_deployed", !entity.getData("skyhighheroes:dyn/cannon_left_arm_bottom_deployed"));
+            if (entity.getData("skyhighheroes:dyn/cannon_left_arm_bottom_deployed")) {
+              system.moduleMessage(this, entity, "<s>Deployed <sh>left arm bottom<s> cannon!");
+            } else {
+              system.moduleMessage(this, entity, "<s>Stowed <sh>left arm bottom<s> cannon!");
+            };
+          },
+          backAction: (entity, manager) => {
+            system.setButton(entity, manager, "main_overview");
+            system.setMenu(entity, manager, "main");
+          },
+        }
+      },
+      "cannon_left_arm_front_deploy": {
+        borderingButtons: {
+          top: "cannon_left_arm_front_deploy",
+          left: "blade_left_deploy",
+          right: "shield_left_deploy",
+        },
+        properties: {
+          confirmAction: (entity, manager) => {
+            manager.setData(entity, "skyhighheroes:dyn/cannon_left_arm_front_deployed", !entity.getData("skyhighheroes:dyn/cannon_left_arm_front_deployed"));
+            if (entity.getData("skyhighheroes:dyn/cannon_left_arm_front_deployed")) {
+              system.moduleMessage(this, entity, "<s>Deployed <sh>left arm front<s> cannon!");
+            } else {
+              system.moduleMessage(this, entity, "<s>Stowed <sh>left arm front<s> cannon!");
+            };
+          },
+          backAction: (entity, manager) => {
+            system.setButton(entity, manager, "main_overview");
+            system.setMenu(entity, manager, "main");
+          },
+        }
+      },
+      "cannon_left_arm_back_deploy": {
+        borderingButtons: {
+          top: "rocket_left_arm_back_deploy",
+          bottom: "cannon_left_arm_bottom_deploy",
+          left: "shield_left_deploy",
+        },
+        properties: {
+          confirmAction: (entity, manager) => {
+            manager.setData(entity, "skyhighheroes:dyn/cannon_left_arm_back_deployed", !entity.getData("skyhighheroes:dyn/cannon_left_arm_back_deployed"));
+            if (entity.getData("skyhighheroes:dyn/cannon_left_arm_back_deployed")) {
+              system.moduleMessage(this, entity, "<s>Deployed <sh>left arm back<s> cannon!");
+            } else {
+              system.moduleMessage(this, entity, "<s>Stowed <sh>left arm back<s> cannon!");
+            };
+          },
+          backAction: (entity, manager) => {
+            system.setButton(entity, manager, "main_overview");
+            system.setMenu(entity, manager, "main");
+          },
+        }
+      },
+      "cannon_right_arm_bottom_deploy": {
+        borderingButtons: {
+          top: "shield_right_deploy",
+          bottom: "intake_right_leg_open",
+          right: "intake_head_right_start_up",
+        },
+        properties: {
+          confirmAction: (entity, manager) => {
+            manager.setData(entity, "skyhighheroes:dyn/cannon_right_arm_bottom_deployed", !entity.getData("skyhighheroes:dyn/cannon_right_arm_bottom_deployed"));
+            if (entity.getData("skyhighheroes:dyn/cannon_right_arm_bottom_deployed")) {
+              system.moduleMessage(this, entity, "<s>Deployed <sh>right arm bottom<s> cannon!");
+            } else {
+              system.moduleMessage(this, entity, "<s>Stowed <sh>right arm bottom<s> cannon!");
+            };
+          },
+          backAction: (entity, manager) => {
+            system.setButton(entity, manager, "main_overview");
+            system.setMenu(entity, manager, "main");
+          },
+        }
+      },
+      "cannon_right_arm_front_deploy": {
+        borderingButtons: {
+          top: "rocket_right_arm_front_deploy",
+          bottom: "cannon_right_arm_bottom_deploy",
+          right: "blade_right_deploy",
+          left: "shield_right_deploy",
+        },
+        properties: {
+          confirmAction: (entity, manager) => {
+            manager.setData(entity, "skyhighheroes:dyn/cannon_right_arm_front_deployed", !entity.getData("skyhighheroes:dyn/cannon_right_arm_front_deployed"));
+            if (entity.getData("skyhighheroes:dyn/cannon_right_arm_front_deployed")) {
+              system.moduleMessage(this, entity, "<s>Deployed <sh>right arm front<s> cannon!");
+            } else {
+              system.moduleMessage(this, entity, "<s>Stowed <sh>right arm front<s> cannon!");
+            };
+          },
+          backAction: (entity, manager) => {
+            system.setButton(entity, manager, "main_overview");
+            system.setMenu(entity, manager, "main");
+          },
+        }
+      },
+      "cannon_right_arm_back_deploy": {
+        borderingButtons: {
+          top: "rocket_right_arm_back_deploy",
+          bottom: "cannon_right_arm_bottom_deploy",
+          right: "shield_right_deploy",
+        },
+        properties: {
+          confirmAction: (entity, manager) => {
+            manager.setData(entity, "skyhighheroes:dyn/cannon_right_arm_back_deployed", !entity.getData("skyhighheroes:dyn/cannon_right_arm_back_deployed"));
+            if (entity.getData("skyhighheroes:dyn/cannon_right_arm_back_deployed")) {
+              system.moduleMessage(this, entity, "<s>Deployed <sh>right arm back<s> cannon!");
+            } else {
+              system.moduleMessage(this, entity, "<s>Stowed <sh>right arm back<s> cannon!");
+            };
+          },
+          backAction: (entity, manager) => {
+            system.setButton(entity, manager, "main_overview");
+            system.setMenu(entity, manager, "main");
+          },
+        }
+      },
+    },
+    cyberMainButton: {
+      buttonID: "main_cannons",
+      borderingButtons: {
+        top: "main_rockets_wings",
+        bottom: "main_blades_shields"
+      },
+      properties: {
+        confirmAction: (entity, manager) => {
+          system.setMenu(entity, manager, "cannons");
+          system.setButton(entity, manager, "cannons_head_armed");
+        },
+        backAction: (entity, manager) => {
+          manager.setData(entity, "skyhighheroes:dyn/interface", false);
+        }
+      }
+    },
     helpMessage: "<n>!cannon <nh>-<n> Cannons",
     disabledMessage: "<e>Module <eh>cannons<e> is disabled!",
     keyBinds: function (hero, color) {
@@ -456,6 +844,15 @@ function initModule(system) {
     },
     tickHandler: function (entity, manager) {
       var nbt = system.mainNBT(entity);
+      if (!system.hasEnoughEnergy(entity, manager, "cannons1") || !system.hasEnoughEnergy(entity, manager, "cannons2") || !system.hasEnoughEnergy(entity, manager, "cannons3") || !system.hasEnoughEnergy(entity, manager, "cannonsCharging1") || !system.hasEnoughEnergy(entity, manager, "cannonsCharging2") || !system.hasEnoughEnergy(entity, manager, "cannonsCharging3")) {
+        manager.setData(entity, "fiskheroes:beam_charge", 0.0);
+        manager.setData(entity, "fiskheroes:beam_charging", false);
+        manager.setData(entity, "fiskheroes:beam_shooting", 0.0);
+        manager.setData(entity, "fiskheroes:beam_shooting_timer", 0.0);
+        manager.setData(entity, "skyhighheroes:dyn/cannons_arms", false);
+        manager.setData(entity, "skyhighheroes:dyn/cannons_body", false);
+        manager.setData(entity, "skyhighheroes:dyn/cannons_head", false);
+      };
       var head = entity.getData("skyhighheroes:dyn/cannons_head_armed") && entity.getData("fiskheroes:beam_charging");
       var body = entity.getData("skyhighheroes:dyn/cannons_body_armed") && entity.getData("fiskheroes:beam_charging");
       var arms = entity.getData("skyhighheroes:dyn/cannons_arms_armed") && entity.getData("fiskheroes:beam_charging");
@@ -481,6 +878,57 @@ function initModule(system) {
         manager.setData(entity, "skyhighheroes:dyn/cannons_arms", arms);
         manager.setData(entity, "skyhighheroes:dyn/cannons_body", body);
         manager.setData(entity, "skyhighheroes:dyn/cannons_head", head);
+        if (head && body && arms) {
+          if (entity.getData("fiskheroes:beam_shooting") > 0) {
+            system.useEnergy(entity, manager, "cannons3");
+          } else if (entity.getData("fiskheroes:beam_charging")) {
+            system.useEnergy(entity, manager, "cannonsCharging3");
+          };
+        } else if ((head && body && !arms) || (head && !body && arms) || (!head && body && arms)) {
+          if (head && body && !arms) {
+            if (entity.getData("fiskheroes:beam_shooting") > 0) {
+              system.useEnergy(entity, manager, "cannons2");
+            } else if (entity.getData("fiskheroes:beam_charging")) {
+              system.useEnergy(entity, manager, "cannonsCharging2");
+            };
+          };
+          if (head && !body && arms) {
+            if (entity.getData("fiskheroes:beam_shooting") > 0) {
+              system.useEnergy(entity, manager, "cannons2");
+            } else if (entity.getData("fiskheroes:beam_charging")) {
+              system.useEnergy(entity, manager, "cannonsCharging2");
+            };
+          };
+          if (!head && body && arms) {
+            if (entity.getData("fiskheroes:beam_shooting") > 0) {
+              system.useEnergy(entity, manager, "cannons2");
+            } else if (entity.getData("fiskheroes:beam_charging")) {
+              system.useEnergy(entity, manager, "cannonsCharging2");
+            };
+          };
+        } else {
+          if (arms) {
+            if (entity.getData("fiskheroes:beam_shooting") > 0) {
+              system.useEnergy(entity, manager, "cannons1");
+            } else if (entity.getData("fiskheroes:beam_charging")) {
+              system.useEnergy(entity, manager, "cannonsCharging1");
+            };
+          };
+          if (body) {
+            if (entity.getData("fiskheroes:beam_shooting") > 0) {
+              system.useEnergy(entity, manager, "cannons1");
+            } else if (entity.getData("fiskheroes:beam_charging")) {
+              system.useEnergy(entity, manager, "cannonsCharging1");
+            };
+          };
+          if (head) {
+            if (entity.getData("fiskheroes:beam_shooting") > 0) {
+              system.useEnergy(entity, manager, "cannons1");
+            } else if (entity.getData("fiskheroes:beam_charging")) {
+              system.useEnergy(entity, manager, "cannonsCharging1");
+            };
+          };
+        };
         if (entity.getData("fiskheroes:beam_charge") < 0.1) {
           if (head && body && arms) {
             system.shoutMessage(entity, "Activating Cannons!", 16);
@@ -514,10 +962,10 @@ function initModule(system) {
       cannonMultiTap.tapReset(entity, manager);
     },
     fightOrFlight: function (entity, manager) {
-      if (!entity.getWornHelmet().nbt().getBoolean("cannonsHead") || !entity.getWornHelmet().nbt().getBoolean("cannonsBody") || !entity.getWornHelmet().nbt().getBoolean("cannonsArms")) {
-        manager.setBoolean(entity.getWornHelmet().nbt(), "cannonsHead", true);
-        manager.setBoolean(entity.getWornHelmet().nbt(), "cannonsBody", true);
-        manager.setBoolean(entity.getWornHelmet().nbt(), "cannonsArms", true);
+      if (!entity.getWornChestplate().nbt().getBoolean("cannonsHead") || !entity.getWornChestplate().nbt().getBoolean("cannonsBody") || !entity.getWornChestplate().nbt().getBoolean("cannonsArms")) {
+        manager.setBoolean(entity.getWornChestplate().nbt(), "cannonsHead", true);
+        manager.setBoolean(entity.getWornChestplate().nbt(), "cannonsBody", true);
+        manager.setBoolean(entity.getWornChestplate().nbt(), "cannonsArms", true);
         system.systemMessage(entity, "<n>Automatically armed <nh>cannons<n>!");
       }
     },
@@ -551,6 +999,15 @@ function initModule(system) {
         manager.setBoolean(nbt, "flushRightArmCannons", false);
       };
       manager.setData(entity, "skyhighheroes:dyn/cannon_right_arm_flush_enabled", nbt.getBoolean("flushRightArmCannons"));
+    },
+    onChargingStart: function (entity, manager) {
+      manager.setData(entity, "fiskheroes:beam_charge", 0.0);
+      manager.setData(entity, "fiskheroes:beam_charging", false);
+      manager.setData(entity, "fiskheroes:beam_shooting", 0.0);
+      manager.setData(entity, "fiskheroes:beam_shooting_timer", 0.0);
+      manager.setData(entity, "skyhighheroes:dyn/cannons_arms", false);
+      manager.setData(entity, "skyhighheroes:dyn/cannons_body", false);
+      manager.setData(entity, "skyhighheroes:dyn/cannons_head", false);
     }
   };
 };

@@ -97,12 +97,22 @@
     {
       "type": "CHARGE",
       "texture": "skyhighheroes:textures/gui/bars/cyber_yellow_transmitting.png",
-      "data": "entity.getInterpolatedData('skyhighheroes:dyn/transmit_timer')"
+      "data": "entity.getInterpolatedData('skyhighheroes:dyn/transmit_suits_timer')"
     },
     {
       "type": "CHARGE",
       "texture": "skyhighheroes:textures/gui/bars/cyber_yellow_receiving.png",
-      "data": "entity.getInterpolatedData('skyhighheroes:dyn/receive_timer')"
+      "data": "entity.getInterpolatedData('skyhighheroes:dyn/receive_suits_timer')"
+    },
+    {
+      "type": "CHARGE",
+      "texture": "skyhighheroes:textures/gui/bars/cyber_yellow_transmitting.png",
+      "data": "entity.getInterpolatedData('skyhighheroes:dyn/transmit_waypoints_timer')"
+    },
+    {
+      "type": "CHARGE",
+      "texture": "skyhighheroes:textures/gui/bars/cyber_yellow_receiving.png",
+      "data": "entity.getInterpolatedData('skyhighheroes:dyn/receive_waypoints_timer')"
     }
   ]
 }

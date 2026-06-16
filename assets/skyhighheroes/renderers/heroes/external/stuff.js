@@ -148,6 +148,17 @@ function animate2(timer, duration, start, fadeIn, fadeOut) {
   return 0.0;
 };
 
+function formatSuitName(input) {
+  var suitID = input.split(":")[1];
+  var suitNameParts = suitID.split("_");
+  var suitName = "";
+  suitNameParts.forEach(part => {
+    unit = part.substring(0, 1).toUpperCase() + part.substring(1);
+    suitName = suitName + unit + " ";
+  });
+  return suitName;
+};
+
 var hostileEntities = [
   "fiskheroes.Creetle",
   "fiskheroes.Cactus",
@@ -376,7 +387,7 @@ var charWidths = {
   "*": 5.0,
   "+": 5.0,
   ",": 1.0,
-  "-": 4.0,
+  "-": 5.0,
   ".": 1.0,
   "/": 5.0,
   "0": 5.0,
@@ -737,7 +748,8 @@ function screenElement(renderer, elementName, verticalAlignment, horizontalAlign
   var parentSizeX = 0.0;
   var parentSizeY = 0.0;
   var parentScreenElement = null;
-  var parentAnchor = parentElementAnchor;
+  var parentAnchor = null;
+  var parentCubeOffset = null;
   if (typeof parentElement === "object") {
     parentScreenElement = parentElement;
   };
@@ -747,6 +759,8 @@ function screenElement(renderer, elementName, verticalAlignment, horizontalAlign
     parentZ = parentScreenElement.z;
     parentSizeX = parentScreenElement.sizeX;
     parentSizeY = parentScreenElement.sizeY;
+    var parentAnchor = parentElementAnchor;
+    var parentCubeOffset = parentScreenElement.modelResource.getCubeOffset("base");
   };
   if (parentAnchor != null) {
     switch (parentAnchor.toLowerCase()) {
@@ -790,11 +804,29 @@ function screenElement(renderer, elementName, verticalAlignment, horizontalAlign
   };
   if (typeof sizeX === "string") {
     if (sizeX.endsWith("pw")) {
-      var percent = parseFloat(sizeX.split("pw")[0]);
+      var value = sizeX.split("pw")[0];
+      var fraction = value.split("/");
+      var percent = 0.0;
+      if (fraction.length > 1) {
+        var numerator = parseInt(fraction[0]);
+        var denominator = parseInt(fraction[1]);
+        percent = (numerator/denominator)*100.0;
+      } else {
+        percent = parseFloat(fraction[0]);
+      };
       baseSizeX = parentSizeX*(percent/100.0);
     };
     if (sizeX.endsWith("ph")) {
-      var percent = parseFloat(sizeX.split("ph")[0]);
+      var value = sizeX.split("ph")[0];
+      var fraction = value.split("/");
+      var percent = 0.0;
+      if (fraction.length > 1) {
+        var numerator = parseInt(fraction[0]);
+        var denominator = parseInt(fraction[1]);
+        percent = (numerator/denominator)*100.0;
+      } else {
+        percent = parseFloat(fraction[0]);
+      };
       baseSizeX = parentSizeY*(percent/100.0);
     };
     if (sizeX.endsWith("pmw")) {
@@ -810,11 +842,29 @@ function screenElement(renderer, elementName, verticalAlignment, horizontalAlign
   };
   if (typeof sizeY === "string") {
     if (sizeY.endsWith("pw")) {
-      var percent = parseFloat(sizeY.split("pw")[0]);
+      var value = sizeY.split("pw")[0];
+      var fraction = value.split("/");
+      var percent = 0.0;
+      if (fraction.length > 1) {
+        var numerator = parseInt(fraction[0]);
+        var denominator = parseInt(fraction[1]);
+        percent = (numerator/denominator)*100.0;
+      } else {
+        percent = parseFloat(fraction[0]);
+      };
       baseSizeY = parentSizeX*(percent/100.0);
     };
     if (sizeY.endsWith("ph")) {
-      var percent = parseFloat(sizeY.split("ph")[0]);
+      var value = sizeY.split("ph")[0];
+      var fraction = value.split("/");
+      var percent = 0.0;
+      if (fraction.length > 1) {
+        var numerator = parseInt(fraction[0]);
+        var denominator = parseInt(fraction[1]);
+        percent = (numerator/denominator)*100.0;
+      } else {
+        percent = parseFloat(fraction[0]);
+      };
       baseSizeY = parentSizeY*(percent/100.0);
     };
     if (sizeY.endsWith("pmw")) {
@@ -853,10 +903,38 @@ function screenElement(renderer, elementName, verticalAlignment, horizontalAlign
   var screen_element = renderer.createResource("MODEL", "skyhighheroes:Pixel");
   screen_element.texture.set(null, "screen_" + elementName);
   var screen_element_model = renderer.createEffect("fiskheroes:model").setModel(screen_element);
-  screen_element_model.anchor.set("head");
+  if (parentCubeOffset != null) {
+    screen_element_model.anchor.set("head", parentCubeOffset);
+  } else {
+    screen_element_model.anchor.set("head");
+  };
   screen_element_model.anchor.ignoreAnchor(true);
   screen_element_model.setRotation(0, 0, 0);
   screen_element_model.setScale(baseSizeX, baseSizeY, 1.0);
+  if (typeof offsetX === "string") {
+    var fraction = offsetX.split("/");
+    var percent = 0.0;
+    if (fraction.length > 1) {
+      var numerator = parseInt(fraction[0]);
+      var denominator = parseInt(fraction[1]);
+      percent = (numerator/denominator)*100.0;
+    } else {
+      percent = parseFloat(fraction[0]);
+    };
+    offsetX = parentSizeX*(percent/100.0);
+  };
+  if (typeof offsetY === "string") {
+    var fraction = offsetY.split("/");
+    var percent = 0.0;
+    if (fraction.length > 1) {
+      var numerator = parseInt(fraction[0]);
+      var denominator = parseInt(fraction[1]);
+      percent = (numerator/denominator)*100.0;
+    } else {
+      percent = parseFloat(fraction[0]);
+    };
+    offsetY = parentSizeY*(percent/100.0);
+  };
   baseX = offsetX+sizeCorrectionX+parentAnchorX;
   baseY = offsetY+sizeCorrectionY+parentAnchorY;
   baseZ = offsetZ+parentZ;
@@ -869,7 +947,8 @@ function screenElement(renderer, elementName, verticalAlignment, horizontalAlign
   var centerY = baseY;
   var bottomYBound = baseY+(baseSizeY/2);
   return {
-    model: screen_element_model,
+    modelResource: screen_element,
+    modelEffect: screen_element_model,
     x: baseX,
     y: baseY,
     z: baseZ,
@@ -903,7 +982,7 @@ function screenElement(renderer, elementName, verticalAlignment, horizontalAlign
  * @param {object} parentElement - Parent element
  * @param {object} parentElementAnchor - Anchor point from parent element
  **/
-function screenElementHead(renderer, elementName, verticalAlignment, horizontalAlignment, sizeX, sizeY, offsetX, offsetY, offsetZ, parentElement, parentElementAnchor) {
+function screenElementAvatar(renderer, elementName, verticalAlignment, horizontalAlignment, sizeX, sizeY, offsetX, offsetY, offsetZ, parentElement, parentElementAnchor) {
   var baseX = 0.0;
   var baseY = 0.0;
   var baseZ = 0.0;
@@ -919,8 +998,8 @@ function screenElementHead(renderer, elementName, verticalAlignment, horizontalA
   var parentSizeX = 0.0;
   var parentSizeY = 0.0;
   var parentScreenElement = null;
-  var parentAnchor = parentElementAnchor;
-  var flipYAnchor = false;
+  var parentAnchor = null;
+  var parentCubeOffset = null;
   if (typeof parentElement === "object") {
     parentScreenElement = parentElement;
   };
@@ -930,6 +1009,8 @@ function screenElementHead(renderer, elementName, verticalAlignment, horizontalA
     parentZ = parentScreenElement.z;
     parentSizeX = parentScreenElement.sizeX;
     parentSizeY = parentScreenElement.sizeY;
+    var parentAnchor = parentElementAnchor;
+    var parentCubeOffset = parentScreenElement.modelResource.getCubeOffset("base");
   };
   if (parentAnchor != null) {
     switch (parentAnchor.toLowerCase()) {
@@ -973,11 +1054,29 @@ function screenElementHead(renderer, elementName, verticalAlignment, horizontalA
   };
   if (typeof sizeX === "string") {
     if (sizeX.endsWith("pw")) {
-      var percent = parseFloat(sizeX.split("pw")[0]);
+      var value = sizeX.split("pw")[0];
+      var fraction = value.split("/");
+      var percent = 0.0;
+      if (fraction.length > 1) {
+        var numerator = parseInt(fraction[0]);
+        var denominator = parseInt(fraction[1]);
+        percent = (numerator/denominator)*100.0;
+      } else {
+        percent = parseFloat(fraction[0]);
+      };
       baseSizeX = parentSizeX*(percent/100.0);
     };
     if (sizeX.endsWith("ph")) {
-      var percent = parseFloat(sizeX.split("ph")[0]);
+      var value = sizeX.split("ph")[0];
+      var fraction = value.split("/");
+      var percent = 0.0;
+      if (fraction.length > 1) {
+        var numerator = parseInt(fraction[0]);
+        var denominator = parseInt(fraction[1]);
+        percent = (numerator/denominator)*100.0;
+      } else {
+        percent = parseFloat(fraction[0]);
+      };
       baseSizeX = parentSizeY*(percent/100.0);
     };
     if (sizeX.endsWith("pmw")) {
@@ -993,11 +1092,29 @@ function screenElementHead(renderer, elementName, verticalAlignment, horizontalA
   };
   if (typeof sizeY === "string") {
     if (sizeY.endsWith("pw")) {
-      var percent = parseFloat(sizeY.split("pw")[0]);
+      var value = sizeY.split("pw")[0];
+      var fraction = value.split("/");
+      var percent = 0.0;
+      if (fraction.length > 1) {
+        var numerator = parseInt(fraction[0]);
+        var denominator = parseInt(fraction[1]);
+        percent = (numerator/denominator)*100.0;
+      } else {
+        percent = parseFloat(fraction[0]);
+      };
       baseSizeY = parentSizeX*(percent/100.0);
     };
     if (sizeY.endsWith("ph")) {
-      var percent = parseFloat(sizeY.split("ph")[0]);
+      var value = sizeX.split("ph")[0];
+      var fraction = value.split("/");
+      var percent = 0.0;
+      if (fraction.length > 1) {
+        var numerator = parseInt(fraction[0]);
+        var denominator = parseInt(fraction[1]);
+        percent = (numerator/denominator)*100.0;
+      } else {
+        percent = parseFloat(fraction[0]);
+      };
       baseSizeY = parentSizeY*(percent/100.0);
     };
     if (sizeY.endsWith("pmw")) {
@@ -1035,18 +1152,46 @@ function screenElementHead(renderer, elementName, verticalAlignment, horizontalA
       sizeCorrectionY = -1*(baseSizeY/2);
       break;
   };
-  var screen_element = renderer.createResource("MODEL", "skyhighheroes:PixelHead");
-  screen_element.texture.set(null, "head_" + elementName);
+  var screen_element = renderer.createResource("MODEL", "skyhighheroes:PixelAvatar");
+  screen_element.texture.set(null, "avatar_" + elementName);
   var screen_element_model = renderer.createEffect("fiskheroes:model").setModel(screen_element);
-  screen_element_model.anchor.set("head");
+  if (parentCubeOffset != null) {
+    screen_element_model.anchor.set("head", parentCubeOffset);
+  } else {
+    screen_element_model.anchor.set("head");
+  };
   screen_element_model.anchor.ignoreAnchor(true);
   screen_element_model.setRotation(0, 0, 0);
   screen_element_model.setScale(baseSizeX, baseSizeY, 1.0);
+  if (typeof offsetX === "string") {
+    var fraction = offsetX.split("/");
+    var percent = 0.0;
+    if (fraction.length > 1) {
+      var numerator = parseInt(fraction[0]);
+      var denominator = parseInt(fraction[1]);
+      percent = (numerator/denominator)*100.0;
+    } else {
+      percent = parseFloat(fraction[0]);
+    };
+    offsetX = parentSizeX*(percent/100.0);
+  };
+  if (typeof offsetY === "string") {
+    var fraction = offsetY.split("/");
+    var percent = 0.0;
+    if (fraction.length > 1) {
+      var numerator = parseInt(fraction[0]);
+      var denominator = parseInt(fraction[1]);
+      percent = (numerator/denominator)*100.0;
+    } else {
+      percent = parseFloat(fraction[0]);
+    };
+    offsetY = parentSizeY*(percent/100.0);
+  };
   baseX = offsetX+sizeCorrectionX+parentAnchorX;
   baseY = offsetY+sizeCorrectionY+parentAnchorY;
   baseZ = offsetZ+parentZ;
   screen_element_model.setOffset(baseX, baseY, baseZ);
-  baseZ = offsetZ+parentZ+0.01;
+  baseZ = offsetZ+parentZ+0.02;
   var leftXBound = baseX-(baseSizeX/2);
   var centerX = baseX;
   var rightXBound = baseX+(baseSizeX/2);
@@ -1054,7 +1199,768 @@ function screenElementHead(renderer, elementName, verticalAlignment, horizontalA
   var centerY = baseY;
   var bottomYBound = baseY+(baseSizeY/2);
   return {
-    model: screen_element_model,
+    modelResource: screen_element,
+    modelEffect: screen_element_model,
+    x: baseX,
+    y: baseY,
+    z: baseZ,
+    sizeX: baseSizeX,
+    sizeY: baseSizeY,
+    leftX: leftXBound,
+    centerX: centerX,
+    rightX: rightXBound,
+    topY: topYBound,
+    centerY: centerY,
+    bottomY: bottomYBound,
+    render: (isFirstPersonArm) => {
+      if (isFirstPersonArm) {
+        screen_element_model.render();
+      };
+    }
+  };
+};
+
+/**
+ * Creates screen element
+ * @param {JSHeroRenderer} renderer - Hero renderer
+ * @param {string} elementName - Name of screen element
+ * @param {string} verticalAlignment - Vertical alignment of element
+ * @param {string} horizontalAlignment - Horizontal alignment of element
+ * @param {number} sizeX - X value of padding
+ * @param {number} sizeY - Y value of padding
+ * @param {number} offsetX - X offset
+ * @param {number} offsetY - Y offset
+ * @param {number} offsetZ - Z offset
+ * @param {object} parentElement - Parent element
+ * @param {object} parentElementAnchor - Anchor point from parent element
+ **/
+function screenElementHead(renderer, elementName, verticalAlignment, horizontalAlignment, size, offsetX, offsetY, offsetZ, parentElement, parentElementAnchor) {
+  var sizeX = size;
+  var sizeY = size;
+  var baseX = 0.0;
+  var baseY = 0.0;
+  var baseZ = 0.0;
+  var baseSizeX = 0.0;
+  var baseSizeY = 0.0;
+  var parentX = 0.0;
+  var parentY = 0.0;
+  var parentZ = 0.0;
+  var parentAnchorX = 0.0;
+  var parentAnchorY = 0.0;
+  var sizeCorrectionX = 0.0;
+  var sizeCorrectionY = 0.0;
+  var parentSizeX = 0.0;
+  var parentSizeY = 0.0;
+  var parentScreenElement = null;
+  var parentAnchor = null;
+  var parentCubeOffset = null;
+  if (typeof parentElement === "object") {
+    parentScreenElement = parentElement;
+  };
+  if (parentScreenElement != null) {
+    parentX = parentScreenElement.x;
+    parentY = parentScreenElement.y;
+    parentZ = parentScreenElement.z;
+    parentSizeX = parentScreenElement.sizeX;
+    parentSizeY = parentScreenElement.sizeY;
+    var parentAnchor = parentElementAnchor;
+    var parentCubeOffset = parentScreenElement.modelResource.getCubeOffset("base");
+  };
+  if (parentAnchor != null) {
+    switch (parentAnchor.toLowerCase()) {
+      case "topleft":
+        parentAnchorX = parentScreenElement.leftX;
+        parentAnchorY = parentScreenElement.topY;
+        break;
+      case "topcenter":
+        parentAnchorX = parentScreenElement.centerX;
+        parentAnchorY = parentScreenElement.topY;
+        break;
+      case "topright":
+        parentAnchorX = parentScreenElement.rightX;
+        parentAnchorY = parentScreenElement.topY;
+        break;
+      case "centerleft":
+        parentAnchorX = parentScreenElement.leftX;
+        parentAnchorY = parentScreenElement.centerY;
+        break;
+      case "center":
+        parentAnchorX = parentScreenElement.centerX;
+        parentAnchorY = parentScreenElement.centerY;
+        break;
+      case "centerright":
+        parentAnchorX = parentScreenElement.rightX;
+        parentAnchorY = parentScreenElement.centerY;
+        break;
+      case "bottomleft":
+        parentAnchorX = parentScreenElement.leftX;
+        parentAnchorY = parentScreenElement.bottomY;
+        break;
+      case "bottomcenter":
+        parentAnchorX = parentScreenElement.centerX;
+        parentAnchorY = parentScreenElement.bottomY;
+        break;
+      case "bottomright":
+        parentAnchorX = parentScreenElement.rightX;
+        parentAnchorY = parentScreenElement.bottomY;
+        break;
+    };
+  };
+  if (typeof sizeX === "string") {
+    if (sizeX.endsWith("pw")) {
+      var value = sizeX.split("pw")[0];
+      var fraction = value.split("/");
+      var percent = 0.0;
+      if (fraction.length > 1) {
+        var numerator = parseInt(fraction[0]);
+        var denominator = parseInt(fraction[1]);
+        percent = (numerator/denominator)*100.0;
+      } else {
+        percent = parseFloat(fraction[0]);
+      };
+      baseSizeX = parentSizeX*(percent/100.0);
+    };
+    if (sizeX.endsWith("ph")) {
+      var value = sizeX.split("ph")[0];
+      var fraction = value.split("/");
+      var percent = 0.0;
+      if (fraction.length > 1) {
+        var numerator = parseInt(fraction[0]);
+        var denominator = parseInt(fraction[1]);
+        percent = (numerator/denominator)*100.0;
+      } else {
+        percent = parseFloat(fraction[0]);
+      };
+      baseSizeX = parentSizeY*(percent/100.0);
+    };
+    if (sizeX.endsWith("pmw")) {
+      var margin = parseFloat(sizeX.split("pmw")[0]);
+      baseSizeX = parentSizeX-margin;
+    };
+    if (sizeX.endsWith("pmh")) {
+      var margin = parseFloat(sizeX.split("pmh")[0]);
+      baseSizeX = parentSizeY-margin;
+    };
+  } else {
+    baseSizeX = sizeX;
+  };
+  if (typeof sizeY === "string") {
+    if (sizeY.endsWith("pw")) {
+      var value = sizeY.split("pw")[0];
+      var fraction = value.split("/");
+      var percent = 0.0;
+      if (fraction.length > 1) {
+        var numerator = parseInt(fraction[0]);
+        var denominator = parseInt(fraction[1]);
+        percent = (numerator/denominator)*100.0;
+      } else {
+        percent = parseFloat(fraction[0]);
+      };
+      baseSizeY = parentSizeX*(percent/100.0);
+    };
+    if (sizeY.endsWith("ph")) {
+      var value = sizeX.split("ph")[0];
+      var fraction = value.split("/");
+      var percent = 0.0;
+      if (fraction.length > 1) {
+        var numerator = parseInt(fraction[0]);
+        var denominator = parseInt(fraction[1]);
+        percent = (numerator/denominator)*100.0;
+      } else {
+        percent = parseFloat(fraction[0]);
+      };
+      baseSizeY = parentSizeY*(percent/100.0);
+    };
+    if (sizeY.endsWith("pmw")) {
+      var margin = parseFloat(sizeY.split("pmw")[0]);
+      baseSizeY = parentSizeX-margin;
+    };
+    if (sizeY.endsWith("pmh")) {
+      var margin = parseFloat(sizeY.split("pmh")[0]);
+      baseSizeY = parentSizeY-margin;
+    };
+  } else {
+    baseSizeY = sizeY;
+  };
+  baseSizeX = baseSizeX/16.0;
+  baseSizeY = baseSizeY/16.0;
+  switch (horizontalAlignment.toLowerCase()) {
+    case "center":
+      sizeCorrectionX = 0.0;
+      break;
+    case "left":
+      sizeCorrectionX = 1*(baseSizeX/2);
+      break;
+    case "right":
+      sizeCorrectionX = -1*(baseSizeX/2);
+      break;
+  };
+  switch (verticalAlignment.toLowerCase()) {
+    case "center":
+      sizeCorrectionY = 0.0;
+      break;
+    case "top":
+      sizeCorrectionY = 1*(baseSizeY/2);
+      break;
+    case "bottom":
+      sizeCorrectionY = -1*(baseSizeY/2);
+      break;
+  };
+  var screen_element = renderer.createResource("MODEL", "skyhighheroes:PixelHead");
+  screen_element.texture.set(null, "display_" + elementName);
+  var screen_element_model = renderer.createEffect("fiskheroes:model").setModel(screen_element);
+  if (parentCubeOffset != null) {
+    screen_element_model.anchor.set("head", parentCubeOffset);
+  } else {
+    screen_element_model.anchor.set("head");
+  };
+  screen_element_model.anchor.ignoreAnchor(true);
+  screen_element_model.setRotation(0, 0, 0);
+  screen_element_model.setScale(baseSizeX, baseSizeY, 1.0);
+  if (typeof offsetX === "string") {
+    var fraction = offsetX.split("/");
+    var percent = 0.0;
+    if (fraction.length > 1) {
+      var numerator = parseInt(fraction[0]);
+      var denominator = parseInt(fraction[1]);
+      percent = (numerator/denominator)*100.0;
+    } else {
+      percent = parseFloat(fraction[0]);
+    };
+    offsetX = parentSizeX*(percent/100.0);
+  };
+  if (typeof offsetY === "string") {
+    var fraction = offsetY.split("/");
+    var percent = 0.0;
+    if (fraction.length > 1) {
+      var numerator = parseInt(fraction[0]);
+      var denominator = parseInt(fraction[1]);
+      percent = (numerator/denominator)*100.0;
+    } else {
+      percent = parseFloat(fraction[0]);
+    };
+    offsetY = parentSizeY*(percent/100.0);
+  };
+  baseX = offsetX+sizeCorrectionX+parentAnchorX;
+  baseY = offsetY+sizeCorrectionY+parentAnchorY;
+  baseZ = offsetZ+parentZ;
+  screen_element_model.setOffset(baseX, baseY, baseZ);
+  baseZ = offsetZ+parentZ+0.02;
+  var leftXBound = baseX-(baseSizeX/2);
+  var centerX = baseX;
+  var rightXBound = baseX+(baseSizeX/2);
+  var topYBound = baseY-(baseSizeY/2);
+  var centerY = baseY;
+  var bottomYBound = baseY+(baseSizeY/2);
+  return {
+    modelResource: screen_element,
+    modelEffect: screen_element_model,
+    x: baseX,
+    y: baseY,
+    z: baseZ,
+    sizeX: baseSizeX,
+    sizeY: baseSizeY,
+    leftX: leftXBound,
+    centerX: centerX,
+    rightX: rightXBound,
+    topY: topYBound,
+    centerY: centerY,
+    bottomY: bottomYBound,
+    render: (isFirstPersonArm) => {
+      if (isFirstPersonArm) {
+        screen_element_model.render();
+      };
+    }
+  };
+};
+
+/**
+ * Creates screen element
+ * @param {JSHeroRenderer} renderer - Hero renderer
+ * @param {string} elementName - Name of screen element
+ * @param {string} verticalAlignment - Vertical alignment of element
+ * @param {string} horizontalAlignment - Horizontal alignment of element
+ * @param {number} sizeX - X value of padding
+ * @param {number} sizeY - Y value of padding
+ * @param {number} offsetX - X offset
+ * @param {number} offsetY - Y offset
+ * @param {number} offsetZ - Z offset
+ * @param {object} parentElement - Parent element
+ * @param {object} parentElementAnchor - Anchor point from parent element
+ **/
+function screenElementBody(renderer, elementName, verticalAlignment, horizontalAlignment, size, offsetX, offsetY, offsetZ, parentElement, parentElementAnchor) {
+  var sizeX = size;
+  var sizeY = size;
+  var baseX = 0.0;
+  var baseY = 0.0;
+  var baseZ = 0.0;
+  var baseSizeX = 0.0;
+  var baseSizeY = 0.0;
+  var parentX = 0.0;
+  var parentY = 0.0;
+  var parentZ = 0.0;
+  var parentAnchorX = 0.0;
+  var parentAnchorY = 0.0;
+  var sizeCorrectionX = 0.0;
+  var sizeCorrectionY = 0.0;
+  var parentSizeX = 0.0;
+  var parentSizeY = 0.0;
+  var parentScreenElement = null;
+  var parentAnchor = null;
+  var parentCubeOffset = null;
+  if (typeof parentElement === "object") {
+    parentScreenElement = parentElement;
+  };
+  if (parentScreenElement != null) {
+    parentX = parentScreenElement.x;
+    parentY = parentScreenElement.y;
+    parentZ = parentScreenElement.z;
+    parentSizeX = parentScreenElement.sizeX;
+    parentSizeY = parentScreenElement.sizeY;
+    var parentAnchor = parentElementAnchor;
+    var parentCubeOffset = parentScreenElement.modelResource.getCubeOffset("base");
+  };
+  if (parentAnchor != null) {
+    switch (parentAnchor.toLowerCase()) {
+      case "topleft":
+        parentAnchorX = parentScreenElement.leftX;
+        parentAnchorY = parentScreenElement.topY;
+        break;
+      case "topcenter":
+        parentAnchorX = parentScreenElement.centerX;
+        parentAnchorY = parentScreenElement.topY;
+        break;
+      case "topright":
+        parentAnchorX = parentScreenElement.rightX;
+        parentAnchorY = parentScreenElement.topY;
+        break;
+      case "centerleft":
+        parentAnchorX = parentScreenElement.leftX;
+        parentAnchorY = parentScreenElement.centerY;
+        break;
+      case "center":
+        parentAnchorX = parentScreenElement.centerX;
+        parentAnchorY = parentScreenElement.centerY;
+        break;
+      case "centerright":
+        parentAnchorX = parentScreenElement.rightX;
+        parentAnchorY = parentScreenElement.centerY;
+        break;
+      case "bottomleft":
+        parentAnchorX = parentScreenElement.leftX;
+        parentAnchorY = parentScreenElement.bottomY;
+        break;
+      case "bottomcenter":
+        parentAnchorX = parentScreenElement.centerX;
+        parentAnchorY = parentScreenElement.bottomY;
+        break;
+      case "bottomright":
+        parentAnchorX = parentScreenElement.rightX;
+        parentAnchorY = parentScreenElement.bottomY;
+        break;
+    };
+  };
+  if (typeof sizeX === "string") {
+    if (sizeX.endsWith("pw")) {
+      var value = sizeX.split("pw")[0];
+      var fraction = value.split("/");
+      var percent = 0.0;
+      if (fraction.length > 1) {
+        var numerator = parseInt(fraction[0]);
+        var denominator = parseInt(fraction[1]);
+        percent = (numerator/denominator)*100.0;
+      } else {
+        percent = parseFloat(fraction[0]);
+      };
+      baseSizeX = parentSizeX*(percent/100.0);
+    };
+    if (sizeX.endsWith("ph")) {
+      var value = sizeX.split("ph")[0];
+      var fraction = value.split("/");
+      var percent = 0.0;
+      if (fraction.length > 1) {
+        var numerator = parseInt(fraction[0]);
+        var denominator = parseInt(fraction[1]);
+        percent = (numerator/denominator)*100.0;
+      } else {
+        percent = parseFloat(fraction[0]);
+      };
+      baseSizeX = parentSizeY*(percent/100.0);
+    };
+    if (sizeX.endsWith("pmw")) {
+      var margin = parseFloat(sizeX.split("pmw")[0]);
+      baseSizeX = parentSizeX-margin;
+    };
+    if (sizeX.endsWith("pmh")) {
+      var margin = parseFloat(sizeX.split("pmh")[0]);
+      baseSizeX = parentSizeY-margin;
+    };
+  } else {
+    baseSizeX = sizeX;
+  };
+  if (typeof sizeY === "string") {
+    if (sizeY.endsWith("pw")) {
+      var value = sizeY.split("pw")[0];
+      var fraction = value.split("/");
+      var percent = 0.0;
+      if (fraction.length > 1) {
+        var numerator = parseInt(fraction[0]);
+        var denominator = parseInt(fraction[1]);
+        percent = (numerator/denominator)*100.0;
+      } else {
+        percent = parseFloat(fraction[0]);
+      };
+      baseSizeY = parentSizeX*(percent/100.0);
+    };
+    if (sizeY.endsWith("ph")) {
+      var value = sizeX.split("ph")[0];
+      var fraction = value.split("/");
+      var percent = 0.0;
+      if (fraction.length > 1) {
+        var numerator = parseInt(fraction[0]);
+        var denominator = parseInt(fraction[1]);
+        percent = (numerator/denominator)*100.0;
+      } else {
+        percent = parseFloat(fraction[0]);
+      };
+      baseSizeY = parentSizeY*(percent/100.0);
+    };
+    if (sizeY.endsWith("pmw")) {
+      var margin = parseFloat(sizeY.split("pmw")[0]);
+      baseSizeY = parentSizeX-margin;
+    };
+    if (sizeY.endsWith("pmh")) {
+      var margin = parseFloat(sizeY.split("pmh")[0]);
+      baseSizeY = parentSizeY-margin;
+    };
+  } else {
+    baseSizeY = sizeY;
+  };
+  baseSizeX = baseSizeX/16.0;
+  baseSizeY = baseSizeY/16.0;
+  switch (horizontalAlignment.toLowerCase()) {
+    case "center":
+      sizeCorrectionX = 0.0;
+      break;
+    case "left":
+      sizeCorrectionX = 1*(baseSizeX/2);
+      break;
+    case "right":
+      sizeCorrectionX = -1*(baseSizeX/2);
+      break;
+  };
+  switch (verticalAlignment.toLowerCase()) {
+    case "center":
+      sizeCorrectionY = 0.0;
+      break;
+    case "top":
+      sizeCorrectionY = 1*(baseSizeY/2);
+      break;
+    case "bottom":
+      sizeCorrectionY = -1*(baseSizeY/2);
+      break;
+  };
+  var screen_element = renderer.createResource("MODEL", "skyhighheroes:PixelBody");
+  screen_element.texture.set(null, "display_" + elementName);
+  var screen_element_model = renderer.createEffect("fiskheroes:model").setModel(screen_element);
+  if (parentCubeOffset != null) {
+    screen_element_model.anchor.set("head", parentCubeOffset);
+  } else {
+    screen_element_model.anchor.set("head");
+  };
+  screen_element_model.anchor.ignoreAnchor(true);
+  screen_element_model.setRotation(0, 0, 0);
+  screen_element_model.setScale(baseSizeX, baseSizeY, 1.0);
+  if (typeof offsetX === "string") {
+    var fraction = offsetX.split("/");
+    var percent = 0.0;
+    if (fraction.length > 1) {
+      var numerator = parseInt(fraction[0]);
+      var denominator = parseInt(fraction[1]);
+      percent = (numerator/denominator)*100.0;
+    } else {
+      percent = parseFloat(fraction[0]);
+    };
+    offsetX = parentSizeX*(percent/100.0);
+  };
+  if (typeof offsetY === "string") {
+    var fraction = offsetY.split("/");
+    var percent = 0.0;
+    if (fraction.length > 1) {
+      var numerator = parseInt(fraction[0]);
+      var denominator = parseInt(fraction[1]);
+      percent = (numerator/denominator)*100.0;
+    } else {
+      percent = parseFloat(fraction[0]);
+    };
+    offsetY = parentSizeY*(percent/100.0);
+  };
+  baseX = offsetX+sizeCorrectionX+parentAnchorX;
+  baseY = offsetY+sizeCorrectionY+parentAnchorY;
+  baseZ = offsetZ+parentZ;
+  screen_element_model.setOffset(baseX, baseY, baseZ);
+  baseZ = offsetZ+parentZ+0.02;
+  var leftXBound = baseX-(baseSizeX/2);
+  var centerX = baseX;
+  var rightXBound = baseX+(baseSizeX/2);
+  var topYBound = baseY-(baseSizeY/2);
+  var centerY = baseY;
+  var bottomYBound = baseY+(baseSizeY/2);
+  return {
+    modelResource: screen_element,
+    modelEffect: screen_element_model,
+    x: baseX,
+    y: baseY,
+    z: baseZ,
+    sizeX: baseSizeX,
+    sizeY: baseSizeY,
+    leftX: leftXBound,
+    centerX: centerX,
+    rightX: rightXBound,
+    topY: topYBound,
+    centerY: centerY,
+    bottomY: bottomYBound,
+    render: (isFirstPersonArm) => {
+      if (isFirstPersonArm) {
+        screen_element_model.render();
+      };
+    }
+  };
+};
+/**
+ * Creates screen element
+ * @param {JSHeroRenderer} renderer - Hero renderer
+ * @param {string} elementName - Name of screen element
+ * @param {string} verticalAlignment - Vertical alignment of element
+ * @param {string} horizontalAlignment - Horizontal alignment of element
+ * @param {number} sizeX - X value of padding
+ * @param {number} sizeY - Y value of padding
+ * @param {number} offsetX - X offset
+ * @param {number} offsetY - Y offset
+ * @param {number} offsetZ - Z offset
+ * @param {object} parentElement - Parent element
+ * @param {object} parentElementAnchor - Anchor point from parent element
+ **/
+function screenElementLimb(renderer, elementName, verticalAlignment, horizontalAlignment, size, offsetX, offsetY, offsetZ, parentElement, parentElementAnchor) {
+  var sizeX = size;
+  var sizeY = size;
+  var baseX = 0.0;
+  var baseY = 0.0;
+  var baseZ = 0.0;
+  var baseSizeX = 0.0;
+  var baseSizeY = 0.0;
+  var parentX = 0.0;
+  var parentY = 0.0;
+  var parentZ = 0.0;
+  var parentAnchorX = 0.0;
+  var parentAnchorY = 0.0;
+  var sizeCorrectionX = 0.0;
+  var sizeCorrectionY = 0.0;
+  var parentSizeX = 0.0;
+  var parentSizeY = 0.0;
+  var parentScreenElement = null;
+  var parentAnchor = null;
+  var parentCubeOffset = null;
+  if (typeof parentElement === "object") {
+    parentScreenElement = parentElement;
+  };
+  if (parentScreenElement != null) {
+    parentX = parentScreenElement.x;
+    parentY = parentScreenElement.y;
+    parentZ = parentScreenElement.z;
+    parentSizeX = parentScreenElement.sizeX;
+    parentSizeY = parentScreenElement.sizeY;
+    var parentAnchor = parentElementAnchor;
+    var parentCubeOffset = parentScreenElement.modelResource.getCubeOffset("base");
+  };
+  if (parentAnchor != null) {
+    switch (parentAnchor.toLowerCase()) {
+      case "topleft":
+        parentAnchorX = parentScreenElement.leftX;
+        parentAnchorY = parentScreenElement.topY;
+        break;
+      case "topcenter":
+        parentAnchorX = parentScreenElement.centerX;
+        parentAnchorY = parentScreenElement.topY;
+        break;
+      case "topright":
+        parentAnchorX = parentScreenElement.rightX;
+        parentAnchorY = parentScreenElement.topY;
+        break;
+      case "centerleft":
+        parentAnchorX = parentScreenElement.leftX;
+        parentAnchorY = parentScreenElement.centerY;
+        break;
+      case "center":
+        parentAnchorX = parentScreenElement.centerX;
+        parentAnchorY = parentScreenElement.centerY;
+        break;
+      case "centerright":
+        parentAnchorX = parentScreenElement.rightX;
+        parentAnchorY = parentScreenElement.centerY;
+        break;
+      case "bottomleft":
+        parentAnchorX = parentScreenElement.leftX;
+        parentAnchorY = parentScreenElement.bottomY;
+        break;
+      case "bottomcenter":
+        parentAnchorX = parentScreenElement.centerX;
+        parentAnchorY = parentScreenElement.bottomY;
+        break;
+      case "bottomright":
+        parentAnchorX = parentScreenElement.rightX;
+        parentAnchorY = parentScreenElement.bottomY;
+        break;
+    };
+  };  if (typeof sizeX === "string") {
+    if (sizeX.endsWith("pw")) {
+      var value = sizeX.split("pw")[0];
+      var fraction = value.split("/");
+      var percent = 0.0;
+      if (fraction.length > 1) {
+        var numerator = parseInt(fraction[0]);
+        var denominator = parseInt(fraction[1]);
+        percent = (numerator/denominator)*100.0;
+      } else {
+        percent = parseFloat(fraction[0]);
+      };
+      baseSizeX = parentSizeX*(percent/100.0);
+    };
+    if (sizeX.endsWith("ph")) {
+      var value = sizeX.split("ph")[0];
+      var fraction = value.split("/");
+      var percent = 0.0;
+      if (fraction.length > 1) {
+        var numerator = parseInt(fraction[0]);
+        var denominator = parseInt(fraction[1]);
+        percent = (numerator/denominator)*100.0;
+      } else {
+        percent = parseFloat(fraction[0]);
+      };
+      baseSizeX = parentSizeY*(percent/100.0);
+    };
+    if (sizeX.endsWith("pmw")) {
+      var margin = parseFloat(sizeX.split("pmw")[0]);
+      baseSizeX = parentSizeX-margin;
+    };
+    if (sizeX.endsWith("pmh")) {
+      var margin = parseFloat(sizeX.split("pmh")[0]);
+      baseSizeX = parentSizeY-margin;
+    };
+  } else {
+    baseSizeX = sizeX;
+  };
+  if (typeof sizeY === "string") {
+    if (sizeY.endsWith("pw")) {
+      var value = sizeY.split("pw")[0];
+      var fraction = value.split("/");
+      var percent = 0.0;
+      if (fraction.length > 1) {
+        var numerator = parseInt(fraction[0]);
+        var denominator = parseInt(fraction[1]);
+        percent = (numerator/denominator)*100.0;
+      } else {
+        percent = parseFloat(fraction[0]);
+      };
+      baseSizeY = parentSizeX*(percent/100.0);
+    };
+    if (sizeY.endsWith("ph")) {
+      var value = sizeX.split("ph")[0];
+      var fraction = value.split("/");
+      var percent = 0.0;
+      if (fraction.length > 1) {
+        var numerator = parseInt(fraction[0]);
+        var denominator = parseInt(fraction[1]);
+        percent = (numerator/denominator)*100.0;
+      } else {
+        percent = parseFloat(fraction[0]);
+      };
+      baseSizeY = parentSizeY*(percent/100.0);
+    };
+    if (sizeY.endsWith("pmw")) {
+      var margin = parseFloat(sizeY.split("pmw")[0]);
+      baseSizeY = parentSizeX-margin;
+    };
+    if (sizeY.endsWith("pmh")) {
+      var margin = parseFloat(sizeY.split("pmh")[0]);
+      baseSizeY = parentSizeY-margin;
+    };
+  } else {
+    baseSizeY = sizeY;
+  };
+  baseSizeX = baseSizeX/16.0;
+  baseSizeY = baseSizeY/16.0;
+  switch (horizontalAlignment.toLowerCase()) {
+    case "center":
+      sizeCorrectionX = 0.0;
+      break;
+    case "left":
+      sizeCorrectionX = 1*(baseSizeX/2);
+      break;
+    case "right":
+      sizeCorrectionX = -1*(baseSizeX/2);
+      break;
+  };
+  switch (verticalAlignment.toLowerCase()) {
+    case "center":
+      sizeCorrectionY = 0.0;
+      break;
+    case "top":
+      sizeCorrectionY = 1*(baseSizeY/2);
+      break;
+    case "bottom":
+      sizeCorrectionY = -1*(baseSizeY/2);
+      break;
+  };
+  var screen_element = renderer.createResource("MODEL", "skyhighheroes:PixelLimb");
+  screen_element.texture.set(null, "display_" + elementName);
+  var screen_element_model = renderer.createEffect("fiskheroes:model").setModel(screen_element);
+  if (parentCubeOffset != null) {
+    screen_element_model.anchor.set("head", parentCubeOffset);
+  } else {
+    screen_element_model.anchor.set("head");
+  };
+  screen_element_model.anchor.ignoreAnchor(true);
+  screen_element_model.setRotation(0, 0, 0);
+  screen_element_model.setScale(baseSizeX, baseSizeY, 1.0);
+  if (typeof offsetX === "string") {
+    var fraction = offsetX.split("/");
+    var percent = 0.0;
+    if (fraction.length > 1) {
+      var numerator = parseInt(fraction[0]);
+      var denominator = parseInt(fraction[1]);
+      percent = (numerator/denominator)*100.0;
+    } else {
+      percent = parseFloat(fraction[0]);
+    };
+    offsetX = parentSizeX*(percent/100.0);
+  };
+  if (typeof offsetY === "string") {
+    var fraction = offsetY.split("/");
+    var percent = 0.0;
+    if (fraction.length > 1) {
+      var numerator = parseInt(fraction[0]);
+      var denominator = parseInt(fraction[1]);
+      percent = (numerator/denominator)*100.0;
+    } else {
+      percent = parseFloat(fraction[0]);
+    };
+    offsetY = parentSizeY*(percent/100.0);
+  };
+  baseX = offsetX+sizeCorrectionX+parentAnchorX;
+  baseY = offsetY+sizeCorrectionY+parentAnchorY;
+  baseZ = offsetZ+parentZ;
+  screen_element_model.setOffset(baseX, baseY, baseZ);
+  baseZ = offsetZ+parentZ+0.02;
+  var leftXBound = baseX-(baseSizeX/2);
+  var centerX = baseX;
+  var rightXBound = baseX+(baseSizeX/2);
+  var topYBound = baseY-(baseSizeY/2);
+  var centerY = baseY;
+  var bottomYBound = baseY+(baseSizeY/2);
+  return {
+    modelResource: screen_element,
+    modelEffect: screen_element_model,
     x: baseX,
     y: baseY,
     z: baseZ,
@@ -1102,13 +2008,13 @@ function screenVerticalScrollBar(renderer, elementName, sizeX, sizeY, offsetX, o
   var originalBarTop = scrollBarOuter.topY;
   var originalBarBottom = scrollBarOuter.bottomY;
   return {
-    baseModel: scrollBarBase.model,
+    baseModel: scrollBarBase.modelEffect,
     baseModelX: scrollBarBase.x,
     baseModelY: scrollBarBase.y,
     baseModelZ: scrollBarBase.z,
     baseModelSizeX: scrollBarBase.sizeX,
     baseModelSizeY: scrollBarBase.sizeY,
-    barModel: scrollBarOuter.model,
+    barModel: scrollBarOuter.modelEffect,
     barModelX: scrollBarOuter.x,
     barModelY: scrollBarOuter.y,
     barModelZ: scrollBarOuter.z,
@@ -1125,11 +2031,73 @@ function screenVerticalScrollBar(renderer, elementName, sizeX, sizeY, offsetX, o
         scrollBarBase.render(isFirstPersonArm);
         scrollBarBaseMiddle.render(isFirstPersonArm);
         scrollBarBaseInner.render(isFirstPersonArm);
-        scrollBarOuter.model.setScale(originalBarSizeX, barSize, 1.0);
-        scrollBarInner.model.setScale(originalBarSizeX-3.0, barSize-3.0, 1.0);
+        scrollBarOuter.modelEffect.setScale(originalBarSizeX, barSize, 1.0);
+        scrollBarInner.modelEffect.setScale(originalBarSizeX-3.0, barSize-3.0, 1.0);
         var progress = (barTopLimit)+(barSpace*(selectedValue/totalValue));
-        scrollBarOuter.model.setOffset(originalBarX, progress, scrollBarOuter.z);
-        scrollBarInner.model.setOffset(originalBarX, progress, scrollBarOuter.z+0.01);
+        scrollBarOuter.modelEffect.setOffset(originalBarX, progress, scrollBarOuter.z);
+        scrollBarInner.modelEffect.setOffset(originalBarX, progress, scrollBarOuter.z+0.01);
+        scrollBarOuter.render(isFirstPersonArm);
+        scrollBarInner.render(isFirstPersonArm);
+      };
+    }
+  };
+};
+/**
+ * Creates vertical scroll bar
+ * @param {JSHeroRenderer} renderer - Hero renderer
+ * @param {string} elementName - Name of screen element
+ * @param {number} paddingX - X value of padding
+ * @param {number} paddingY - Y value of padding
+ * @param {number} sizeX - X value of size
+ * @param {number} sizeY - Y value of size
+ * @param {number} offsetX - X offset
+ * @param {number} offsetY - Y offset
+ * @param {number} offsetZ - Z offset
+ **/
+function screenVerticalScrollBar(renderer, elementName, sizeX, sizeY, offsetX, offsetY, offsetZ, parentElement, parentElementAnchor) {
+  var paddingX = 2.0;
+  var paddingY = 2.0;
+  var scrollBarBase = screenElement(renderer, elementName+"_outer", "center", "center", sizeX, sizeY, offsetX, offsetY, offsetZ, parentElement, parentElementAnchor);
+  var originalBarSizeX = scrollBarBase.sizeX-paddingX;
+  var originalBarSizeY = scrollBarBase.sizeY-paddingY;
+  var scrollBarBaseMiddle = screenElement(renderer, elementName+"_middle", "center", "center", "1pmw", "1pmh", 0.0, 0.0, 0.0, scrollBarBase, "center");
+  var scrollBarBaseInner = screenElement(renderer, elementName+"_inner", "center", "center", "2.5pmw", "2.5pmh", 0.0, 0.0, 0.0, scrollBarBaseMiddle, "center");
+  //Bar
+  var scrollBarOuter = screenElement(renderer, elementName+"_bar_outer", "center", "center", "1pmw", "1pmh", 0.0, 0.0, 0.0, scrollBarBaseMiddle, "center");
+  var scrollBarInner = screenElement(renderer, elementName+"_bar_inner", "center", "center", "1pmw", "1pmh", 0.0, 0.0, 0.0, scrollBarOuter, "center");
+  var originalBarX = scrollBarOuter.x;
+  var originalBarY = scrollBarOuter.y;
+  var originalBarTop = scrollBarOuter.topY;
+  var originalBarBottom = scrollBarOuter.bottomY;
+  return {
+    baseModel: scrollBarBase.modelEffect,
+    baseModelX: scrollBarBase.x,
+    baseModelY: scrollBarBase.y,
+    baseModelZ: scrollBarBase.z,
+    baseModelSizeX: scrollBarBase.sizeX,
+    baseModelSizeY: scrollBarBase.sizeY,
+    barModel: scrollBarOuter.modelEffect,
+    barModelX: scrollBarOuter.x,
+    barModelY: scrollBarOuter.y,
+    barModelZ: scrollBarOuter.z,
+    barModelSizeX: scrollBarOuter.sizeX,
+    barModelSizeY: scrollBarOuter.sizeY,
+    render: (isFirstPersonArm, selected, total) => {
+      if (isFirstPersonArm) {
+        var selectedValue = selected;
+        var totalValue = ((total == 0) ? 1 : total);
+        var barSize = originalBarSizeY/((total == 0) ? 1 : (total+1));
+        var barTopLimit = originalBarTop-(paddingY/2)+(barSize/2);
+        var barBottomLimit = originalBarBottom+(paddingY/2)-(barSize/2);
+        var barSpace = Math.abs(barTopLimit-barBottomLimit);
+        scrollBarBase.render(isFirstPersonArm);
+        scrollBarBaseMiddle.render(isFirstPersonArm);
+        scrollBarBaseInner.render(isFirstPersonArm);
+        scrollBarOuter.modelEffect.setScale(originalBarSizeX, barSize, 1.0);
+        scrollBarInner.modelEffect.setScale(originalBarSizeX-3.0, barSize-3.0, 1.0);
+        var progress = (barTopLimit)+(barSpace*(selectedValue/totalValue));
+        scrollBarOuter.modelEffect.setOffset(originalBarX, progress, scrollBarOuter.z);
+        scrollBarInner.modelEffect.setOffset(originalBarX, progress, scrollBarOuter.z+0.01);
         scrollBarOuter.render(isFirstPersonArm);
         scrollBarInner.render(isFirstPersonArm);
       };
@@ -1137,15 +2105,16 @@ function screenVerticalScrollBar(renderer, elementName, sizeX, sizeY, offsetX, o
   };
 };
 
-function screenSelector(renderer, elementName, verticalAlignment, horizontalAlignment, sizeX, sizeY, offsetX, offsetY, offsetZ, parentElement, parentElementAnchor) {
+function screenSelectorTranser(renderer, elementName, verticalAlignment, horizontalAlignment, sizeX, sizeY, offsetX, offsetY, offsetZ, parentElement, parentElementAnchor) {
   var selector = screenElement(renderer, elementName, verticalAlignment, horizontalAlignment, sizeX, sizeY, offsetX, offsetY, offsetZ, parentElement, parentElementAnchor);
   return {
-    model: selector.model,
+    modelResource: selector.modelResource,
+    modelEffect: selector.modelEffect,
     x: selector.x,
     y: selector.y,
     z: selector.z,
-    sizeX: selector.sizeX,
-    sizeY: selector.sizeY,
+    sizeX: selector.baseSizeX,
+    sizeY: selector.baseSizeY,
     leftX: selector.leftX,
     centerX: selector.centerX,
     rightX: selector.rightX,
@@ -1156,14 +2125,151 @@ function screenSelector(renderer, elementName, verticalAlignment, horizontalAlig
       if (isFirstPersonArm) {
         var timer = entity.loop(10);
         var value = change*animate2(timer, 1.0, 0.0, 0.7, 0.3);
-        selector.model.setOffset(selector.x+change-value, selector.y, selector.z);
+        selector.modelEffect.setOffset(selector.x+change-value, selector.y, selector.z);
         selector.render(isFirstPersonArm);
       };
     }
   };
 };
 
-function screenCornerSelecter(renderer, elementName, parentElement, thickness) {
+function screenSelector(renderer, elementName, verticalAlignment, horizontalAlignment, sizeX, sizeY, offsetX, offsetY, offsetZ, parentElement, parentElementAnchor) {
+  var selector = screenElement(renderer, elementName, verticalAlignment, horizontalAlignment, sizeX, sizeY, offsetX, offsetY, offsetZ, parentElement, parentElementAnchor);
+  return {
+    modelResource: selector.modelResource,
+    modelEffect: selector.modelEffect,
+    x: selector.x,
+    y: selector.y,
+    z: selector.z,
+    sizeX: selector.baseSizeX,
+    sizeY: selector.baseSizeY,
+    leftX: selector.leftX,
+    centerX: selector.centerX,
+    rightX: selector.rightX,
+    topY: selector.topY,
+    centerY: selector.centerY,
+    bottomY: selector.bottomY,
+    render: (isFirstPersonArm) => {
+      if (isFirstPersonArm) {
+        selector.render(isFirstPersonArm);
+      };
+    }
+  };
+};
+
+function screenStatusLight(renderer, elementName, verticalAlignment, horizontalAlignment, sizeX, sizeY, offsetX, offsetY, offsetZ, parentElement, parentElementAnchor) {
+  var statusOn = screenElement(renderer, elementName + "_on", verticalAlignment, horizontalAlignment, sizeX, sizeY, offsetX, offsetY, offsetZ, parentElement, parentElementAnchor);
+  var statusOff = screenElement(renderer, elementName + "_off", verticalAlignment, horizontalAlignment, sizeX, sizeY, offsetX, offsetY, offsetZ, parentElement, parentElementAnchor);
+  return {
+    modelResource: statusOff.modelResource,
+    modelEffect: statusOff.modelEffect,
+    x: statusOff.x,
+    y: statusOff.y,
+    z: statusOff.z,
+    sizeX: statusOff.baseSizeX,
+    sizeY: statusOff.baseSizeY,
+    leftX: statusOff.leftX,
+    centerX: statusOff.centerX,
+    rightX: statusOff.rightX,
+    topY: statusOff.topY,
+    centerY: statusOff.centerY,
+    bottomY: statusOff.bottomY,
+    render: (entity, isFirstPersonArm, variable) => {
+      if (isFirstPersonArm) {
+        if (entity.getData("skyhighheroes:dyn/" + variable)) {
+          statusOn.render(isFirstPersonArm);
+        } else {
+          statusOff.render(isFirstPersonArm);
+        };
+      };
+    }
+  };
+};
+
+function screenStatusLightWithProgress(renderer, elementName, verticalAlignment, horizontalAlignment, sizeX, sizeY, offsetX, offsetY, offsetZ, parentElement, parentElementAnchor) {
+  var statusOn = screenElement(renderer, elementName + "_on", verticalAlignment, horizontalAlignment, sizeX, sizeY, offsetX, offsetY, offsetZ, parentElement, parentElementAnchor);
+  var statusInProgress = screenElement(renderer, elementName + "_in_progress", verticalAlignment, horizontalAlignment, sizeX, sizeY, offsetX, offsetY, offsetZ, parentElement, parentElementAnchor);
+  var statusOff = screenElement(renderer, elementName + "_off", verticalAlignment, horizontalAlignment, sizeX, sizeY, offsetX, offsetY, offsetZ, parentElement, parentElementAnchor);
+  return {
+    modelResource: statusOff.modelResource,
+    modelEffect: statusOff.modelEffect,
+    x: statusOff.x,
+    y: statusOff.y,
+    z: statusOff.z,
+    sizeX: statusOff.baseSizeX,
+    sizeY: statusOff.baseSizeY,
+    leftX: statusOff.leftX,
+    centerX: statusOff.centerX,
+    rightX: statusOff.rightX,
+    topY: statusOff.topY,
+    centerY: statusOff.centerY,
+    bottomY: statusOff.bottomY,
+    render: (entity, isFirstPersonArm, variable) => {
+      if (isFirstPersonArm) {
+        if (entity.getInterpolatedData("skyhighheroes:dyn/" + variable) == 1) {
+          statusOn.render(isFirstPersonArm);
+        };
+        if (entity.getInterpolatedData("skyhighheroes:dyn/" + variable) == 0) {
+          statusOff.render(isFirstPersonArm);
+        };
+        if ((entity.getInterpolatedData("skyhighheroes:dyn/" + variable) > 0) && (entity.getInterpolatedData("skyhighheroes:dyn/" + variable) < 1)) {
+          statusInProgress.render(isFirstPersonArm);
+        };
+      };
+    },
+    render2: (entity, isFirstPersonArm, variable, variable2) => {
+      if (isFirstPersonArm) {
+        if (((entity.getInterpolatedData("skyhighheroes:dyn/" + variable2) == 1) ? true : (entity.getInterpolatedData("skyhighheroes:dyn/" + variable) == 1))) {
+          statusOn.render(isFirstPersonArm);
+        } else {
+          if (((entity.getInterpolatedData("skyhighheroes:dyn/" + variable2) == 0) ? true : (entity.getInterpolatedData("skyhighheroes:dyn/" + variable) == 0))) {
+            statusOff.render(isFirstPersonArm);
+          };
+        };
+        if (((entity.getInterpolatedData("skyhighheroes:dyn/" + variable2) > 0) && (entity.getInterpolatedData("skyhighheroes:dyn/" + variable2) < 1) ? true : ((entity.getInterpolatedData("skyhighheroes:dyn/" + variable) > 0) && (entity.getInterpolatedData("skyhighheroes:dyn/" + variable) < 1)))) {
+          statusInProgress.render(isFirstPersonArm);
+        };
+      };
+    }
+  };
+};
+
+function screenCornerSelector(renderer, elementName, parentElement, thickness, length) {
+  var topLeftBase = screenElement(renderer, elementName, "center", "center", thickness, thickness, 0.0, 0.0, 0.0, parentElement, "topLeft");
+  var topLeftLeft = screenElement(renderer, elementName, "top", "center", thickness, length, 0.0, 0.0, 0.0, topLeftBase, "bottomCenter");
+  var topLeftTop = screenElement(renderer, elementName, "center", "left", length, thickness, 0.0, 0.0, 0.0, topLeftBase, "centerRight");
+  
+  var topRightBase = screenElement(renderer, elementName, "center", "center", thickness, thickness, 0.0, 0.0, 0.0, parentElement, "topRight");
+  var topRightRight = screenElement(renderer, elementName, "top", "center", thickness, length, 0.0, 0.0, 0.0, topRightBase, "bottomCenter");
+  var topRightTop = screenElement(renderer, elementName, "center", "right", length, thickness, 0.0, 0.0, 0.0, topRightBase, "centerLeft");
+
+  var bottomLeftBase = screenElement(renderer, elementName, "center", "center", thickness, thickness, 0.0, 0.0, 0.0, parentElement, "bottomLeft");
+  var bottomLeftLeft = screenElement(renderer, elementName, "bottom", "center", thickness, length, 0.0, 0.0, 0.0, bottomLeftBase, "topCenter");
+  var bottomLeftBottom = screenElement(renderer, elementName, "center", "left", length, thickness, 0.0, 0.0, 0.0, bottomLeftBase, "centerRight");
+  
+  var bottomRightBase = screenElement(renderer, elementName, "center", "center", thickness, thickness, 0.0, 0.0, 0.0, parentElement, "bottomRight");
+  var bottomRightRight = screenElement(renderer, elementName, "bottom", "center", thickness, length, 0.0, 0.0, 0.0, bottomRightBase, "topCenter");
+  var bottomRightBottom = screenElement(renderer, elementName, "center", "right", length, thickness, 0.0, 0.0, 0.0, bottomRightBase, "centerLeft");
+  return {
+    render: (isFirstPersonArm) => {
+      if (isFirstPersonArm) {
+        topLeftBase.render(isFirstPersonArm);
+        topLeftLeft.render(isFirstPersonArm);
+        topLeftTop.render(isFirstPersonArm);
+        topRightBase.render(isFirstPersonArm);
+        topRightRight.render(isFirstPersonArm);
+        topRightTop.render(isFirstPersonArm);
+        bottomLeftBase.render(isFirstPersonArm);
+        bottomLeftLeft.render(isFirstPersonArm);
+        bottomLeftBottom.render(isFirstPersonArm);
+        bottomRightBase.render(isFirstPersonArm);
+        bottomRightRight.render(isFirstPersonArm);
+        bottomRightBottom.render(isFirstPersonArm);
+      };
+    }
+  }
+};
+
+function screenCornerSelectorTranser(renderer, elementName, parentElement, thickness) {
   var topLeftBase = screenElement(renderer, elementName, "center", "center", thickness, thickness, 0.0, 0.0, 0.0, parentElement, "topLeft");
   var topLeftBaseOff = screenElement(renderer, elementName+"_off", "center", "center", "60pw", "60ph", 0.0, 0.0, 0.0, topLeftBase, "center");
   var topLeftBaseOn = screenElement(renderer, elementName+"_on", "center", "center", "60pw", "60ph", 0.0, 0.0, 0.0, topLeftBase, "center");
@@ -1250,7 +2356,7 @@ function screenCornerSelecter(renderer, elementName, parentElement, thickness) {
   }
 };
 
-function screenBoxSelecter(renderer, elementName, parentElement, thickness) {
+function screenBoxSelectorTranser(renderer, elementName, parentElement, thickness) {
   var topOff = screenElement(renderer, elementName+"_off", "bottom", "center", parentElement.sizeX+(thickness*2.0), thickness, 0.0, 0.0, 0.0, parentElement, "topCenter");
   var topOn = screenElement(renderer, elementName+"_on", "bottom", "center", parentElement.sizeX+(thickness*2.0), thickness, 0.0, 0.0, 0.0, parentElement, "topCenter");
 
@@ -1397,7 +2503,7 @@ var transformedVars = [
   "ironmaniac:dyn/mk5_timer",
   "secretheroes:dyn/moonknight_timer",
   "secretheroes:dyn/mrknight_timer",
-  "skyhighocs:dyn/wave_changing_timer",
+  "skyhighheroes:dyn/wave_changing_timer",
   "skyhighheroes:dyn/wave_changing_timer",
 ];
 
@@ -1409,6 +2515,13 @@ function isTransformed(entity) {
     };
   });
   return transformed;
+};
+
+function isLookingAtTarget(basePos, baseRot, targetPos, fov) {
+    var directionToEntity = targetPos.subtract(basePos).normalized();
+    var dotProduct = Math.max(-1, Math.min(1, baseRot.dot(directionToEntity)));
+    var angle = Math.acos(dotProduct) * (180 / Math.PI);
+    return Math.abs(angle) < fov;
 };
 
 function getMainNBT(entity) {

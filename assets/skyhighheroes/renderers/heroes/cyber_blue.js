@@ -1,6 +1,17 @@
 extend("skyhighheroes:base_cyber");
 
 loadTextures({
+  "screen_color": "skyhighheroes:cybers/cyber_blue_color",
+  "screen_scroll_bar_outer": "skyhighheroes:cybers/cyber_blue_color",
+  "screen_scroll_bar_inner": "skyhighheroes:cybers/cyber_blue_color",
+  "screen_scroll_bar_bar_inner": "skyhighheroes:cybers/cyber_blue_color",
+  "display_head": "skyhighheroes:cybers/cyber_blue_display_head.tx.json",
+  "display_head_hair": "skyhighheroes:cybers/cyber_blue_display_head_hair.tx.json",
+  "display_left_arm": "skyhighheroes:cybers/cyber_blue_display_left_arm.tx.json",
+  "display_right_arm": "skyhighheroes:cybers/cyber_blue_display_right_arm.tx.json",
+  "display_body": "skyhighheroes:cybers/cyber_blue_display_body.tx.json",
+  "display_left_leg": "skyhighheroes:cybers/cyber_blue_display_left_leg.tx.json",
+  "display_right_leg": "skyhighheroes:cybers/cyber_blue_display_right_leg.tx.json",
   "arm_lights": "skyhighheroes:cyber/blue/cyber_blue_arm_lights",
   "claw_lights": "skyhighheroes:cyber/blue/cyber_blue_claw_lights",
   "head_lights": "skyhighheroes:cyber/blue/cyber_blue_head_lights",
@@ -23,6 +34,8 @@ loadTextures({
   "right_arm_disguise": "skyhighheroes:cyber/blue/cyber_blue_right_arm_disguise.tx.json",
   "left_leg_disguise": "skyhighheroes:cyber/blue/cyber_blue_left_leg_disguise.tx.json",
   "right_leg_disguise": "skyhighheroes:cyber/blue/cyber_blue_right_leg_disguise.tx.json",
+  "shield": "skyhighheroes:cyber/blue/cyber_blue_shield",
+  "blade": "skyhighheroes:cyber/blue/cyber_blue_blade",
   "character_0": "skyhighheroes:characters/blue/blue_character_0",
   "character_1": "skyhighheroes:characters/blue/blue_character_1",
   "character_2": "skyhighheroes:characters/blue/blue_character_2",

@@ -143,7 +143,7 @@ function initCyberneticAnimations(renderer) {
   addAnimation(renderer, "cybernetic.STATUE", "skyhighheroes:cybernetic_base").setData((entity, data) => {
     data.load(1.0);
   })
-  .setCondition(entity => !entity.is("DISPLAY") && mainNBT(entity).getBoolean("statueMode"))
+  .setCondition(entity => !entity.is("DISPLAY") && entity.getData("skyhighheroes:dyn/cybernetic_statue_mode"))
   .priority = -11;/*
   addAnimation(renderer, "cybernetic.LEFT_ARM_PUNCH", "skyhighheroes:cybernetic_left_arm_punch").setData((entity, data) => {
     data.load(entity.getPunchTimerInterpolated());
@@ -306,9 +306,9 @@ function bodyAnimations(entity, data) {
   data.load(8, entity.getInterpolatedData("skyhighheroes:dyn/cannon_body_flush_timer"));
   data.load(9, entity.getInterpolatedData("skyhighheroes:dyn/intake_body_left_open_timer"));
   data.load(10, entity.getInterpolatedData("skyhighheroes:dyn/intake_body_right_open_timer"));
-  data.load(11, entity.getInterpolatedData("skyhighheroes:dyn/system_core_open_timer"));
-  data.load(12, entity.loop(500*(1-entity.getInterpolatedData("skyhighheroes:dyn/intake_body_left_start_up_timer"))+15)*((entity.getInterpolatedData("skyhighheroes:dyn/intake_body_left_start_up_timer") == 0)?0:1));
-  data.load(13, entity.loop(500*(1-entity.getInterpolatedData("skyhighheroes:dyn/intake_body_right_start_up_timer"))+15)*((entity.getInterpolatedData("skyhighheroes:dyn/intake_body_right_start_up_timer") == 0)?0:1));
+  data.load(11, entity.loop(500*(1-entity.getInterpolatedData("skyhighheroes:dyn/intake_body_left_start_up_timer"))+15)*((entity.getInterpolatedData("skyhighheroes:dyn/intake_body_left_start_up_timer") == 0)?0:1));
+  data.load(12, entity.loop(500*(1-entity.getInterpolatedData("skyhighheroes:dyn/intake_body_right_start_up_timer"))+15)*((entity.getInterpolatedData("skyhighheroes:dyn/intake_body_right_start_up_timer") == 0)?0:1));
+  data.load(13, entity.getInterpolatedData("skyhighheroes:dyn/system_core_open_timer"));
   data.load(14, 0.0 + getHoloBooleans(entity, "holoFlight", "holoFlightMotion"));
   data.load(15, entity.getInterpolatedData("fiskheroes:flight_timer"));
   data.load(16, entity.getInterpolatedData("fiskheroes:flight_boost_timer"));
@@ -537,7 +537,8 @@ function position(entity) {
  * @returns The Cyber ID
  **/
 function getModelID(entity) {
-  return mainNBT(entity).getString("cyberModelID");
+  var domain = entity.getWornChestplate().suitType().split(":")[0];
+  return entity.getDataOrDefault(domain + ":dyn/model_id", "");
 };
 /**
  * Gets the Cyber name
@@ -545,7 +546,8 @@ function getModelID(entity) {
  * @returns The Cyber alias
  **/
 function getAliasName(entity) {
-  return mainNBT(entity).getString("cyberAliasName");
+  var domain = entity.getWornChestplate().suitType().split(":")[0];
+  return entity.getDataOrDefault(domain + ":dyn/alias", "");
 };
 
 /**
@@ -582,9 +584,9 @@ function getSatIDList(entity) {
  * @param {JSEntity} otherEntity - Required
  **/
 function checkSatellite(entity, otherEntity) {
-  var nbt = mainNBT(entity);
-  var nbtOther = mainNBT(otherEntity);
-  if ((nbt.getShort("xSat") == nbtOther.getShort("xSat")) && (nbt.getShort("ySat") == nbtOther.getShort("ySat")) && (nbt.getShort("zSat") == nbtOther.getShort("zSat"))) {
+  var domain = entity.getWornChestplate().suitType().split(":")[0];
+  var otherDomain = otherEntity.getWornChestplate().suitType().split(":")[0];
+  if ((entity.getDataOrDefault(domain + ":dyn/satellite_x", -1) == otherEntity.getDataOrDefault(otherDomain + ":dyn/satellite_x", 1)) && (entity.getDataOrDefault(domain + ":dyn/satellite_y", -999) == otherEntity.getDataOrDefault(otherDomain + ":dyn/satellite_y", -1001)) && (entity.getDataOrDefault(domain + ":dyn/satellite_z", -1) == otherEntity.getDataOrDefault(otherDomain + ":dyn/satellite_z", 1))) {
     return true;
   } else {
     return false;
@@ -597,9 +599,9 @@ function checkSatellite(entity, otherEntity) {
  * @param {JSEntity} otherEntity - Required
  **/
 function checkFrequency(entity, otherEntity) {
-  var nbt = mainNBT(entity);
-  var nbtOther = mainNBT(otherEntity);
-  if (nbt.getShort("freq") == nbtOther.getShort("freq")) {
+  var domain = entity.getWornChestplate().suitType().split(":")[0];
+  var otherDomain = otherEntity.getWornChestplate().suitType().split(":")[0];
+  if (entity.getDataOrDefault(domain + ":dyn/frequency", -1) == otherEntity.getDataOrDefault(otherDomain + ":dyn/frequency", 1)) {
     return true;
   } else {
     return false;
@@ -633,7 +635,7 @@ function isStillCyber(entity, id) {
  * @returns If the entity is cybernetic
  **/
 function hasCyberneticBody(entity) {
-  return mainNBT(entity).hasKey("cyberModelID") && mainNBT(entity).getString("cyberAliasName");
+  return (getModelID(entity) != "") && (getAliasName(entity) != "");
 };
 
 function headConditions(entity) {

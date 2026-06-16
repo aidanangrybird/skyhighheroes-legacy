@@ -19,25 +19,25 @@ loadTextures({
   "screen_scroll_bar_inner": "skyhighheroes:transer/scroll_bar_inner",
   "screen_scroll_bar_bar_outer": "skyhighheroes:transer/scroll_bar_bar_outer",
   "screen_scroll_bar_bar_inner": "skyhighheroes:transer/scroll_bar_bar_inner",
-  "head_brother_left_top_profile": "skyhighheroes:transer/brother_left_top_profile.tx.json",
+  "avatar_brother_left_top_profile": "skyhighheroes:transer/brother_left_top_profile.tx.json",
   "screen_brother_left_top_satellite": "skyhighheroes:transer/brother_left_top_satellite.tx.json",
   "screen_brother_left_top_satellite_border": "skyhighheroes:transer/brother_left_top_satellite_border.tx.json",
-  "head_brother_left_center_profile": "skyhighheroes:transer/brother_left_center_profile.tx.json",
+  "avatar_brother_left_center_profile": "skyhighheroes:transer/brother_left_center_profile.tx.json",
   "screen_brother_left_center_satellite": "skyhighheroes:transer/brother_left_center_satellite.tx.json",
   "screen_brother_left_center_satellite_border": "skyhighheroes:transer/brother_left_center_satellite_border.tx.json",
-  "head_brother_left_bottom_profile": "skyhighheroes:transer/brother_left_bottom_profile.tx.json",
+  "avatar_brother_left_bottom_profile": "skyhighheroes:transer/brother_left_bottom_profile.tx.json",
   "screen_brother_left_bottom_satellite": "skyhighheroes:transer/brother_left_bottom_satellite.tx.json",
   "screen_brother_left_bottom_satellite_border": "skyhighheroes:transer/brother_left_bottom_satellite_border.tx.json",
-  "head_brother_right_top_profile": "skyhighheroes:transer/brother_right_top_profile.tx.json",
+  "avatar_brother_right_top_profile": "skyhighheroes:transer/brother_right_top_profile.tx.json",
   "screen_brother_right_top_satellite": "skyhighheroes:transer/brother_right_top_satellite.tx.json",
   "screen_brother_right_top_satellite_border": "skyhighheroes:transer/brother_right_top_satellite_border.tx.json",
-  "head_brother_right_center_profile": "skyhighheroes:transer/brother_right_center_profile.tx.json",
+  "avatar_brother_right_center_profile": "skyhighheroes:transer/brother_right_center_profile.tx.json",
   "screen_brother_right_center_satellite": "skyhighheroes:transer/brother_right_center_satellite.tx.json",
   "screen_brother_right_center_satellite_border": "skyhighheroes:transer/brother_right_center_satellite_border.tx.json",
-  "head_brother_right_bottom_profile": "skyhighheroes:transer/brother_right_bottom_profile.tx.json",
+  "avatar_brother_right_bottom_profile": "skyhighheroes:transer/brother_right_bottom_profile.tx.json",
   "screen_brother_right_bottom_satellite": "skyhighheroes:transer/brother_right_bottom_satellite.tx.json",
   "screen_brother_right_bottom_satellite_border": "skyhighheroes:transer/brother_right_bottom_satellite_border.tx.json",
-  "head_brother_profile_human": "skyhighheroes:transer/brother_profile_human.tx.json",
+  "avatar_brother_profile_human": "skyhighheroes:transer/brother_profile_human.tx.json",
   "screen_brother_profile_off_white": "skyhighheroes:transer/brother_profile_off_white.tx.json",
   "screen_brother_profile_color_1": "skyhighheroes:transer/brother_profile_color_1.tx.json",
   "screen_brother_profile_color_2": "skyhighheroes:transer/brother_profile_color_2.tx.json",
@@ -358,8 +358,8 @@ function initEffects(renderer) {
   xpBox = stuff.screenElement(renderer, "color_2", "top", "left", 50.0, 20.0, 92.0, 65.0, 0.0, upperScreenProfile, "topleft");
   xpTextBox = stuff.screenElement(renderer, "profile_text_box", "center", "center", "4pmw", "4pmh", 0.0, 0.0, 0.0, xpBox, "center");
   headBox = stuff.screenElement(renderer, "color_2", "top", "right", 80.0, 80.0, -5.0, 35.0, 0.0, upperScreenProfile, "topright");
-  headHuman = stuff.screenElementHead(renderer, "human", "center", "center", "3pmw", "3pmh", 0.0, 0.0, 0.0, headBox, "center");
-  headEMBeing = stuff.screenElementHead(renderer, "transformed", "center", "center", "3pmw", "3pmh", 0.0, 0.0, 0.0, headBox, "center");
+  headHuman = stuff.screenElementAvatar(renderer, "human", "center", "center", "3pmw", "3pmh", 0.0, 0.0, 0.0, headBox, "center");
+  headEMBeing = stuff.screenElementAvatar(renderer, "transformed", "center", "center", "3pmw", "3pmh", 0.0, 0.0, 0.0, headBox, "center");
 
   //Brother menu
   brotherUpperBorder = stuff.screenElement(renderer, "color_3", "top", "center", "25pw", "12ph", 0.0, 0.0, 0.0, upperScreenProfile, "topcenter");
@@ -367,54 +367,54 @@ function initEffects(renderer) {
   brotherSelfBase = stuff.screenElement(renderer, "color_1", "center", "center", 3.0, 10.0, 0.0, -5.0, 0.01, upperScreenProfile, "center");
   brotherSelfSatellite = stuff.screenElement(renderer, "color_2", "center", "center", 38.0, 68.0, 0.0, 0.0, 0.0, brotherSelfBase, "center");
   brotherSelfSatelliteBorder = stuff.screenElement(renderer, "color_1", "center", "center", "2pmw", "50ph", 0.0, -2.0, 0.0, brotherSelfSatellite, "center");
-  brotherSelfProfile = stuff.screenElementHead(renderer, "human", "center", "center", "3pmw", "3pmh", 0.0, 0.0, 0.0, brotherSelfSatelliteBorder, "center");
-  brotherSelfSelected = stuff.screenCornerSelecter(renderer, "corner_selected", brotherSelfSatellite, 5.0);
+  brotherSelfProfile = stuff.screenElementAvatar(renderer, "human", "center", "center", "3pmw", "3pmh", 0.0, 0.0, 0.0, brotherSelfSatelliteBorder, "center");
+  brotherSelfSelected = stuff.screenCornerSelectorTranser(renderer, "corner_selected", brotherSelfSatellite, 5.0);
   //Top left
   brotherLeftTopBase = stuff.screenElement(renderer, "color_1", "center", "center", 10.0, 3.0, -76.0, -39.0, 0.0, brotherSelfBase, "topleft");
   brotherLeftTopSatellite = stuff.screenElement(renderer, "brother_left_top_satellite", "center", "center", 68.0, 38.0, 0.0, 0.0, 0.0, brotherLeftTopBase, "center");
   brotherLeftTopSatelliteBorder = stuff.screenElement(renderer, "brother_left_top_satellite_border", "center", "right", "50pw", "2pmh", -2.0, 0.0, 0.0, brotherLeftTopSatellite, "centerright");
-  brotherLeftTopProfile = stuff.screenElementHead(renderer, "brother_left_top_profile", "center", "center", "3pmw", "3pmh", 0.0, 0.0, 0.0, brotherLeftTopSatelliteBorder, "center");
-  brotherLeftTopSelected = stuff.screenCornerSelecter(renderer, "corner_selected", brotherLeftTopSatellite, 5.0);
+  brotherLeftTopProfile = stuff.screenElementAvatar(renderer, "brother_left_top_profile", "center", "center", "3pmw", "3pmh", 0.0, 0.0, 0.0, brotherLeftTopSatelliteBorder, "center");
+  brotherLeftTopSelected = stuff.screenCornerSelectorTranser(renderer, "corner_selected", brotherLeftTopSatellite, 5.0);
   brotherLeftTopConnector = stuff.screenElement(renderer, "profile", "center", "center", 70.0, 10.0, 50.0, 10.0, -0.04, brotherLeftTopBase, "center");
   brotherLeftTopConnector.model.setRotation(0.0, 0.0, -30.0);
   //Center left
   brotherLeftCenterBase = stuff.screenElement(renderer, "color_1", "center", "center", 10.0, 3.0, -76.0, 0.0, 0.0, brotherSelfBase, "centerleft");
   brotherLeftCenterSatellite = stuff.screenElement(renderer, "brother_left_center_satellite", "center", "center", 68.0, 38.0, 0.0, 0.0, 0.0, brotherLeftCenterBase, "center");
   brotherLeftCenterSatelliteBorder = stuff.screenElement(renderer, "brother_left_center_satellite_border", "center", "right", "50pw", "2pmh", -2.0, 0.0, 0.0, brotherLeftCenterSatellite, "centerright");
-  brotherLeftCenterProfile = stuff.screenElementHead(renderer, "brother_left_center_profile", "center", "center", "3pmw", "3pmh", 0.0, 0.0, 0.0, brotherLeftCenterSatelliteBorder, "center");
-  brotherLeftCenterSelected = stuff.screenCornerSelecter(renderer, "corner_selected", brotherLeftCenterSatellite, 5.0);
+  brotherLeftCenterProfile = stuff.screenElementAvatar(renderer, "brother_left_center_profile", "center", "center", "3pmw", "3pmh", 0.0, 0.0, 0.0, brotherLeftCenterSatelliteBorder, "center");
+  brotherLeftCenterSelected = stuff.screenCornerSelectorTranser(renderer, "corner_selected", brotherLeftCenterSatellite, 5.0);
   brotherLeftCenterConnector = stuff.screenElement(renderer, "profile", "center", "center", 70.0, 10.0, 50.0, 0.0, -0.04, brotherLeftCenterBase, "center");
   brotherLeftCenterConnector.model.setRotation(0.0, 0.0, 0.0);
   //Bottom left
   brotherLeftBottomBase = stuff.screenElement(renderer, "color_1", "center", "center", 10.0, 3.0, -76.0, 39.0, 0.0, brotherSelfBase, "bottomleft");
   brotherLeftBottomSatellite = stuff.screenElement(renderer, "brother_left_bottom_satellite", "center", "center", 68.0, 38.0, 0.0, 0.0, 0.0, brotherLeftBottomBase, "center");
   brotherLeftBottomSatelliteBorder = stuff.screenElement(renderer, "brother_left_bottom_satellite_border", "center", "right", "50pw", "2pmh", -2.0, 0.0, 0.0, brotherLeftBottomSatellite, "centerright");
-  brotherLeftBottomProfile = stuff.screenElementHead(renderer, "brother_left_bottom_profile", "center", "center", "3pmw", "3pmh", 0.0, 0.0, 0.0, brotherLeftBottomSatelliteBorder, "center");
-  brotherLeftBottomSelected = stuff.screenCornerSelecter(renderer, "corner_selected", brotherLeftBottomSatellite, 5.0);
+  brotherLeftBottomProfile = stuff.screenElementAvatar(renderer, "brother_left_bottom_profile", "center", "center", "3pmw", "3pmh", 0.0, 0.0, 0.0, brotherLeftBottomSatelliteBorder, "center");
+  brotherLeftBottomSelected = stuff.screenCornerSelectorTranser(renderer, "corner_selected", brotherLeftBottomSatellite, 5.0);
   brotherLeftBottomConnector = stuff.screenElement(renderer, "profile", "center", "center", 70.0, 10.0, 50.0, -10.0, -0.04, brotherLeftBottomBase, "center");
   brotherLeftBottomConnector.model.setRotation(0.0, 0.0, 30.0);
   //Top right
   brotherRightTopBase = stuff.screenElement(renderer, "color_1", "center", "center", 10.0, 3.0, 76.0, -39.0, 0.0, brotherSelfBase, "topright");
   brotherRightTopSatellite = stuff.screenElement(renderer, "brother_right_top_satellite", "center", "center", 68.0, 38.0, 0.0, 0.0, 0.0, brotherRightTopBase, "center");
   brotherRightTopSatelliteBorder = stuff.screenElement(renderer, "brother_right_top_satellite_border", "center", "right", "50pw", "2pmh", -2.0, 0.0, 0.0, brotherRightTopSatellite, "centerright");
-  brotherRightTopProfile = stuff.screenElementHead(renderer, "brother_right_top_profile", "center", "center", "3pmw", "3pmh", 0.0, 0.0, 0.0, brotherRightTopSatelliteBorder, "center");
-  brotherRightTopSelected = stuff.screenCornerSelecter(renderer, "corner_selected", brotherRightTopSatellite, 5.0);
+  brotherRightTopProfile = stuff.screenElementAvatar(renderer, "brother_right_top_profile", "center", "center", "3pmw", "3pmh", 0.0, 0.0, 0.0, brotherRightTopSatelliteBorder, "center");
+  brotherRightTopSelected = stuff.screenCornerSelectorTranser(renderer, "corner_selected", brotherRightTopSatellite, 5.0);
   brotherRightTopConnector = stuff.screenElement(renderer, "profile", "center", "center", 70.0, 10.0, -50.0, 10.0, -0.04, brotherRightTopBase, "center");
   brotherRightTopConnector.model.setRotation(0.0, 0.0, 30.0);
   //Center right
   brotherRightCenterBase = stuff.screenElement(renderer, "color_1", "center", "center", 10.0, 3.0, 76.0, 0.0, 0.0, brotherSelfBase, "centerright");
   brotherRightCenterSatellite = stuff.screenElement(renderer, "brother_right_center_satellite", "center", "center", 68.0, 38.0, 0.0, 0.0, 0.0, brotherRightCenterBase, "center");
   brotherRightCenterSatelliteBorder = stuff.screenElement(renderer, "brother_right_center_satellite_border", "center", "right", "50pw", "2pmh", -2.0, 0.0, 0.0, brotherRightCenterSatellite, "centerright");
-  brotherRightCenterProfile = stuff.screenElementHead(renderer, "brother_right_center_profile", "center", "center", "3pmw", "3pmh", 0.0, 0.0, 0.0, brotherRightCenterSatelliteBorder, "center");
-  brotherRightCenterSelected = stuff.screenCornerSelecter(renderer, "corner_selected", brotherRightCenterSatellite, 5.0);
+  brotherRightCenterProfile = stuff.screenElementAvatar(renderer, "brother_right_center_profile", "center", "center", "3pmw", "3pmh", 0.0, 0.0, 0.0, brotherRightCenterSatelliteBorder, "center");
+  brotherRightCenterSelected = stuff.screenCornerSelectorTranser(renderer, "corner_selected", brotherRightCenterSatellite, 5.0);
   brotherRightCenterConnector = stuff.screenElement(renderer, "profile", "center", "center", 70.0, 10.0, -50.0, 0.0, -0.04, brotherRightCenterBase, "center");
   brotherRightCenterConnector.model.setRotation(0.0, 0.0, 0.0);
   //Bottom right
   brotherRightBottomBase = stuff.screenElement(renderer, "color_1", "center", "center", 10.0, 3.0, 76.0, 39.0, 0.0, brotherSelfBase, "bottomright");
   brotherRightBottomSatellite = stuff.screenElement(renderer, "brother_right_bottom_satellite", "center", "center", 68.0, 38.0, 0.0, 0.0, 0.0, brotherRightBottomBase, "center");
   brotherRightBottomSatelliteBorder = stuff.screenElement(renderer, "brother_right_bottom_satellite_border", "center", "right", "50pw", "2pmh", -2.0, 0.0, 0.0, brotherRightBottomSatellite, "centerright");
-  brotherRightBottomProfile = stuff.screenElementHead(renderer, "brother_right_bottom_profile", "center", "center", "3pmw", "3pmh", 0.0, 0.0, 0.0, brotherRightBottomSatelliteBorder, "center");
-  brotherRightBottomSelected = stuff.screenCornerSelecter(renderer, "corner_selected", brotherRightBottomSatellite, 5.0);
+  brotherRightBottomProfile = stuff.screenElementAvatar(renderer, "brother_right_bottom_profile", "center", "center", "3pmw", "3pmh", 0.0, 0.0, 0.0, brotherRightBottomSatelliteBorder, "center");
+  brotherRightBottomSelected = stuff.screenCornerSelectorTranser(renderer, "corner_selected", brotherRightBottomSatellite, 5.0);
   brotherRightBottomConnector = stuff.screenElement(renderer, "profile", "center", "center", 70.0, 10.0, -50.0, -10.0, -0.04, brotherRightBottomBase, "center");
   brotherRightBottomConnector.model.setRotation(0.0, 0.0, -30.0);
 
@@ -427,21 +427,21 @@ function initEffects(renderer) {
   profileBrotherNameBox = stuff.screenElement(renderer, "brother_profile_color_2", "top", "right", 145.0, 20.0, -5.0, 35.0, 0.0, brotherScreenProfile, "topright");
   profileBrotherNameTextBox = stuff.screenElement(renderer, "profile_text_box", "center", "center", "4pmw", "4pmh", 0.0, 0.0, 0.0, profileBrotherNameBox, "center");
   profileBrotherHeadBox = stuff.screenElement(renderer, "brother_profile_color_2", "top", "left", 80.0, 80.0, 5.0, 35.0, 0.0, brotherScreenProfile, "topleft");
-  profileBrotherHead = stuff.screenElementHead(renderer, "brother_profile_human", "center", "center", "3pmw", "3pmh", 0.0, 0.0, 0.0, profileBrotherHeadBox, "center");
+  profileBrotherHead = stuff.screenElementAvatar(renderer, "brother_profile_human", "center", "center", "3pmw", "3pmh", 0.0, 0.0, 0.0, profileBrotherHeadBox, "center");
   profileBrotherBox = stuff.screenElement(renderer, "brother_profile_color_2", "bottom", "right", "50pw", 60.0, -5.0, -15.0, 0.0, brotherScreenProfile, "bottomright");
   profileBrotherBoxInner = stuff.screenElement(renderer, "brother_profile_color_3", "center", "center", "2.5pmw", "2.5pmh", 0.0, 0.0, 0.0, profileBrotherBox, "center");
-  profileBrotherPersonalMessageSelected = stuff.screenSelector(renderer, "selector", "center", "center", 10.0, 10.0, 8.0, -18.0, 0.0, profileBrotherBoxInner, "centerleft");
-  profileBrotherSecretMessageSelected = stuff.screenSelector(renderer, "selector", "center", "center", 10.0, 10.0, 8.0, -6.0, 0.0, profileBrotherBoxInner, "centerleft");
-  profileBrotherReestablishSelected = stuff.screenSelector(renderer, "selector", "center", "center", 10.0, 10.0, 8.0, 6.0, 0.0, profileBrotherBoxInner, "centerleft");
-  profileBrotherDeleteSelected = stuff.screenSelector(renderer, "selector", "center", "center", 10.0, 10.0, 8.0, 18.0, 0.0, profileBrotherBoxInner, "centerleft");
+  profileBrotherPersonalMessageSelected = stuff.screenSelectorTranser(renderer, "selector", "center", "center", 10.0, 10.0, 8.0, -18.0, 0.0, profileBrotherBoxInner, "centerleft");
+  profileBrotherSecretMessageSelected = stuff.screenSelectorTranser(renderer, "selector", "center", "center", 10.0, 10.0, 8.0, -6.0, 0.0, profileBrotherBoxInner, "centerleft");
+  profileBrotherReestablishSelected = stuff.screenSelectorTranser(renderer, "selector", "center", "center", 10.0, 10.0, 8.0, 6.0, 0.0, profileBrotherBoxInner, "centerleft");
+  profileBrotherDeleteSelected = stuff.screenSelectorTranser(renderer, "selector", "center", "center", 10.0, 10.0, 8.0, 18.0, 0.0, profileBrotherBoxInner, "centerleft");
 
   //Brother self profile
   profileBrotherSelfBox = stuff.screenElement(renderer, "brother_profile_color_2", "bottom", "right", "50pw", 36.0, -5.0, -15.0, 0.0, brotherScreenProfile, "bottomright");
   profileBrotherSelfBoxInner = stuff.screenElement(renderer, "brother_profile_color_3", "center", "center", "2.5pmw", "2.5pmh", 0.0, 0.0, 0.0, profileBrotherSelfBox, "center");
-  profileBrotherSelfPersonalMessageSelected = stuff.screenSelector(renderer, "selector", "center", "center", 10.0, 10.0, 8.0, -6.0, 0.0, profileBrotherSelfBoxInner, "centerleft");
-  profileBrotherSelfSecretMessageSelected = stuff.screenSelector(renderer, "selector", "center", "center", 10.0, 10.0, 8.0, 6.0, 0.0, profileBrotherSelfBoxInner, "centerleft");
-  profileBrotherSelfEditMessageSelected = stuff.screenSelector(renderer, "selector", "center", "center", 10.0, 10.0, 8.0, -6.0, 0.0, profileBrotherSelfBoxInner, "centerleft");
-  profileBrotherSelfViewMessageSelected = stuff.screenSelector(renderer, "selector", "center", "center", 10.0, 10.0, 8.0, 6.0, 0.0, profileBrotherSelfBoxInner, "centerleft");
+  profileBrotherSelfPersonalMessageSelected = stuff.screenSelectorTranser(renderer, "selector", "center", "center", 10.0, 10.0, 8.0, -6.0, 0.0, profileBrotherSelfBoxInner, "centerleft");
+  profileBrotherSelfSecretMessageSelected = stuff.screenSelectorTranser(renderer, "selector", "center", "center", 10.0, 10.0, 8.0, 6.0, 0.0, profileBrotherSelfBoxInner, "centerleft");
+  profileBrotherSelfEditMessageSelected = stuff.screenSelectorTranser(renderer, "selector", "center", "center", 10.0, 10.0, 8.0, -6.0, 0.0, profileBrotherSelfBoxInner, "centerleft");
+  profileBrotherSelfViewMessageSelected = stuff.screenSelectorTranser(renderer, "selector", "center", "center", 10.0, 10.0, 8.0, 6.0, 0.0, profileBrotherSelfBoxInner, "centerleft");
 
   //Base menu screen
   upperScreenMenu = stuff.screenElement(renderer, "color_3", "center", "center", "5pmw", "5pmh", 0.0, 0.0, 0.0, upperTranserBorder, "center");
@@ -453,86 +453,86 @@ function initEffects(renderer) {
   contactsBox = stuff.screenElement(renderer, "menu_text_box", "bottom", "right", "45pw", 126.0, -13.0, -5.0, 0.0, upperScreenMenu, "bottomright");
   contactsBoxInner = stuff.screenElement(renderer, "color_3", "center", "center", "2.5pmw", "2.5pmh", 0.0, 0.0, 0.0, contactsBox, "center");
   contactsButton0 = stuff.screenElement(renderer, "color_4", "top", "center", "2pmw", 15.0, 0.0, 2.0, 0.0, contactsBoxInner, "topcenter");
-  contactsButton0Selected = stuff.screenBoxSelecter(renderer, "box_selected", contactsButton0, 2.0);
+  contactsButton0Selected = stuff.screenBoxSelectorTranser(renderer, "box_selected", contactsButton0, 2.0);
   contactsButton1 = stuff.screenElement(renderer, "color_4", "top", "center", "2pmw", 15.0, 0.0, 19.0, 0.0, contactsBoxInner, "topcenter");
-  contactsButton1Selected = stuff.screenBoxSelecter(renderer, "box_selected", contactsButton1, 2.0);
+  contactsButton1Selected = stuff.screenBoxSelectorTranser(renderer, "box_selected", contactsButton1, 2.0);
   contactsButton2 = stuff.screenElement(renderer, "color_4", "top", "center", "2pmw", 15.0, 0.0, 36.0, 0.0, contactsBoxInner, "topcenter");
-  contactsButton2Selected = stuff.screenBoxSelecter(renderer, "box_selected", contactsButton2, 2.0);
+  contactsButton2Selected = stuff.screenBoxSelectorTranser(renderer, "box_selected", contactsButton2, 2.0);
   contactsButton3 = stuff.screenElement(renderer, "color_4", "top", "center", "2pmw", 15.0, 0.0, 53.0, 0.0, contactsBoxInner, "topcenter");
-  contactsButton3Selected = stuff.screenBoxSelecter(renderer, "box_selected", contactsButton3, 2.0);
+  contactsButton3Selected = stuff.screenBoxSelectorTranser(renderer, "box_selected", contactsButton3, 2.0);
   contactsButton4 = stuff.screenElement(renderer, "color_4", "top", "center", "2pmw", 15.0, 0.0, 70.0, 0.0, contactsBoxInner, "topcenter");
-  contactsButton4Selected = stuff.screenBoxSelecter(renderer, "box_selected", contactsButton4, 2.0);
+  contactsButton4Selected = stuff.screenBoxSelectorTranser(renderer, "box_selected", contactsButton4, 2.0);
   contactsButton5 = stuff.screenElement(renderer, "color_4", "top", "center", "2pmw", 15.0, 0.0, 87.0, 0.0, contactsBoxInner, "topcenter");
-  contactsButton5Selected = stuff.screenBoxSelecter(renderer, "box_selected", contactsButton5, 2.0);
+  contactsButton5Selected = stuff.screenBoxSelectorTranser(renderer, "box_selected", contactsButton5, 2.0);
   contactsButton6 = stuff.screenElement(renderer, "color_4", "top", "center", "2pmw", 15.0, 0.0, 104.0, 0.0, contactsBoxInner, "topcenter");
-  contactsButton6Selected = stuff.screenBoxSelecter(renderer, "box_selected", contactsButton6, 2.0);
+  contactsButton6Selected = stuff.screenBoxSelectorTranser(renderer, "box_selected", contactsButton6, 2.0);
   contactsScrollBar = stuff.screenVerticalScrollBar(renderer, "scroll_bar", 10.0, "100ph", 6.0, 0.0, 0.0, contactsBox, "centerright");
   contactsNumberBox = stuff.screenElement(renderer, "menu_text_box", "top", "left", "45pw", 20.0, 3.0, 19.0, 0.0, upperScreenMenu, "topleft");
   contactsNumberBoxInner = stuff.screenElement(renderer, "color_3", "center", "center", "2.5pmw", "2.5pmh", 0.0, 0.0, 0.0, contactsNumberBox, "center");
   contactsBaseBox = stuff.screenElement(renderer, "menu_text_box", "bottom", "left", "45pw", 36.0, 3.0, -32.0, 0.0, upperScreenMenu, "bottomleft");
   contactsBaseBoxInner = stuff.screenElement(renderer, "color_3", "center", "center", "2.5pmw", "2.5pmh", 0.0, 0.0, 0.0, contactsBaseBox, "center");
-  contactsEditSelected = stuff.screenSelector(renderer, "selector", "center", "center", 10.0, 10.0, 8.0, -6.0, 0.0, contactsBaseBoxInner, "centerleft");
-  contactsAddSelected = stuff.screenSelector(renderer, "selector", "center", "center", 10.0, 10.0, 8.0, 6.0, 0.0, contactsBaseBoxInner, "centerleft");
+  contactsEditSelected = stuff.screenSelectorTranser(renderer, "selector", "center", "center", 10.0, 10.0, 8.0, -6.0, 0.0, contactsBaseBoxInner, "centerleft");
+  contactsAddSelected = stuff.screenSelectorTranser(renderer, "selector", "center", "center", 10.0, 10.0, 8.0, 6.0, 0.0, contactsBaseBoxInner, "centerleft");
   contactsEditBox = stuff.screenElement(renderer, "menu_text_box", "bottom", "left", "45pw", 22.0, 3.0, -5.0, 0.0, upperScreenMenu, "bottomleft");
   contactsEditBoxInner = stuff.screenElement(renderer, "color_3", "center", "center", "2.5pmw", "2.5pmh", 0.0, 0.0, 0.0, contactsEditBox, "center");
-  contactsDeleteSelected = stuff.screenSelector(renderer, "selector", "center", "center", 10.0, 10.0, 8.0, 0.0, 0.0, contactsEditBoxInner, "centerleft");
+  contactsDeleteSelected = stuff.screenSelectorTranser(renderer, "selector", "center", "center", 10.0, 10.0, 8.0, 0.0, 0.0, contactsEditBoxInner, "centerleft");
   
   //Groups menu
   groupsBox = stuff.screenElement(renderer, "menu_text_box", "bottom", "right", "45pw", 126.0, -13.0, -5.0, 0.0, upperScreenMenu, "bottomright");
   groupsBoxInner = stuff.screenElement(renderer, "color_3", "center", "center", "2.5pmw", "2.5pmh", 0.0, 0.0, 0.0, groupsBox, "center");
   groupsButton0 = stuff.screenElement(renderer, "color_4", "top", "center", "2pmw", 15.0, 0.0, 2.0, 0.0, groupsBoxInner, "topcenter");
-  groupsButton0Selected = stuff.screenBoxSelecter(renderer, "box_selected", groupsButton0, 2.0);
+  groupsButton0Selected = stuff.screenBoxSelectorTranser(renderer, "box_selected", groupsButton0, 2.0);
   groupsButton1 = stuff.screenElement(renderer, "color_4", "top", "center", "2pmw", 15.0, 0.0, 19.0, 0.0, groupsBoxInner, "topcenter");
-  groupsButton1Selected = stuff.screenBoxSelecter(renderer, "box_selected", groupsButton1, 2.0);
+  groupsButton1Selected = stuff.screenBoxSelectorTranser(renderer, "box_selected", groupsButton1, 2.0);
   groupsButton2 = stuff.screenElement(renderer, "color_4", "top", "center", "2pmw", 15.0, 0.0, 36.0, 0.0, groupsBoxInner, "topcenter");
-  groupsButton2Selected = stuff.screenBoxSelecter(renderer, "box_selected", groupsButton2, 2.0);
+  groupsButton2Selected = stuff.screenBoxSelectorTranser(renderer, "box_selected", groupsButton2, 2.0);
   groupsButton3 = stuff.screenElement(renderer, "color_4", "top", "center", "2pmw", 15.0, 0.0, 53.0, 0.0, groupsBoxInner, "topcenter");
-  groupsButton3Selected = stuff.screenBoxSelecter(renderer, "box_selected", groupsButton3, 2.0);
+  groupsButton3Selected = stuff.screenBoxSelectorTranser(renderer, "box_selected", groupsButton3, 2.0);
   groupsButton4 = stuff.screenElement(renderer, "color_4", "top", "center", "2pmw", 15.0, 0.0, 70.0, 0.0, groupsBoxInner, "topcenter");
-  groupsButton4Selected = stuff.screenBoxSelecter(renderer, "box_selected", groupsButton4, 2.0);
+  groupsButton4Selected = stuff.screenBoxSelectorTranser(renderer, "box_selected", groupsButton4, 2.0);
   groupsButton5 = stuff.screenElement(renderer, "color_4", "top", "center", "2pmw", 15.0, 0.0, 87.0, 0.0, groupsBoxInner, "topcenter");
-  groupsButton5Selected = stuff.screenBoxSelecter(renderer, "box_selected", groupsButton5, 2.0);
+  groupsButton5Selected = stuff.screenBoxSelectorTranser(renderer, "box_selected", groupsButton5, 2.0);
   groupsButton6 = stuff.screenElement(renderer, "color_4", "top", "center", "2pmw", 15.0, 0.0, 104.0, 0.0, groupsBoxInner, "topcenter");
-  groupsButton6Selected = stuff.screenBoxSelecter(renderer, "box_selected", groupsButton6, 2.0);
+  groupsButton6Selected = stuff.screenBoxSelectorTranser(renderer, "box_selected", groupsButton6, 2.0);
   groupsScrollBar = stuff.screenVerticalScrollBar(renderer, "scroll_bar", 10.0, "100ph", 6.0, 0.0, 0.0, groupsBox, "centerright");
   groupsNumberBox = stuff.screenElement(renderer, "menu_text_box", "top", "left", "45pw", 20.0, 3.0, 19.0, 0.0, upperScreenMenu, "topleft");
   groupsNumberBoxInner = stuff.screenElement(renderer, "color_3", "center", "center", "2.5pmw", "2.5pmh", 0.0, 0.0, 0.0, contactsNumberBox, "center");
   groupsBaseBox = stuff.screenElement(renderer, "menu_text_box", "bottom", "left", "45pw", 36.0, 3.0, -46.0, 0.0, upperScreenMenu, "bottomleft");
   groupsBaseBoxInner = stuff.screenElement(renderer, "color_3", "center", "center", "2.5pmw", "2.5pmh", 0.0, 0.0, 0.0, groupsBaseBox, "center");
-  groupsEditSelected = stuff.screenSelector(renderer, "selector", "center", "center", 10.0, 10.0, 8.0, 6.0, 0.0, groupsBaseBoxInner, "centerleft");
-  groupsAddSelected = stuff.screenSelector(renderer, "selector", "center", "center", 10.0, 10.0, 8.0, -6.0, 0.0, groupsBaseBoxInner, "centerleft");
+  groupsEditSelected = stuff.screenSelectorTranser(renderer, "selector", "center", "center", 10.0, 10.0, 8.0, 6.0, 0.0, groupsBaseBoxInner, "centerleft");
+  groupsAddSelected = stuff.screenSelectorTranser(renderer, "selector", "center", "center", 10.0, 10.0, 8.0, -6.0, 0.0, groupsBaseBoxInner, "centerleft");
   groupsEditBox = stuff.screenElement(renderer, "menu_text_box", "bottom", "left", "45pw", 36.0, 3.0, -5.0, 0.0, upperScreenMenu, "bottomleft");
   groupsEditBoxInner = stuff.screenElement(renderer, "color_3", "center", "center", "2.5pmw", "2.5pmh", 0.0, 0.0, 0.0, groupsEditBox, "center");
-  groupsMembersSelected = stuff.screenSelector(renderer, "selector", "center", "center", 10.0, 10.0, 8.0, 6.0, 0.0, groupsEditBoxInner, "centerleft");
-  groupsDeleteSelected = stuff.screenSelector(renderer, "selector", "center", "center", 10.0, 10.0, 8.0, -6.0, 0.0, groupsEditBoxInner, "centerleft");
+  groupsMembersSelected = stuff.screenSelectorTranser(renderer, "selector", "center", "center", 10.0, 10.0, 8.0, 6.0, 0.0, groupsEditBoxInner, "centerleft");
+  groupsDeleteSelected = stuff.screenSelectorTranser(renderer, "selector", "center", "center", 10.0, 10.0, 8.0, -6.0, 0.0, groupsEditBoxInner, "centerleft");
   //Groups members menu
   groupsMembersNumberBox = stuff.screenElement(renderer, "menu_text_box", "top", "left", "45pw", 30.0, 3.0, 19.0, 0.0, upperScreenMenu, "topleft");
   groupsMembersNumberBoxInner = stuff.screenElement(renderer, "color_3", "center", "center", "2.5pmw", "2.5pmh", 0.0, 0.0, 0.0, groupsMembersNumberBox, "center");
   groupsMembersBaseBox = stuff.screenElement(renderer, "menu_text_box", "bottom", "left", "45pw", 36.0, 3.0, -32.0, 0.0, upperScreenMenu, "bottomleft");
   groupsMembersBaseBoxInner = stuff.screenElement(renderer, "color_3", "center", "center", "2.5pmw", "2.5pmh", 0.0, 0.0, 0.0, groupsMembersBaseBox, "center");
-  groupsMembersEditSelected = stuff.screenSelector(renderer, "selector", "center", "center", 10.0, 10.0, 8.0, 6.0, 0.0, groupsMembersBaseBoxInner, "centerleft");
-  groupsMembersAddSelected = stuff.screenSelector(renderer, "selector", "center", "center", 10.0, 10.0, 8.0, -6.0, 0.0, groupsMembersBaseBoxInner, "centerleft");
+  groupsMembersEditSelected = stuff.screenSelectorTranser(renderer, "selector", "center", "center", 10.0, 10.0, 8.0, 6.0, 0.0, groupsMembersBaseBoxInner, "centerleft");
+  groupsMembersAddSelected = stuff.screenSelectorTranser(renderer, "selector", "center", "center", 10.0, 10.0, 8.0, -6.0, 0.0, groupsMembersBaseBoxInner, "centerleft");
   groupsMembersEditBox = stuff.screenElement(renderer, "menu_text_box", "bottom", "left", "45pw", 22.0, 3.0, -5.0, 0.0, upperScreenMenu, "bottomleft");
   groupsMembersEditBoxInner = stuff.screenElement(renderer, "color_3", "center", "center", "2.5pmw", "2.5pmh", 0.0, 0.0, 0.0, groupsMembersEditBox, "center");
-  groupsMembersDeleteSelected = stuff.screenSelector(renderer, "selector", "center", "center", 10.0, 10.0, 8.0, 0.0, 0.0, groupsMembersEditBoxInner, "centerleft");
+  groupsMembersDeleteSelected = stuff.screenSelectorTranser(renderer, "selector", "center", "center", 10.0, 10.0, 8.0, 0.0, 0.0, groupsMembersEditBoxInner, "centerleft");
 
   //Waypoints menu
   waypointsBox = stuff.screenElement(renderer, "menu_text_box", "bottom", "right", "45pw", 126.0, -13.0, -5.0, 0.0, upperScreenMenu, "bottomright");
   waypointsBoxInner = stuff.screenElement(renderer, "color_3", "center", "center", "2.5pmw", "2.5pmh", 0.0, 0.0, 0.0, waypointsBox, "center");
   waypointsButton0 = stuff.screenElement(renderer, "color_4", "top", "center", "2pmw", 15.0, 0.0, 2.0, 0.0, waypointsBoxInner, "topcenter");
-  waypointsButton0Selected = stuff.screenBoxSelecter(renderer, "box_selected", waypointsButton0, 2.0);
+  waypointsButton0Selected = stuff.screenBoxSelectorTranser(renderer, "box_selected", waypointsButton0, 2.0);
   waypointsButton1 = stuff.screenElement(renderer, "color_4", "top", "center", "2pmw", 15.0, 0.0, 19.0, 0.0, waypointsBoxInner, "topcenter");
-  waypointsButton1Selected = stuff.screenBoxSelecter(renderer, "box_selected", waypointsButton1, 2.0);
+  waypointsButton1Selected = stuff.screenBoxSelectorTranser(renderer, "box_selected", waypointsButton1, 2.0);
   waypointsButton2 = stuff.screenElement(renderer, "color_4", "top", "center", "2pmw", 15.0, 0.0, 36.0, 0.0, waypointsBoxInner, "topcenter");
-  waypointsButton2Selected = stuff.screenBoxSelecter(renderer, "box_selected", waypointsButton2, 2.0);
+  waypointsButton2Selected = stuff.screenBoxSelectorTranser(renderer, "box_selected", waypointsButton2, 2.0);
   waypointsButton3 = stuff.screenElement(renderer, "color_4", "top", "center", "2pmw", 15.0, 0.0, 53.0, 0.0, waypointsBoxInner, "topcenter");
-  waypointsButton3Selected = stuff.screenBoxSelecter(renderer, "box_selected", waypointsButton3, 2.0);
+  waypointsButton3Selected = stuff.screenBoxSelectorTranser(renderer, "box_selected", waypointsButton3, 2.0);
   waypointsButton4 = stuff.screenElement(renderer, "color_4", "top", "center", "2pmw", 15.0, 0.0, 70.0, 0.0, waypointsBoxInner, "topcenter");
-  waypointsButton4Selected = stuff.screenBoxSelecter(renderer, "box_selected", waypointsButton4, 2.0);
+  waypointsButton4Selected = stuff.screenBoxSelectorTranser(renderer, "box_selected", waypointsButton4, 2.0);
   waypointsButton5 = stuff.screenElement(renderer, "color_4", "top", "center", "2pmw", 15.0, 0.0, 87.0, 0.0, waypointsBoxInner, "topcenter");
-  waypointsButton5Selected = stuff.screenBoxSelecter(renderer, "box_selected", waypointsButton5, 2.0);
+  waypointsButton5Selected = stuff.screenBoxSelectorTranser(renderer, "box_selected", waypointsButton5, 2.0);
   waypointsButton6 = stuff.screenElement(renderer, "color_4", "top", "center", "2pmw", 15.0, 0.0, 104.0, 0.0, waypointsBoxInner, "topcenter");
-  waypointsButton6Selected = stuff.screenBoxSelecter(renderer, "box_selected", waypointsButton6, 2.0);
+  waypointsButton6Selected = stuff.screenBoxSelectorTranser(renderer, "box_selected", waypointsButton6, 2.0);
   waypointsScrollBar = stuff.screenVerticalScrollBar(renderer, "scroll_bar", 10.0, "100ph", 6.0, 0.0, 0.0, waypointsBox, "centerright");
   waypointsNumberBox = stuff.screenElement(renderer, "menu_text_box", "top", "left", "45pw", 20.0, 3.0, 19.0, 0.0, upperScreenMenu, "topleft");
   waypointsNumberBoxInner = stuff.screenElement(renderer, "color_3", "center", "center", "2.5pmw", "2.5pmh", 0.0, 0.0, 0.0, waypointsNumberBox, "center");
@@ -540,34 +540,34 @@ function initEffects(renderer) {
   waypointsInfoBoxInner = stuff.screenElement(renderer, "color_3", "center", "center", "2.5pmw", "2.5pmh", 0.0, 0.0, 0.0, waypointsInfoBox, "center");
   waypointsBaseBox = stuff.screenElement(renderer, "menu_text_box", "bottom", "left", "45pw", 36.0, 3.0, -32.0, 0.0, upperScreenMenu, "bottomleft");
   waypointsBaseBoxInner = stuff.screenElement(renderer, "color_3", "center", "center", "2.5pmw", "2.5pmh", 0.0, 0.0, 0.0, waypointsBaseBox, "center");
-  waypointsEditSelected = stuff.screenSelector(renderer, "selector", "center", "center", 10.0, 10.0, 8.0, -6.0, 0.0, waypointsBaseBoxInner, "centerleft");
-  waypointsAddSelected = stuff.screenSelector(renderer, "selector", "center", "center", 10.0, 10.0, 8.0, 6.0, 0.0, waypointsBaseBoxInner, "centerleft");
+  waypointsEditSelected = stuff.screenSelectorTranser(renderer, "selector", "center", "center", 10.0, 10.0, 8.0, -6.0, 0.0, waypointsBaseBoxInner, "centerleft");
+  waypointsAddSelected = stuff.screenSelectorTranser(renderer, "selector", "center", "center", 10.0, 10.0, 8.0, 6.0, 0.0, waypointsBaseBoxInner, "centerleft");
   waypointsEditBox = stuff.screenElement(renderer, "menu_text_box", "bottom", "left", "45pw", 22.0, 3.0, -5.0, 0.0, upperScreenMenu, "bottomleft");
   waypointsEditBoxInner = stuff.screenElement(renderer, "color_3", "center", "center", "2.5pmw", "2.5pmh", 0.0, 0.0, 0.0, waypointsEditBox, "center");
-  waypointsDeleteSelected = stuff.screenSelector(renderer, "selector", "center", "center", 10.0, 10.0, 8.0, 0.0, 0.0, waypointsEditBoxInner, "centerleft");
+  waypointsDeleteSelected = stuff.screenSelectorTranser(renderer, "selector", "center", "center", 10.0, 10.0, 8.0, 0.0, 0.0, waypointsEditBoxInner, "centerleft");
   
   //Settings menu
   settingsBox = stuff.screenElement(renderer, "menu_text_box", "bottom", "right", "45pw", 126.0, -13.0, -5.0, 0.0, upperScreenMenu, "bottomright");
   settingsBoxInner = stuff.screenElement(renderer, "color_3", "center", "center", "2.5pmw", "2.5pmh", 0.0, 0.0, 0.0, settingsBox, "center");
   settingsButton0 = stuff.screenElement(renderer, "color_4", "top", "center", "2pmw", 15.0, 0.0, 2.0, 0.0, settingsBoxInner, "topcenter");
-  settingsButton0Selected = stuff.screenBoxSelecter(renderer, "box_selected", settingsButton0, 2.0);
+  settingsButton0Selected = stuff.screenBoxSelectorTranser(renderer, "box_selected", settingsButton0, 2.0);
   settingsButton1 = stuff.screenElement(renderer, "color_4", "top", "center", "2pmw", 15.0, 0.0, 19.0, 0.0, settingsBoxInner, "topcenter");
-  settingsButton1Selected = stuff.screenBoxSelecter(renderer, "box_selected", settingsButton1, 2.0);
+  settingsButton1Selected = stuff.screenBoxSelectorTranser(renderer, "box_selected", settingsButton1, 2.0);
   settingsButton2 = stuff.screenElement(renderer, "color_4", "top", "center", "2pmw", 15.0, 0.0, 36.0, 0.0, settingsBoxInner, "topcenter");
-  settingsButton2Selected = stuff.screenBoxSelecter(renderer, "box_selected", settingsButton2, 2.0);
+  settingsButton2Selected = stuff.screenBoxSelectorTranser(renderer, "box_selected", settingsButton2, 2.0);
   settingsButton3 = stuff.screenElement(renderer, "color_4", "top", "center", "2pmw", 15.0, 0.0, 53.0, 0.0, settingsBoxInner, "topcenter");
-  settingsButton3Selected = stuff.screenBoxSelecter(renderer, "box_selected", settingsButton3, 2.0);
+  settingsButton3Selected = stuff.screenBoxSelectorTranser(renderer, "box_selected", settingsButton3, 2.0);
   settingsButton4 = stuff.screenElement(renderer, "color_4", "top", "center", "2pmw", 15.0, 0.0, 70.0, 0.0, settingsBoxInner, "topcenter");
-  settingsButton4Selected = stuff.screenBoxSelecter(renderer, "box_selected", settingsButton4, 2.0);
+  settingsButton4Selected = stuff.screenBoxSelectorTranser(renderer, "box_selected", settingsButton4, 2.0);
   settingsButton5 = stuff.screenElement(renderer, "color_4", "top", "center", "2pmw", 15.0, 0.0, 87.0, 0.0, settingsBoxInner, "topcenter");
-  settingsButton5Selected = stuff.screenBoxSelecter(renderer, "box_selected", settingsButton5, 2.0);
+  settingsButton5Selected = stuff.screenBoxSelectorTranser(renderer, "box_selected", settingsButton5, 2.0);
   settingsButton6 = stuff.screenElement(renderer, "color_4", "top", "center", "2pmw", 15.0, 0.0, 104.0, 0.0, settingsBoxInner, "topcenter");
-  settingsButton6Selected = stuff.screenBoxSelecter(renderer, "box_selected", settingsButton6, 2.0);
+  settingsButton6Selected = stuff.screenBoxSelectorTranser(renderer, "box_selected", settingsButton6, 2.0);
   settingsScrollBar = stuff.screenVerticalScrollBar(renderer, "scroll_bar", 10.0, "100ph", 6.0, 0.0, 0.0, settingsBox, "centerright");
   settingsBaseBox = stuff.screenElement(renderer, "menu_text_box", "bottom", "left", "45pw", 36.0, 3.0, -5.0, 0.0, upperScreenMenu, "bottomleft");
   settingsBaseBoxInner = stuff.screenElement(renderer, "color_3", "center", "center", "2.5pmw", "2.5pmh", 0.0, 0.0, 0.0, settingsBaseBox, "center");
-  settingsEditSelected = stuff.screenSelector(renderer, "selector", "center", "center", 10.0, 10.0, 8.0, -6.0, 0.0, settingsBaseBoxInner, "centerleft");
-  settingsViewSelected = stuff.screenSelector(renderer, "selector", "center", "center", 10.0, 10.0, 8.0, 6.0, 0.0, settingsBaseBoxInner, "centerleft");
+  settingsEditSelected = stuff.screenSelectorTranser(renderer, "selector", "center", "center", 10.0, 10.0, 8.0, -6.0, 0.0, settingsBaseBoxInner, "centerleft");
+  settingsViewSelected = stuff.screenSelectorTranser(renderer, "selector", "center", "center", 10.0, 10.0, 8.0, 6.0, 0.0, settingsBaseBoxInner, "centerleft");
 
   //Chat menu
   chatBox = stuff.screenElement(renderer, "menu_text_box", "bottom", "left", "90pw", "45ph", 0.0, 0.0, 0.0, upperScreenMenu, "bottomleft");
@@ -577,19 +577,19 @@ function initEffects(renderer) {
   lowerTranserBorder = stuff.screenElement(renderer, "border", "top", "center", 250.0, 160.0, 0.0, 0.0, -250.0);
   lowerScreen = stuff.screenElement(renderer, "color_3", "center", "center", "5pmw", "5pmh", 0.0, 0.0, 0.0, lowerTranserBorder, "center");
   buttonPersonal = stuff.screenElement(renderer, "profile", "center", "left", 73.0, 30.0, 5.0, 40.0, 0.0, lowerScreen, "topleft");
-  buttonPersonalSelected = stuff.screenCornerSelecter(renderer, "corner_selected", buttonPersonal, 5.0);
+  buttonPersonalSelected = stuff.screenCornerSelectorTranser(renderer, "corner_selected", buttonPersonal, 5.0);
   buttonBrother = stuff.screenElement(renderer, "profile", "center", "center", 73.0, 30.0, 0.0, 40.0, 0.0, lowerScreen, "topcenter");
-  buttonBrotherSelected = stuff.screenCornerSelecter(renderer, "corner_selected", buttonBrother, 5.0);
+  buttonBrotherSelected = stuff.screenCornerSelectorTranser(renderer, "corner_selected", buttonBrother, 5.0);
   buttonContacts = stuff.screenElement(renderer, "color_2", "center", "left", 73.0, 40.0, 5.0, 5.0, 0.0, lowerScreen, "centerleft");
-  buttonContactsSelected = stuff.screenCornerSelecter(renderer, "corner_selected", buttonContacts, 5.0);
+  buttonContactsSelected = stuff.screenCornerSelectorTranser(renderer, "corner_selected", buttonContacts, 5.0);
   buttonGroups = stuff.screenElement(renderer, "color_2", "center", "center", 73.0, 40.0, 0.0, 5.0, 0.0, lowerScreen, "center");
-  buttonGroupsSelected = stuff.screenCornerSelecter(renderer, "corner_selected", buttonGroups, 5.0);
+  buttonGroupsSelected = stuff.screenCornerSelectorTranser(renderer, "corner_selected", buttonGroups, 5.0);
   buttonWaypoints = stuff.screenElement(renderer, "color_2", "center", "right", 73.0, 40.0, -5.0, 5.0, 0.0, lowerScreen, "centerright");
-  buttonWaypointsSelected = stuff.screenCornerSelecter(renderer, "corner_selected", buttonWaypoints, 5.0);
+  buttonWaypointsSelected = stuff.screenCornerSelectorTranser(renderer, "corner_selected", buttonWaypoints, 5.0);
   buttonChat = stuff.screenElement(renderer, "color_2", "bottom", "left", 73.0, 40.0, 5.0, -5.0, 0.0, lowerScreen, "bottomleft");
-  buttonChatSelected = stuff.screenCornerSelecter(renderer, "corner_selected", buttonChat, 5.0);
+  buttonChatSelected = stuff.screenCornerSelectorTranser(renderer, "corner_selected", buttonChat, 5.0);
   buttonSettings = stuff.screenElement(renderer, "color_2", "bottom", "center", 73.0, 40.0, 0.0, -5.0, 0.0, lowerScreen, "bottomcenter");
-  buttonSettingsSelected = stuff.screenCornerSelecter(renderer, "corner_selected", buttonSettings, 5.0);
+  buttonSettingsSelected = stuff.screenCornerSelectorTranser(renderer, "corner_selected", buttonSettings, 5.0);
 };
 
 function render(entity, renderLayer, isFirstPersonArm) {

@@ -286,6 +286,50 @@ function formatSystem(input) {
   return output;
 };
 
+function cleanData(value) {
+  return Math.abs(value) < 0.0000075 ? 0 : value;
+};
+
+function syncXMotion(entity, manager) {
+  if (PackLoader.getSide() == "SERVER") {
+    var currentPos = entity.posX();
+    manager.setDataWithNotify(entity, "skyhighheroes:dyn/motion_x", cleanData(entity.getData("skyhighheroes:dyn/position_x") - currentPos));
+    manager.setDataWithNotify(entity, "skyhighheroes:dyn/position_x", currentPos);
+  } else {
+    return;
+  };
+};
+
+function syncYMotion(entity, manager) {
+  if (PackLoader.getSide() == "SERVER") {
+    var currentPos = entity.posY();
+    manager.setDataWithNotify(entity, "skyhighheroes:dyn/motion_y", cleanData(entity.getData("skyhighheroes:dyn/position_y") - currentPos));
+    manager.setDataWithNotify(entity, "skyhighheroes:dyn/position_y", currentPos);
+  } else {
+    return;
+  }
+};
+
+function syncZMotion(entity, manager) {
+  if (PackLoader.getSide() == "SERVER") {
+    var currentPos = entity.posZ();
+    manager.setDataWithNotify(entity, "skyhighheroes:dyn/motion_z", cleanData(entity.getData("skyhighheroes:dyn/position_z") - currentPos));
+    manager.setDataWithNotify(entity, "skyhighheroes:dyn/position_z", currentPos);
+  } else {
+    return;
+  };
+};
+
+function syncMotion(entity, manager) {
+  if (PackLoader.getSide() == "SERVER") {
+    syncXMotion(entity, manager);
+    syncYMotion(entity, manager);
+    syncZMotion(entity, manager);
+  } else {
+    return;
+  };
+};
+
 /**
  * Formats EM Being name to variable format
  * @param {string} input - Name to format
@@ -582,14 +626,14 @@ function moduleMessage(module, entity, message) {
  * @param {string} keyBind - Required
  **/
 function setKeyBind(entity, keyBind) {
+  switch (keyBind) {
+    default:
+      return true;
+  };
 };
 
 function basicTierOverride(entity) {
   return 0;
-};
-
-function isTelekinesisButton(entity) {
-  return ((telekinesisButtons.indexOf(entity.getData("skyhighheroes:dyn/selected_button")) > -1) ? true : false);
 };
 
 function addButtonToMenu(menuArray, button, buttonID) {
@@ -632,26 +676,95 @@ function setActiveButton(entity, manager, menuButtons) {
   var y = entity.getData("skyhighheroes:dyn/menu_y");
   var row = menuButtons[y];
   var button = row[x];
-  manager.setData(entity, "skyhighheroes:dyn/selected_button", button);
+  setButton(entity, manager, button);
+};
+function setMenu(entity, manager, newMenu) {
+  manager.setDataWithNotify(entity, "skyhighheroes:dyn/prev_menu", entity.getData("skyhighheroes:dyn/current_menu"));
+  manager.setDataWithNotify(entity, "skyhighheroes:dyn/current_menu", newMenu);
+};
+function setSubmenu(entity, manager, newSubmenu) {
+  manager.setDataWithNotify(entity, "skyhighheroes:dyn/prev_submenu", entity.getData("skyhighheroes:dyn/current_submenu"));
+  manager.setDataWithNotify(entity, "skyhighheroes:dyn/current_submenu", newSubmenu);
 };
 
 function updateList(entity, manager, count, list) {
-  manager.setData(entity, "skyhighheroes:dyn/list_total", list.length);
-  manager.setData(entity, "skyhighheroes:dyn/scroll_entry_0", "");
-  manager.setData(entity, "skyhighheroes:dyn/scroll_entry_1", "");
-  manager.setData(entity, "skyhighheroes:dyn/scroll_entry_2", "");
-  manager.setData(entity, "skyhighheroes:dyn/scroll_entry_3", "");
-  manager.setData(entity, "skyhighheroes:dyn/scroll_entry_4", "");
-  manager.setData(entity, "skyhighheroes:dyn/scroll_entry_5", "");
-  manager.setData(entity, "skyhighheroes:dyn/scroll_entry_6", "");
-  manager.setData(entity, "skyhighheroes:dyn/scroll_entry_7", "");
-  manager.setData(entity, "skyhighheroes:dyn/scroll_entry_8", "");
-  manager.setData(entity, "skyhighheroes:dyn/scroll_entry_9", "");
-  for (i=0;i<(count-1);i++) {
-    var value = entity.getData("skyhighheroes:dyn/scroll_value") + i;
-    var variableName = "skyhighheroes:dyn/scroll_entry_" + i;
-    manager.setData(entity, variableName, (list.length > value) ? list[value] : "");
+  manager.setDataWithNotify(entity, "skyhighheroes:dyn/list_total", list.length);
+  manager.setDataWithNotify(entity, "skyhighheroes:dyn/scroll_entry_0", "");
+  manager.setDataWithNotify(entity, "skyhighheroes:dyn/scroll_entry_1", "");
+  manager.setDataWithNotify(entity, "skyhighheroes:dyn/scroll_entry_2", "");
+  manager.setDataWithNotify(entity, "skyhighheroes:dyn/scroll_entry_3", "");
+  manager.setDataWithNotify(entity, "skyhighheroes:dyn/scroll_entry_4", "");
+  manager.setDataWithNotify(entity, "skyhighheroes:dyn/scroll_entry_5", "");
+  manager.setDataWithNotify(entity, "skyhighheroes:dyn/scroll_entry_6", "");
+  manager.setDataWithNotify(entity, "skyhighheroes:dyn/scroll_entry_7", "");
+  manager.setDataWithNotify(entity, "skyhighheroes:dyn/scroll_entry_8", "");
+  manager.setDataWithNotify(entity, "skyhighheroes:dyn/scroll_entry_9", "");
+  if (list.length > 0) {
+    for (i = 0; i < count; i++) {
+      var value = entity.getData("skyhighheroes:dyn/scroll_value") + i;
+      var variableName = "skyhighheroes:dyn/scroll_entry_" + i;
+      var listEntry = ((list.length > value) ? list[value] : "");
+      manager.setDataWithNotify(entity, variableName, (typeof listEntry === "string") ? listEntry : "");
+    };
   };
+};
+function updateList2(entity, manager, count, list) {
+  manager.setDataWithNotify(entity, "skyhighheroes:dyn/list2_total", list.length);
+  manager.setDataWithNotify(entity, "skyhighheroes:dyn/scroll2_entry_0", "");
+  manager.setDataWithNotify(entity, "skyhighheroes:dyn/scroll2_entry_1", "");
+  manager.setDataWithNotify(entity, "skyhighheroes:dyn/scroll2_entry_2", "");
+  manager.setDataWithNotify(entity, "skyhighheroes:dyn/scroll2_entry_3", "");
+  manager.setDataWithNotify(entity, "skyhighheroes:dyn/scroll2_entry_4", "");
+  manager.setDataWithNotify(entity, "skyhighheroes:dyn/scroll2_entry_5", "");
+  manager.setDataWithNotify(entity, "skyhighheroes:dyn/scroll2_entry_6", "");
+  manager.setDataWithNotify(entity, "skyhighheroes:dyn/scroll2_entry_7", "");
+  manager.setDataWithNotify(entity, "skyhighheroes:dyn/scroll2_entry_8", "");
+  manager.setDataWithNotify(entity, "skyhighheroes:dyn/scroll2_entry_9", "");
+  if (list.length > 0) {
+    for (i = 0; i < count; i++) {
+      var value = entity.getData("skyhighheroes:dyn/scroll2_value") + i;
+      var variableName = "skyhighheroes:dyn/scroll2_entry_" + i;
+      var listEntry = ((list.length > value) ? list[value] : "");
+      manager.setDataWithNotify(entity, variableName, (typeof listEntry === "string") ? listEntry : "");
+    };
+  };
+};
+
+function scrollDown(entity, manager, count, list) {
+  manager.setDataWithNotify(entity, "skyhighheroes:dyn/list_total", list.length);
+  var value = entity.getData("skyhighheroes:dyn/scroll_value");
+  if ((list.length - count) > value) {
+    manager.setDataWithNotify(entity, "skyhighheroes:dyn/scroll_value", entity.getData("skyhighheroes:dyn/scroll_value") + 1);
+  };
+};
+
+function scrollDown2(entity, manager, count, list) {
+  manager.setDataWithNotify(entity, "skyhighheroes:dyn/list2_total", list.length);
+  var value = entity.getData("skyhighheroes:dyn/scroll2_value");
+  if ((list.length - count) > value) {
+    manager.setDataWithNotify(entity, "skyhighheroes:dyn/scroll2_value", entity.getData("skyhighheroes:dyn/scroll2_value") + 1);
+  };
+};
+
+function scrollUp(entity, manager, list) {
+  manager.setDataWithNotify(entity, "skyhighheroes:dyn/list_total", list.length);
+  var value = entity.getData("skyhighheroes:dyn/scroll_value");
+  if (value > 0) {
+    manager.setDataWithNotify(entity, "skyhighheroes:dyn/scroll_value", entity.getData("skyhighheroes:dyn/scroll_value") - 1);
+  };
+};
+
+function scrollUp2(entity, manager, list) {
+  manager.setDataWithNotify(entity, "skyhighheroes:dyn/list_total", list.length);
+  var value = entity.getData("skyhighheroes:dyn/scroll_value");
+  if (value > 0) {
+    manager.setDataWithNotify(entity, "skyhighheroes:dyn/scroll_value", entity.getData("skyhighheroes:dyn/scroll_value") - 1);
+  };
+};
+
+function setButton(entity, manager, button) {
+  manager.setDataWithNotify(entity, "skyhighheroes:dyn/prev_selected_button", entity.getData("skyhighheroes:dyn/selected_button"));
+  manager.setDataWithNotify(entity, "skyhighheroes:dyn/selected_button", button);
 };
 
 var defaultButtons = [
@@ -1127,10 +1240,10 @@ function initSystem(moduleList, transerName, satellite) {
         var menuIndex = menuIDs.indexOf(currentMenu);
         if (menuIndex > -1) {
           var newMenu = parentMenuIDs[menuIndex];
-          manager.setData(entity, "skyhighheroes:dyn/current_menu", newMenu);
+          setMenu(entity, manager, newMenu);
           if (currentMenu != "main") {
             var prevButton = prevButtons[menuIndex];
-            manager.setData(entity, "skyhighheroes:dyn/selected_button", prevButton);
+            setButton(entity, manager, prevButton);
           };
         };
       };
@@ -1343,6 +1456,12 @@ function initSystem(moduleList, transerName, satellite) {
     systemHandler: (entity, manager) => {
       var nbt = mainNBT(entity);
       if (!entity.getDataOrDefault("skyhighheroes:dyn/system_init", true)) {
+        if (entity.getData("skyhighheroes:dyn/selected_button") == "") {
+          setButton(entity, manager, "main_contacts");
+        };
+        if (entity.getData("skyhighheroes:dyn/current_menu") == "") {
+          setMenu(entity, manager, "main");
+        };
         assignTranser(entity, manager, assignedSatellite);
         //status(entity);
         if (human != "") {
@@ -1498,71 +1617,73 @@ function initSystem(moduleList, transerName, satellite) {
         };
       };
       if (entity.getData("skyhighheroes:dyn/transer") && !entity.getData("skyhighheroes:dyn/entering_value")) {
-        syncMotion(entity, manager);
-        var motion_x = entity.getData("skyhighheroes:dyn/motion_x");
-        var motion_z = entity.getData("skyhighheroes:dyn/motion_z");
-        var yaw = (entity.rotation().y()/180)*Math.PI;
-        var cosa = Math.cos(yaw);
-        var sina = Math.sin(yaw);
-        var strafe = (motion_x*cosa) + (motion_z*sina);
-        var forward = (motion_z*cosa) - (motion_x*sina);
-        var positive_threshold = 0.015;
-        var negative_threshold = -0.015;
-        manager.incrementData(entity, "skyhighheroes:dyn/button_cooldown", 6, 0, entity.getData("skyhighheroes:dyn/button_coolingdown"));
-        if (entity.getData("skyhighheroes:dyn/button_cooldown") == 1) {
-          manager.setData(entity, "skyhighheroes:dyn/button_coolingdown", false);
-        };
-        if (entity.getData("skyhighheroes:dyn/button_cooldown") == 0) {
-          var buttonIndex = buttonIDs.indexOf(entity.getData("skyhighheroes:dyn/selected_button"));
-          if (buttonIndex > -1) {
-            var borderingButtons = buttonBorders[buttonIndex];
-            var properties = buttonProperties[buttonIndex];
-            //Up
-            if (forward < negative_threshold) {
-              if (borderingButtons.hasOwnProperty("top")) {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", borderingButtons["top"]);
-              };
-              if (properties.hasOwnProperty("upAction")) {
-                properties.upAction(entity, manager);
-              };
-              manager.setData(entity, "skyhighheroes:dyn/button_coolingdown", true);
-            };
-            //Down
-            if (forward > positive_threshold) {
-              if (borderingButtons.hasOwnProperty("bottom")) {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", borderingButtons["bottom"]);
-              };
-              if (properties.hasOwnProperty("downAction")) {
-                properties.downAction(entity, manager);
-              };
-              manager.setData(entity, "skyhighheroes:dyn/button_coolingdown", true);
-            };
-            //Left
-            if (strafe < negative_threshold) {
-              if (borderingButtons.hasOwnProperty("left")) {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", borderingButtons["left"]);
-              };
-              if (properties.hasOwnProperty("leftAction")) {
-                properties.leftAction(entity, manager);
-              };
-              manager.setData(entity, "skyhighheroes:dyn/button_coolingdown", true);
-            };
-            //Right
-            if (strafe > positive_threshold) {
-              if (borderingButtons.hasOwnProperty("right")) {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", borderingButtons["right"]);
-              };
-              if (properties.hasOwnProperty("rightAction")) {
-                properties.rightAction(entity, manager);
-              };
-              manager.setData(entity, "skyhighheroes:dyn/button_coolingdown", true);
-            };
+        if (PackLoader.getSide() == "SERVER") {
+          syncMotion(entity, manager);
+          var motion_x = entity.getData("skyhighheroes:dyn/motion_x");
+          var motion_z = entity.getData("skyhighheroes:dyn/motion_z");
+          var yaw = (entity.rotation().y() / 180) * Math.PI;
+          var cosa = Math.cos(yaw);
+          var sina = Math.sin(yaw);
+          var strafe = (motion_x * cosa) + (motion_z * sina);
+          var forward = (motion_z * cosa) - (motion_x * sina);
+          var positive_threshold = 0.015;
+          var negative_threshold = -0.015;
+          manager.incrementData(entity, "skyhighheroes:dyn/button_cooldown", 6, 0, entity.getData("skyhighheroes:dyn/button_coolingdown"));
+          if (entity.getData("skyhighheroes:dyn/button_cooldown") == 1) {
+            manager.setData(entity, "skyhighheroes:dyn/button_coolingdown", false);
           };
-          var newButtonIndex = buttonIDs.indexOf(entity.getData("skyhighheroes:dyn/selected_button"));
-          if (newButtonIndex > -1) {
-            var properties = buttonProperties[newButtonIndex];
-            if (properties.hasOwnProperty("selectAction")) {
-              properties.selectAction(entity, manager);
+          if (entity.getData("skyhighheroes:dyn/button_cooldown") == 0) {
+            var buttonIndex = buttonIDs.indexOf(entity.getData("skyhighheroes:dyn/selected_button"));
+            if (buttonIndex > -1) {
+              var borderingButtons = buttonBorders[buttonIndex];
+              var properties = buttonProperties[buttonIndex];
+              //Up
+              if (forward < negative_threshold) {
+                if (borderingButtons.hasOwnProperty("top")) {
+                  setButton(entity, manager, borderingButtons["top"]);
+                };
+                if (properties.hasOwnProperty("upAction")) {
+                  properties.upAction(entity, manager);
+                };
+                manager.setData(entity, "skyhighheroes:dyn/button_coolingdown", true);
+              };
+              //Down
+              if (forward > positive_threshold) {
+                if (borderingButtons.hasOwnProperty("bottom")) {
+                  setButton(entity, manager, borderingButtons["bottom"]);
+                };
+                if (properties.hasOwnProperty("downAction")) {
+                  properties.downAction(entity, manager);
+                };
+                manager.setData(entity, "skyhighheroes:dyn/button_coolingdown", true);
+              };
+              //Left
+              if (strafe < negative_threshold) {
+                if (borderingButtons.hasOwnProperty("left")) {
+                  setButton(entity, manager, borderingButtons["left"]);
+                };
+                if (properties.hasOwnProperty("leftAction")) {
+                  properties.leftAction(entity, manager);
+                };
+                manager.setData(entity, "skyhighheroes:dyn/button_coolingdown", true);
+              };
+              //Right
+              if (strafe > positive_threshold) {
+                if (borderingButtons.hasOwnProperty("right")) {
+                  setButton(entity, manager, borderingButtons["right"]);
+                };
+                if (properties.hasOwnProperty("rightAction")) {
+                  properties.rightAction(entity, manager);
+                };
+                manager.setData(entity, "skyhighheroes:dyn/button_coolingdown", true);
+              };
+            };
+            var newButtonIndex = buttonIDs.indexOf(entity.getData("skyhighheroes:dyn/selected_button"));
+            if (newButtonIndex > -1) {
+              var properties = buttonProperties[newButtonIndex];
+              if (properties.hasOwnProperty("selectAction")) {
+                properties.selectAction(entity, manager);
+              };
             };
           };
         };
@@ -1587,45 +1708,4 @@ function initSystem(moduleList, transerName, satellite) {
       };
     }
   };
-};
-
-//Using this for testing for current
-function clean(value) {
-  return Math.abs(value) < 0.000015 ? 0 : value;
-};
-
-function syncMotionX(entity, manager) {
-  if (PackLoader.getSide() == "CLIENT") {
-    return;
-  };
-  var currentPos = entity.posX();
-  manager.setDataWithNotify(entity, "skyhighheroes:dyn/motion_x", clean(entity.getData("skyhighheroes:dyn/position_x") - currentPos));
-  manager.setDataWithNotify(entity, "skyhighheroes:dyn/position_x", currentPos);
-};
-
-function syncMotionY(entity, manager) {
-  if (PackLoader.getSide() == "CLIENT") {
-    return;
-  };
-  var currentPos = entity.posY();
-  manager.setDataWithNotify(entity, "skyhighheroes:dyn/motion_y", clean(entity.getData("skyhighheroes:dyn/position_y") - currentPos));
-  manager.setDataWithNotify(entity, "skyhighheroes:dyn/position_y", currentPos);
-};
-
-function syncMotionZ(entity, manager) {
-  if (PackLoader.getSide() == "CLIENT") {
-    return;
-  };
-  var currentPos = entity.posZ();
-  manager.setDataWithNotify(entity, "skyhighheroes:dyn/motion_z", clean(entity.getData("skyhighheroes:dyn/position_z") - currentPos));
-  manager.setDataWithNotify(entity, "skyhighheroes:dyn/position_z", currentPos);
-};
-
-function syncMotion(entity, manager) {
-  if (PackLoader.getSide() == "CLIENT") {
-    return;
-  };
-  syncMotionX(entity, manager);
-  syncMotionY(entity, manager);
-  syncMotionZ(entity, manager);
 };

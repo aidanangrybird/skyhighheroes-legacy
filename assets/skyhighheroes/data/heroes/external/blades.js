@@ -10,6 +10,166 @@ function initModule(system) {
     moduleMessageName: "Blades",
     type: 14,
     command: "blade",
+    cyberOverviewButtons: {
+      "blade_left_deploy": {
+        borderingButtons: {
+          top: "rocket_left_arm_front_deploy",
+          bottom: "cannon_left_arm_bottom_deploy",
+          left: "intake_head_left_start_up",
+          right: "cannon_left_arm_front_deploy",
+        },
+        properties: {
+          confirmAction: (entity, manager) => {
+            manager.setData(entity, "skyhighheroes:dyn/blade_left_deployed", !entity.getData("skyhighheroes:dyn/blade_left_deployed"));
+            if (entity.getData("skyhighheroes:dyn/blade_left_deployed")) {
+              system.moduleMessage(this, entity, "<s>Deployed <sh>left arm<s> blade!");
+            } else {
+              system.moduleMessage(this, entity, "<s>Stowed <sh>left arm<s> blade!");
+            };
+          },
+          backAction: (entity, manager) => {
+            system.setButton(entity, manager, "main_overview");
+            system.setMenu(entity, manager, "main");
+          },
+        }
+      },
+      "blade_right_deploy": {
+        borderingButtons: {
+          top: "rocket_right_arm_front_deploy",
+          bottom: "cannon_right_arm_bottom_deploy",
+          right: "intake_head_right_start_up",
+          left: "cannon_right_arm_front_deploy",
+        },
+        properties: {
+          confirmAction: (entity, manager) => {
+            manager.setData(entity, "skyhighheroes:dyn/blade_right_deployed", !entity.getData("skyhighheroes:dyn/blade_right_deployed"));
+            if (entity.getData("skyhighheroes:dyn/blade_right_deployed")) {
+              system.moduleMessage(this, entity, "<s>Deployed <sh>right arm<s> blade!");
+            } else {
+              system.moduleMessage(this, entity, "<s>Stowed <sh>right arm<s> blade!");
+            };
+          },
+          backAction: (entity, manager) => {
+            system.setButton(entity, manager, "main_overview");
+            system.setMenu(entity, manager, "main");
+          },
+        }
+      },
+    },
+    cyberMenus: {
+      "blades_shields": {
+        parent: "main",
+        prevButton: "main_blades_shields",
+        buttons: {
+          "blade_left_armed": {
+            borderingButtons: {
+              bottom: "blade_left_stealth",
+              right: "blade_right_armed",
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                var nbt = system.mainNBT(entity);
+                manager.setData(entity, "skyhighheroes:dyn/blade_left_armed", !entity.getData("skyhighheroes:dyn/blade_left_armed"));
+                manager.setBoolean(nbt, "bladesLeft", !nbt.getBoolean("bladesLeft"));
+                if (entity.getData("skyhighheroes:dyn/blade_left_armed")) {
+                  system.moduleMessage(this, entity, "<s>Armed <sh>left arm<s> blade!");
+                } else {
+                  system.moduleMessage(this, entity, "<s>Disarmed <sh>left arm<s> blade!");
+                };
+              },
+              backAction: (entity, manager) => {
+                system.setButton(entity, manager, "main_blades_shields");
+                system.setMenu(entity, manager, "main");
+              },
+            }
+          },
+          "blade_left_stealth": {
+            borderingButtons: {
+              top: "blade_left_armed",
+              bottom: "shield_left_armed",
+              right: "blade_right_stealth",
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                var nbt = system.mainNBT(entity);
+                manager.setData(entity, "skyhighheroes:dyn/blade_left_stealth_enabled", !entity.getData("skyhighheroes:dyn/blade_left_stealth_enabled"));
+                manager.setBoolean(nbt, "bladesLeftStealth", !nbt.getBoolean("bladesLeftStealth"));
+                if (entity.getData("skyhighheroes:dyn/blade_left_stealth_enabled")) {
+                  systemMessage(entity, "<n>Opening core!");
+                } else {
+                  systemMessage(entity, "<n>Closing core!");
+                };
+              },
+              backAction: (entity, manager) => {
+                system.setButton(entity, manager, "main_blades_shields");
+                system.setMenu(entity, manager, "main");
+              },
+            }
+          },
+          "blade_right_armed": {
+            borderingButtons: {
+              bottom: "blade_right_stealth",
+              left: "blade_left_armed",
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                var nbt = system.mainNBT(entity);
+                manager.setData(entity, "skyhighheroes:dyn/blade_right_armed", !entity.getData("skyhighheroes:dyn/blade_right_armed"));
+                manager.setBoolean(nbt, "bladesRight", !nbt.getBoolean("bladesRight"));
+                if (entity.getData("skyhighheroes:dyn/blade_right_armed")) {
+                  system.moduleMessage(this, entity, "<s>Armed <sh>right arm<s> blade!");
+                } else {
+                  system.moduleMessage(this, entity, "<s>Disarmed <sh>right arm<s> blade!");
+                };
+              },
+              backAction: (entity, manager) => {
+                system.setButton(entity, manager, "main_blades_shields");
+                system.setMenu(entity, manager, "main");
+              },
+            }
+          },
+          "blade_right_stealth": {
+            borderingButtons: {
+              top: "blade_right_armed",
+              bottom: "shield_right_armed",
+              left: "blade_left_stealth",
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                var nbt = system.mainNBT(entity);
+                manager.setData(entity, "skyhighheroes:dyn/blade_right_stealth_enabled", !entity.getData("skyhighheroes:dyn/blade_right_stealth_enabled"));
+                manager.setBoolean(nbt, "bladesRightStealth", !nbt.getBoolean("bladesRightStealth"));
+                if (entity.getData("skyhighheroes:dyn/blade_right_stealth_enabled")) {
+                  system.moduleMessage(this, entity, "<s>Enabled stealth mode on <sh>right arm<s> blade!");
+                } else {
+                  system.moduleMessage(this, entity, "<s>Disabled stealth mode on <sh>right arm<s> blade!");
+                };
+              },
+              backAction: (entity, manager) => {
+                system.setButton(entity, manager, "main_blades_shields");
+                system.setMenu(entity, manager, "main");
+              },
+            }
+          },
+        }
+      }
+    },
+    cyberMainButton: {
+      buttonID: "main_blades_shields",
+      borderingButtons: {
+        top: "main_cannons",
+        bottom: "main_suits"
+      },
+      properties: {
+        confirmAction: (entity, manager) => {
+          system.setButton(entity, manager, "blade_left_armed");
+          system.setMenu(entity, manager, "blades_shields");
+        },
+        backAction: (entity, manager) => {
+          manager.setData(entity, "skyhighheroes:dyn/interface", false);
+        }
+      }
+    },
     helpMessage: "<n>!blade <nh>-<n> Blades",
     disabledMessage: "<e>Module <eh>bladeSystem<e> is disabled!",
     keyBinds: function (hero, color) {
@@ -337,6 +497,11 @@ function initModule(system) {
       manager.setData(entity, "skyhighheroes:dyn/blade_right_deployed", false);
     },
     tickHandler: function (entity, manager) {
+      if (!system.hasEnoughEnergy(entity, manager, "blade")) {
+        manager.setData(entity, "fiskheroes:blade", false);
+        manager.setData(entity, "skyhighheroes:dyn/blade_left", false);
+        manager.setData(entity, "skyhighheroes:dyn/blade_right", false);
+      };
       var left = entity.getData("skyhighheroes:dyn/blade_left_armed") && entity.getData("fiskheroes:blade");
       var right = entity.getData("skyhighheroes:dyn/blade_right_armed") && entity.getData("fiskheroes:blade");
       if ((!entity.getData("skyhighheroes:dyn/blade_left_armed") || !entity.getData("skyhighheroes:dyn/blade_right_armed")) && bladeMultiTap.multiTap(entity, manager, 2, 20, 1)) {
@@ -358,6 +523,12 @@ function initModule(system) {
       if ((entity.getData("skyhighheroes:dyn/blade_left_armed") || entity.getData("skyhighheroes:dyn/blade_right_armed")) && entity.getData("fiskheroes:blade_timer") > 0) {
         manager.setData(entity, "skyhighheroes:dyn/blade_left", left);
         manager.setData(entity, "skyhighheroes:dyn/blade_right", right);
+        if (left) {
+          system.useEnergy(entity, manager, "blade");
+        };
+        if (right) {
+          system.useEnergy(entity, manager, "blade");
+        };
         if (entity.getData("fiskheroes:blade_timer") < 0.2) {
           if (left && right) {
             system.shoutMessage(entity, "Activating Blades!", 16);
@@ -378,7 +549,7 @@ function initModule(system) {
       bladeMultiTap.tapReset(entity, manager);
     },
     fightOrFlight: function (entity, manager) {
-      if (!entity.getWornHelmet().nbt().getBoolean("bladesLeft") || !entity.getWornHelmet().nbt().getBoolean("bladesRight")) {
+      if (!entity.getWornChestplate().nbt().getBoolean("bladesLeft") || !entity.getWornChestplate().nbt().getBoolean("bladesRight")) {
         manager.setData(entity, "skyhighheroes:dyn/blade_left_armed", true);
         manager.setData(entity, "skyhighheroes:dyn/blade_right_armed", true);
         system.systemMessage(entity, "<n>Automatically armed <nh>blades<n>!");
@@ -407,6 +578,11 @@ function initModule(system) {
         manager.setBoolean(nbt, "bladesRightStealth", false);
       };
       manager.setData(entity, "skyhighheroes:dyn/blade_right_stealth_enabled", nbt.getBoolean("bladesRightStealth"));
+    },
+    onChargingStart: function (entity, manager) {
+      manager.setData(entity, "fiskheroes:blade", false);
+      manager.setData(entity, "skyhighheroes:dyn/blade_left", false);
+      manager.setData(entity, "skyhighheroes:dyn/blade_right", false);
     }
   };
 };

@@ -7,6 +7,40 @@ function initModule(system) {
     name: "externalArms",
     type: 13,
     command: "extarms",
+    cyberOverviewButtons: {
+      "external_arm_left_deploy": {
+        borderingButtons: {
+          top: "rocket_body_left_deploy",
+          left: "wing_left_deploy",
+          right: "rocket_left_leg_back_deploy",
+        },
+        properties: {
+          confirmAction: (entity, manager) => {
+            manager.setData(entity, "skyhighheroes:dyn/external_arm_left_deployed", !entity.getData("skyhighheroes:dyn/external_arm_left_deployed"));
+          },
+          backAction: (entity, manager) => {
+            system.setButton(entity, manager, "main_overview");
+            system.setMenu(entity, manager, "main");
+          },
+        }
+      },
+      "external_arm_right_deploy": {
+        borderingButtons: {
+          top: "rocket_body_right_deploy",
+          right: "wing_right_deploy",
+          left: "rocket_right_leg_back_deploy",
+        },
+        properties: {
+          confirmAction: (entity, manager) => {
+            manager.setData(entity, "skyhighheroes:dyn/external_arm_right_deployed", !entity.getData("skyhighheroes:dyn/external_arm_right_deployed"));
+          },
+          backAction: (entity, manager) => {
+            system.setButton(entity, manager, "main_overview");
+            system.setMenu(entity, manager, "main");
+          },
+        }
+      },
+    },
     helpMessage: "<n>!extarms <nh>-<n> ExtArms",
     disabledMessage: "<e>Module <eh>externalArms<e> is disabled!",
     keyBinds: function (hero, color) {
@@ -86,9 +120,19 @@ function initModule(system) {
       manager.setData(entity, "skyhighheroes:dyn/external_arm_right_deployed", false);
     },
     tickHandler: function (entity, manager) {
+      if (!system.hasEnoughEnergy(entity, manager, "externalArms") || !system.hasEnoughEnergy(entity, manager, "externalArmsLifting")) {
+        manager.setData(entity, "skyhighheroes:dyn/external_arms", false);
+        manager.setData(entity, "fiskheroes:tentacles_retracting", true);
+      };
       if (entity.getData("skyhighheroes:dyn/external_arms")) {
         var tentacles = entity.getData("skyhighheroes:dyn/external_arms_timer") == 1;
         manager.setData(entity, "fiskheroes:tentacles_retracting", !tentacles);
+        if (tentacles) {
+          if (entity.getData("fiskheroes:tentacle_lift")) {
+            system.useEnergy(entity, manager, "externalArmsLifting");
+          };
+          system.useEnergy(entity, manager, "externalArms");
+        };
         if (entity.getData("skyhighheroes:dyn/external_arms_timer") < 0.1) {
           system.shoutMessage(entity, "Activating External Arms!", 16);
         };
@@ -97,6 +141,10 @@ function initModule(system) {
         var tentacles = entity.getData("tentacle_extend_timer") == 0;
         manager.setData(entity, "skyhighheroes:dyn/external_arms", tentacles);
       };
+    },
+    onChargingStart: function (entity, manager) {
+      manager.setData(entity, "skyhighheroes:dyn/external_arms", false);
+      manager.setData(entity, "fiskheroes:tentacles_retracting", true);
     }
   };
 };

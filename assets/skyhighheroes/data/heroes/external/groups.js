@@ -244,14 +244,14 @@ function initModule(system) {
             },
             properties: {
               confirmAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "groups_select_0");
+                system.setButton(entity, manager, "groups_select_0");
               },
               backAction: (entity, manager) => {
                 if (entity.getData("skyhighheroes:dyn/entering_value")) {
                   manager.setData(entity, "skyhighheroes:dyn/entering_value", false);
                 } else {
-                  manager.setData(entity, "skyhighheroes:dyn/selected_button", "main_groups");
-                  manager.setData(entity, "skyhighheroes:dyn/current_menu", "main");
+                  system.setButton(entity, manager, "main_groups");
+                  system.setMenu(entity, manager, "main");
                 };
               },
             }
@@ -268,8 +268,8 @@ function initModule(system) {
                 if (entity.getData("skyhighheroes:dyn/entering_value")) {
                   manager.setData(entity, "skyhighheroes:dyn/entering_value", false);
                 } else {
-                  manager.setData(entity, "skyhighheroes:dyn/selected_button", "main_groups");
-                  manager.setData(entity, "skyhighheroes:dyn/current_menu", "main");
+                  system.setButton(entity, manager, "main_groups");
+                  system.setMenu(entity, manager, "main");
                 };
               },
               textAction: (entity, manager, entry) => {
@@ -285,11 +285,11 @@ function initModule(system) {
             properties: {
               confirmAction: (entity, manager) => {
                 removeGroup(entity, manager, entity.getData("skyhighheroes:dyn/list_entry"));
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "groups_select_0");
+                system.setButton(entity, manager, "groups_select_0");
               },
               backAction: (entity, manager) => {
                 var listValue = entity.getData("skyhighheroes:dyn/list_value").toString();
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "groups_select_" + listValue);
+                system.setButton(entity, manager, "groups_select_" + listValue);
               },
             }
           },
@@ -299,8 +299,8 @@ function initModule(system) {
             },
             properties: {
               confirmAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "groups_members_edit");
-                manager.setData(entity, "skyhighheroes:dyn/current_menu", "group_members");
+                system.setButton(entity, manager, "groups_members_edit");
+                system.setMenu(entity, manager, "group_members");
                 manager.setData(entity, "skyhighheroes:dyn/prev_list_entry", entity.getData("skyhighheroes:dyn/list_entry"));
                 manager.setData(entity, "skyhighheroes:dyn/prev_list_value", entity.getData("skyhighheroes:dyn/list_value"));
                 var list = groupMembersList(entity, manager, entity.getData("skyhighheroes:dyn/prev_list_entry"));
@@ -308,7 +308,7 @@ function initModule(system) {
               },
               backAction: (entity, manager) => {
                 var listValue = entity.getData("skyhighheroes:dyn/list_value").toString();
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "groups_select_" + listValue);
+                system.setButton(entity, manager, "groups_select_" + listValue);
               },
             }
           },
@@ -317,12 +317,12 @@ function initModule(system) {
             },
             properties: {
               confirmAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "groups_members");
+                system.setButton(entity, manager, "groups_members");
                 manager.setData(entity, "skyhighheroes:dyn/list_value", 0);
                 manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_0"));
               },
               backAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "groups_edit");
+                system.setButton(entity, manager, "groups_edit");
               },
               upAction: (entity, manager) => {
                 var list = groupsList(entity, manager);
@@ -335,8 +335,8 @@ function initModule(system) {
               },
               downAction: (entity, manager) => {
                 var list = groupsList(entity, manager);
-                if ((list.length) > 1) {
-                  manager.setData(entity, "skyhighheroes:dyn/selected_button", "groups_select_1");
+                if (entity.getData("skyhighheroes:dyn/scroll_entry_1") != "") {
+                  system.setButton(entity, manager, "groups_select_1");
                 };
               },
               selectAction: (entity, manager) => {
@@ -351,17 +351,17 @@ function initModule(system) {
             },
             properties: {
               confirmAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "groups_members");
+                system.setButton(entity, manager, "groups_members");
                 manager.setData(entity, "skyhighheroes:dyn/list_value", 1);
                 manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_1"));
               },
               backAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "groups_edit");
+                system.setButton(entity, manager, "groups_edit");
               },
               downAction: (entity, manager) => {
                 var list = groupsList(entity, manager);
-                if ((list.length) > 2) {
-                  manager.setData(entity, "skyhighheroes:dyn/selected_button", "groups_select_2");
+                if (entity.getData("skyhighheroes:dyn/scroll_entry_2") != "") {
+                  system.setButton(entity, manager, "groups_select_2");
                 };
               },
               selectAction: (entity, manager) => {
@@ -376,17 +376,17 @@ function initModule(system) {
             },
             properties: {
               confirmAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "groups_members");
+                system.setButton(entity, manager, "groups_members");
                 manager.setData(entity, "skyhighheroes:dyn/list_value", 2);
                 manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_2"));
               },
               backAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "groups_edit");
+                system.setButton(entity, manager, "groups_edit");
               },
               downAction: (entity, manager) => {
                 var list = groupsList(entity, manager);
-                if ((list.length) > 3) {
-                  manager.setData(entity, "skyhighheroes:dyn/selected_button", "groups_select_3");
+                if (entity.getData("skyhighheroes:dyn/scroll_entry_3") != "") {
+                  system.setButton(entity, manager, "groups_select_3");
                 };
               },
               selectAction: (entity, manager) => {
@@ -401,17 +401,17 @@ function initModule(system) {
             },
             properties: {
               confirmAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "groups_members");
+                system.setButton(entity, manager, "groups_members");
                 manager.setData(entity, "skyhighheroes:dyn/list_value", 3);
                 manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_3"));
               },
               backAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "groups_edit");
+                system.setButton(entity, manager, "groups_edit");
               },
               downAction: (entity, manager) => {
                 var list = groupsList(entity, manager);
-                if ((list.length) > 4) {
-                  manager.setData(entity, "skyhighheroes:dyn/selected_button", "groups_select_4");
+                if (entity.getData("skyhighheroes:dyn/scroll_entry_4") != "") {
+                  system.setButton(entity, manager, "groups_select_4");
                 };
               },
               selectAction: (entity, manager) => {
@@ -426,17 +426,17 @@ function initModule(system) {
             },
             properties: {
               confirmAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "groups_members");
+                system.setButton(entity, manager, "groups_members");
                 manager.setData(entity, "skyhighheroes:dyn/list_value", 4);
                 manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_4"));
               },
               backAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "groups_edit");
+                system.setButton(entity, manager, "groups_edit");
               },
               downAction: (entity, manager) => {
                 var list = groupsList(entity, manager);
-                if ((list.length) > 5) {
-                  manager.setData(entity, "skyhighheroes:dyn/selected_button", "groups_select_5");
+                if (entity.getData("skyhighheroes:dyn/scroll_entry_5") != "") {
+                  system.setButton(entity, manager, "groups_select_5");
                 };
               },
               selectAction: (entity, manager) => {
@@ -451,17 +451,17 @@ function initModule(system) {
             },
             properties: {
               confirmAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "groups_members");
+                system.setButton(entity, manager, "groups_members");
                 manager.setData(entity, "skyhighheroes:dyn/list_value", 5);
                 manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_5"));
               },
               backAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "groups_edit");
+                system.setButton(entity, manager, "groups_edit");
               },
               downAction: (entity, manager) => {
                 var list = groupsList(entity, manager);
-                if ((list.length) > 6) {
-                  manager.setData(entity, "skyhighheroes:dyn/selected_button", "groups_select_6");
+                if (entity.getData("skyhighheroes:dyn/scroll_entry_6") != "") {
+                  system.setButton(entity, manager, "groups_select_6");
                 };
               },
               selectAction: (entity, manager) => {
@@ -476,12 +476,12 @@ function initModule(system) {
             },
             properties: {
               confirmAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "groups_members");
+                system.setButton(entity, manager, "groups_members");
                 manager.setData(entity, "skyhighheroes:dyn/list_value", 6);
                 manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_6"));
               },
               backAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "groups_edit");
+                system.setButton(entity, manager, "groups_edit");
               },
               downAction: (entity, manager) => {
                 var list = groupsList(entity, manager);
@@ -510,15 +510,15 @@ function initModule(system) {
             },
             properties: {
               confirmAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "groups_members_select_0");
+                system.setButton(entity, manager, "groups_members_select_0");
               },
               backAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/current_menu", "groups");
+                system.setMenu(entity, manager, "groups");
                 var list = groupsList(entity, manager);
                 manager.setData(entity, "skyhighheroes:dyn/list_total", list.length);
                 system.updateList(entity, manager, 7, list);
                 var listValue = entity.getData("skyhighheroes:dyn/prev_list_value").toString();
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "groups_select_" + listValue);
+                system.setButton(entity, manager, "groups_select_" + listValue);
               },
             }
           },
@@ -534,12 +534,12 @@ function initModule(system) {
                 if (entity.getData("skyhighheroes:dyn/entering_value")) {
                   manager.setData(entity, "skyhighheroes:dyn/entering_value", false);
                 } else {
-                  manager.setData(entity, "skyhighheroes:dyn/current_menu", "groups");
+                  system.setMenu(entity, manager, "groups");
                   var list = groupsList(entity, manager);
                   manager.setData(entity, "skyhighheroes:dyn/list_total", list.length);
                   system.updateList(entity, manager, 7, list);
                   var listValue = entity.getData("skyhighheroes:dyn/prev_list_value").toString();
-                  manager.setData(entity, "skyhighheroes:dyn/selected_button", "groups_select_" + listValue);
+                  system.setButton(entity, manager, "groups_select_" + listValue);
                 };
               },
               textAction: (entity, manager, entry) => {
@@ -554,11 +554,11 @@ function initModule(system) {
             properties: {
               confirmAction: (entity, manager) => {
                 removeGroupMember(entity, manager, entity.getData("skyhighheroes:dyn/prev_list_entry"), entity.getData("skyhighheroes:dyn/list_entry"));
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "groups_members_select_0");
+                system.setButton(entity, manager, "groups_members_select_0");
               },
               backAction: (entity, manager) => {
                 var listValue = entity.getData("skyhighheroes:dyn/list_value").toString();
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "groups_members_select_" + listValue);
+                system.setButton(entity, manager, "groups_members_select_" + listValue);
               },
             }
           },
@@ -567,12 +567,12 @@ function initModule(system) {
             },
             properties: {
               confirmAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "groups_members_delete");
+                system.setButton(entity, manager, "groups_members_delete");
                 manager.setData(entity, "skyhighheroes:dyn/list_value", 0);
                 manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_0"));
               },
               backAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "groups_members_edit");
+                system.setButton(entity, manager, "groups_members_edit");
               },
               upAction: (entity, manager) => {
                 var list = groupMembersList(entity, manager, entity.getData("skyhighheroes:dyn/prev_list_entry"));
@@ -585,8 +585,8 @@ function initModule(system) {
               },
               downAction: (entity, manager) => {
                 var list = groupMembersList(entity, manager, entity.getData("skyhighheroes:dyn/prev_list_entry"));
-                if ((list.length) > 1) {
-                  manager.setData(entity, "skyhighheroes:dyn/selected_button", "groups_members_select_1");
+                if (entity.getData("skyhighheroes:dyn/scroll_entry_1") != "") {
+                  system.setButton(entity, manager, "groups_members_select_1");
                 };
               },
               selectAction: (entity, manager) => {
@@ -601,17 +601,17 @@ function initModule(system) {
             },
             properties: {
               confirmAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "groups_members_delete");
+                system.setButton(entity, manager, "groups_members_delete");
                 manager.setData(entity, "skyhighheroes:dyn/list_value", 1);
                 manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_1"));
               },
               backAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "groups_members_edit");
+                system.setButton(entity, manager, "groups_members_edit");
               },
               downAction: (entity, manager) => {
                 var list = groupMembersList(entity, manager, entity.getData("skyhighheroes:dyn/prev_list_entry"));
-                if ((list.length) > 2) {
-                  manager.setData(entity, "skyhighheroes:dyn/selected_button", "groups_members_select_2");
+                if (entity.getData("skyhighheroes:dyn/scroll_entry_2") != "") {
+                  system.setButton(entity, manager, "groups_members_select_2");
                 };
               },
               selectAction: (entity, manager) => {
@@ -626,17 +626,17 @@ function initModule(system) {
             },
             properties: {
               confirmAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "groups_members_delete");
+                system.setButton(entity, manager, "groups_members_delete");
                 manager.setData(entity, "skyhighheroes:dyn/list_value", 2);
                 manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_2"));
               },
               backAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "groups_members_edit");
+                system.setButton(entity, manager, "groups_members_edit");
               },
               downAction: (entity, manager) => {
                 var list = groupMembersList(entity, manager, entity.getData("skyhighheroes:dyn/prev_list_entry"));
-                if ((list.length) > 3) {
-                  manager.setData(entity, "skyhighheroes:dyn/selected_button", "groups_members_select_3");
+                if (entity.getData("skyhighheroes:dyn/scroll_entry_3") != "") {
+                  system.setButton(entity, manager, "groups_members_select_3");
                 };
               },
               selectAction: (entity, manager) => {
@@ -651,17 +651,17 @@ function initModule(system) {
             },
             properties: {
               confirmAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "groups_members_delete");
+                system.setButton(entity, manager, "groups_members_delete");
                 manager.setData(entity, "skyhighheroes:dyn/list_value", 3);
                 manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_3"));
               },
               backAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "groups_members_edit");
+                system.setButton(entity, manager, "groups_members_edit");
               },
               downAction: (entity, manager) => {
                 var list = groupMembersList(entity, manager, entity.getData("skyhighheroes:dyn/prev_list_entry"));
-                if ((list.length) > 4) {
-                  manager.setData(entity, "skyhighheroes:dyn/selected_button", "groups_members_select_4");
+                if (entity.getData("skyhighheroes:dyn/scroll_entry_4") != "") {
+                  system.setButton(entity, manager, "groups_members_select_4");
                 };
               },
               selectAction: (entity, manager) => {
@@ -676,17 +676,17 @@ function initModule(system) {
             },
             properties: {
               confirmAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "groups_members_delete");
+                system.setButton(entity, manager, "groups_members_delete");
                 manager.setData(entity, "skyhighheroes:dyn/list_value", 4);
                 manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_4"));
               },
               backAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "groups_members_edit");
+                system.setButton(entity, manager, "groups_members_edit");
               },
               downAction: (entity, manager) => {
                 var list = groupMembersList(entity, manager, entity.getData("skyhighheroes:dyn/prev_list_entry"));
-                if ((list.length) > 5) {
-                  manager.setData(entity, "skyhighheroes:dyn/selected_button", "groups_members_select_5");
+                if (entity.getData("skyhighheroes:dyn/scroll_entry_5") != "") {
+                  system.setButton(entity, manager, "groups_members_select_5");
                 };
               },
               selectAction: (entity, manager) => {
@@ -701,17 +701,17 @@ function initModule(system) {
             },
             properties: {
               confirmAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "groups_members_delete");
+                system.setButton(entity, manager, "groups_members_delete");
                 manager.setData(entity, "skyhighheroes:dyn/list_value", 5);
                 manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_5"));
               },
               backAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "groups_members_edit");
+                system.setButton(entity, manager, "groups_members_edit");
               },
               downAction: (entity, manager) => {
                 var list = groupMembersList(entity, manager, entity.getData("skyhighheroes:dyn/prev_list_entry"));
-                if ((list.length) > 6) {
-                  manager.setData(entity, "skyhighheroes:dyn/selected_button", "groups_members_select_6");
+                if (entity.getData("skyhighheroes:dyn/scroll_entry_6") != "") {
+                  system.setButton(entity, manager, "groups_members_select_6");
                 };
               },
               selectAction: (entity, manager) => {
@@ -726,12 +726,12 @@ function initModule(system) {
             },
             properties: {
               confirmAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "groups_members_delete");
+                system.setButton(entity, manager, "groups_members_delete");
                 manager.setData(entity, "skyhighheroes:dyn/list_value", 6);
                 manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_6"));
               },
               backAction: (entity, manager) => {
-                manager.setData(entity, "skyhighheroes:dyn/selected_button", "groups_members_edit");
+                system.setButton(entity, manager, "groups_members_edit");
               },
               downAction: (entity, manager) => {
                 var list = groupsMembersList(entity);
@@ -761,8 +761,8 @@ function initModule(system) {
       },
       properties: {
         confirmAction: (entity, manager) => {
-          manager.setData(entity, "skyhighheroes:dyn/current_menu", "groups");
-          manager.setData(entity, "skyhighheroes:dyn/selected_button", "groups_edit");
+          system.setMenu(entity, manager, "groups");
+          system.setButton(entity, manager, "groups_edit");
           var list = groupsList(entity, manager);
           manager.setData(entity, "skyhighheroes:dyn/list_total", list.length);
           manager.setData(entity, "skyhighheroes:dyn/scroll_value", 0);
@@ -771,6 +771,716 @@ function initModule(system) {
         },
         backAction: (entity, manager) => {
           manager.setData(entity, "skyhighheroes:dyn/transer", false);
+        }
+      }
+    },
+    cyberMainButton: {
+      buttonID: "main_contacts_groups",
+      borderingButtons: {
+        top: "main_settings",
+        bottom: "main_waypoints"
+      },
+      properties: {
+        confirmAction: (entity, manager) => {
+          system.setMenu(entity, manager, "contacts_groups");
+          system.setButton(entity, manager, "contacts_groups_contacts");
+        },
+        backAction: (entity, manager) => {
+          manager.setData(entity, "skyhighheroes:dyn/interface", false);
+        }
+      }
+    },
+    cyberMenus: {
+      "contacts_groups": {
+        parent: "main",
+        prevButton: "main_contacts_groups",
+        buttons: {
+          "contacts_groups_groups": {
+            borderingButtons: {
+              top: "contacts_groups_contacts",
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                system.setMenu(entity, manager, "groups");
+                system.setButton(entity, manager, "groups_edit");
+                var list = groupsList(entity, manager);
+                manager.setData(entity, "skyhighheroes:dyn/list_total", list.length);
+                manager.setData(entity, "skyhighheroes:dyn/scroll_value", 0);
+                manager.setData(entity, "skyhighheroes:dyn/scroll_total", Math.max(list.length - 10, 0));
+                system.updateList(entity, manager, 10, list);
+              },
+              backAction: (entity, manager) => {
+                system.setButton(entity, manager, "main_contacts_groups");
+                system.setMenu(entity, manager, "main");
+              },
+            }
+          },
+        }
+      },
+      "groups": {
+        parent: "contacts_groups",
+        prevButton: "contacts_groups_groups",
+        buttons: {
+          "groups_edit": {
+            borderingButtons: {
+              bottom: "groups_add",
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                system.setButton(entity, manager, "groups_select_0");
+              },
+              backAction: (entity, manager) => {
+                if (entity.getData("skyhighheroes:dyn/entering_value")) {
+                  manager.setData(entity, "skyhighheroes:dyn/entering_value", false);
+                } else {
+                  system.setButton(entity, manager, "contacts_groups_groups");
+                  system.setMenu(entity, manager, "contacts_groups");
+                };
+              },
+            }
+          },
+          "groups_add": {
+            borderingButtons: {
+              top: "groups_edit",
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                manager.setData(entity, "skyhighheroes:dyn/entering_value", true);
+              },
+              backAction: (entity, manager) => {
+                if (entity.getData("skyhighheroes:dyn/entering_value")) {
+                  manager.setData(entity, "skyhighheroes:dyn/entering_value", false);
+                } else {
+                  system.setButton(entity, manager, "contacts_groups_groups");
+                  system.setMenu(entity, manager, "contacts_groups");
+                };
+              },
+              textAction: (entity, manager, entry) => {
+                addGroup(entity, manager, entry);
+                manager.setData(entity, "skyhighheroes:dyn/entering_value", false);
+              },
+            }
+          },
+          "groups_delete": {
+            borderingButtons: {
+              top: "groups_members"
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                removeGroup(entity, manager, entity.getData("skyhighheroes:dyn/list_entry"));
+                system.setButton(entity, manager, "groups_select_0");
+              },
+              backAction: (entity, manager) => {
+                var listValue = entity.getData("skyhighheroes:dyn/list_value").toString();
+                system.setButton(entity, manager, "groups_select_" + listValue);
+              },
+            }
+          },
+          "groups_members": {
+            borderingButtons: {
+              bottom: "groups_delete"
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                system.setButton(entity, manager, "groups_members_edit");
+                system.setMenu(entity, manager, "group_members");
+                manager.setData(entity, "skyhighheroes:dyn/prev_list_entry", entity.getData("skyhighheroes:dyn/list_entry"));
+                manager.setData(entity, "skyhighheroes:dyn/prev_list_value", entity.getData("skyhighheroes:dyn/list_value"));
+                var list = groupMembersList(entity, manager, entity.getData("skyhighheroes:dyn/prev_list_entry"));
+                system.updateList(entity, manager, 10, list);
+              },
+              backAction: (entity, manager) => {
+                var listValue = entity.getData("skyhighheroes:dyn/list_value").toString();
+                system.setButton(entity, manager, "groups_select_" + listValue);
+              },
+            }
+          },
+          "groups_select_0": {
+            borderingButtons: {
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                system.setButton(entity, manager, "groups_members");
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 0);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_0"));
+              },
+              backAction: (entity, manager) => {
+                system.setButton(entity, manager, "groups_edit");
+              },
+              upAction: (entity, manager) => {
+                var list = groupsList(entity, manager);
+                manager.setData(entity, "skyhighheroes:dyn/list_total", list.length);
+                var value = entity.getData("skyhighheroes:dyn/scroll_value");
+                if (value > 0) {
+                  manager.setData(entity, "skyhighheroes:dyn/scroll_value", entity.getData("skyhighheroes:dyn/scroll_value") - 1);
+                };
+                system.updateList(entity, manager, 10, list);
+              },
+              downAction: (entity, manager) => {
+                var list = groupsList(entity, manager);
+                if (entity.getData("skyhighheroes:dyn/scroll_entry_1") != "") {
+                  system.setButton(entity, manager, "groups_select_1");
+                };
+              },
+              selectAction: (entity, manager) => {
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 0);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_0"));
+              }
+            }
+          },
+          "groups_select_1": {
+            borderingButtons: {
+              top: "groups_select_0",
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                system.setButton(entity, manager, "groups_members");
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 1);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_1"));
+              },
+              backAction: (entity, manager) => {
+                system.setButton(entity, manager, "groups_edit");
+              },
+              downAction: (entity, manager) => {
+                var list = groupsList(entity, manager);
+                if (entity.getData("skyhighheroes:dyn/scroll_entry_2") != "") {
+                  system.setButton(entity, manager, "groups_select_2");
+                };
+              },
+              selectAction: (entity, manager) => {
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 1);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_1"));
+              }
+            }
+          },
+          "groups_select_2": {
+            borderingButtons: {
+              top: "groups_select_1",
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                system.setButton(entity, manager, "groups_members");
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 2);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_2"));
+              },
+              backAction: (entity, manager) => {
+                system.setButton(entity, manager, "groups_edit");
+              },
+              downAction: (entity, manager) => {
+                var list = groupsList(entity, manager);
+                if (entity.getData("skyhighheroes:dyn/scroll_entry_3") != "") {
+                  system.setButton(entity, manager, "groups_select_3");
+                };
+              },
+              selectAction: (entity, manager) => {
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 2);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_2"));
+              }
+            }
+          },
+          "groups_select_3": {
+            borderingButtons: {
+              top: "groups_select_2",
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                system.setButton(entity, manager, "groups_members");
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 3);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_3"));
+              },
+              backAction: (entity, manager) => {
+                system.setButton(entity, manager, "groups_edit");
+              },
+              downAction: (entity, manager) => {
+                var list = groupsList(entity, manager);
+                if (entity.getData("skyhighheroes:dyn/scroll_entry_4") != "") {
+                  system.setButton(entity, manager, "groups_select_4");
+                };
+              },
+              selectAction: (entity, manager) => {
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 3);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_3"));
+              }
+            }
+          },
+          "groups_select_4": {
+            borderingButtons: {
+              top: "groups_select_3",
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                system.setButton(entity, manager, "groups_members");
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 4);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_4"));
+              },
+              backAction: (entity, manager) => {
+                system.setButton(entity, manager, "groups_edit");
+              },
+              downAction: (entity, manager) => {
+                var list = groupsList(entity, manager);
+                if (entity.getData("skyhighheroes:dyn/scroll_entry_5") != "") {
+                  system.setButton(entity, manager, "groups_select_5");
+                };
+              },
+              selectAction: (entity, manager) => {
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 4);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_4"));
+              }
+            }
+          },
+          "groups_select_5": {
+            borderingButtons: {
+              top: "groups_select_4",
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                system.setButton(entity, manager, "groups_members");
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 5);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_5"));
+              },
+              backAction: (entity, manager) => {
+                system.setButton(entity, manager, "groups_edit");
+              },
+              downAction: (entity, manager) => {
+                var list = groupsList(entity, manager);
+                if (entity.getData("skyhighheroes:dyn/scroll_entry_6") != "") {
+                  system.setButton(entity, manager, "groups_select_6");
+                };
+              },
+              selectAction: (entity, manager) => {
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 5);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_5"));
+              }
+            }
+          },
+          "groups_select_6": {
+            borderingButtons: {
+              top: "groups_select_5",
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                system.setButton(entity, manager, "groups_members");
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 6);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_6"));
+              },
+              backAction: (entity, manager) => {
+                system.setButton(entity, manager, "groups_edit");
+              },
+              downAction: (entity, manager) => {
+                var list = groupsList(entity, manager);
+                if (entity.getData("skyhighheroes:dyn/scroll_entry_7") != "") {
+                  system.setButton(entity, manager, "groups_select_7");
+                };
+              },
+              selectAction: (entity, manager) => {
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 6);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_6"));
+              }
+            }
+          },
+          "groups_select_7": {
+            borderingButtons: {
+              top: "groups_select_6",
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                system.setButton(entity, manager, "groups_members");
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 7);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_7"));
+              },
+              backAction: (entity, manager) => {
+                system.setButton(entity, manager, "groups_edit");
+              },
+              downAction: (entity, manager) => {
+                var list = groupsList(entity, manager);
+                if (entity.getData("skyhighheroes:dyn/scroll_entry_8") != "") {
+                  system.setButton(entity, manager, "groups_select_8");
+                };
+              },
+              selectAction: (entity, manager) => {
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 7);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_7"));
+              }
+            }
+          },
+          "groups_select_8": {
+            borderingButtons: {
+              top: "groups_select_4",
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                system.setButton(entity, manager, "groups_members");
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 8);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_8"));
+              },
+              backAction: (entity, manager) => {
+                system.setButton(entity, manager, "groups_edit");
+              },
+              downAction: (entity, manager) => {
+                var list = groupsList(entity, manager);
+                if (entity.getData("skyhighheroes:dyn/scroll_entry_9") != "") {
+                  system.setButton(entity, manager, "groups_select_9");
+                };
+              },
+              selectAction: (entity, manager) => {
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 8);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_8"));
+              }
+            }
+          },
+          "groups_select_9": {
+            borderingButtons: {
+              top: "groups_select_5",
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                system.setButton(entity, manager, "groups_members");
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 9);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_9"));
+              },
+              backAction: (entity, manager) => {
+                system.setButton(entity, manager, "groups_edit");
+              },
+              downAction: (entity, manager) => {
+                var list = groupsList(entity, manager);
+                manager.setData(entity, "skyhighheroes:dyn/list_total", list.length);
+                var value = entity.getData("skyhighheroes:dyn/scroll_value");
+                if ((list.length - 10) > value) {
+                  manager.setData(entity, "skyhighheroes:dyn/scroll_value", entity.getData("skyhighheroes:dyn/scroll_value") + 1);
+                };
+                system.updateList(entity, manager, 10, list);
+              },
+              selectAction: (entity, manager) => {
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 9);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_9"));
+              }
+            }
+          },
+          //Members submenu
+        }
+      },
+      "group_members": {
+        parent: "groups",
+        buttons: {
+          "groups_members_edit": {
+            borderingButtons: {
+              bottom: "groups_members_add",
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                system.setButton(entity, manager, "groups_members_select_0");
+              },
+              backAction: (entity, manager) => {
+                system.setMenu(entity, manager, "groups");
+                var list = groupsList(entity, manager);
+                manager.setData(entity, "skyhighheroes:dyn/list_total", list.length);
+                system.updateList(entity, manager, 10, list);
+                var listValue = entity.getData("skyhighheroes:dyn/prev_list_value").toString();
+                system.setButton(entity, manager, "groups_select_" + listValue);
+              },
+            }
+          },
+          "groups_members_add": {
+            borderingButtons: {
+              top: "groups_members_edit",
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                manager.setData(entity, "skyhighheroes:dyn/entering_value", true);
+              },
+              backAction: (entity, manager) => {
+                if (entity.getData("skyhighheroes:dyn/entering_value")) {
+                  manager.setData(entity, "skyhighheroes:dyn/entering_value", false);
+                } else {
+                  system.setMenu(entity, manager, "groups");
+                  var list = groupsList(entity, manager);
+                  manager.setData(entity, "skyhighheroes:dyn/list_total", list.length);
+                  system.updateList(entity, manager, 10, list);
+                  var listValue = entity.getData("skyhighheroes:dyn/prev_list_value").toString();
+                  system.setButton(entity, manager, "groups_select_" + listValue);
+                };
+              },
+              textAction: (entity, manager, entry) => {
+                addGroupMember(entity, manager, entity.getData("skyhighheroes:dyn/prev_list_entry"), entry);
+                manager.setData(entity, "skyhighheroes:dyn/entering_value", false);
+              },
+            }
+          },
+          "groups_members_delete": {
+            borderingButtons: {
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                removeGroupMember(entity, manager, entity.getData("skyhighheroes:dyn/prev_list_entry"), entity.getData("skyhighheroes:dyn/list_entry"));
+                system.setButton(entity, manager, "groups_members_select_0");
+              },
+              backAction: (entity, manager) => {
+                var listValue = entity.getData("skyhighheroes:dyn/list_value").toString();
+                system.setButton(entity, manager, "groups_members_select_" + listValue);
+              },
+            }
+          },
+          "groups_members_select_0": {
+            borderingButtons: {
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                system.setButton(entity, manager, "groups_members_delete");
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 0);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_0"));
+              },
+              backAction: (entity, manager) => {
+                system.setButton(entity, manager, "groups_members_edit");
+              },
+              upAction: (entity, manager) => {
+                var list = groupMembersList(entity, manager, entity.getData("skyhighheroes:dyn/prev_list_entry"));
+                manager.setData(entity, "skyhighheroes:dyn/list_total", list.length);
+                var value = entity.getData("skyhighheroes:dyn/scroll_value");
+                if (value > 0) {
+                  manager.setData(entity, "skyhighheroes:dyn/scroll_value", entity.getData("skyhighheroes:dyn/scroll_value") - 1);
+                };
+                system.updateList(entity, manager, 10, list);
+              },
+              downAction: (entity, manager) => {
+                var list = groupMembersList(entity, manager, entity.getData("skyhighheroes:dyn/prev_list_entry"));
+                if (entity.getData("skyhighheroes:dyn/scroll_entry_1") != "") {
+                  system.setButton(entity, manager, "groups_members_select_1");
+                };
+              },
+              selectAction: (entity, manager) => {
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 0);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_0"));
+              }
+            }
+          },
+          "groups_members_select_1": {
+            borderingButtons: {
+              top: "groups_members_select_0",
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                system.setButton(entity, manager, "groups_members_delete");
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 1);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_1"));
+              },
+              backAction: (entity, manager) => {
+                system.setButton(entity, manager, "groups_members_edit");
+              },
+              downAction: (entity, manager) => {
+                var list = groupMembersList(entity, manager, entity.getData("skyhighheroes:dyn/prev_list_entry"));
+                if (entity.getData("skyhighheroes:dyn/scroll_entry_2") != "") {
+                  system.setButton(entity, manager, "groups_members_select_2");
+                };
+              },
+              selectAction: (entity, manager) => {
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 1);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_1"));
+              }
+            }
+          },
+          "groups_members_select_2": {
+            borderingButtons: {
+              top: "groups_members_select_1",
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                system.setButton(entity, manager, "groups_members_delete");
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 2);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_2"));
+              },
+              backAction: (entity, manager) => {
+                system.setButton(entity, manager, "groups_members_edit");
+              },
+              downAction: (entity, manager) => {
+                var list = groupMembersList(entity, manager, entity.getData("skyhighheroes:dyn/prev_list_entry"));
+                if (entity.getData("skyhighheroes:dyn/scroll_entry_3") != "") {
+                  system.setButton(entity, manager, "groups_members_select_3");
+                };
+              },
+              selectAction: (entity, manager) => {
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 2);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_2"));
+              }
+            }
+          },
+          "groups_members_select_3": {
+            borderingButtons: {
+              top: "groups_members_select_2",
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                system.setButton(entity, manager, "groups_members_delete");
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 3);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_3"));
+              },
+              backAction: (entity, manager) => {
+                system.setButton(entity, manager, "groups_members_edit");
+              },
+              downAction: (entity, manager) => {
+                var list = groupMembersList(entity, manager, entity.getData("skyhighheroes:dyn/prev_list_entry"));
+                if (entity.getData("skyhighheroes:dyn/scroll_entry_4") != "") {
+                  system.setButton(entity, manager, "groups_members_select_4");
+                };
+              },
+              selectAction: (entity, manager) => {
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 3);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_3"));
+              }
+            }
+          },
+          "groups_members_select_4": {
+            borderingButtons: {
+              top: "groups_members_select_3",
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                system.setButton(entity, manager, "groups_members_delete");
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 4);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_4"));
+              },
+              backAction: (entity, manager) => {
+                system.setButton(entity, manager, "groups_members_edit");
+              },
+              downAction: (entity, manager) => {
+                var list = groupMembersList(entity, manager, entity.getData("skyhighheroes:dyn/prev_list_entry"));
+                if (entity.getData("skyhighheroes:dyn/scroll_entry_5") != "") {
+                  system.setButton(entity, manager, "groups_members_select_5");
+                };
+              },
+              selectAction: (entity, manager) => {
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 4);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_4"));
+              }
+            }
+          },
+          "groups_members_select_5": {
+            borderingButtons: {
+              top: "groups_members_select_4",
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                system.setButton(entity, manager, "groups_members_delete");
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 5);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_5"));
+              },
+              backAction: (entity, manager) => {
+                system.setButton(entity, manager, "groups_members_edit");
+              },
+              downAction: (entity, manager) => {
+                var list = groupMembersList(entity, manager, entity.getData("skyhighheroes:dyn/prev_list_entry"));
+                if (entity.getData("skyhighheroes:dyn/scroll_entry_6") != "") {
+                  system.setButton(entity, manager, "groups_members_select_6");
+                };
+              },
+              selectAction: (entity, manager) => {
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 5);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_5"));
+              }
+            }
+          },
+          "groups_members_select_6": {
+            borderingButtons: {
+              top: "groups_members_select_5",
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                system.setButton(entity, manager, "groups_members_delete");
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 6);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_6"));
+              },
+              backAction: (entity, manager) => {
+                system.setButton(entity, manager, "groups_members_edit");
+              },
+              downAction: (entity, manager) => {
+                var list = groupMembersList(entity, manager, entity.getData("skyhighheroes:dyn/prev_list_entry"));
+                if (entity.getData("skyhighheroes:dyn/scroll_entry_7") != "") {
+                  system.setButton(entity, manager, "groups_members_select_7");
+                };
+              },
+              selectAction: (entity, manager) => {
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 6);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_6"));
+              }
+            }
+          },
+          "groups_members_select_7": {
+            borderingButtons: {
+              top: "groups_members_select_6",
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                system.setButton(entity, manager, "groups_members_delete");
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 7);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_7"));
+              },
+              backAction: (entity, manager) => {
+                system.setButton(entity, manager, "groups_members_edit");
+              },
+              downAction: (entity, manager) => {
+                var list = groupMembersList(entity, manager, entity.getData("skyhighheroes:dyn/prev_list_entry"));
+                if (entity.getData("skyhighheroes:dyn/scroll_entry_8") != "") {
+                  system.setButton(entity, manager, "groups_members_select_8");
+                };
+              },
+              selectAction: (entity, manager) => {
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 7);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_7"));
+              }
+            }
+          },
+          "groups_members_select_8": {
+            borderingButtons: {
+              top: "groups_members_select_7",
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                system.setButton(entity, manager, "groups_members_delete");
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 8);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_8"));
+              },
+              backAction: (entity, manager) => {
+                system.setButton(entity, manager, "groups_members_edit");
+              },
+              downAction: (entity, manager) => {
+                var list = groupMembersList(entity, manager, entity.getData("skyhighheroes:dyn/prev_list_entry"));
+                if (entity.getData("skyhighheroes:dyn/scroll_entry_9") != "") {
+                  system.setButton(entity, manager, "groups_members_select_9");
+                };
+              },
+              selectAction: (entity, manager) => {
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 8);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_8"));
+              }
+            }
+          },
+          "groups_members_select_9": {
+            borderingButtons: {
+              top: "groups_members_select_8",
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                system.setButton(entity, manager, "groups_members_delete");
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 9);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_9"));
+              },
+              backAction: (entity, manager) => {
+                system.setButton(entity, manager, "groups_members_edit");
+              },
+              downAction: (entity, manager) => {
+                var list = groupsMembersList(entity);
+                manager.setData(entity, "skyhighheroes:dyn/list_total", list.length);
+                var value = entity.getData("skyhighheroes:dyn/scroll_value");
+                if ((list.length - 7) > value) {
+                  manager.setData(entity, "skyhighheroes:dyn/scroll_value", entity.getData("skyhighheroes:dyn/scroll_value") + 1);
+                };
+                system.updateList(entity, manager, 10, list);
+              },
+              selectAction: (entity, manager) => {
+                manager.setData(entity, "skyhighheroes:dyn/list_value", 9);
+                manager.setData(entity, "skyhighheroes:dyn/list_entry", entity.getData("skyhighheroes:dyn/scroll_entry_9"));
+              }
+            }
+          }
         }
       }
     },

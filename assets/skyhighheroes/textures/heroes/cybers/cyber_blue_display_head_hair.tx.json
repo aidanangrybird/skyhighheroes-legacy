@@ -1,0 +1,12 @@
+{
+  "texture": {
+    "in": "skyhighheroes:cybers/cyber_blue_full",
+    "transform": [
+      {
+        "operation": "STITCH",
+        "supply": "skyhighheroes:display_head_hair"
+      }
+    ],
+    "out": "skyhighheroes:generated/cyber_blue_display_head_hair"
+  }
+}

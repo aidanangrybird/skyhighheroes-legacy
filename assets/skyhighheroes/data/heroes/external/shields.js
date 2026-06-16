@@ -10,6 +10,120 @@ function initModule(system) {
     moduleMessageName: "Shields",
     type: 14,
     command: "shield",
+    cyberOverviewButtons: {
+      "shield_left_deploy": {
+        borderingButtons: {
+          top: "rocket_left_arm_outer_deploy",
+          bottom: "cannon_left_arm_bottom_deploy",
+          right: "cannon_left_arm_back_deploy",
+          left: "cannon_left_arm_front_deploy",
+        },
+        properties: {
+          confirmAction: (entity, manager) => {
+            manager.setData(entity, "skyhighheroes:dyn/shield_left_deployed", !entity.getData("skyhighheroes:dyn/shield_left_deployed"));
+            if (entity.getData("skyhighheroes:dyn/shield_left_deployed")) {
+              system.moduleMessage(this, entity, "<s>Deployed <sh>left arm<s> shield!");
+            } else {
+              system.moduleMessage(this, entity, "<s>Stowed <sh>left arm<s> shield!");
+            };
+          },
+          backAction: (entity, manager) => {
+            system.setButton(entity, manager, "main_overview");
+            system.setMenu(entity, manager, "main");
+          },
+        }
+      },
+      "shield_right_deploy": {
+        borderingButtons: {
+          top: "rocket_right_arm_outer_deploy",
+          bottom: "cannon_right_arm_bottom_deploy",
+          left: "cannon_right_arm_back_deploy",
+          right: "cannon_right_arm_front_deploy",
+        },
+        properties: {
+          confirmAction: (entity, manager) => {
+            manager.setData(entity, "skyhighheroes:dyn/shield_right_deployed", !entity.getData("skyhighheroes:dyn/shield_right_deployed"));
+            if (entity.getData("skyhighheroes:dyn/shield_right_deployed")) {
+              system.moduleMessage(this, entity, "<s>Deployed <sh>left arm<s> shield!");
+            } else {
+              system.moduleMessage(this, entity, "<s>Stowed <sh>left arm<s> shield!");
+            };
+          },
+          backAction: (entity, manager) => {
+            system.setButton(entity, manager, "main_overview");
+            system.setMenu(entity, manager, "main");
+          },
+        }
+      },
+    },
+    cyberMenus: {
+      "blades_shields": {
+        parent: "main",
+        prevButton: "main_blades_shields",
+        buttons: {
+          "shield_left_armed": {
+            borderingButtons: {
+              top: "blade_left_stealth",
+              right: "shield_right_armed",
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                var nbt = system.mainNBT(entity);
+                manager.setData(entity, "skyhighheroes:dyn/shield_left_armed", !entity.getData("skyhighheroes:dyn/shield_left_armed"));
+                manager.setBoolean(nbt, "shieldsLeft", !nbt.getBoolean("shieldsLeft"));
+                if (entity.getData("skyhighheroes:dyn/shield_left_armed")) {
+                  system.moduleMessage(this, entity, "<s>Armed <sh>left arm<s> shield!");
+                } else {
+                  system.moduleMessage(this, entity, "<s>Disarmed <sh>left arm<s> shield!");
+                };
+              },
+              backAction: (entity, manager) => {
+                system.setButton(entity, manager, "main_blades_shields");
+                system.setMenu(entity, manager, "main");
+              },
+            }
+          },
+          "shield_right_armed": {
+            borderingButtons: {
+              top: "blade_right_stealth",
+              left: "shield_left_armed",
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                var nbt = system.mainNBT(entity);
+                manager.setData(entity, "skyhighheroes:dyn/shield_right_armed", !entity.getData("skyhighheroes:dyn/shield_right_armed"));
+                manager.setBoolean(nbt, "shieldsRight", !nbt.getBoolean("shieldsRight"));
+                if (entity.getData("skyhighheroes:dyn/shield_right_armed")) {
+                  system.moduleMessage(this, entity, "<s>Armed <sh>right arm<s> shield!");
+                } else {
+                  system.moduleMessage(this, entity, "<s>Disarmed <sh>right arm<s> shield!");
+                };
+              },
+              backAction: (entity, manager) => {
+                system.setButton(entity, manager, "main_blades_shields");
+                system.setMenu(entity, manager, "main");
+              },
+            }
+          },
+        }
+      }
+    },
+    cyberMainButton: {
+      buttonID: "main_blades_shields",
+      borderingButtons: {
+        top: "main_blades",
+        bottom: "main_suits"
+      },
+      properties: {
+        confirmAction: (entity, manager) => {
+          system.setButton(entity, manager, "shield_left_armed");
+          system.setMenu(entity, manager, "blades_shields");
+        },
+        backAction: (entity, manager) => {
+          manager.setData(entity, "skyhighheroes:dyn/interface", false);
+        }
+      }
+    },
     helpMessage: "<n>!shield <nh>-<n> Shields",
     disabledMessage: "<e>Module <eh>shields<e> is disabled!",
     keyBinds: function (hero, color) {
@@ -303,6 +417,11 @@ function initModule(system) {
       manager.setData(entity, "skyhighheroes:dyn/shield_right_deployed", false);
     },
     tickHandler: function (entity, manager) {
+      if (!system.hasEnoughEnergy(entity, manager, "shield") || !system.hasEnoughEnergy(entity, manager, "shieldDamaged")) {
+        manager.setData(entity, "fiskheroes:shield", false);
+        manager.setData(entity, "skyhighheroes:dyn/shield_left", false);
+        manager.setData(entity, "skyhighheroes:dyn/shield_right", false);
+      };
       var left = entity.getData("skyhighheroes:dyn/shield_left_armed") && entity.getData("fiskheroes:shield");
       var right = entity.getData("skyhighheroes:dyn/shield_right_armed") && entity.getData("fiskheroes:shield");
       if ((!entity.getData("skyhighheroes:dyn/shield_left_armed") || !entity.getData("skyhighheroes:dyn/shield_right_armed")) && shieldMultiTap.multiTap(entity, manager, 2, 20, 1)) {
@@ -324,6 +443,18 @@ function initModule(system) {
       if ((entity.getData("skyhighheroes:dyn/shield_left_armed") || entity.getData("skyhighheroes:dyn/shield_right_armed")) && entity.getData("fiskheroes:shield_timer") > 0) {
         manager.setData(entity, "skyhighheroes:dyn/shield_left", left);
         manager.setData(entity, "skyhighheroes:dyn/shield_right", right);
+        if (left) {
+          if (entity.getData("fiskheroes:ticks_since_shield_damaged") == 0) {
+            system.useEnergy(entity, manager, "shieldDamaged");
+          };
+          system.useEnergy(entity, manager, "shield");
+        };
+        if (right) {
+          if (entity.getData("fiskheroes:ticks_since_shield_damaged") == 0) {
+            system.useEnergy(entity, manager, "shieldDamaged");
+          };
+          system.useEnergy(entity, manager, "shield");
+        };
         if (entity.getData("fiskheroes:shield_timer") < 0.5) {
           if (left && right) {
             system.shoutMessage(entity, "Activating Shields!", 16);
@@ -340,9 +471,9 @@ function initModule(system) {
       shieldMultiTap.tapReset(entity, manager);
     },
     fightOrFlight: function (entity, manager) {
-      if (!entity.getWornHelmet().nbt().getBoolean("shieldsLeft") || !entity.getWornHelmet().nbt().getBoolean("shieldsRight")) {
-        manager.setBoolean(entity.getWornHelmet().nbt(), "shieldsLeft", true);
-        manager.setBoolean(entity.getWornHelmet().nbt(), "shieldsRight", true);
+      if (!entity.getWornChestplate().nbt().getBoolean("shieldsLeft") || !entity.getWornChestplate().nbt().getBoolean("shieldsRight")) {
+        manager.setBoolean(entity.getWornChestplate().nbt(), "shieldsLeft", true);
+        manager.setBoolean(entity.getWornChestplate().nbt(), "shieldsRight", true);
         system.systemMessage(entity, "<n>Automatically armed <nh>shields<n>!");
       };
     },
@@ -356,6 +487,11 @@ function initModule(system) {
         manager.setBoolean(nbt, "shieldsRight", false);
       };
       manager.setData(entity, "skyhighheroes:dyn/shield_right_armed", nbt.getBoolean("shieldsRight"));
+    },
+    onChargingStart: function (entity, manager) {
+      manager.setData(entity, "fiskheroes:shield", false);
+      manager.setData(entity, "skyhighheroes:dyn/shield_left", false);
+      manager.setData(entity, "skyhighheroes:dyn/shield_right", false);
     }
   };
 };

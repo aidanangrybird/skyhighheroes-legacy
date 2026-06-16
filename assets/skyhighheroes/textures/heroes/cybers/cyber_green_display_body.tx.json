@@ -1,0 +1,12 @@
+{
+  "texture": {
+    "in": "skyhighheroes:cybers/cyber_green_full",
+    "transform": [
+      {
+        "operation": "STITCH",
+        "supply": "skyhighheroes:display_body"
+      }
+    ],
+    "out": "skyhighheroes:generated/cyber_green_display_body"
+  }
+}
