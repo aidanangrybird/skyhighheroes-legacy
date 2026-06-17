@@ -184,6 +184,14 @@ function assignTranser(entity, manager, satellite) {
       var computerID = Math.random().toFixed(20).toString().substring(2);
       manager.setString(nbt, "computerID", computerID);
     };
+  } else {
+    var computerID = nbt.getString("computerID");
+    if (computerID.length < 20) {
+      if (PackLoader.getSide() == "SERVER") {
+        var computerID = Math.random().toFixed(20).toString().substring(2);
+        manager.setString(nbt, "computerID", computerID);
+      };
+    };
   };
 };
 
