@@ -1,6 +1,8 @@
 //If I see anyone steal this, I will be very mad as I have spent a lot of time working on this to get it working well
 //So please don't steal this, it will look very bad on you
 
+var logMessages = false;
+
 //Encryption stuff
 var possibleChars = ["!","\"","#","$","%","&","'","(",")","*","+",",","-",".","/","0","1","2","3","4","5","6","7","8","9",":",";","<","=",">","?","@","A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z","[","\\","]","^","_","`","a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","{","|","}","~", " "];
 var possibleNumbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
@@ -604,7 +606,9 @@ function systemMessage(entity, message) {
  * @param {string} message - Log message
  **/
 function logMessage(message) {
-  PackLoader.print("skyhighheroes: " + message);
+  if (logMessages) {
+    PackLoader.print("skyhighheroes: " + message);
+  };
 };
 
 /**

@@ -1,6 +1,8 @@
 //If I see anyone steal this, I will be very mad as I have spent a lot of time working on this to get it working well
 //So please don't steal this, it will look very bad on you
 
+var logMessages = false;
+
 regex = /((<ob>))|(<n>)|(<nh>)|(<s>)|(<sh>)|(<e>)|(<eh>)|(<r>)/gm;
 
 var formatting = {
@@ -337,7 +339,9 @@ function moduleMessage(module, entity, message) {
  * @param {string} message - Entity recieving message
  **/
 function logMessage(message) {
-  PackLoader.print("skyhighheroes: " + message);
+  if (logMessages) {
+    PackLoader.print("skyhighheroes: " + message);
+  };
 };
 
 /**
