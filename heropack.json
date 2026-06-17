@@ -369,6 +369,8 @@
     "download_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "download_duration": { "type": "INTEGER", "resetWithoutSuit": true },
     "downloading": { "type": "BOOLEAN", "resetWithoutSuit": true },
+    "transmitting_status_data": { "type": "BOOLEAN", "resetWithoutSuit": true },
+    "receiving_status_data": { "type": "BOOLEAN", "resetWithoutWaypoint": true },
     
     "wings_timer": { "type": "FLOAT_INTERP", "resetWithoutSuit": true },
     "wings": { "type": "BOOLEAN", "resetWithoutSuit": true },

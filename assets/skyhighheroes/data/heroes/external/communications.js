@@ -853,6 +853,8 @@ function initModule(system) {
                 manager.setData(entity, "skyhighheroes:dyn/scroll_value", 0);
                 manager.setData(entity, "skyhighheroes:dyn/scroll_total", Math.max(idList.length - 1, 0));
                 system.updateList(entity, manager, 1, idList);
+                manager.setData(entity, "skyhighheroes:dyn/receiving_status_data", true);
+                manager.setData(entity, "skyhighheroes:dyn/transmitting_status_data", true);
               },
               backAction: (entity, manager) => {
                 system.setButton(entity, manager, "main_comms");
@@ -869,16 +871,22 @@ function initModule(system) {
               backAction: (entity, manager) => {
                 system.setButton(entity, manager, "comms_status");
                 system.setSubmenu(entity, manager, "");
+                manager.setData(entity, "skyhighheroes:dyn/receiving_status_data", false);
+                manager.setData(entity, "skyhighheroes:dyn/transmitting_status_data", false);
               },
               leftAction: (entity, manager) => {
                 var list = updateIDList(entity, manager);
                 system.scrollUp(entity, manager, list);
                 system.updateList(entity, manager, 1, list);
+                manager.setData(entity, "skyhighheroes:dyn/receiving_status_data", true);
+                manager.setData(entity, "skyhighheroes:dyn/transmitting_status_data", true);
               },
               rightAction: (entity, manager) => {
                 var list = updateIDList(entity, manager);
                 system.scrollDown(entity, manager, 1, list);
                 system.updateList(entity, manager, 1, list);
+                manager.setData(entity, "skyhighheroes:dyn/receiving_status_data", true);
+                manager.setData(entity, "skyhighheroes:dyn/transmitting_status_data", true);
               }
             }
           },
@@ -2275,17 +2283,21 @@ function initModule(system) {
         manager.setData(entity, "skyhighheroes:dyn/antenna_deployed", false);
       };
       if (!system.hasEnoughEnergy(entity, manager, "receiving")) {
+        manager.setData(entity, "skyhighheroes:dyn/receiving_status_data", false);
         manager.setData(entity, "skyhighheroes:dyn/receiving_suits", false);
         manager.setData(entity, "skyhighheroes:dyn/receiving_waypoints", false);
       };
       if (!system.hasEnoughEnergy(entity, manager, "transmitting")) {
+        manager.setData(entity, "skyhighheroes:dyn/transmitting_status_data", false);
         manager.setData(entity, "skyhighheroes:dyn/transmitting_suits", false);
         manager.setData(entity, "skyhighheroes:dyn/transmitting_waypoints", false);
       };
       if (entity.getData("skyhighheroes:dyn/satellite_deploy_timer") == 1) {
         var rainMode = (entity.getData("skyhighheroes:dyn/satellite_rain_mode_timer") == 0);
-        manager.setData(entity, "skyhighheroes:dyn/transmit_beam", rainMode);
-        manager.setData(entity, "skyhighheroes:dyn/receive_beam", rainMode);
+        var receiving = (entity.getData("skyhighheroes:dyn/receiving_suits") || entity.getData("skyhighheroes:dyn/receiving_waypoints") || entity.getData("skyhighheroes:dyn/receiving_status_data"))
+        var transmitting = (entity.getData("skyhighheroes:dyn/transmitting_suits") || entity.getData("skyhighheroes:dyn/transmitting_waypoints") || entity.getData("skyhighheroes:dyn/transmitting_status_data"));
+        manager.setData(entity, "skyhighheroes:dyn/transmit_beam", rainMode && transmitting);
+        manager.setData(entity, "skyhighheroes:dyn/receive_beam", rainMode && receiving);
       };
       if (!entity.getData("skyhighheroes:dyn/satellite_deployed")) {
         manager.setData(entity, "skyhighheroes:dyn/transmit_beam", false);
@@ -2297,10 +2309,10 @@ function initModule(system) {
       if (entity.getData("skyhighheroes:dyn/antenna_deployed")) {
         system.useEnergy(entity, manager, "antenna");
       };
-      if (entity.getData("skyhighheroes:dyn/receiving_suits") || entity.getData("skyhighheroes:dyn/receiving_waypoints")) {
+      if (entity.getData("skyhighheroes:dyn/receiving_suits") || entity.getData("skyhighheroes:dyn/receiving_waypoints") || entity.getData("skyhighheroes:dyn/receiving_status_data")) {
         system.useEnergy(entity, manager, "receiving");
       };
-      if (entity.getData("skyhighheroes:dyn/transmitting_suits") || entity.getData("skyhighheroes:dyn/transmitting_waypoints")) {
+      if (entity.getData("skyhighheroes:dyn/transmitting_suits") || entity.getData("skyhighheroes:dyn/transmitting_waypoints") || entity.getData("skyhighheroes:dyn/transmitting_status_data")) {
         system.useEnergy(entity, manager, "transmitting");
       };
       var nbt = system.mainNBT(entity);

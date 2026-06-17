@@ -127,7 +127,8 @@
 {part3_satellite_dish_arm} = if({satellite_dish} != 1, animate2({satellite_dish}, 1.0, 0.5, 0.1, 0.0), 1)
 {part4_satellite_dish_arm} = if({satellite_dish} != 1, animate2({satellite_dish}, 1.0, 0.6, 0.1, 0.0), 1)
 {part5_satellite_dish_arm} = if({satellite_dish} != 1, animate2({satellite_dish}, 1.0, 0.7, 0.1, 0.0), 1)
-{part6_satellite_dish_arm} = if({satellite_dish} != 1, animate2({satellite_dish}, 1.0, 0.8, 0.2, 0.0), 1)
+{part6_satellite_dish_arm} = if({satellite_dish} != 1, animate2({satellite_dish}, 1.0, 0.8, 0.1, 0.0), 1)
+{satellite_tracking} = if({satellite_dish} != 1, animate2({satellite_dish}, 1.0, 0.9, 0.1, 0.0), 1)
 {head_left_satellite_dish_cover_posZ} -= 0.03{part0_satellite_dish_arm}
 {head_right_satellite_dish_cover_posZ} -= 0.03{part0_satellite_dish_arm}
 {head_left_satellite_dish_cover_posX} += 0.99{part1_satellite_dish_arm} + 0.01{part0_satellite_dish_arm}
@@ -141,9 +142,10 @@
 {head_satellite_dish_arm_base_rotX} += 55'{part6_satellite_dish_arm} - 15'{part6_satellite_dish_arm}{rain_mode} - (clamp({pitch} - 35', 0', 55')){part6_satellite_dish_arm}{not_rain_mode} - (clamp({pitch} - 50', 0', 50')){part6_satellite_dish_arm}{rain_mode} - (clamp({pitch} + 62', -17', 0')){part6_satellite_dish_arm}{rain_mode}
 {head_satellite_dish_arm_lower_rotX} += 35'{part6_satellite_dish_arm}{not_rain_mode} + 105'{part6_satellite_dish_arm}{rain_mode} - (clamp({pitch}, 0', 35')){part6_satellite_dish_arm}{not_rain_mode} - (clamp({pitch}, 0', 90')){part6_satellite_dish_arm}{rain_mode} + (clamp({pitch} - 35', 0', 0')){part6_satellite_dish_arm}{rain_mode} - (clamp({pitch} + 55', -7', 0')){part6_satellite_dish_arm}{rain_mode}
 {head_satellite_dish_antenna_posY} += 3{part6_satellite_dish_arm} - 3{part6_satellite_dish_arm}{rain_mode}
-{head_satellite_dish_arm_bearing_rotX} += -35'{part6_satellite_dish_arm}{rain_mode} - if({pitch}>0,0,1){pitch}{part6_satellite_dish_arm}{not_rain_mode} - (clamp({pitch}, -55', 0')){part6_satellite_dish_arm}{rain_mode} + (clamp({pitch} - 70', 0', 20')){part6_satellite_dish_arm}{rain_mode}
-{head_satellite_dish_base_rotX} += {angle_X}{part6_satellite_dish_arm}{not_rain_mode} - 20'{part6_satellite_dish_arm}{rain_mode} - (clamp({pitch} + 79', -11', 0')){part6_satellite_dish_arm}{rain_mode} - (clamp({pitch} + 62', 11', 0')){part6_satellite_dish_arm}{rain_mode} + (clamp({pitch} - 50', 0', 20')){part6_satellite_dish_arm}{rain_mode}
-{head_satellite_dish_arm_upper_rotY} += {bearing}{part6_satellite_dish_arm}{not_rain_mode} - {angle_Y}{part6_satellite_dish_arm}{not_rain_mode}
+;dish tracking
+{head_satellite_dish_arm_bearing_rotX} += -35'{satellite_tracking}{rain_mode} - if({pitch}>0,0,1){pitch}{satellite_tracking}{not_rain_mode} - (clamp({pitch}, -55', 0')){satellite_tracking}{rain_mode} + (clamp({pitch} - 70', 0', 20')){satellite_tracking}{rain_mode}
+{head_satellite_dish_base_rotX} += {angle_X}{satellite_tracking}{not_rain_mode} - 20'{satellite_tracking}{rain_mode} - (clamp({pitch} + 79', -11', 0')){satellite_tracking}{rain_mode} - (clamp({pitch} + 62', 11', 0')){satellite_tracking}{rain_mode} + (clamp({pitch} - 50', 0', 20')){satellite_tracking}{rain_mode}
+{head_satellite_dish_arm_upper_rotY} += {bearing}{satellite_tracking}{not_rain_mode} - {angle_Y}{satellite_tracking}{not_rain_mode}
 ;dish
 {dish} = if({satellite_dish} != 1, animate2({satellite_dish}, 1.0, 0.65, 0.35, 0.0), 1)
 {part1_satellite_dish} = if({dish} != 1, animate2({dish}, 1.0, 0.0, 0.1, 0.0), 1)
