@@ -26,12 +26,14 @@ function initModule(system) {
       var uuid = entries[1];
       if (system.isStillCyber(entity, id)) {
         var otherEntity = entity.world().getEntityById(id);
-        var name = system.getAliasName(otherEntity);
-        var listEntry = id+";:"+name;
-        if (uuid != "") {
-          listEntry = listEntry+";:"+uuid;
+        if (otherEntity.getName() != entity.getName()) {
+          var name = system.getAliasName(otherEntity);
+          var listEntry = id + ";:" + name;
+          if (uuid != "") {
+            listEntry = listEntry + ";:" + uuid;
+          };
+          list.push(listEntry);
         };
-        list.push(listEntry);
       };
     });
     return list;
@@ -330,7 +332,6 @@ function initModule(system) {
         };
       });
     };
-    foundPlayers.push(entity);
     if (foundPlayers.length > 0) {
       //entity = tx
       //otherEntity = rx
@@ -657,7 +658,6 @@ function initModule(system) {
         };
       });
     };
-    foundPlayers.push(entity);
     if (foundPlayers.length > 0) {
       //entity = tx
       //otherEntity = rx
