@@ -30,36 +30,37 @@ var months = [
 ];
 
 var colorDamage = {
-  //Orange gold
+  //Base
+  "9": "12",
+  //Blue
+  "1": "4",
+  //Green
+  "2": "2",
+  //Orange
   "6": "14",
-  //Green lime
-  "2": "10",
   //Purple
   "5": "5",
   //Red
   "4": "1",
-  //Cyan
-  "3": "6",
-  //Blue
-  "1": "4",
+  //Yellow
+  "e": "11"
 };
 
-var cybers = [
-  "CF-4",
-  "CV-6",
-  "CA-1",
-  "CG-3",
-  "CN-2",
-  "CS-5"
-];
-
 var hexColors = {
-  "CF-4": "0xFF0000",
-  "CV-6": "0xFF8900",
-  "CA-1": "0x0000FF",
-  "CG-3": "0x00FFFF",
-  "CN-2": "0x55FF00",
-  "CS-5": "0x8000FF"
+  //Base
+  "C-9": "0x00AEFF",
+  //Blue
+  "CB-1": "0x0000FF",
+  //Green
+  "CG-2": "0x00FF00",
+  //Orange
+  "CO-6": "0xFF9400",
+  //Purple
+  "CP-5": "0x7C00FF",
+  //Red
+  "CR-4": "0xFF0000",
+  //Yellow
+  "CY-e": "0xFFFF00"
 };
 
 modelRegex = /[a-z\s]/gm;
