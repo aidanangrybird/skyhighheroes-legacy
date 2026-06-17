@@ -376,7 +376,7 @@ function initEffects(renderer) {
   brotherLeftTopProfile = stuff.screenElementAvatar(renderer, "brother_left_top_profile", "center", "center", "3pmw", "3pmh", 0.0, 0.0, 0.0, brotherLeftTopSatelliteBorder, "center");
   brotherLeftTopSelected = stuff.screenCornerSelectorTranser(renderer, "corner_selected", brotherLeftTopSatellite, 5.0);
   brotherLeftTopConnector = stuff.screenElement(renderer, "profile", "center", "center", 70.0, 10.0, 50.0, 10.0, -0.04, brotherLeftTopBase, "center");
-  brotherLeftTopConnector.model.setRotation(0.0, 0.0, -30.0);
+  brotherLeftTopConnector.modelEffect.setRotation(0.0, 0.0, -30.0);
   //Center left
   brotherLeftCenterBase = stuff.screenElement(renderer, "color_1", "center", "center", 10.0, 3.0, -76.0, 0.0, 0.0, brotherSelfBase, "centerleft");
   brotherLeftCenterSatellite = stuff.screenElement(renderer, "brother_left_center_satellite", "center", "center", 68.0, 38.0, 0.0, 0.0, 0.0, brotherLeftCenterBase, "center");
@@ -384,7 +384,7 @@ function initEffects(renderer) {
   brotherLeftCenterProfile = stuff.screenElementAvatar(renderer, "brother_left_center_profile", "center", "center", "3pmw", "3pmh", 0.0, 0.0, 0.0, brotherLeftCenterSatelliteBorder, "center");
   brotherLeftCenterSelected = stuff.screenCornerSelectorTranser(renderer, "corner_selected", brotherLeftCenterSatellite, 5.0);
   brotherLeftCenterConnector = stuff.screenElement(renderer, "profile", "center", "center", 70.0, 10.0, 50.0, 0.0, -0.04, brotherLeftCenterBase, "center");
-  brotherLeftCenterConnector.model.setRotation(0.0, 0.0, 0.0);
+  brotherLeftCenterConnector.modelEffect.setRotation(0.0, 0.0, 0.0);
   //Bottom left
   brotherLeftBottomBase = stuff.screenElement(renderer, "color_1", "center", "center", 10.0, 3.0, -76.0, 39.0, 0.0, brotherSelfBase, "bottomleft");
   brotherLeftBottomSatellite = stuff.screenElement(renderer, "brother_left_bottom_satellite", "center", "center", 68.0, 38.0, 0.0, 0.0, 0.0, brotherLeftBottomBase, "center");
@@ -392,7 +392,7 @@ function initEffects(renderer) {
   brotherLeftBottomProfile = stuff.screenElementAvatar(renderer, "brother_left_bottom_profile", "center", "center", "3pmw", "3pmh", 0.0, 0.0, 0.0, brotherLeftBottomSatelliteBorder, "center");
   brotherLeftBottomSelected = stuff.screenCornerSelectorTranser(renderer, "corner_selected", brotherLeftBottomSatellite, 5.0);
   brotherLeftBottomConnector = stuff.screenElement(renderer, "profile", "center", "center", 70.0, 10.0, 50.0, -10.0, -0.04, brotherLeftBottomBase, "center");
-  brotherLeftBottomConnector.model.setRotation(0.0, 0.0, 30.0);
+  brotherLeftBottomConnector.modelEffect.setRotation(0.0, 0.0, 30.0);
   //Top right
   brotherRightTopBase = stuff.screenElement(renderer, "color_1", "center", "center", 10.0, 3.0, 76.0, -39.0, 0.0, brotherSelfBase, "topright");
   brotherRightTopSatellite = stuff.screenElement(renderer, "brother_right_top_satellite", "center", "center", 68.0, 38.0, 0.0, 0.0, 0.0, brotherRightTopBase, "center");
@@ -400,7 +400,7 @@ function initEffects(renderer) {
   brotherRightTopProfile = stuff.screenElementAvatar(renderer, "brother_right_top_profile", "center", "center", "3pmw", "3pmh", 0.0, 0.0, 0.0, brotherRightTopSatelliteBorder, "center");
   brotherRightTopSelected = stuff.screenCornerSelectorTranser(renderer, "corner_selected", brotherRightTopSatellite, 5.0);
   brotherRightTopConnector = stuff.screenElement(renderer, "profile", "center", "center", 70.0, 10.0, -50.0, 10.0, -0.04, brotherRightTopBase, "center");
-  brotherRightTopConnector.model.setRotation(0.0, 0.0, 30.0);
+  brotherRightTopConnector.modelEffect.setRotation(0.0, 0.0, 30.0);
   //Center right
   brotherRightCenterBase = stuff.screenElement(renderer, "color_1", "center", "center", 10.0, 3.0, 76.0, 0.0, 0.0, brotherSelfBase, "centerright");
   brotherRightCenterSatellite = stuff.screenElement(renderer, "brother_right_center_satellite", "center", "center", 68.0, 38.0, 0.0, 0.0, 0.0, brotherRightCenterBase, "center");
@@ -408,7 +408,7 @@ function initEffects(renderer) {
   brotherRightCenterProfile = stuff.screenElementAvatar(renderer, "brother_right_center_profile", "center", "center", "3pmw", "3pmh", 0.0, 0.0, 0.0, brotherRightCenterSatelliteBorder, "center");
   brotherRightCenterSelected = stuff.screenCornerSelectorTranser(renderer, "corner_selected", brotherRightCenterSatellite, 5.0);
   brotherRightCenterConnector = stuff.screenElement(renderer, "profile", "center", "center", 70.0, 10.0, -50.0, 0.0, -0.04, brotherRightCenterBase, "center");
-  brotherRightCenterConnector.model.setRotation(0.0, 0.0, 0.0);
+  brotherRightCenterConnector.modelEffect.setRotation(0.0, 0.0, 0.0);
   //Bottom right
   brotherRightBottomBase = stuff.screenElement(renderer, "color_1", "center", "center", 10.0, 3.0, 76.0, 39.0, 0.0, brotherSelfBase, "bottomright");
   brotherRightBottomSatellite = stuff.screenElement(renderer, "brother_right_bottom_satellite", "center", "center", 68.0, 38.0, 0.0, 0.0, 0.0, brotherRightBottomBase, "center");
@@ -416,7 +416,7 @@ function initEffects(renderer) {
   brotherRightBottomProfile = stuff.screenElementAvatar(renderer, "brother_right_bottom_profile", "center", "center", "3pmw", "3pmh", 0.0, 0.0, 0.0, brotherRightBottomSatelliteBorder, "center");
   brotherRightBottomSelected = stuff.screenCornerSelectorTranser(renderer, "corner_selected", brotherRightBottomSatellite, 5.0);
   brotherRightBottomConnector = stuff.screenElement(renderer, "profile", "center", "center", 70.0, 10.0, -50.0, -10.0, -0.04, brotherRightBottomBase, "center");
-  brotherRightBottomConnector.model.setRotation(0.0, 0.0, -30.0);
+  brotherRightBottomConnector.modelEffect.setRotation(0.0, 0.0, -30.0);
 
   //Brother profile
   brotherScreenProfile = stuff.screenElement(renderer, "brother_profile_off_white", "center", "center", "5pmw", "5pmh", 0.0, 0.0, 0.0, upperTranserBorder, "center");
