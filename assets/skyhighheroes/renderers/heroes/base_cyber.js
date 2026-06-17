@@ -196,7 +196,9 @@ function initEffects(renderer) {
   cannonHeadRightDeployStatus = stuff.screenStatusLightWithProgress(renderer, "status", "center", "center", 8.0, 8.0, -32.0, 16.0, 0.0, displayHead, "center");
   cannonHeadRightDeploySelector = stuff.screenCornerSelector(renderer, "color", cannonHeadRightDeployStatus, 1.725, 1.725);
   //Comms status lights
-  satelliteDeployStatus = stuff.screenStatusLightWithProgress(renderer, "status", "center", "center", 8.0, 8.0, 0.0, -44.0, 0.0, displayHead, "center");
+  satelliteRainModeStatus = stuff.screenStatusLightWithProgress(renderer, "status", "center", "center", 8.0, 8.0, 0.0, -48.0, 0.0, displayHead, "center");
+  satelliteRainModeSelector = stuff.screenCornerSelector(renderer, "color", satelliteRainModeStatus, 1.725, 1.725);
+  satelliteDeployStatus = stuff.screenStatusLightWithProgress(renderer, "status", "center", "center", 8.0, 8.0, 0.0, -40.0, 0.0, displayHead, "center");
   satelliteDeploySelector = stuff.screenCornerSelector(renderer, "color", satelliteDeployStatus, 1.725, 1.725);
   antennaDeployStatus = stuff.screenStatusLightWithProgress(renderer, "status", "center", "center", 8.0, 8.0, 0.0, -26.0, 0.0, displayHead, "center");
   antennaDeploySelector = stuff.screenCornerSelector(renderer, "color", antennaDeployStatus, 1.725, 1.725);
@@ -386,13 +388,11 @@ function initEffects(renderer) {
   shieldRightArmedSelector = stuff.screenCornerSelector(renderer, "color", shieldRightArmedStatus, 1.725, 1.725);
 
   //Comms menu
-  commsBaseBox = stuff.screenElement(renderer, "color", "center", "center", 100.0, 60.0, 0.0, 0.0, 0.0, mainMenu, "center");
+  commsBaseBox = stuff.screenElement(renderer, "color", "center", "center", 100.0, 48.0, 0.0, 0.0, 0.0, mainMenu, "center");
   commsBaseBoxInner = stuff.screenElement(renderer, "inactive_menu", "center", "center", "2.5pmw", "2.5pmh", 0.0, 0.0, 0.0, commsBaseBox, "center");
-  commsStatusSelected = stuff.screenSelector(renderer, "color", "center", "center", 10.0, 10.0, 8.0, -18.0, 0.0, commsBaseBoxInner, "centerleft");
-  commsSuitsSelected = stuff.screenSelector(renderer, "color", "center", "center", 10.0, 10.0, 8.0, -6.0, 0.0, commsBaseBoxInner, "centerleft");
-  commsWaypointsSelected = stuff.screenSelector(renderer, "color", "center", "center", 10.0, 10.0, 8.0, 6.0, 0.0, commsBaseBoxInner, "centerleft");
-  commsSettingsSelected = stuff.screenSelector(renderer, "color", "center", "center", 10.0, 10.0, 8.0, 18.0, 0.0, commsBaseBoxInner, "centerleft");
-
+  commsStatusSelected = stuff.screenSelector(renderer, "color", "center", "center", 10.0, 10.0, 8.0, -12.0, 0.0, commsBaseBoxInner, "centerleft");
+  commsSuitsSelected = stuff.screenSelector(renderer, "color", "center", "center", 10.0, 10.0, 8.0, 0.0, 0.0, commsBaseBoxInner, "centerleft");
+  commsWaypointsSelected = stuff.screenSelector(renderer, "color", "center", "center", 10.0, 10.0, 8.0, 12.0, 0.0, commsBaseBoxInner, "centerleft");
 
   //Suits menu
   suitsBaseBox = stuff.screenElement(renderer, "color", "center", "center", 100.0, 48.0, 0.0, 0.0, 0.0, mainMenu, "center");
@@ -1026,6 +1026,10 @@ function render(entity, renderLayer, isFirstPersonArm) {
           if (entity.getData("skyhighheroes:dyn/selected_button") == "cannon_head_right_deploy") {
             cannonHeadRightDeploySelector.render(isFirstPersonArm);
           };
+          satelliteRainModeStatus.render(entity, isFirstPersonArm, "satellite_rain_mode_timer");
+          if (entity.getData("skyhighheroes:dyn/selected_button") == "satellite_rain_mode") {
+            satelliteRainModeSelector.render(isFirstPersonArm);
+          };
           satelliteDeployStatus.render(entity, isFirstPersonArm, "satellite_deploy_timer");
           if (entity.getData("skyhighheroes:dyn/selected_button") == "satellite_deploy") {
             satelliteDeploySelector.render(isFirstPersonArm);
@@ -1496,10 +1500,6 @@ function render(entity, renderLayer, isFirstPersonArm) {
             text_renderer.renderLine(isFirstPersonArm, "left", "center", "Waypoints", commsWaypointsSelected.leftX + 14.0, commsWaypointsSelected.centerY, commsWaypointsSelected.z, 1.0);
             if (entity.getData("skyhighheroes:dyn/selected_button") == "comms_waypoints") {
               commsWaypointsSelected.render(isFirstPersonArm);
-            };
-            text_renderer.renderLine(isFirstPersonArm, "left", "center", "Settings", commsSettingsSelected.leftX + 14.0, commsSettingsSelected.centerY, commsSettingsSelected.z, 1.0);
-            if (entity.getData("skyhighheroes:dyn/selected_button") == "comms_settings") {
-              commsSettingsSelected.render(isFirstPersonArm);
             };
           };
           if (entity.getData("skyhighheroes:dyn/current_submenu") == "comms_status") {

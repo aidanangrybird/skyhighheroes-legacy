@@ -775,8 +775,28 @@ function initModule(system) {
     type: 12,
     command: "comms",
     cyberOverviewButtons: {
+      "satellite_rain_mode": {
+        borderingButtons: {
+          bottom: "satellite_deploy",
+        },
+        properties: {
+          confirmAction: (entity, manager) => {
+            manager.setData(entity, "skyhighheroes:dyn/satellite_rain_mode", !entity.getData("skyhighheroes:dyn/satellite_rain_mode"));
+            if (entity.getData("skyhighheroes:dyn/satellite_rain_mode")) {
+              system.moduleMessage(this, entity, "<n>Activating satellite rain mode!");
+            } else {
+              system.moduleMessage(this, entity, "<n>Deactivating satellite rain mode!");
+            };
+          },
+          backAction: (entity, manager) => {
+            system.setButton(entity, manager, "main_overview");
+            system.setMenu(entity, manager, "main");
+          },
+        }
+      },
       "satellite_deploy": {
         borderingButtons: {
+          top: "satellite_rain_mode",
           bottom: "antenna_deploy",
         },
         properties: {
@@ -891,7 +911,6 @@ function initModule(system) {
           "comms_waypoints": {
             borderingButtons: {
               top: "comms_suits",
-              bottom: "comms_settings",
             },
             properties: {
               confirmAction: (entity, manager) => {
@@ -907,20 +926,6 @@ function initModule(system) {
                 manager.setData(entity, "skyhighheroes:dyn/scroll_value", 0);
                 manager.setData(entity, "skyhighheroes:dyn/scroll_total", Math.max(list.length - 10, 0));
                 system.updateList(entity, manager, 10, list);
-              },
-              backAction: (entity, manager) => {
-                system.setButton(entity, manager, "main_comms");
-                system.setMenu(entity, manager, "main");
-              },
-            }
-          },
-          "comms_settings": {
-            borderingButtons: {
-              top: "comms_waypoints",
-            },
-            properties: {
-              confirmAction: (entity, manager) => {
-                system.setSubmenu(entity, manager, "comms_settings");
               },
               backAction: (entity, manager) => {
                 system.setButton(entity, manager, "main_comms");
@@ -2278,8 +2283,9 @@ function initModule(system) {
         manager.setData(entity, "skyhighheroes:dyn/transmitting_waypoints", false);
       };
       if (entity.getData("skyhighheroes:dyn/satellite_deploy_timer") == 1) {
-        manager.setData(entity, "skyhighheroes:dyn/transmit_beam", true);
-        manager.setData(entity, "skyhighheroes:dyn/receive_beam", true);
+        var rainMode = (entity.getData("skyhighheroes:dyn/satellite_rain_mode_timer") == 0);
+        manager.setData(entity, "skyhighheroes:dyn/transmit_beam", rainMode);
+        manager.setData(entity, "skyhighheroes:dyn/receive_beam", rainMode);
       };
       if (!entity.getData("skyhighheroes:dyn/satellite_deployed")) {
         manager.setData(entity, "skyhighheroes:dyn/transmit_beam", false);
