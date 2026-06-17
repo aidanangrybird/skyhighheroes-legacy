@@ -346,7 +346,7 @@ function round(input) {
 var energyConfig = {
   "maxEnergy": 1000000000,
   "minEnergy": 0,
-  "reserveEnergy": 5000,
+  "reserveEnergy": 500000,
 };
 
 var energyUseConfig = {
@@ -389,9 +389,9 @@ var energyUseConfig = {
   //Camouflage active
   "camouflage": 20000,
   //Disguise active
-  "disguise": 10000,
+  "disguise": 1000,
   //Disguise clothing enabled
-  "disguiseClothing": 5000,
+  "disguiseClothing": 500,
   //Body lights, which can be turned off to preserve energy
   "bodyLights": 10,
   //Statue mode can be turned on to preserve energy
@@ -425,9 +425,12 @@ var energyUseConfig = {
 };
 
 var chargingConfig = {
-  "minecraft:redstone_block": 50,
-  "fiskheroes:eternium_block": 100,
-  "fiskheroes:supercharged_eternium": 2000,
+  "minecraft:redstone_ore": 500,
+  "fiskheroes:lunar_redstone_ore": 500,
+  "minecraft:redstone_block": 1000,
+  "fiskheroes:eternium_stone": 5000,
+  "fiskheroes:eternium_block": 10000,
+  "fiskheroes:supercharged_eternium": 50000,
 };
 
 function useEnergy(entity, manager, device) {
@@ -1965,6 +1968,9 @@ function initSystem(moduleList, name, colorCode) {
    * @param {string} modifier - Required
    **/
   function cyberneticModifierEnabled(entity, modifier) {
+    if ((modifier.name() == "fiskheroes:transformation") && (modifier.id() == "interface")) {
+      return true;
+    };
     if (entity.getData("skyhighheroes:dyn/powering_down_timer") > 0) {
       return false;
     };
@@ -2298,7 +2304,7 @@ function initSystem(moduleList, name, colorCode) {
   function cyberneticKeyBindEnabled(entity, keyBind) {
     if (entity.getData("skyhighheroes:dyn/charging_timer") == 0) {
       if (keyBind == "START_CHARGING") {
-        return (entity.getData("skyhighheroes:dyn/charging_timer") == 0) && onChargingBlock(entity);
+        return (entity.getData("skyhighheroes:dyn/charging_timer") == 0) && onChargingBlock(entity) && !entity.getData("skyhighheroes:dyn/interface");
       };
       if (keyBind == "INTERFACE") {
         return (entity.getData("skyhighheroes:dyn/interface")) ? true : !entity.isSneaking();
@@ -2431,12 +2437,10 @@ function initSystem(moduleList, name, colorCode) {
       var hexColor = hexColors[getModelID(entity)];
       manager.setString(nbt, "hudColorSkyHigh", hexColor);
       manager.setData(entity, "skyhighheroes:dyn/color", color);
-      systemMessage(entity, "<n>Hello <nh>" + getModelID(entity) + "<n> AKA <nh>" + getAliasName(entity) + "<n>!");
       onInitSystemIndexes.forEach(index => {
         var module = modules[index];
         module.onInitSystem(entity, manager);
       });
-      status(entity);
       manager.setData(entity, "skyhighheroes:dyn/system_init", true);
       manager.setData(entity, "fiskheroes:penetrate_martian_invis", false);
     };
@@ -2651,22 +2655,16 @@ function initSystem(moduleList, name, colorCode) {
         systemMessage(entity, message);
       };
     };
-    if (!hasEnoughEnergy(entity, manager, "base")) {
+    if (entity.getData("skyhighheroes:dyn/energy") <= 0) {
       manager.setData(entity, "skyhighheroes:dyn/powered_down", true);
+    } else {
+      if (entity.getData("skyhighheroes:dyn/powering_down_timer") == 1) {
+        manager.setData(entity, "skyhighheroes:dyn/powered_down", false);
+      };
     };
-    if (!hasEnoughEnergy(entity, manager, "bodyLights")) {
-      manager.setData(entity, "skyhighheroes:dyn/cybernetic_body_lights", false);
+    if (entity.getData("skyhighheroes:dyn/powering_down_timer") == 0) {
+      useEnergy(entity, manager, "base");
     };
-    if (!hasEnoughEnergy(entity, manager, "motorControl")) {
-      manager.setData(entity, "skyhighheroes:dyn/cybernetic_statue_mode", false);
-    };
-    if (!hasEnoughEnergy(entity, manager, "nightVision")) {
-      manager.setData(entity, "skyhighheroes:dyn/night_vision", false);
-    };
-    if (!hasEnoughEnergy(entity, manager, "opticsEnabled")) {
-      manager.setData(entity, "skyhighheroes:dyn/optics_enabled", false);
-    };
-    useEnergy(entity, manager, "base");
     if (entity.getData("skyhighheroes:dyn/cybernetic_body_lights")) {
       useEnergy(entity, manager, "bodyLights");
     };

@@ -837,39 +837,41 @@ function render(entity, renderLayer, isFirstPersonArm) {
     left_leg_model.opacity = 1.0;
     right_leg_model.opacity = 1.0;
     if (entity.isWearingFullSuit()) {
-      if (entity.getInterpolatedData("skyhighheroes:dyn/thermoptic_disguise_timer") > 0) {
-        head_disguise_model.render();
-        head_hair_disguise_model.render();
-        body_disguise_model.render();
-        left_arm_disguise_model.render();
-        right_arm_disguise_model.render();
-        left_leg_disguise_model.render();
-        right_leg_disguise_model.render();
-      };
-      if (entity.getInterpolatedData("skyhighheroes:dyn/thermoptic_disguise_timer") < 1) {
-        head_base_model.render();
-        head_hair_base_model.render();
-        body_base_model.render();
-        left_arm_base_model.render();
-        right_arm_base_model.render();
-        left_leg_base_model.render();
-        right_leg_base_model.render();
-        if (!entity.getData("skyhighheroes:dyn/cybernetic_body_lights") || entity.getInterpolatedData("skyhighheroes:dyn/powering_down_timer") == 1) {
-          head_lights_off_model.render();
-          head_hair_lights_off_model.render();
-          body_lights_off_model.render();
-          left_arm_lights_off_model.render();
-          right_arm_lights_off_model.render();
-          left_leg_lights_off_model.render();
-          right_leg_lights_off_model.render();
-        } else {
-          head_lights_on_model.render();
-          head_hair_lights_on_model.render();
-          body_lights_on_model.render();
-          left_arm_lights_on_model.render();
-          right_arm_lights_on_model.render();
-          left_leg_lights_on_model.render();
-          right_leg_lights_on_model.render();
+      if (entity.getInterpolatedData("skyhighheroes:dyn/thermoptic_camouflage_timer") < 1) {
+        if (entity.getInterpolatedData("skyhighheroes:dyn/thermoptic_disguise_timer") > 0) {
+          head_disguise_model.render();
+          head_hair_disguise_model.render();
+          body_disguise_model.render();
+          left_arm_disguise_model.render();
+          right_arm_disguise_model.render();
+          left_leg_disguise_model.render();
+          right_leg_disguise_model.render();
+        };
+        if (entity.getInterpolatedData("skyhighheroes:dyn/thermoptic_disguise_timer") < 1) {
+          head_base_model.render();
+          head_hair_base_model.render();
+          body_base_model.render();
+          left_arm_base_model.render();
+          right_arm_base_model.render();
+          left_leg_base_model.render();
+          right_leg_base_model.render();
+          if (!entity.getData("skyhighheroes:dyn/cybernetic_body_lights") || entity.getInterpolatedData("skyhighheroes:dyn/powering_down_timer") == 1) {
+            head_lights_off_model.render();
+            head_hair_lights_off_model.render();
+            body_lights_off_model.render();
+            left_arm_lights_off_model.render();
+            right_arm_lights_off_model.render();
+            left_leg_lights_off_model.render();
+            right_leg_lights_off_model.render();
+          } else {
+            head_lights_on_model.render();
+            head_hair_lights_on_model.render();
+            body_lights_on_model.render();
+            left_arm_lights_on_model.render();
+            right_arm_lights_on_model.render();
+            left_leg_lights_on_model.render();
+            right_leg_lights_on_model.render();
+          };
         };
       };
       if (entity.getInterpolatedData("skyhighheroes:dyn/thermoptic_camouflage_timer") == 0) {
@@ -2286,6 +2288,8 @@ function render(entity, renderLayer, isFirstPersonArm) {
     left_arm_base_model.render();
     left_arm_lights_off_model.render();
     left_arm_disguise_model.render();
+    left_arm_shield_model.render();
+    left_arm_blade_model.render();
 
     if (!isFirstPersonArm) {
       right_arm_model.opacity = stuff.clamp(2*entity.getInterpolatedData("skyhighheroes:dyn/cybernetic_conversion_timer"), 0, 1);
@@ -2293,6 +2297,8 @@ function render(entity, renderLayer, isFirstPersonArm) {
       right_arm_base_model.render();
       right_arm_lights_off_model.render();
       right_arm_disguise_model.render();
+      right_arm_shield_model.render();
+      right_arm_blade_model.render();
     };
     if (isFirstPersonArm && ((entity.getData("skyhighheroes:dyn/cybernetic_conversion_sleep")) ? (entity.getInterpolatedData("skyhighheroes:dyn/cybernetic_conversion_sleep_timer") < 0.5) : (entity.getInterpolatedData("skyhighheroes:dyn/cybernetic_conversion_sleep_timer") < 1))) {
       right_arm_model.opacity = stuff.clamp(2*entity.getInterpolatedData("skyhighheroes:dyn/cybernetic_conversion_timer"), 0, 1);
@@ -2300,6 +2306,8 @@ function render(entity, renderLayer, isFirstPersonArm) {
       right_arm_base_model.render();
       right_arm_lights_off_model.render();
       right_arm_disguise_model.render();
+      right_arm_shield_model.render();
+      right_arm_blade_model.render();
     };
 
     left_leg_model.opacity = stuff.clamp(2*entity.getInterpolatedData("skyhighheroes:dyn/cybernetic_conversion_timer"), 0, 1);
