@@ -115,7 +115,7 @@ function initModule(system) {
       result = false;
       if (!system.isModuleDisabled(entity, this.name)) {
         if (keyBind == "CAMOUFLAGE" && !entity.getData("skyhighocs:dyn/battle_mode")) {
-          result = !onChargingBlock(entity);
+          result = !system.onChargingBlock(entity);
         };
       };
       return result;

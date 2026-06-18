@@ -2972,7 +2972,7 @@ function initSystem(moduleList, name, colorCode) {
       hero.setChestplate("System Core");
       hero.setVersion("OC");
     
-      hero.addPrimaryEquipment("fiskheroes:suit_data_drive@" + colorDamage[color] + "{display:{Name:\u00A7" + color + cyberName + "'s Data Drive}}", true, item => (item.damage() == colorDamage[color] && item.displayName() == "\u00A7" + color + cyberName + "'s Data Drive"));
+      hero.addPrimaryEquipment("fiskheroes:suit_data_drive@" + colorDamage[color] + "{display:{Name:\u00A7" + color + cyberName + "'s Data Drive}}", true, item => (item.damage() == colorDamage[color]));
     
       keyBinds(hero);
       initProfiles(hero);
