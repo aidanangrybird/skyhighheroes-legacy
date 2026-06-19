@@ -166,31 +166,20 @@ function initModule(system) {
           system.setMenu(entity, manager, "blades_shields");
         },
         backAction: (entity, manager) => {
-          manager.setData(entity, "skyhighheroes:dyn/interface", false);
+          manager.setData(entity, "skyhighheroes:dyn/cybernetic_interface", false);
         }
       }
     },
     helpMessage: "<n>!blade <nh>-<n> Blades",
     disabledMessage: "<e>Module <eh>bladeSystem<e> is disabled!",
     keyBinds: function (hero, color) {
-      hero.addKeyBindFunc("BLADES", (player, manager) => {
-        //system.moduleMessage(this, player, "<e>To arm a blade do <eh>!blade arm <left|right><e>.");
-        bladeMultiTap.tap(player, manager);
-        return false;
-      }, "\u00A7" + color + "Blades (x2 to arm)", 1);
-      hero.addKeyBindFunc("BLADE", (player, manager) => {
-        bladeMultiTap.tap(player, manager);
-        return true;
-      }, "\u00A7" + color + "Blades (x2 to disarm)", 1);
+      hero.addKeyBind("BLADE", "\u00A7" + color + "Activate Armed Blades", 1);
     },
     isKeyBindEnabled: function (entity, keyBind) {
       result = false;
       if (!system.isModuleDisabled(entity, this.name)) {
         var left = entity.getData("skyhighheroes:dyn/blade_left_armed");
         var right = entity.getData("skyhighheroes:dyn/blade_right_armed");
-        if (keyBind == "BLADES" && !entity.getData("skyhighheroes:dyn/battle_mode")) {
-          result = (!left && !right);
-        };
         if (keyBind == "BLADE" && !entity.getData("skyhighheroes:dyn/battle_mode")) {
           result = (left || right);
         };
@@ -580,9 +569,22 @@ function initModule(system) {
       manager.setData(entity, "skyhighheroes:dyn/blade_right_stealth_enabled", nbt.getBoolean("bladesRightStealth"));
     },
     onChargingStart: function (entity, manager) {
-      manager.setData(entity, "fiskheroes:blade", false);
-      manager.setData(entity, "skyhighheroes:dyn/blade_left", false);
-      manager.setData(entity, "skyhighheroes:dyn/blade_right", false);
-    }
+      manager.setDataWithNotify(entity, "fiskheroes:blade", false);
+      manager.setDataWithNotify(entity, "skyhighheroes:dyn/blade_left", false);
+      manager.setDataWithNotify(entity, "skyhighheroes:dyn/blade_right", false);
+    },
+    onSleep: function (entity, manager) {
+      manager.setDataWithNotify(entity, "skyhighheroes:dyn/prev_blade", entity.getData("fiskheroes:blade"));
+      manager.setDataWithNotify(entity, "skyhighheroes:dyn/prev_blade_left", entity.getData("skyhighheroes:dyn/blade_left"));
+      manager.setDataWithNotify(entity, "skyhighheroes:dyn/prev_blade_right", entity.getData("skyhighheroes:dyn/blade_right"));
+      manager.setDataWithNotify(entity, "fiskheroes:blade", false);
+      manager.setDataWithNotify(entity, "skyhighheroes:dyn/blade_left", false);
+      manager.setDataWithNotify(entity, "skyhighheroes:dyn/blade_right", false);
+    },
+    onWake: function (entity, manager) {
+      manager.setDataWithNotify(entity, "fiskheroes:blade", entity.getData("skyhighheroes:dyn/prev_blade"));
+      manager.setDataWithNotify(entity, "skyhighheroes:dyn/blade_left", entity.getData("skyhighheroes:dyn/prev_blade_left"));
+      manager.setDataWithNotify(entity, "skyhighheroes:dyn/blade_right", entity.getData("skyhighheroes:dyn/prev_blade_right"));
+    },
   };
 };

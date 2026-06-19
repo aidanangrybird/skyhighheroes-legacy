@@ -120,31 +120,20 @@ function initModule(system) {
           system.setMenu(entity, manager, "blades_shields");
         },
         backAction: (entity, manager) => {
-          manager.setData(entity, "skyhighheroes:dyn/interface", false);
+          manager.setData(entity, "skyhighheroes:dyn/cybernetic_interface", false);
         }
       }
     },
     helpMessage: "<n>!shield <nh>-<n> Shields",
     disabledMessage: "<e>Module <eh>shields<e> is disabled!",
     keyBinds: function (hero, color) {
-      hero.addKeyBindFunc("SHIELDS", (player, manager) => {
-        //system.moduleMessage(this, player, "<e>To arm a shield do <eh>!shield arm <left|right><e>.");
-        shieldMultiTap.tap(player, manager);
-        return true;
-      }, "\u00A7" + color + "Shields (x2 to arm)", 2);
-      hero.addKeyBindFunc("SHIELD", (player, manager) => {
-        shieldMultiTap.tap(player, manager);
-        return true;
-      }, "\u00A7" + color + "Shields (x2 to disarm)", 2);
+      hero.addKeyBind("SHIELD", "\u00A7" + color + "Activate Armed Shields", 2);
     },
     isKeyBindEnabled: function (entity, keyBind) {
       result = false;
       if (!system.isModuleDisabled(entity, this.name)) {
         var left = entity.getData("skyhighheroes:dyn/shield_left_armed");
         var right = entity.getData("skyhighheroes:dyn/shield_right_armed");
-        if (keyBind == "SHIELDS" && !entity.getData("skyhighheroes:dyn/battle_mode")) {
-          result = (!left && !right);
-        };
         if (keyBind == "SHIELD" && !entity.getData("skyhighheroes:dyn/battle_mode")) {
           result = (left || right);
         };
@@ -489,9 +478,22 @@ function initModule(system) {
       manager.setData(entity, "skyhighheroes:dyn/shield_right_armed", nbt.getBoolean("shieldsRight"));
     },
     onChargingStart: function (entity, manager) {
-      manager.setData(entity, "fiskheroes:shield", false);
-      manager.setData(entity, "skyhighheroes:dyn/shield_left", false);
+      manager.setDataWithNotify(entity, "fiskheroes:shield", false);
+      manager.setDataWithNotify(entity, "skyhighheroes:dyn/shield_left", false);
+      manager.setDataWithNotify(entity, "skyhighheroes:dyn/shield_right", false);
+    },
+    onSleep: function (entity, manager) {
+      manager.setDataWithNotify(entity, "skyhighheroes:dyn/prev_shield", entity.getData("fiskheroes:shield"));
+      manager.setDataWithNotify(entity, "skyhighheroes:dyn/prev_shield_left", entity.getData("skyhighheroes:dyn/shield_left"));
+      manager.setDataWithNotify(entity, "skyhighheroes:dyn/prev_shield_right", entity.getData("skyhighheroes:dyn/shield_right"));
+      manager.setDataWithNotify(entity, "fiskheroes:shield", false);
+      manager.setDataWithNotify(entity, "skyhighheroes:dyn/shield_left", false);
       manager.setData(entity, "skyhighheroes:dyn/shield_right", false);
-    }
+    },
+    onWake: function (entity, manager) {
+      manager.setDataWithNotify(entity, "fiskheroes:shield", entity.getData("skyhighheroes:dyn/prev_shield"));
+      manager.setDataWithNotify(entity, "skyhighheroes:dyn/shield_left", entity.getData("skyhighheroes:dyn/prev_shield_left"));
+      manager.setDataWithNotify(entity, "skyhighheroes:dyn/shield_right", entity.getData("skyhighheroes:dyn/prev_shield_right"));
+    },
   };
 };

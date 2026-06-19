@@ -484,7 +484,7 @@ function text(renderer, name) {
   } else {
     texture_name = "character"
   };
-  for (var char in chars) {
+  chars.forEach(char => {
     var character_texture = texture_name + "_" + index.toString();
     var character_model = renderer.createResource("MODEL", "skyhighheroes:Character");
     character_model.texture.set(null, character_texture);
@@ -495,10 +495,10 @@ function text(renderer, name) {
     character.setOffset(0.0, 0.0, 0.0);
     characterModels.push(character);
     index = index + 1;
-  };
+  });
   return {
     renderLine: (isFirstPersonArm, horizontalAlignment, verticalAlignment, text, posX, posY, posZ, scale) => {
-      if (isFirstPersonArm && text != null && typeof text === "string") {
+      if (text != null && typeof text === "string") {
         var lines = text.split("\n");
         if (lines.length > 1) {
           this.renderLines(isFirstPersonArm, horizontalAlignment, verticalAlignment, lines, posX, posY, posZ, scale)
@@ -539,20 +539,26 @@ function text(renderer, name) {
             if (index > -1) {
               var model = characterModels[index];
               model.setRotation(0, 0, 0);
-              model.setOffset(posX+currentPosX-overallOffsetPosX, posY+overallOffsetPosY, posZ);
+              if (isFirstPersonArm) {
+                model.setOffset(posX + currentPosX - overallOffsetPosX, posY + overallOffsetPosY, posZ);
+              };
+              if (!isFirstPersonArm) {
+                model.setRotation(0, -180.0, 0);
+                model.setOffset(posX - currentPosX + overallOffsetPosX, posY + overallOffsetPosY, posZ);
+              };
               model.setScale(scale);
               model.render();
-              currentPosX = currentPosX + charWidths[textCharacter]*scale + 1.0*scale;
+              currentPosX = currentPosX + charWidths[textCharacter] * scale + 1.0 * scale;
             };
             if (textCharacter == " ") {
-              currentPosX = currentPosX + charWidths[textCharacter]*scale + 1.0*scale;
+              currentPosX = currentPosX + charWidths[textCharacter] * scale + 1.0 * scale;
             };
           });
         };
       };
     },
     renderLines: (isFirstPersonArm, horizontalAlignment, verticalAlignment, textArray, posX, posY, posZ, scale) => {
-      if (isFirstPersonArm && typeof textArray !== "string") {
+      if (typeof textArray !== "string") {
         var overallPosY = 0.0;
         var totalHeight = 11.0*((textArray.length-1)*1.0)*scale;
         var overallPosX = 0.0;
@@ -634,13 +640,19 @@ function text(renderer, name) {
               if (index > -1) {
                 var model = characterModels[index];
                 model.setRotation(0, 0, 0);
-                model.setOffset(posX+currentPosX-overallPosX+linePosX, posY+currentPosY-overallPosY, posZ);
+                if (isFirstPersonArm) {
+                  model.setOffset(posX + currentPosX - overallPosX + linePosX, posY + currentPosY - overallPosY, posZ);
+                };
+                if (!isFirstPersonArm) {
+                  model.setRotation(0, -180.0, 0);
+                  model.setOffset(posX - currentPosX + overallPosX - linePosX, posY + currentPosY - overallPosY, posZ);
+                };
                 model.setScale(scale);
                 model.render();
-                currentPosX = currentPosX + charWidths[textCharacter]*scale + 1.0*scale;
+                currentPosX = currentPosX + charWidths[textCharacter] * scale + 1.0 * scale;
               };
               if (textCharacter == " ") {
-                currentPosX = currentPosX + charWidths[textCharacter]*scale + 1.0*scale;
+                currentPosX = currentPosX + charWidths[textCharacter] * scale + 1.0 * scale;
               };
             });
           };
@@ -2503,7 +2515,7 @@ var transformedVars = [
   "ironmaniac:dyn/mk5_timer",
   "secretheroes:dyn/moonknight_timer",
   "secretheroes:dyn/mrknight_timer",
-  "skyhighheroes:dyn/wave_changing_timer",
+  "skyhighocs:dyn/wave_changing_timer",
   "skyhighheroes:dyn/wave_changing_timer",
 ];
 

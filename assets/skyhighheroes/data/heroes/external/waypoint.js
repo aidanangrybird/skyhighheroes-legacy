@@ -538,7 +538,7 @@ function initModule(system) {
           system.updateList(entity, manager, 10, list);
         },
         backAction: (entity, manager) => {
-          manager.setData(entity, "skyhighheroes:dyn/interface", false);
+          manager.setData(entity, "skyhighheroes:dyn/cybernetic_interface", false);
         },
         selectAction: (entity, manager) => {
           var list = waypointsList(entity, manager);

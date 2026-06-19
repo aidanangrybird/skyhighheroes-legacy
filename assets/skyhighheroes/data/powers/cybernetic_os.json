@@ -4,22 +4,37 @@
   "modifiers": {
     "fiskheroes:transformation|power": {
       "transformation": {
-        "toggleData": "skyhighheroes:dyn/powered_down",
-        "timerData": "skyhighheroes:dyn/powering_down_timer",
+        "toggleData": "skyhighheroes:dyn/cybernetics_offline",
+        "timerData": "skyhighheroes:dyn/cybernetics_offline_timer",
         "time": 80
+      },
+      "isToggle": true
+    },
+    "fiskheroes:transformation|sleep": {
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/cybernetic_sleep",
+        "timerData": "skyhighheroes:dyn/cybernetic_sleep_timer",
+        "time": 10
+      },
+      "isToggle": true
+    },
+    "fiskheroes:transformation|statue": {
+      "transformation": {
+        "toggleData": "skyhighheroes:dyn/cybernetic_statue_mode",
+        "timerData": "skyhighheroes:dyn/cybernetic_statue_mode_timer",
+        "time": 10
       },
       "isToggle": true
     },
     "fiskheroes:transformation|interface": {
       "key": "INTERFACE",
       "transformation": {
-        "toggleData": "skyhighheroes:dyn/interface",
-        "timerData": "skyhighheroes:dyn/interface_timer",
-        "time": 60
+        "toggleData": "skyhighheroes:dyn/cybernetic_interface",
+        "timerData": "skyhighheroes:dyn/cybernetic_interface_timer",
+        "time": 20
       },
       "isToggle": true
     },
-    "fiskheroes:shape_shifting": {
-    }
+    "fiskheroes:shape_shifting": {}
   }
 }

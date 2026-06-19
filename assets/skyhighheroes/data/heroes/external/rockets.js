@@ -200,7 +200,7 @@ function initModule(system) {
           system.setButton(entity, manager, "rockets_arms_armed");
         },
         backAction: (entity, manager) => {
-          manager.setData(entity, "skyhighheroes:dyn/interface", false);
+          manager.setData(entity, "skyhighheroes:dyn/cybernetic_interface", false);
         }
       }
     },
@@ -1491,6 +1491,22 @@ function initModule(system) {
       manager.setData(entity, "skyhighheroes:dyn/rockets_arms", false);
       manager.setData(entity, "skyhighheroes:dyn/rockets_legs", false);
       manager.setData(entity, "skyhighheroes:dyn/rockets_body", false);
-    }
+    },
+    onSleep: function (entity, manager) {
+      manager.setDataWithNotify(entity, "skyhighheroes:dyn/prev_rockets", entity.getData("fiskheroes:flying"));
+      manager.setDataWithNotify(entity, "skyhighheroes:dyn/prev_rockets_body", entity.getData("skyhighheroes:dyn/rockets_body"));
+      manager.setDataWithNotify(entity, "skyhighheroes:dyn/prev_rockets_arms", entity.getData("skyhighheroes:dyn/rockets_arms"));
+      manager.setDataWithNotify(entity, "skyhighheroes:dyn/prev_rockets_legs", entity.getData("skyhighheroes:dyn/rockets_legs"));
+      manager.setDataWithNotify(entity, "fiskheroes:flying", false);
+      manager.setDataWithNotify(entity, "skyhighheroes:dyn/rockets_arms", false);
+      manager.setDataWithNotify(entity, "skyhighheroes:dyn/rockets_legs", false);
+      manager.setDataWithNotify(entity, "skyhighheroes:dyn/rockets_body", false);
+    },
+    onWake: function (entity, manager) {
+      manager.setDataWithNotify(entity, "fiskheroes:flying", entity.getData("skyhighheroes:dyn/prev_rockets"));
+      manager.setDataWithNotify(entity, "skyhighheroes:dyn/rockets_body", entity.getData("skyhighheroes:dyn/prev_rockets_body"));
+      manager.setDataWithNotify(entity, "skyhighheroes:dyn/rockets_arms", entity.getData("skyhighheroes:dyn/prev_rockets_arms"));
+      manager.setDataWithNotify(entity, "skyhighheroes:dyn/rockets_legs", entity.getData("skyhighheroes:dyn/prev_rockets_legs"));
+    },
   };
 };

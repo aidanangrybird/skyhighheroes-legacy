@@ -394,23 +394,14 @@ function initModule(system) {
           system.setButton(entity, manager, "cannons_head_armed");
         },
         backAction: (entity, manager) => {
-          manager.setData(entity, "skyhighheroes:dyn/interface", false);
+          manager.setData(entity, "skyhighheroes:dyn/cybernetic_interface", false);
         }
       }
     },
     helpMessage: "<n>!cannon <nh>-<n> Cannons",
     disabledMessage: "<e>Module <eh>cannons<e> is disabled!",
     keyBinds: function (hero, color) {
-      hero.addKeyBindFunc("CANNONS", (player, manager) => {
-        //system.moduleMessage(this, player, "<e>To arm a cannon set do <eh>!cannon arm <arms|body|head><e>.");
-        cannonMultiTap.tap(player, manager);
-        return true;
-      }, "\u00A7" + color + "Cannons (x2 to arm)", 4);
-      hero.addKeyBindFunc("CHARGED_BEAM", (player, manager) => {
-        cannonMultiTap.tap(player, manager);
-        return true;
-      }, "\u00A7" + color + "Cannons (x2 to disarm)", 4);
-      hero.addKeyBind("CANNONS_ARMS", "\u00A7" + color + "", 4);
+      hero.addKeyBind("CHARGED_BEAM", "\u00A7" + color + "Fire Armed Cannons", 4);
     },
     isKeyBindEnabled: function (entity, keyBind) {
       result = false;
@@ -418,9 +409,6 @@ function initModule(system) {
         var head = entity.getData("skyhighheroes:dyn/cannons_head_armed");
         var body = entity.getData("skyhighheroes:dyn/cannons_body_armed");
         var arms = entity.getData("skyhighheroes:dyn/cannons_arms_armed");
-        if (keyBind == "CANNONS" && !entity.getData("skyhighheroes:dyn/battle_mode")) {
-          result = (!head && !body && !arms);
-        };
         if (keyBind == "CHARGED_BEAM" && !entity.getData("skyhighheroes:dyn/battle_mode")) {
           result = (head || body || arms);
         };
@@ -1001,13 +989,23 @@ function initModule(system) {
       manager.setData(entity, "skyhighheroes:dyn/cannon_right_arm_flush_enabled", nbt.getBoolean("flushRightArmCannons"));
     },
     onChargingStart: function (entity, manager) {
-      manager.setData(entity, "fiskheroes:beam_charge", 0.0);
-      manager.setData(entity, "fiskheroes:beam_charging", false);
-      manager.setData(entity, "fiskheroes:beam_shooting", 0.0);
-      manager.setData(entity, "fiskheroes:beam_shooting_timer", 0.0);
-      manager.setData(entity, "skyhighheroes:dyn/cannons_arms", false);
-      manager.setData(entity, "skyhighheroes:dyn/cannons_body", false);
-      manager.setData(entity, "skyhighheroes:dyn/cannons_head", false);
-    }
+      manager.setDataWithNotify(entity, "fiskheroes:beam_charge", 0.0);
+      manager.setDataWithNotify(entity, "fiskheroes:beam_charging", false);
+      manager.setDataWithNotify(entity, "fiskheroes:beam_shooting", 0.0);
+      manager.setDataWithNotify(entity, "fiskheroes:beam_shooting_timer", 0.0);
+      manager.setDataWithNotify(entity, "skyhighheroes:dyn/cannons_arms", false);
+      manager.setDataWithNotify(entity, "skyhighheroes:dyn/cannons_body", false);
+      manager.setDataWithNotify(entity, "skyhighheroes:dyn/cannons_head", false);
+    },
+    onSleep: function (entity, manager) {
+      manager.setDataWithNotify(entity, "skyhighheroes:dyn/prev_cannons_body", entity.getData("skyhighheroes:dyn/cannons_body"));
+      manager.setDataWithNotify(entity, "skyhighheroes:dyn/prev_cannons_arms", entity.getData("skyhighheroes:dyn/cannons_arms"));
+      manager.setDataWithNotify(entity, "skyhighheroes:dyn/prev_cannons_head", entity.getData("skyhighheroes:dyn/cannons_head"));
+    },
+    onWake: function (entity, manager) {
+      manager.setDataWithNotify(entity, "skyhighheroes:dyn/cannons_body", entity.getData("skyhighheroes:dyn/prev_cannons_body"));
+      manager.setDataWithNotify(entity, "skyhighheroes:dyn/cannons_arms", entity.getData("skyhighheroes:dyn/prev_cannons_arms"));
+      manager.setDataWithNotify(entity, "skyhighheroes:dyn/cannons_head", entity.getData("skyhighheroes:dyn/prev_cannons_head"));
+    },
   };
 };

@@ -101,7 +101,7 @@ function initModule(system) {
           system.setButton(entity, manager, "rockets_arms_armed");
         },
         backAction: (entity, manager) => {
-          manager.setData(entity, "skyhighheroes:dyn/interface", false);
+          manager.setData(entity, "skyhighheroes:dyn/cybernetic_interface", false);
         }
       }
     },
@@ -262,6 +262,16 @@ function initModule(system) {
         manager.setBoolean(nbt, "wings", false);
       };
       manager.setData(entity, "skyhighheroes:dyn/wings_armed", nbt.getBoolean("wings"));
-    }
+    },
+    onSleep: function (entity, manager) {
+      manager.setDataWithNotify(entity, "skyhighheroes:dyn/prev_wings", entity.getData("skyhighheroes:dyn/wings"));
+      manager.setDataWithNotify(entity, "skyhighheroes:dyn/prev_gliding", entity.getData("fiskheroes:gliding"));
+      manager.setDataWithNotify(entity, "skyhighheroes:dyn/prev_wings", false);
+      manager.setDataWithNotify(entity, "skyhighheroes:dyn/prev_gliding", false);
+    },
+    onWake: function (entity, manager) {
+      manager.setDataWithNotify(entity, "skyhighheroes:dyn/wings", entity.getData("skyhighheroes:dyn/prev_wings"));
+      manager.setDataWithNotify(entity, "fiskheroes:gliding", entity.getData("skyhighheroes:dyn/prev_gliding"));
+    },
   };
 };

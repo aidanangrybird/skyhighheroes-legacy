@@ -16,7 +16,7 @@ function initModule(system) {
           "settings_statue_mode": {
             borderingButtons: {
               bottom: "settings_alias_active",
-              right: "settings_body_lights",
+              right: "settings_sleep",
             },
             properties: {
               confirmAction: (entity, manager) => {
@@ -38,7 +38,7 @@ function initModule(system) {
           "settings_body_lights": {
             borderingButtons: {
               bottom: "settings_night_vision",
-              left: "settings_statue_mode",
+              left: "settings_sleep",
             },
             properties: {
               confirmAction: (entity, manager) => {
@@ -60,7 +60,7 @@ function initModule(system) {
           "settings_alias_active": {
             borderingButtons: {
               top: "settings_statue_mode",
-              right: "settings_night_vision",
+              right: "settings_offline",
             },
             properties: {
               confirmAction: (entity, manager) => {
@@ -82,7 +82,7 @@ function initModule(system) {
           "settings_night_vision": {
             borderingButtons: {
               top: "settings_body_lights",
-              left: "settings_alias_active",
+              left: "settings_offline",
             },
             properties: {
               confirmAction: (entity, manager) => {
@@ -93,6 +93,57 @@ function initModule(system) {
                   system.moduleMessage(this, entity, "<n>Enabled <nh>night vision<n>!");
                 } else {
                   system.moduleMessage(this, entity, "<n>Disabled <nh>night vision<n>!");
+                };
+              },
+              backAction: (entity, manager) => {
+                system.setButton(entity, manager, "main_settings");
+                system.setMenu(entity, manager, "main");
+              },
+            }
+          },
+          "settings_sleep": {
+            borderingButtons: {
+              bottom: "settings_offline",
+              left: "settings_statue_mode",
+              right: "settings_body_lights",
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                manager.setDataWithNotify(entity, "skyhighheroes:dyn/cybernetic_sleep", !entity.getData("skyhighheroes:dyn/cybernetic_sleep"));
+                if (entity.getData("skyhighheroes:dyn/cybernetic_sleep")) {
+                  system.moduleMessage(this, entity, "<n>Sleep mode activated!");
+                  manager.setData(entity, "skyhighheroes:dyn/cybernetic_body_lights", false);
+                  system.onSleepActions.forEach(action => {
+                    action(entity, manager);
+                  });
+                } else {
+                  system.moduleMessage(this, entity, "<n>Sleep mode deactivated!");
+                  var nbt = system.mainNBT(entity);
+                  manager.setData(entity, "skyhighheroes:dyn/cybernetic_body_lights", nbt.getBoolean("bodyLights"));
+                  system.onWakeActions.forEach(action => {
+                    action(entity, manager);
+                  });
+                };
+              },
+              backAction: (entity, manager) => {
+                system.setButton(entity, manager, "main_settings");
+                system.setMenu(entity, manager, "main");
+              },
+            }
+          },
+          "settings_offline": {
+            borderingButtons: {
+              top: "settings_sleep",
+              left: "settings_alias_active",
+              right: "settings_night_vision",
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                manager.setData(entity, "skyhighheroes:dyn/cybernetics_offline", !entity.getData("skyhighheroes:dyn/cybernetics_offline"));
+                if (entity.getData("skyhighheroes:dyn/cybernetics_offline")) {
+                  system.moduleMessage(this, entity, "<n>Now offline!");
+                } else {
+                  system.moduleMessage(this, entity, "<n>Now online!");
                 };
               },
               backAction: (entity, manager) => {
@@ -113,10 +164,10 @@ function initModule(system) {
       properties: {
         confirmAction: (entity, manager) => {
           system.setMenu(entity, manager, "settings");
-          system.setButton(entity, manager, "settings_statue_mode");
+          system.setButton(entity, manager, "settings_sleep");
         },
         backAction: (entity, manager) => {
-          manager.setData(entity, "skyhighheroes:dyn/interface", false);
+          manager.setData(entity, "skyhighheroes:dyn/cybernetic_interface", false);
         }
       }
     },

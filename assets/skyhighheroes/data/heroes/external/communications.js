@@ -1980,7 +1980,7 @@ function initModule(system) {
           system.setButton(entity, manager, "comms_status");
         },
         backAction: (entity, manager) => {
-          manager.setData(entity, "skyhighheroes:dyn/interface", false);
+          manager.setData(entity, "skyhighheroes:dyn/cybernetic_interface", false);
         }
       }
     },

@@ -786,7 +786,7 @@ function initModule(system) {
           system.setButton(entity, manager, "contacts_groups_contacts");
         },
         backAction: (entity, manager) => {
-          manager.setData(entity, "skyhighheroes:dyn/interface", false);
+          manager.setData(entity, "skyhighheroes:dyn/cybernetic_interface", false);
         }
       }
     },
