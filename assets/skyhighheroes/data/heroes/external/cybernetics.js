@@ -2707,6 +2707,21 @@ function initSystem(moduleList, name, colorCode) {
           module.tickHandler(entity, manager);
         };
       });
+      var trackedWaypoint = entity.getData("skyhighheroes:dyn/tracked_waypoint").split(";:");
+      if (trackedWaypoint.length == 5) {
+        var waypointX = parseFloat(trackedWaypoint[1]);
+        var waypointZ = parseFloat(trackedWaypoint[3]);
+        var sameDim = (entity.world().getDimension() == parseInt(trackedWaypoint[4]));
+        if (sameDim) {
+          var waypointRotation = (entity.rotYaw() - (Math.atan2((waypointZ - entity.eyePos().z()), (waypointX - entity.eyePos().x())) / Math.PI) * 180) % 360;
+          var waypointBearing = ((Math.abs((waypointRotation < 0) ? (waypointRotation + 360) : waypointRotation) + 90) % 360);
+          manager.setDataWithNotify(entity, "skyhighheroes:dyn/tracked_waypoint_bearing", waypointBearing);
+        };
+      } else {
+        if (entity.getData('skyhighocs:dyn/tracked_waypoint_bearing') != 0) {
+          manager.setDataWithNotify(entity, "skyhighheroes:dyn/tracked_waypoint_bearing", 0.0);
+        };
+      };
       var rotation = entity.rotYaw()%360;
       var bearing = ((Math.abs((rotation < 0) ? (rotation+360) : rotation)+180) % 360);
       manager.setDataWithNotify(entity, "skyhighheroes:dyn/bearing", bearing);

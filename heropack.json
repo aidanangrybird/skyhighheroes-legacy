@@ -18,6 +18,7 @@
     "normal_selected": "STRING",
     "brotherband_selected": "STRING",
     "tracked_waypoint": { "type": "STRING", "resetWithoutSuit": true, "default": "" },
+    "tracked_waypoint_bearing": { "type": "FLOAT_INTERP", "resetWithoutSuit": true, "default": 0.0 },
     "selected_button": { "type": "STRING", "resetWithoutSuit": true, "default": "" },
     "prev_selected_button": { "type": "STRING", "resetWithoutSuit": true, "default": "" },
     "current_menu": { "type": "STRING", "resetWithoutSuit": true, "default": "" },

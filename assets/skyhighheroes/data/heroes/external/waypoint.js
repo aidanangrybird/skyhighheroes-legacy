@@ -202,10 +202,10 @@ function initModule(system) {
     var waypointIndex = waypointNames.indexOf(waypoint);
     if (waypointIndex > -1) {
       waypointData = waypointDataArray[waypointIndex].coords;
-      data = waypoint + ";:" + waypointData[0] + ";:" + waypointData[1] + ";:" + waypointData[2] + ";:" + waypointData[3];
-      manager.setString(nbt, "trackedWaypoint", "");
+      data = waypoint + ";:" + (waypointData[0] + 0.5) + ";:" + waypointData[1] + ";:" + (waypointData[2] + 0.5) + ";:" + waypointData[3];
+      manager.setString(nbt, "trackedWaypoint", data);
       manager.setDataWithNotify(entity, "skyhighheroes:dyn/tracked_waypoint", data);
-      system.systemMessage(entity, "Now tracking waypoint " + waypoint + "!")
+      system.systemMessage(entity, "<s>Now tracking waypoint <sh>" + waypoint + "<s>!");
     };
   };
   return {

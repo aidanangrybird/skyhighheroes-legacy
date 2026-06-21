@@ -86,6 +86,86 @@
     },
     {
       "type": "CHARGE",
+      "texture": "skyhighheroes:textures/gui/bars/cyber_waypoint_F.png",
+      "data": "entity.getData('skyhighheroes:dyn/converted_cyber') && (((entity.getData('skyhighheroes:dyn/tracked_waypoint_bearing') >= 0) && (entity.getData('skyhighheroes:dyn/tracked_waypoint_bearing') < 11.25)) || ((entity.getData('skyhighheroes:dyn/tracked_waypoint_bearing') > 348.75) && (entity.getData('skyhighheroes:dyn/tracked_waypoint_bearing') <= 360))) ? 1.0 : 0.0"
+    },
+    {
+      "type": "CHARGE",
+      "texture": "skyhighheroes:textures/gui/bars/cyber_waypoint_FFR.png",
+      "data": "entity.getData('skyhighheroes:dyn/converted_cyber') && ((entity.getData('skyhighheroes:dyn/tracked_waypoint_bearing') < 33.75) && (entity.getData('skyhighheroes:dyn/tracked_waypoint_bearing') > 11.25)) ? 1.0 : 0.0"
+    },
+    {
+      "type": "CHARGE",
+      "texture": "skyhighheroes:textures/gui/bars/cyber_waypoint_FR.png",
+      "data": "entity.getData('skyhighheroes:dyn/converted_cyber') && ((entity.getData('skyhighheroes:dyn/tracked_waypoint_bearing') < 56.25) && (entity.getData('skyhighheroes:dyn/tracked_waypoint_bearing') > 33.75)) ? 1.0 : 0.0"
+    },
+    {
+      "type": "CHARGE",
+      "texture": "skyhighheroes:textures/gui/bars/cyber_waypoint_RFR.png",
+      "data": "entity.getData('skyhighheroes:dyn/converted_cyber') && ((entity.getData('skyhighheroes:dyn/tracked_waypoint_bearing') < 78.75) && (entity.getData('skyhighheroes:dyn/tracked_waypoint_bearing') > 56.25)) ? 1.0 : 0.0"
+    },
+    {
+      "type": "CHARGE",
+      "texture": "skyhighheroes:textures/gui/bars/cyber_waypoint_R.png",
+      "data": "entity.getData('skyhighheroes:dyn/converted_cyber') && ((entity.getData('skyhighheroes:dyn/tracked_waypoint_bearing') < 101.25) && (entity.getData('skyhighheroes:dyn/tracked_waypoint_bearing') > 78.75)) ? 1.0 : 0.0"
+    },
+    {
+      "type": "CHARGE",
+      "texture": "skyhighheroes:textures/gui/bars/cyber_waypoint_RBR.png",
+      "data": "entity.getData('skyhighheroes:dyn/converted_cyber') && ((entity.getData('skyhighheroes:dyn/tracked_waypoint_bearing') < 123.75) && (entity.getData('skyhighheroes:dyn/tracked_waypoint_bearing') > 101.25)) ? 1.0 : 0.0"
+    },
+    {
+      "type": "CHARGE",
+      "texture": "skyhighheroes:textures/gui/bars/cyber_waypoint_BR.png",
+      "data": "entity.getData('skyhighheroes:dyn/converted_cyber') && ((entity.getData('skyhighheroes:dyn/tracked_waypoint_bearing') < 146.25) && (entity.getData('skyhighheroes:dyn/tracked_waypoint_bearing') > 123.75)) ? 1.0 : 0.0"
+    },
+    {
+      "type": "CHARGE",
+      "texture": "skyhighheroes:textures/gui/bars/cyber_waypoint_BBR.png",
+      "data": "entity.getData('skyhighheroes:dyn/converted_cyber') && ((entity.getData('skyhighheroes:dyn/tracked_waypoint_bearing') < 168.75) && (entity.getData('skyhighheroes:dyn/tracked_waypoint_bearing') > 146.25)) ? 1.0 : 0.0"
+    },
+    {
+      "type": "CHARGE",
+      "texture": "skyhighheroes:textures/gui/bars/cyber_waypoint_B.png",
+      "data": "entity.getData('skyhighheroes:dyn/converted_cyber') && ((entity.getData('skyhighheroes:dyn/tracked_waypoint_bearing') < 191.25) && (entity.getData('skyhighheroes:dyn/tracked_waypoint_bearing') > 168.75)) ? 1.0 : 0.0"
+    },
+    {
+      "type": "CHARGE",
+      "texture": "skyhighheroes:textures/gui/bars/cyber_waypoint_BBL.png",
+      "data": "entity.getData('skyhighheroes:dyn/converted_cyber') && ((entity.getData('skyhighheroes:dyn/tracked_waypoint_bearing') < 213.75) && (entity.getData('skyhighheroes:dyn/tracked_waypoint_bearing') > 191.25)) ? 1.0 : 0.0"
+    },
+    {
+      "type": "CHARGE",
+      "texture": "skyhighheroes:textures/gui/bars/cyber_waypoint_BL.png",
+      "data": "entity.getData('skyhighheroes:dyn/converted_cyber') && ((entity.getData('skyhighheroes:dyn/tracked_waypoint_bearing') < 236.25) && (entity.getData('skyhighheroes:dyn/tracked_waypoint_bearing') > 213.75)) ? 1.0 : 0.0"
+    },
+    {
+      "type": "CHARGE",
+      "texture": "skyhighheroes:textures/gui/bars/cyber_waypoint_LBL.png",
+      "data": "entity.getData('skyhighheroes:dyn/converted_cyber') && ((entity.getData('skyhighheroes:dyn/tracked_waypoint_bearing') < 258.75) && (entity.getData('skyhighheroes:dyn/tracked_waypoint_bearing') > 236.25)) ? 1.0 : 0.0"
+    },
+    {
+      "type": "CHARGE",
+      "texture": "skyhighheroes:textures/gui/bars/cyber_waypoint_L.png",
+      "data": "entity.getData('skyhighheroes:dyn/converted_cyber') && ((entity.getData('skyhighheroes:dyn/tracked_waypoint_bearing') < 281.25) && (entity.getData('skyhighheroes:dyn/tracked_waypoint_bearing') > 258.75)) ? 1.0 : 0.0"
+    },
+    {
+      "type": "CHARGE",
+      "texture": "skyhighheroes:textures/gui/bars/cyber_waypoint_LFL.png",
+      "data": "entity.getData('skyhighheroes:dyn/converted_cyber') && ((entity.getData('skyhighheroes:dyn/tracked_waypoint_bearing') < 303.75) && (entity.getData('skyhighheroes:dyn/tracked_waypoint_bearing') > 281.25)) ? 1.0 : 0.0"
+    },
+    {
+      "type": "CHARGE",
+      "texture": "skyhighheroes:textures/gui/bars/cyber_waypoint_FL.png",
+      "data": "entity.getData('skyhighheroes:dyn/converted_cyber') && ((entity.getData('skyhighheroes:dyn/tracked_waypoint_bearing') < 326.25) && (entity.getData('skyhighheroes:dyn/tracked_waypoint_bearing') > 303.75)) ? 1.0 : 0.0"
+    },
+    {
+      "type": "CHARGE",
+      "texture": "skyhighheroes:textures/gui/bars/cyber_waypoint_FFL.png",
+      "data": "entity.getData('skyhighheroes:dyn/converted_cyber') && ((entity.getData('skyhighheroes:dyn/tracked_waypoint_bearing') < 348.75) && (entity.getData('skyhighheroes:dyn/tracked_waypoint_bearing') > 326.25)) ? 1.0 : 0.0"
+    },
+    {
+      "type": "CHARGE",
       "texture": "skyhighheroes:textures/gui/bars/cyber_downloading.png",
       "data": "entity.getInterpolatedData('skyhighheroes:dyn/download_timer')"
     },
