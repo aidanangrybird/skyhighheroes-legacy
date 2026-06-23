@@ -59,7 +59,7 @@ function initModule(system) {
    * @returns Array of waypoint names, coords and dimension
    **/
   function getWaypointArray(entity, manager) {
-    var nbt = system.getMainNBT(entity);
+    var nbt = system.mainNBT(entity);
     if (!nbt.hasKey("waypoints")) {
       var newWaypointsList = manager.newTagList();
       manager.setTagList(nbt, "waypoints", newWaypointsList);
@@ -84,7 +84,7 @@ function initModule(system) {
    * @returns List of waypoint names
    **/
   function waypointsList(entity, manager) {
-    var nbt = system.getMainNBT(entity);
+    var nbt = system.mainNBT(entity);
     if (!nbt.hasKey("waypoints")) {
       var newWaypointsList = manager.newTagList();
       manager.setTagList(nbt, "waypoints", newWaypointsList);
@@ -99,7 +99,7 @@ function initModule(system) {
    * @returns List of waypoint names
    **/
   function waypointsQueueList(entity, manager) {
-    var nbt = system.getMainNBT(entity);
+    var nbt = system.mainNBT(entity);
     if (!nbt.hasKey("waypointsTransmitBuffer")) {
       var newWaypointsList = manager.newTagList();
       manager.setTagList(nbt, "waypointsTransmitBuffer", newWaypointsList);
@@ -336,7 +336,7 @@ function initModule(system) {
       //entity = tx
       //otherEntity = rx
       foundPlayers.forEach(otherEntity => {
-        var rxDomain = otherEntity.getWornChestplate().suitType().split(":")[0];
+        var rxDomain = system.getMainPiece(otherEntity).suitType().split(":")[0];
         var rxAntennaDeployed = (otherEntity.getData(rxDomain + ":dyn/antenna_deploy_timer") == 1) && (otherEntity.getData(rxDomain + ":dyn/satellite_rain_mode_timer") == 0);
         var rxSatelliteDeployed = (otherEntity.getData(rxDomain + ":dyn/satellite_deploy_timer") == 1) && (otherEntity.getData(rxDomain + ":dyn/satellite_rain_mode_timer") == 0);
         if (entity.canSee(otherEntity) && entity.pos().distanceTo(otherEntity.pos()) <= range) {
@@ -662,7 +662,7 @@ function initModule(system) {
       //entity = tx
       //otherEntity = rx
       foundPlayers.forEach(otherEntity => {
-        var rxDomain = otherEntity.getWornChestplate().suitType().split(":")[0];
+        var rxDomain = system.getMainPiece(otherEntity).suitType().split(":")[0];
         var rxAntennaDeployed = (otherEntity.getData(rxDomain + ":dyn/antenna_deploy_timer") == 1) && (otherEntity.getData(rxDomain + ":dyn/satellite_rain_mode_timer") == 0);
         var rxSatelliteDeployed = (otherEntity.getData(rxDomain + ":dyn/satellite_deploy_timer") == 1) && (otherEntity.getData(rxDomain + ":dyn/satellite_rain_mode_timer") == 0);
         if (entity.canSee(otherEntity) && entity.pos().distanceTo(otherEntity.pos()) <= range) {
@@ -2143,7 +2143,7 @@ function initModule(system) {
               //otherEntity = rx
               transmitSuitsCommand(this, entity, manager, argList[2]);
               foundPlayers.forEach(otherEntity => {
-                var rxDomain = otherEntity.getWornChestplate().suitType().split(":")[0];
+                var rxDomain = system.getMainPiece(otherEntity).suitType().split(":")[0];
                 var rxAntennaDeployed = (otherEntity.getData(rxDomain + ":dyn/antenna_deploy_timer") == 1) && (otherEntity.getData(rxDomain + ":dyn/satellite_rain_mode_timer") == 0);
                 var rxSatelliteDeployed = (otherEntity.getData(rxDomain + ":dyn/satellite_deploy_timer") == 1) && (otherEntity.getData(rxDomain + ":dyn/satellite_rain_mode_timer") == 0);
                 if (entity.canSee(otherEntity) && entity.pos().distanceTo(otherEntity.pos()) <= range) {

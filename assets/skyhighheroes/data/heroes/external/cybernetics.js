@@ -316,26 +316,34 @@ function direction(base, other) {
   return direction;
 };
 
-function mainNBT(entity) {
-  return entity.getWornChestplate().nbt();
+function mainPiece(entity) {
+  return entity.getWornChestplate();
 };
 
-function getMainNBT(entity) {
+function mainNBT(entity) {
+  return mainPiece(entity).nbt();
+};
+
+function getMainPiece(entity) {
   if (entity.isWearingFullSuit()) {
     if (entity.getWornHelmet().nbt().hasKey("computerID")) {
-      return entity.getWornHelmet().nbt();
+      return entity.getWornHelmet();
     };
     if (entity.getWornChestplate().nbt().hasKey("computerID")) {
-      return entity.getWornChestplate().nbt();
+      return entity.getWornChestplate();
     };
     if (entity.getWornLeggings().nbt().hasKey("computerID")) {
-      return entity.getWornLeggings().nbt();
+      return entity.getWornLeggings();
     };
     if (entity.getWornBoots().nbt().hasKey("computerID")) {
-      return entity.getWornBoots().nbt();
+      return entity.getWornBoots();
     };
   };
   return null;
+};
+
+function getMainNBT(entity) {
+  return ((getMainPiece(entity) != null) ? getMainPiece(entity).nbt() : null);
 };
 
 function round(input) {

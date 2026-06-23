@@ -53,7 +53,7 @@ function initModule(system) {
    **/
   function settingsList(entity) {
     var settingsList = Object.keys(settings);
-    var nbt = system.getMainNBT(entity);
+    var nbt = system.mainNBT(entity);
     var settingsEntries = [];
     settingsList.forEach(entry => {
       var setting = settings[entry];
@@ -94,7 +94,7 @@ function initModule(system) {
    * @param {JSEntity} entity - Required
    **/
   function viewValue(entity) {
-    var nbt = system.getMainNBT(entity);
+    var nbt = system.mainNBT(entity);
     var entry = entity.getData("skyhighheroes:dyn/list_entry");
     var entries = entry.split(";:");
     var nbtKey = entries[0];
@@ -135,7 +135,7 @@ function initModule(system) {
 
   function initSettings(entity, manager) {
     var settingsList = Object.keys(settings);
-    var nbt = system.getMainNBT(entity);
+    var nbt = system.mainNBT(entity);
     settingsList.forEach(entry => {
       var setting = settings[entry];
       if (entry == "systemColor") {
