@@ -125,9 +125,9 @@
 {part1_satellite_dish_arm} = if({satellite_dish} != 1, animate2({satellite_dish}, 1.0, 0.2, 0.2, 0.0), 1)
 {part2_satellite_dish_arm} = if({satellite_dish} != 1, animate2({satellite_dish}, 1.0, 0.4, 0.1, 0.0), 1)
 {part3_satellite_dish_arm} = if({satellite_dish} != 1, animate2({satellite_dish}, 1.0, 0.5, 0.1, 0.0), 1)
-{part4_satellite_dish_arm} = if({satellite_dish} != 1, animate2({satellite_dish}, 1.0, 0.6, 0.1, 0.0), 1)
-{part5_satellite_dish_arm} = if({satellite_dish} != 1, animate2({satellite_dish}, 1.0, 0.7, 0.1, 0.0), 1)
-{part6_satellite_dish_arm} = if({satellite_dish} != 1, animate2({satellite_dish}, 1.0, 0.8, 0.1, 0.0), 1)
+{part4_satellite_dish_arm} = if({satellite_dish} != 1, animate2({satellite_dish}, 1.0, 0.55, 0.1, 0.0), 1)
+{part5_satellite_dish_arm} = if({satellite_dish} != 1, animate2({satellite_dish}, 1.0, 0.6, 0.1, 0.0), 1)
+{part6_satellite_dish_arm} = if({satellite_dish} != 1, animate2({satellite_dish}, 1.0, 0.65, 0.1, 0.0), 1)
 {satellite_tracking} = if({satellite_dish} != 1, animate2({satellite_dish}, 1.0, 0.9, 0.1, 0.0), 1)
 {head_left_satellite_dish_cover_posZ} -= 0.03{part0_satellite_dish_arm}
 {head_right_satellite_dish_cover_posZ} -= 0.03{part0_satellite_dish_arm}
@@ -147,116 +147,104 @@
 {head_satellite_dish_base_rotX} += {angle_X}{satellite_tracking}{not_rain_mode} - 20'{satellite_tracking}{rain_mode} - (clamp({pitch} + 79', -11', 0')){satellite_tracking}{rain_mode} - (clamp({pitch} + 62', 11', 0')){satellite_tracking}{rain_mode} + (clamp({pitch} - 50', 0', 20')){satellite_tracking}{rain_mode}
 {head_satellite_dish_arm_upper_rotY} += {bearing}{satellite_tracking}{not_rain_mode} - {angle_Y}{satellite_tracking}{not_rain_mode}
 ;dish
-{dish} = if({satellite_dish} != 1, animate2({satellite_dish}, 1.0, 0.65, 0.35, 0.0), 1)
-{part1_satellite_dish} = if({dish} != 1, animate2({dish}, 1.0, 0.0, 0.1, 0.0), 1)
-{part2_satellite_dish} = if({dish} != 1, animate2({dish}, 1.0, 0.1, 0.1, 0.0), 1)
-{part3_satellite_dish} = if({dish} != 1, animate2({dish}, 1.0, 0.2, 0.1, 0.0), 1)
-{part4_satellite_dish} = if({dish} != 1, animate2({dish}, 1.0, 0.3, 0.1, 0.0), 1)
-{part5_satellite_dish} = if({dish} != 1, animate2({dish}, 1.0, 0.6, 0.4, 0.0), 1)
+{dish} = if({satellite_dish} != 1, animate2({satellite_dish}, 1.0, 0.8, 0.2, 0.0), 1)
+{part1_satellite_dish} = if({dish} != 1, animate2({dish}, 1.0, 0.0, 0.4, 0.0), 1)
+{part2_satellite_dish} = if({dish} != 1, animate2({dish}, 1.0, 0.4, 0.4, 0.0), 1)
+{part3_satellite_dish} = if({dish} != 1, animate2({dish}, 1.0, 0.8, 0.2, 0.0), 1)
+{leaf_root_angle} = 90'{part1_satellite_dish} + 15'{part3_satellite_dish} - 30'{part3_satellite_dish}{rain_mode}
+{leaf_fold_angle} = 180'{part1_satellite_dish}
+{leaf_unfold_angle} = 180'{part2_satellite_dish}
+{dish_shrink} = 0.01{part3_satellite_dish}
+{dish_base} = 2{part1_satellite_dish} - 1.7{part3_satellite_dish} - 0.3{part3_satellite_dish}{rain_mode}
+{dish_down} = 1{part3_satellite_dish} - 1{part3_satellite_dish}{rain_mode}
+;base extension
+;sides
+{head_satellite_dish_upper_base_posZ} += {dish_base}
+{head_satellite_dish_lower_base_posZ} -= {dish_base}
+{head_satellite_dish_left_base_posX} += {dish_base}
+{head_satellite_dish_right_base_posX} -= {dish_base}
+{head_satellite_dish_upper_base_posY} -= {dish_down}
+{head_satellite_dish_lower_base_posY} -= {dish_down}
+{head_satellite_dish_left_base_posY} -= {dish_down}
+{head_satellite_dish_right_base_posY} -= {dish_down}
+;corners
+{head_satellite_dish_upper_left_base_posZ} += {dish_base}
+{head_satellite_dish_upper_left_base_posX} += {dish_base}
+{head_satellite_dish_lower_left_base_posZ} -= {dish_base}
+{head_satellite_dish_lower_left_base_posX} += {dish_base}
+{head_satellite_dish_upper_right_base_posZ} += {dish_base}
+{head_satellite_dish_upper_right_base_posX} -= {dish_base}
+{head_satellite_dish_lower_right_base_posZ} -= {dish_base}
+{head_satellite_dish_lower_right_base_posX} -= {dish_base}
+{head_satellite_dish_upper_left_base_posY} -= {dish_down}
+{head_satellite_dish_lower_left_base_posY} -= {dish_down}
+{head_satellite_dish_upper_right_base_posY} -= {dish_down}
+{head_satellite_dish_lower_right_base_posY} -= {dish_down}
+;petals
 ;upper
-{head_satellite_dish_ring_4_upper_posX} += 2{part1_satellite_dish}
-{head_satellite_dish_ring_4_upper_left_4_posZ} += 2{part1_satellite_dish}
-{head_satellite_dish_ring_4_upper_right_4_posZ} -= 2{part1_satellite_dish}
-{head_satellite_dish_ring_4_upper_left_3_posZ} += 2{part2_satellite_dish}
-{head_satellite_dish_ring_4_upper_right_3_posZ} -= 2{part2_satellite_dish}
-{head_satellite_dish_ring_4_upper_left_2_posZ} += 2{part3_satellite_dish}
-{head_satellite_dish_ring_4_upper_right_2_posZ} -= 2{part3_satellite_dish}
-{head_satellite_dish_ring_4_upper_left_1_posZ} += 2{part4_satellite_dish}
-{head_satellite_dish_ring_4_upper_right_1_posZ} -= 2{part4_satellite_dish}
-{head_satellite_dish_ring_3_upper_posX} += 2{part2_satellite_dish}
-{head_satellite_dish_ring_3_upper_left_3_posZ} += 2{part2_satellite_dish}
-{head_satellite_dish_ring_3_upper_right_3_posZ} -= 2{part2_satellite_dish}
-{head_satellite_dish_ring_3_upper_left_2_posZ} += 2{part3_satellite_dish}
-{head_satellite_dish_ring_3_upper_right_2_posZ} -= 2{part3_satellite_dish}
-{head_satellite_dish_ring_3_upper_left_1_posZ} += 2{part4_satellite_dish}
-{head_satellite_dish_ring_3_upper_right_1_posZ} -= 2{part4_satellite_dish}
-{head_satellite_dish_ring_2_upper_posX} += 2{part3_satellite_dish}
-{head_satellite_dish_ring_2_upper_left_2_posZ} += 2{part3_satellite_dish}
-{head_satellite_dish_ring_2_upper_right_2_posZ} -= 2{part3_satellite_dish}
-{head_satellite_dish_ring_2_upper_left_1_posZ} += 2{part4_satellite_dish}
-{head_satellite_dish_ring_2_upper_right_1_posZ} -= 2{part4_satellite_dish}
-{head_satellite_dish_ring_1_upper_rotZ} += 25'{part5_satellite_dish} - 50'{part5_satellite_dish}{rain_mode}
-{head_satellite_dish_ring_1_upper_posX} += 2{part4_satellite_dish}
-{head_satellite_dish_ring_1_upper_left_1_posZ} += 2{part4_satellite_dish}
-{head_satellite_dish_ring_1_upper_right_1_posZ} -= 2{part4_satellite_dish}
+{head_satellite_dish_upper_inner_posZ} -= {dish_shrink}
+{head_satellite_dish_upper_inner_rotX} += {leaf_root_angle}
+{head_satellite_dish_upper_inner_right_rotZ} -= {leaf_unfold_angle}
+{head_satellite_dish_upper_inner_right_ext_rotZ} += {leaf_unfold_angle}
+{head_satellite_dish_upper_inner_left_rotZ} -= {leaf_unfold_angle}
+{head_satellite_dish_upper_inner_left_ext_rotZ} += {leaf_unfold_angle}
+{head_satellite_dish_upper_outer_rotX} -= {leaf_fold_angle}
+{head_satellite_dish_upper_outer_right_1_rotZ} -= {leaf_unfold_angle}
+{head_satellite_dish_upper_outer_right_2_rotZ} += {leaf_unfold_angle}
+{head_satellite_dish_upper_outer_right_3_rotZ} -= {leaf_unfold_angle}
+{head_satellite_dish_upper_outer_right_ext_rotZ} += {leaf_unfold_angle}
+{head_satellite_dish_upper_outer_left_1_rotZ} -= {leaf_unfold_angle}
+{head_satellite_dish_upper_outer_left_2_rotZ} += {leaf_unfold_angle}
+{head_satellite_dish_upper_outer_left_3_rotZ} -= {leaf_unfold_angle}
+{head_satellite_dish_upper_outer_left_ext_rotZ} += {leaf_unfold_angle}
 ;lower
-{head_satellite_dish_ring_4_lower_posX} += 2{part1_satellite_dish}
-{head_satellite_dish_ring_4_lower_left_4_posZ} += 2{part1_satellite_dish}
-{head_satellite_dish_ring_4_lower_right_4_posZ} -= 2{part1_satellite_dish}
-{head_satellite_dish_ring_4_lower_left_3_posZ} += 2{part2_satellite_dish}
-{head_satellite_dish_ring_4_lower_right_3_posZ} -= 2{part2_satellite_dish}
-{head_satellite_dish_ring_4_lower_left_2_posZ} += 2{part3_satellite_dish}
-{head_satellite_dish_ring_4_lower_right_2_posZ} -= 2{part3_satellite_dish}
-{head_satellite_dish_ring_4_lower_left_1_posZ} += 2{part4_satellite_dish}
-{head_satellite_dish_ring_4_lower_right_1_posZ} -= 2{part4_satellite_dish}
-{head_satellite_dish_ring_3_lower_posX} += 2{part2_satellite_dish}
-{head_satellite_dish_ring_3_lower_left_3_posZ} += 2{part2_satellite_dish}
-{head_satellite_dish_ring_3_lower_right_3_posZ} -= 2{part2_satellite_dish}
-{head_satellite_dish_ring_3_lower_left_2_posZ} += 2{part3_satellite_dish}
-{head_satellite_dish_ring_3_lower_right_2_posZ} -= 2{part3_satellite_dish}
-{head_satellite_dish_ring_3_lower_left_1_posZ} += 2{part4_satellite_dish}
-{head_satellite_dish_ring_3_lower_right_1_posZ} -= 2{part4_satellite_dish}
-{head_satellite_dish_ring_2_lower_posX} += 2{part3_satellite_dish}
-{head_satellite_dish_ring_2_lower_left_2_posZ} += 2{part3_satellite_dish}
-{head_satellite_dish_ring_2_lower_right_2_posZ} -= 2{part3_satellite_dish}
-{head_satellite_dish_ring_2_lower_left_1_posZ} += 2{part4_satellite_dish}
-{head_satellite_dish_ring_2_lower_right_1_posZ} -= 2{part4_satellite_dish}
-{head_satellite_dish_ring_1_lower_rotZ} -= 25'{part5_satellite_dish} - 50'{part5_satellite_dish}{rain_mode}
-{head_satellite_dish_ring_1_lower_posX} -= 2{part4_satellite_dish}
-{head_satellite_dish_ring_1_lower_left_1_posZ} += 2{part4_satellite_dish}
-{head_satellite_dish_ring_1_lower_right_1_posZ} -= 2{part4_satellite_dish}
+{head_satellite_dish_lower_inner_posZ} += {dish_shrink}
+{head_satellite_dish_lower_inner_rotX} += {leaf_root_angle}
+{head_satellite_dish_lower_inner_left_rotZ} -= {leaf_unfold_angle}
+{head_satellite_dish_lower_inner_left_ext_rotZ} += {leaf_unfold_angle}
+{head_satellite_dish_lower_inner_right_rotZ} -= {leaf_unfold_angle}
+{head_satellite_dish_lower_inner_right_ext_rotZ} += {leaf_unfold_angle}
+{head_satellite_dish_lower_outer_rotX} -= {leaf_fold_angle}
+{head_satellite_dish_lower_outer_left_1_rotZ} -= {leaf_unfold_angle}
+{head_satellite_dish_lower_outer_left_2_rotZ} += {leaf_unfold_angle}
+{head_satellite_dish_lower_outer_left_3_rotZ} -= {leaf_unfold_angle}
+{head_satellite_dish_lower_outer_left_ext_rotZ} += {leaf_unfold_angle}
+{head_satellite_dish_lower_outer_right_1_rotZ} -= {leaf_unfold_angle}
+{head_satellite_dish_lower_outer_right_2_rotZ} += {leaf_unfold_angle}
+{head_satellite_dish_lower_outer_right_3_rotZ} -= {leaf_unfold_angle}
+{head_satellite_dish_lower_outer_right_ext_rotZ} += {leaf_unfold_angle}
 ;left
-{head_satellite_dish_ring_4_left_posZ} += 2{part1_satellite_dish}
-{head_satellite_dish_ring_4_left_upper_4_posX} += 2{part1_satellite_dish}
-{head_satellite_dish_ring_4_left_lower_4_posX} -= 2{part1_satellite_dish}
-{head_satellite_dish_ring_4_left_upper_3_posX} += 2{part2_satellite_dish}
-{head_satellite_dish_ring_4_left_lower_3_posX} -= 2{part2_satellite_dish}
-{head_satellite_dish_ring_4_left_upper_2_posX} += 2{part3_satellite_dish}
-{head_satellite_dish_ring_4_left_lower_2_posX} -= 2{part3_satellite_dish}
-{head_satellite_dish_ring_4_left_upper_1_posX} += 2{part4_satellite_dish}
-{head_satellite_dish_ring_4_left_lower_1_posX} -= 2{part4_satellite_dish}
-{head_satellite_dish_ring_3_left_posZ} += 2{part2_satellite_dish}
-{head_satellite_dish_ring_3_left_upper_3_posX} += 2{part2_satellite_dish}
-{head_satellite_dish_ring_3_left_lower_3_posX} -= 2{part2_satellite_dish}
-{head_satellite_dish_ring_3_left_upper_2_posX} += 2{part3_satellite_dish}
-{head_satellite_dish_ring_3_left_lower_2_posX} -= 2{part3_satellite_dish}
-{head_satellite_dish_ring_3_left_upper_1_posX} += 2{part4_satellite_dish}
-{head_satellite_dish_ring_3_left_lower_1_posX} -= 2{part4_satellite_dish}
-{head_satellite_dish_ring_2_left_posZ} += 2{part3_satellite_dish}
-{head_satellite_dish_ring_2_left_upper_2_posX} += 2{part3_satellite_dish}
-{head_satellite_dish_ring_2_left_lower_2_posX} -= 2{part3_satellite_dish}
-{head_satellite_dish_ring_2_left_upper_1_posX} += 2{part4_satellite_dish}
-{head_satellite_dish_ring_2_left_lower_1_posX} -= 2{part4_satellite_dish}
-{head_satellite_dish_ring_1_left_rotX} -= 25'{part5_satellite_dish} - 50'{part5_satellite_dish}{rain_mode}
-{head_satellite_dish_ring_1_left_posZ} -= 2{part4_satellite_dish}
-{head_satellite_dish_ring_1_left_upper_1_posX} += 2{part4_satellite_dish}
-{head_satellite_dish_ring_1_left_lower_1_posX} -= 2{part4_satellite_dish}
+{head_satellite_dish_left_inner_posX} -= {dish_shrink}
+{head_satellite_dish_left_inner_rotX} += {leaf_root_angle}
+{head_satellite_dish_left_inner_upper_rotZ} -= {leaf_unfold_angle}
+{head_satellite_dish_left_inner_upper_ext_rotZ} += {leaf_unfold_angle}
+{head_satellite_dish_left_inner_lower_rotZ} -= {leaf_unfold_angle}
+{head_satellite_dish_left_inner_lower_ext_rotZ} += {leaf_unfold_angle}
+{head_satellite_dish_left_outer_rotX} -= {leaf_fold_angle}
+{head_satellite_dish_left_outer_upper_1_rotZ} -= {leaf_unfold_angle}
+{head_satellite_dish_left_outer_upper_2_rotZ} += {leaf_unfold_angle}
+{head_satellite_dish_left_outer_upper_3_rotZ} -= {leaf_unfold_angle}
+{head_satellite_dish_left_outer_upper_ext_rotZ} += {leaf_unfold_angle}
+{head_satellite_dish_left_outer_lower_1_rotZ} -= {leaf_unfold_angle}
+{head_satellite_dish_left_outer_lower_2_rotZ} += {leaf_unfold_angle}
+{head_satellite_dish_left_outer_lower_3_rotZ} -= {leaf_unfold_angle}
+{head_satellite_dish_left_outer_lower_ext_rotZ} += {leaf_unfold_angle}
 ;right
-{head_satellite_dish_ring_4_right_posZ} += 2{part1_satellite_dish}
-{head_satellite_dish_ring_4_right_lower_4_posX} += 2{part1_satellite_dish}
-{head_satellite_dish_ring_4_right_upper_4_posX} -= 2{part1_satellite_dish}
-{head_satellite_dish_ring_4_right_lower_3_posX} += 2{part2_satellite_dish}
-{head_satellite_dish_ring_4_right_upper_3_posX} -= 2{part2_satellite_dish}
-{head_satellite_dish_ring_4_right_lower_2_posX} += 2{part3_satellite_dish}
-{head_satellite_dish_ring_4_right_upper_2_posX} -= 2{part3_satellite_dish}
-{head_satellite_dish_ring_4_right_lower_1_posX} += 2{part4_satellite_dish}
-{head_satellite_dish_ring_4_right_upper_1_posX} -= 2{part4_satellite_dish}
-{head_satellite_dish_ring_3_right_posZ} += 2{part2_satellite_dish}
-{head_satellite_dish_ring_3_right_lower_3_posX} += 2{part2_satellite_dish}
-{head_satellite_dish_ring_3_right_upper_3_posX} -= 2{part2_satellite_dish}
-{head_satellite_dish_ring_3_right_lower_2_posX} += 2{part3_satellite_dish}
-{head_satellite_dish_ring_3_right_upper_2_posX} -= 2{part3_satellite_dish}
-{head_satellite_dish_ring_3_right_lower_1_posX} += 2{part4_satellite_dish}
-{head_satellite_dish_ring_3_right_upper_1_posX} -= 2{part4_satellite_dish}
-{head_satellite_dish_ring_2_right_posZ} += 2{part3_satellite_dish}
-{head_satellite_dish_ring_2_right_lower_2_posX} += 2{part3_satellite_dish}
-{head_satellite_dish_ring_2_right_upper_2_posX} -= 2{part3_satellite_dish}
-{head_satellite_dish_ring_2_right_lower_1_posX} += 2{part4_satellite_dish}
-{head_satellite_dish_ring_2_right_upper_1_posX} -= 2{part4_satellite_dish}
-{head_satellite_dish_ring_1_right_posZ} += 2{part4_satellite_dish}
-{head_satellite_dish_ring_1_right_rotX} -= 25'{part5_satellite_dish} - 50'{part5_satellite_dish}{rain_mode}
-{head_satellite_dish_ring_1_right_lower_1_posX} += 2{part4_satellite_dish}
-{head_satellite_dish_ring_1_right_upper_1_posX} -= 2{part4_satellite_dish}
+{head_satellite_dish_right_inner_posX} += {dish_shrink}
+{head_satellite_dish_right_inner_rotX} += {leaf_root_angle}
+{head_satellite_dish_right_inner_lower_rotZ} -= {leaf_unfold_angle}
+{head_satellite_dish_right_inner_lower_ext_rotZ} += {leaf_unfold_angle}
+{head_satellite_dish_right_inner_upper_rotZ} -= {leaf_unfold_angle}
+{head_satellite_dish_right_inner_upper_ext_rotZ} += {leaf_unfold_angle}
+{head_satellite_dish_right_outer_rotX} -= {leaf_fold_angle}
+{head_satellite_dish_right_outer_lower_1_rotZ} -= {leaf_unfold_angle}
+{head_satellite_dish_right_outer_lower_2_rotZ} += {leaf_unfold_angle}
+{head_satellite_dish_right_outer_lower_3_rotZ} -= {leaf_unfold_angle}
+{head_satellite_dish_right_outer_lower_ext_rotZ} += {leaf_unfold_angle}
+{head_satellite_dish_right_outer_upper_1_rotZ} -= {leaf_unfold_angle}
+{head_satellite_dish_right_outer_upper_2_rotZ} += {leaf_unfold_angle}
+{head_satellite_dish_right_outer_upper_3_rotZ} -= {leaf_unfold_angle}
+{head_satellite_dish_right_outer_upper_ext_rotZ} += {leaf_unfold_angle}
 
 ;intakes
 ;left
