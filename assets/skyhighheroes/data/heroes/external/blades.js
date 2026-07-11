@@ -95,10 +95,11 @@ function initModule(system) {
                 manager.setData(entity, "skyhighheroes:dyn/blade_left_stealth_enabled", !entity.getData("skyhighheroes:dyn/blade_left_stealth_enabled"));
                 manager.setBoolean(nbt, "bladesLeftStealth", !nbt.getBoolean("bladesLeftStealth"));
                 if (entity.getData("skyhighheroes:dyn/blade_left_stealth_enabled")) {
-                  systemMessage(entity, "<n>Opening core!");
+                  system.moduleMessage(this, entity, "<s>Enabled stealth mode on <sh>left arm<s> blade!");
                 } else {
-                  systemMessage(entity, "<n>Closing core!");
+                  system.moduleMessage(this, entity, "<s>Disabled stealth mode on <sh>left arm<s> blade!");
                 };
+                manager.setData(entity, "skyhighheroes:dyn/blade_left_stealth", entity.getData("skyhighheroes:dyn/blade_left_stealth_enabled"));
               },
               backAction: (entity, manager) => {
                 system.setButton(entity, manager, "main_blades_shields");
