@@ -114,6 +114,8 @@ function initSatelliteBeams(renderer, model, color) {
   transmitBeam.anchor.set("head", transmitBase);
   transmitBeam.color.set(color);
 
+  var offset = 0.229351184;
+  var yOffset = 300.0+offset;
   var receiveBeamRenderer;
   if (overrides.hasOwnProperty(color)) {
     receiveBeamRenderer = renderer.createResource("BEAM_RENDERER", "skyhighheroes:" + overrides[color] + "_receive");
@@ -121,21 +123,20 @@ function initSatelliteBeams(renderer, model, color) {
     receiveBeamRenderer = renderer.createResource("BEAM_RENDERER", "skyhighheroes:cybernetic_receive");
   };
   var receiveShape = renderer.createResource("SHAPE", null);
-  var receiveLine = receiveShape.bindLine({ "start": [0.0, 300.375, 0.0], "end": [0.0, 300.375, 0.0], "size": [15.0, 15.0] });
+  var receiveLine = receiveShape.bindLine({ "start": [0.0, yOffset, 0.0], "end": [0.0, yOffset, 0.0], "size": [15.0, 15.0] });
   var receiveBeam = renderer.createEffect("fiskheroes:lines").setRenderer(receiveBeamRenderer).setShape(receiveShape).setOffset(0.0, 0.0, 0.0);
   receiveBeam.mirror = false;
   receiveBeam.setScale(16.0);
   receiveBeam.anchor.set("head", receiveBase);
   receiveBeam.color.set(color);
-  
   return {
     render: function (entity, isFirstPersonArm) {
-      var vector = PackLoader.asVec3(entity.getData("skyhighheroes:dyn/satellite_x")+0.5, entity.getData("skyhighheroes:dyn/satellite_y")+0.5, entity.getData("skyhighheroes:dyn/satellite_z")+0.5);
+      var vector = PackLoader.asVec3(entity.getData("skyhighheroes:dyn/satellite_x")+0.5, entity.getData("skyhighocs:dyn/satellite_y")+0.5, entity.getData("skyhighocs:dyn/satellite_z")+0.5);
       var transmitTimer = entity.getInterpolatedData("skyhighheroes:dyn/transmit_beam_timer");
-      var receiveTimer = entity.getInterpolatedData("skyhighheroes:dyn/receive_beam_timer");
+      var receiveTimer = entity.getInterpolatedData("skyhighocs:dyn/receive_beam_timer");
       var factor = entity.eyePos().add(0, 1, 0).distanceTo(vector);
-      receiveLine.start.y = factor+0.375;
-      receiveLine.end.y = factor+0.375;
+      receiveLine.start.y = factor+offset;
+      receiveLine.end.y = factor+offset;
       transmitLine.end.y = transmitLine.start.y+factor*transmitTimer;
       receiveLine.end.y = receiveLine.start.y-factor*receiveTimer;
       if (!isFirstPersonArm) {
