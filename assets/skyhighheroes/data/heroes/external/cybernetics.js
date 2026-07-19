@@ -967,7 +967,7 @@ var defaultButtons = [
       }
     }
   },
-   {
+  {
     buttonID: "main_chat",
     borderingButtons: {
       top: "main_waypoints",
@@ -1161,15 +1161,7 @@ function initSystem(moduleList, name, colorCode) {
                 });
               };
               if (moduleInit.hasOwnProperty("cyberOverviewButtons")) {
-                var buttons = moduleInit.cyberOverviewButtons;
-                var buttonIDList = Object.keys(buttons);
-                buttonIDList.forEach(buttonID => {
-                  var button = buttons[buttonID];
-                  buttonIDs.push(buttonID);
-                  buttonProperties.push(button.properties);
-                  buttonBorders.push(button.borderingButtons);
-                  logMessage("Added button \"" + buttonID + "\" to menu \"overview\"!");
-                });
+                tempOverviewButtons.push(moduleInit.cyberOverviewButtons);
               };
             };
             hasError = false;
