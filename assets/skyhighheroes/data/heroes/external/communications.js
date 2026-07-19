@@ -2208,23 +2208,23 @@ function initModule(system) {
                 system.moduleMessage(this, entity, "<n>holoSat set to <nh>" + nbt.getBoolean("holoSat") + "<n>!");
                 break;
               case "xSat":
-                manager.setData(entity, "skyhighheroes:dyn/satellite_x", parseInt(argList[2]));
-                manager.setShort(nbt, "xSat", parseInt(argList[2]));
+                manager.setData(entity, "skyhighheroes:dyn/satellite_x", parseInt(argList[3]));
+                manager.setShort(nbt, "xSat", parseInt(argList[3]));
                 system.moduleMessage(this, entity, "<n>xSat set to <nh>" + nbt.getShort("xSat") + "<n>!");
                 break;
               case "ySat":
-                manager.setData(entity, "skyhighheroes:dyn/satellite_y", parseInt(argList[2]));
-                manager.setShort(nbt, "ySat", parseInt(argList[2]));
+                manager.setData(entity, "skyhighheroes:dyn/satellite_y", parseInt(argList[3]));
+                manager.setShort(nbt, "ySat", parseInt(argList[3]));
                 system.moduleMessage(this, entity, "<n>ySat set to <nh>" + nbt.getShort("ySat") + "<n>!");
                 break;
               case "zSat":
-                manager.setData(entity, "skyhighheroes:dyn/satellite_z", parseInt(argList[2]));
-                manager.setShort(nbt, "zSat", parseInt(argList[2]));
+                manager.setData(entity, "skyhighheroes:dyn/satellite_z", parseInt(argList[3]));
+                manager.setShort(nbt, "zSat", parseInt(argList[3]));
                 system.moduleMessage(this, entity, "<n>zSat set to <nh>" + nbt.getShort("zSat") + "<n>!");
                 break;
               case "freq":
-                manager.setData(entity, "skyhighheroes:dyn/frequency", parseInt(argList[2]));
-                manager.setShort(nbt, "freq", parseInt(argList[2]));
+                manager.setData(entity, "skyhighheroes:dyn/frequency", parseInt(argList[3]));
+                manager.setShort(nbt, "freq", parseInt(argList[3]));
                 system.moduleMessage(this, entity, "<n>Frequency set to <nh>" + nbt.getShort("freq") + "<n>!");
                 break;
               default:
