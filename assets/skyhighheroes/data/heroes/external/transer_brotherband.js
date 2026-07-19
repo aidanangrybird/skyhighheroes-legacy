@@ -362,7 +362,7 @@ function initModule(system) {
    * @returns If sender is in receiver's BrotherBands
    **/
   function entityHasBrother(sender, receiver) {
-    var brotherBands = brothersUsernames(entity);
+    var brotherBands = brothersUsernames(receiver);
     var result = false;
     brothers.forEach(entry => {
       if (entry == sender.getName()) {
