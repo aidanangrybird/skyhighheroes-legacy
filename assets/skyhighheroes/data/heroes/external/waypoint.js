@@ -85,11 +85,17 @@ function initModule(system) {
     var nbt = system.getMainNBT(entity);
     var waypoints = nbt.getTagList("waypoints");
     var waypointIndex = getWaypointNameArray(entity, manager).indexOf(waypointName);
+    var data = entity.getData("skyhighheroes:dyn/tracked_waypoint").split(";:");
+    var waypoint = data[0];
     if (waypointIndex < 0) {
       system.moduleMessage(this, entity, "<e>Unable to find waypoint with name <eh>" + waypointName + "<e> to remove!");
     } else {
       system.moduleMessage(this, entity, "<e>Removed waypoint <eh>" + waypointName + "<e>!");
       manager.removeTag(waypoints, waypointIndex);
+      if (waypoint == waypointName) {
+        manager.setString(nbt, "trackedWaypoint", "");
+        manager.setDataWithNotify(entity, "skyhighheroes:dyn/tracked_waypoint", "");
+      };
     };
   };
   /**
@@ -207,6 +213,19 @@ function initModule(system) {
       manager.setDataWithNotify(entity, "skyhighheroes:dyn/tracked_waypoint", data);
       system.systemMessage(entity, "<s>Now tracking waypoint <sh>" + waypoint + "<s>!");
     };
+  };
+  /**
+   * Detrack waypoint
+   * @param {JSEntity} entity - Required
+   * @param {JSDataManager} manager - Required
+   **/
+  function detrackWaypoint(entity, manager) {
+    var nbt = system.getMainNBT(entity);
+    var data = entity.getData("skyhighheroes:dyn/tracked_waypoint").split(";:");
+    var waypoint = data[0];
+    system.systemMessage(entity, "<s>No longer tracking waypoint<s>!");
+    manager.setString(nbt, "trackedWaypoint", "");
+    manager.setDataWithNotify(entity, "skyhighheroes:dyn/tracked_waypoint", "");
   };
   return {
     name: "waypoints",
@@ -556,7 +575,7 @@ function initModule(system) {
         buttons: {
           "waypoints_edit": {
             borderingButtons: {
-              top: "waypoints_add",
+              top: "waypoints_detrack",
             },
             properties: {
               confirmAction: (entity, manager) => {
@@ -566,18 +585,29 @@ function initModule(system) {
                 system.updateList(entity, manager, 10, list);
               },
               backAction: (entity, manager) => {
-                if (entity.getData("skyhighheroes:dyn/entering_value")) {
-                  manager.setData(entity, "skyhighheroes:dyn/entering_value", false);
-                } else {
-                  system.setButton(entity, manager, "main_waypoints");
-                  system.setMenu(entity, manager, "main");
-                };
+                system.setButton(entity, manager, "main_waypoints");
+                system.setMenu(entity, manager, "main");
+              },
+            }
+          },
+          "waypoints_detrack": {
+            borderingButtons: {
+              top: "waypoints_add",
+              bottom: "waypoints_edit",
+            },
+            properties: {
+              confirmAction: (entity, manager) => {
+                detrackWaypoint(entity, manager);
+              },
+              backAction: (entity, manager) => {
+                system.setButton(entity, manager, "main_waypoints");
+                system.setMenu(entity, manager, "main");
               },
             }
           },
           "waypoints_add": {
             borderingButtons: {
-              bottom: "waypoints_edit",
+              bottom: "waypoints_detrack",
             },
             properties: {
               confirmAction: (entity, manager) => {

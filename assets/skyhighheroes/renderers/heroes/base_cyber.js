@@ -388,19 +388,19 @@ function initEffects(renderer) {
   shieldRightArmedSelector = stuff.screenCornerSelector(renderer, "color", shieldRightArmedStatus, 1.725, 1.725);
 
   //Comms menu
-  commsBaseBox = stuff.screenElement(renderer, "color", "center", "center", 100.0, 48.0, 0.0, 0.0, 0.0, mainMenu, "center");
+  commsBaseBox = stuff.screenElement(renderer, "color", "center", "center", 100.0, 44.0, 0.0, 0.0, 0.0, mainMenu, "center");
   commsBaseBoxInner = stuff.screenElement(renderer, "inactive_menu", "center", "center", "2.5pmw", "2.5pmh", 0.0, 0.0, 0.0, commsBaseBox, "center");
   commsStatusSelected = stuff.screenSelector(renderer, "color", "center", "center", 10.0, 10.0, 8.0, -12.0, 0.0, commsBaseBoxInner, "centerleft");
   commsSuitsSelected = stuff.screenSelector(renderer, "color", "center", "center", 10.0, 10.0, 8.0, 0.0, 0.0, commsBaseBoxInner, "centerleft");
   commsWaypointsSelected = stuff.screenSelector(renderer, "color", "center", "center", 10.0, 10.0, 8.0, 12.0, 0.0, commsBaseBoxInner, "centerleft");
 
   //Suits menu
-  suitsBaseBox = stuff.screenElement(renderer, "color", "center", "center", 100.0, 48.0, 0.0, 0.0, 0.0, mainMenu, "center");
+  suitsBaseBox = stuff.screenElement(renderer, "color", "center", "center", 100.0, 44.0, 0.0, 0.0, 0.0, mainMenu, "center");
   suitsBaseBoxInner = stuff.screenElement(renderer, "inactive_menu", "center", "center", "2.5pmw", "2.5pmh", 0.0, 0.0, 0.0, suitsBaseBox, "center");
   suitsEditSelected = stuff.screenSelector(renderer, "color", "center", "center", 10.0, 10.0, 8.0, -12.0, 0.0, suitsBaseBoxInner, "centerleft");
   suitsUploadSelected = stuff.screenSelector(renderer, "color", "center", "center", 10.0, 10.0, 8.0, 0.0, 0.0, suitsBaseBoxInner, "centerleft");
   suitsDownloadSelected = stuff.screenSelector(renderer, "color", "center", "center", 10.0, 10.0, 8.0, 12.0, 0.0, suitsBaseBoxInner, "centerleft");
-  suitsEditBox = stuff.screenElement(renderer, "color", "center", "center", 75.0, 22.0, 0.0, -20.0, 0.0, mainMenu, "bottomcenter");
+  suitsEditBox = stuff.screenElement(renderer, "color", "center", "center", 75.0, 18.0, 0.0, -20.0, 0.0, mainMenu, "bottomcenter");
   suitsEditBoxInner = stuff.screenElement(renderer, "inactive_menu", "center", "center", "2.5pmw", "2.5pmh", 0.0, 0.0, 0.0, suitsEditBox, "center");
   suitsDeleteSelected = stuff.screenSelector(renderer, "color", "center", "center", 10.0, 10.0, 8.0, 0.0, 0.0, suitsEditBoxInner, "centerleft");
 
@@ -413,42 +413,43 @@ function initEffects(renderer) {
   thermopticsCamouflageSelector = stuff.screenCornerSelector(renderer, "color", thermopticsCamouflageStatus, 1.725, 1.725);
 
   //Contacts and groups menu
-  contactsGroupsBaseBox = stuff.screenElement(renderer, "color", "center", "center", 100.0, 36.0, 0.0, 0.0, 0.0, mainMenu, "center");
+  contactsGroupsBaseBox = stuff.screenElement(renderer, "color", "center", "center", 100.0, 32.0, 0.0, 0.0, 0.0, mainMenu, "center");
   contactsGroupsBaseBoxInner = stuff.screenElement(renderer, "inactive_menu", "center", "center", "2.5pmw", "2.5pmh", 0.0, 0.0, 0.0, contactsGroupsBaseBox, "center");
   contactsGroupsContactsSelected = stuff.screenSelector(renderer, "color", "center", "center", 10.0, 10.0, 8.0, -6.0, 0.0, contactsGroupsBaseBoxInner, "centerleft");
   contactsGroupsGroupsSelected = stuff.screenSelector(renderer, "color", "center", "center", 10.0, 10.0, 8.0, 6.0, 0.0, contactsGroupsBaseBoxInner, "centerleft");
   //Groups base submenu
-  groupsBaseBox = stuff.screenElement(renderer, "color", "top", "left", 100.0, 36.0, 0.0, 5.0, 0.0, listBox, "bottomleft");
+  groupsBaseBox = stuff.screenElement(renderer, "color", "top", "left", 100.0, 32.0, 0.0, 5.0, 0.0, listBox, "bottomleft");
   groupsBaseBoxInner = stuff.screenElement(renderer, "inactive_menu", "center", "center", "2.5pmw", "2.5pmh", 0.0, 0.0, 0.0, groupsBaseBox, "center");
   groupsAddSelected = stuff.screenSelector(renderer, "color", "center", "center", 10.0, 10.0, 8.0, -6.0, 0.0, groupsBaseBoxInner, "centerleft");
   groupsEditSelected = stuff.screenSelector(renderer, "color", "center", "center", 10.0, 10.0, 8.0, 6.0, 0.0, groupsBaseBoxInner, "centerleft");
-  groupsEditBox = stuff.screenElement(renderer, "color", "top", "right", 100.0, 36.0, 0.0, 2.5, 0.0, listBox, "bottomright");
+  groupsEditBox = stuff.screenElement(renderer, "color", "top", "right", 100.0, 32.0, 0.0, 2.5, 0.0, listBox, "bottomright");
   groupsEditBoxInner = stuff.screenElement(renderer, "inactive_menu", "center", "center", "2.5pmw", "2.5pmh", 0.0, 0.0, 0.0, groupsEditBox, "center");
   groupsMembersSelected = stuff.screenSelector(renderer, "color", "center", "center", 10.0, 10.0, 8.0, -6.0, 0.0, groupsEditBoxInner, "centerleft");
   groupsDeleteSelected = stuff.screenSelector(renderer, "color", "center", "center", 10.0, 10.0, 8.0, 6.0, 0.0, groupsEditBoxInner, "centerleft");
   //Groups members submenu
-  groupsMembersBaseBox = stuff.screenElement(renderer, "color", "top", "left", 100.0, 36.0, 0.0, 5.0, 0.0, listBox, "bottomleft");
+  groupsMembersBaseBox = stuff.screenElement(renderer, "color", "top", "left", 100.0, 32.0, 0.0, 5.0, 0.0, listBox, "bottomleft");
   groupsMembersBaseBoxInner = stuff.screenElement(renderer, "inactive_menu", "center", "center", "2.5pmw", "2.5pmh", 0.0, 0.0, 0.0, groupsMembersBaseBox, "center");
   groupsMembersEditSelected = stuff.screenSelector(renderer, "color", "center", "center", 10.0, 10.0, 8.0, 6.0, 0.0, groupsMembersBaseBoxInner, "centerleft");
   groupsMembersAddSelected = stuff.screenSelector(renderer, "color", "center", "center", 10.0, 10.0, 8.0, -6.0, 0.0, groupsMembersBaseBoxInner, "centerleft");
-  groupsMembersEditBox = stuff.screenElement(renderer, "color", "top", "right", 100.0, 22.0, 0.0, -5.0, 0.0, listBox, "bottomright");
+  groupsMembersEditBox = stuff.screenElement(renderer, "color", "top", "right", 100.0, 18.0, 0.0, -5.0, 0.0, listBox, "bottomright");
   groupsMembersEditBoxInner = stuff.screenElement(renderer, "inactive_menu", "center", "center", "2.5pmw", "2.5pmh", 0.0, 0.0, 0.0, groupsMembersEditBox, "center");
   groupsMembersDeleteSelected = stuff.screenSelector(renderer, "color", "center", "center", 10.0, 10.0, 8.0, 0.0, 0.0, groupsMembersEditBoxInner, "centerleft");
   //Contacts submenu
-  contactsBaseBox = stuff.screenElement(renderer, "color", "top", "left", 100.0, 36.0, 0.0, 5.0, 0.0, listBox, "bottomleft");
+  contactsBaseBox = stuff.screenElement(renderer, "color", "top", "left", 100.0, 32.0, 0.0, 5.0, 0.0, listBox, "bottomleft");
   contactsBaseBoxInner = stuff.screenElement(renderer, "inactive_menu", "center", "center", "2.5pmw", "2.5pmh", 0.0, 0.0, 0.0, contactsBaseBox, "center");
   contactsEditSelected = stuff.screenSelector(renderer, "color", "center", "center", 10.0, 10.0, 8.0, -6.0, 0.0, contactsBaseBoxInner, "centerleft");
   contactsAddSelected = stuff.screenSelector(renderer, "color", "center", "center", 10.0, 10.0, 8.0, 6.0, 0.0, contactsBaseBoxInner, "centerleft");
-  contactsEditBox = stuff.screenElement(renderer, "color", "top", "right", 100.0, 22.0, 0.0, 5.0, 0.0, listBox, "bottomright");
+  contactsEditBox = stuff.screenElement(renderer, "color", "top", "right", 100.0, 18.0, 0.0, 5.0, 0.0, listBox, "bottomright");
   contactsEditBoxInner = stuff.screenElement(renderer, "inactive_menu", "center", "center", "2.5pmw", "2.5pmh", 0.0, 0.0, 0.0, contactsEditBox, "center");
   contactsDeleteSelected = stuff.screenSelector(renderer, "color", "center", "center", 10.0, 10.0, 8.0, 0.0, 0.0, contactsEditBoxInner, "centerleft");
 
   //Waypoints menu
-  waypointsBaseBox = stuff.screenElement(renderer, "color", "top", "left", 100.0, 36.0, 0.0, 5.0, 0.0, listBox, "bottomleft");
+  waypointsBaseBox = stuff.screenElement(renderer, "color", "top", "left", 75.0, 44.0, 0.0, 5.0, 0.0, listBox, "bottomleft");
   waypointsBaseBoxInner = stuff.screenElement(renderer, "inactive_menu", "center", "center", "2.5pmw", "2.5pmh", 0.0, 0.0, 0.0, waypointsBaseBox, "center");
-  waypointsAddSelected = stuff.screenSelector(renderer, "color", "center", "center", 10.0, 10.0, 8.0, -6.0, 0.0, waypointsBaseBoxInner, "centerleft");
-  waypointsEditSelected = stuff.screenSelector(renderer, "color", "center", "center", 10.0, 10.0, 8.0, 6.0, 0.0, waypointsBaseBoxInner, "centerleft");
-  waypointsEditBox = stuff.screenElement(renderer, "color", "top", "right", 75.0, 36.0, 0.0, 5.0, 0.0, listBox, "bottomright");
+  waypointsAddSelected = stuff.screenSelector(renderer, "color", "center", "center", 10.0, 10.0, 8.0, -12.0, 0.0, waypointsBaseBoxInner, "centerleft");
+  waypointsDetrackSelected = stuff.screenSelector(renderer, "color", "center", "center", 10.0, 10.0, 8.0, 0.0, 0.0, waypointsBaseBoxInner, "centerleft");
+  waypointsEditSelected = stuff.screenSelector(renderer, "color", "center", "center", 10.0, 10.0, 8.0, 12.0, 0.0, waypointsBaseBoxInner, "centerleft");
+  waypointsEditBox = stuff.screenElement(renderer, "color", "top", "right", 75.0, 32.0, 0.0, 5.0, 0.0, listBox, "bottomright");
   waypointsEditBoxInner = stuff.screenElement(renderer, "inactive_menu", "center", "center", "2.5pmw", "2.5pmh", 0.0, 0.0, 0.0, waypointsEditBox, "center");
   waypointsTrackSelected = stuff.screenSelector(renderer, "color", "center", "center", 10.0, 10.0, 8.0, -6.0, 0.0, waypointsEditBoxInner, "centerleft");
   waypointsDeleteSelected = stuff.screenSelector(renderer, "color", "center", "center", 10.0, 10.0, 8.0, 6.0, 0.0, waypointsEditBoxInner, "centerleft");
@@ -1913,6 +1914,10 @@ function render(entity, renderLayer, isFirstPersonArm) {
               text_renderer.renderLine(isFirstPersonArm, "left", "center", "Edit", waypointsEditSelected.leftX + 14.0, waypointsEditSelected.centerY, waypointsEditSelected.z, 1.0);
               if (entity.getData("skyhighheroes:dyn/selected_button") == "waypoints_edit") {
                 waypointsEditSelected.render(isFirstPersonArm);
+              };
+              text_renderer.renderLine(isFirstPersonArm, "left", "center", "Detrack", waypointsDetrackSelected.leftX + 14.0, waypointsDetrackSelected.centerY, waypointsDetrackSelected.z, 1.0);
+              if (entity.getData("skyhighheroes:dyn/selected_button") == "waypoints_detrack") {
+                waypointsDetrackSelected.render(isFirstPersonArm);
               };
               text_renderer.renderLine(isFirstPersonArm, "left", "center", "Add", waypointsAddSelected.leftX + 14.0, waypointsAddSelected.centerY, waypointsAddSelected.z, 1.0);
               if (entity.getData("skyhighheroes:dyn/selected_button") == "waypoints_add") {
