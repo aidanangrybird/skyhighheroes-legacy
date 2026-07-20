@@ -6,8 +6,8 @@
     },
     "fiskheroes:transformation|calling": {
       "transformation": {
-        "toggleData": "skyhighheroes:dyn/calling",
-        "timerData": "skyhighheroes:dyn/calling_timer",
+        "toggleData": "skyhighheroes:dyn/wave_calling",
+        "timerData": "skyhighheroes:dyn/wave_calling_timer",
         "time": 600
       },
       "isToggle": true

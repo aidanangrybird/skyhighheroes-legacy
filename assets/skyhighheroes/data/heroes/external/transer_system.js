@@ -1341,6 +1341,10 @@ function initSystem(moduleList, transerName, satellite) {
         return true;
       }, "Back", 3);
       hero.addKeyBind("SHAPE_SHIFT", "Enter command/value", 2);
+      hero.addKeyBindFunc("WAVE_CALLING", (entity, manager) => {
+        manager.setData(entity, "skyhighheroes:dyn/wave_calling", true);
+        return true;
+      }, "Wave Calling", 5);
     },
     setKeyBind: (entity, keyBind) => {
       if (keyBind == "TRANSER") {
@@ -1435,7 +1439,7 @@ function initSystem(moduleList, transerName, satellite) {
      * @returns Profile for wave calling
      **/
     getWaveProfile: function (entity) {
-      return ((entity.getData("skyhighheroes:dyn/calling_timer") > 0) ? "WAVE_CALLING" : null);
+      return ((entity.getData("skyhighheroes:dyn/wave_calling_timer") > 0) ? "WAVE_CALLING" : null);
     },
     /**
      * Keybind enabled stuff for em
@@ -1547,7 +1551,7 @@ function initSystem(moduleList, transerName, satellite) {
                   break;
                 case "waveCalling":
                   if (entity.getUUID() == getCompatibleUUID(entity) && (emBeingIndex > -1 && waveChangeIndex > -1 && waveIndex > -1) && entity.as("PLAYER").isCreativeMode()) {
-                    manager.setDataWithNotify(entity, "skyhighheroes:dyn/calling", true);
+                    manager.setDataWithNotify(entity, "skyhighheroes:dyn/wave_calling", true);
                   } else {
                     systemMessage(entity, "<e>Unknown command! Try <eh>!help<e> for a list of commands!");
                   };
