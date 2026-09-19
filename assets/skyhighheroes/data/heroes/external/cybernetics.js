@@ -2718,7 +2718,7 @@ function initSystem(moduleList, name, colorCode) {
           manager.setDataWithNotify(entity, "skyhighheroes:dyn/tracked_waypoint_bearing", waypointBearing);
         };
       } else {
-        if (entity.getData('skyhighocs:dyn/tracked_waypoint_bearing') != 0) {
+        if (entity.getData('skyhighheroes:dyn/tracked_waypoint_bearing') != 0) {
           manager.setDataWithNotify(entity, "skyhighheroes:dyn/tracked_waypoint_bearing", 0.0);
         };
       };
