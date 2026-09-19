@@ -131,9 +131,9 @@ function initSatelliteBeams(renderer, model, color) {
   receiveBeam.color.set(color);
   return {
     render: function (entity, isFirstPersonArm) {
-      var vector = PackLoader.asVec3(entity.getData("skyhighheroes:dyn/satellite_x")+0.5, entity.getData("skyhighocs:dyn/satellite_y")+0.5, entity.getData("skyhighocs:dyn/satellite_z")+0.5);
+      var vector = PackLoader.asVec3(entity.getData("skyhighheroes:dyn/satellite_x")+0.5, entity.getData("skyhighheroes:dyn/satellite_y")+0.5, entity.getData("skyhighheroes:dyn/satellite_z")+0.5);
       var transmitTimer = entity.getInterpolatedData("skyhighheroes:dyn/transmit_beam_timer");
-      var receiveTimer = entity.getInterpolatedData("skyhighocs:dyn/receive_beam_timer");
+      var receiveTimer = entity.getInterpolatedData("skyhighheroes:dyn/receive_beam_timer");
       var factor = entity.eyePos().add(0, 1, 0).distanceTo(vector);
       receiveLine.start.y = factor+offset;
       receiveLine.end.y = factor+offset;
